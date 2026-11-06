@@ -44,36 +44,37 @@ A deliberate construction site: hazard tape, a blueprint pipeline with animated 
 
 All rates below are for a **45-minute lap on Zoom**, Science (the base subject).
 
-| Grade | Weekly | Monthly (4 laps) | Yearly (48 laps, −10%) |
+| Grade | Weekly | Monthly (4 laps, −5%) | Yearly (48 laps, −15%) |
 | --- | --- | --- | --- |
-| 1 | $30 | $120 | $1,296 |
-| 2 | $32 | $128 | $1,382 |
-| 3 | $34 | $136 | $1,469 |
-| 4 | $37 | $148 | $1,598 |
-| 5 | $40 | $160 | $1,728 |
-| 6 | $43 | $172 | $1,858 |
-| 7 | $46 | $184 | $1,987 |
-| 8 | $49 | $196 | $2,117 |
+| 1 | $24 | $91 | $979 |
+| 2 | $26 | $99 | $1,061 |
+| 3 | $28 | $106 | $1,142 |
+| 4 | $30 | $114 | $1,224 |
+| 5 | $33 | $125 | $1,346 |
+| 6 | $36 | $137 | $1,469 |
+| 7 | $39 | $148 | $1,591 |
+| 8 | $42 | $160 | $1,714 |
 
 Adjustments:
 
 | Option | Effect on a weekly lap |
 | --- | --- |
-| Math | +$4 |
-| English | +$7 |
-| Public library | +$15 (per 45 minutes) |
+| Math | +$3 |
+| English | +$5 |
+| Public library | +$10 (per 45 minutes) |
 | 30-minute lap | ×0.7 |
-| 60-minute lap | ×1.6 |
-| Yearly plan | −10% vs. 48 weekly payments |
+| 60-minute lap | ×1.5 |
+| Monthly plan | −5% vs. 4 weekly payments |
+| Yearly plan | −15% vs. 48 weekly payments |
 
 Special coaching (60 minutes, suggested starting rates):
 
 | Program | Price |
 | --- | --- |
-| Moody IB Prep | $150 |
-| High School Application Review | $65 |
+| Moody IB Prep | $120 |
+| High School Application Review | $50 |
 
-Service terms: $25 missed session, $15 family-requested reschedule, and a 15% credit toward the next request when the tutor reschedules. Fees are arranged directly with the tutor - never on this site.
+Service terms: $15 missed session, $10 family-requested reschedule, and a 15% credit toward the next request when the tutor reschedules. Fees are arranged directly with the tutor - never on this site.
 
 ---
 
