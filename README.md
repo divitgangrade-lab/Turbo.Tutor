@@ -142,3 +142,29 @@ This project intentionally does **not** integrate a payment provider. There are 
 ## License
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
+
+## Motion layer and extra pages
+
+The site ships as plain HTML, CSS and JavaScript with no build step. `enhance.css` and
+`enhance.js` sit on top of the inline styles and scripts in `index.html`:
+
+- A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
+- A damped spring solver runs the text reveals, hero entrance, magnetic controls, parallax,
+  counters, cursor and the scroll progress bar.
+- `index.html` includes a boot veil (helmet fill and a 4px meter), a marching-squares contour
+  backdrop in the hero, chequered dissolve seams, and a circuit map whose lap is drawn in
+  canvas with corner braking, marker flares and a cursor reticle with a lit halftone.
+- The FAQ uses an animated `<details>` body, the header tucks on scroll, and the mobile
+  sticky CTA appears after the hero. All of it is disabled under `prefers-reduced-motion`.
+
+Additional pages and assets:
+
+- `privacy.html`: service terms, privacy, browser storage, payment and attendance policy.
+- `thanks.html`: what happens after a request is sent (noindex).
+- `404.html`: a branded off-circuit page.
+- `robots.txt` and `sitemap.xml`.
+- `og-image.png`: the 1200x630 social share card referenced by the Open Graph tags.
+
+There is no analytics, advertising pixel or third-party cookie on the site. Web fonts come
+from Google Fonts and hosting logs come from GitHub Pages. Reviews and a team photograph are
+not published because neither exists yet; the site does not invent them.

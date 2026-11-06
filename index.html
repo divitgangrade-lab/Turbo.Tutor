@@ -4,12 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0c0f">
-  <title>TurboTutor — 1:1 tutoring at full throttle</title>
-  <meta name="description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $30, online on Zoom or in person at a public library. No online payment — build a request in the kart and the tutor confirms the rest.">
-  <meta property="og:title" content="TurboTutor — 1:1 tutoring at full throttle">
-  <meta property="og:description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $30, online or at a public library.">
+  <title>TurboTutor · 1:1 tutoring at full throttle</title>
+  <meta name="description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $30, online on Zoom or in person at a public library. No online payment: build a request in the kart and the tutor confirms the rest.">
+  <link rel="canonical" href="https://divitgangrade-lab.github.io/Turbo.Tutor/">
+  <meta property="og:site_name" content="TurboTutor">
+  <meta property="og:title" content="TurboTutor · 1:1 tutoring at full throttle">
+  <meta property="og:description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $30, online or at a public library. No online payment.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="open-wheel-car.svg">
+  <meta property="og:url" content="https://divitgangrade-lab.github.io/Turbo.Tutor/">
+  <meta property="og:image" content="https://divitgangrade-lab.github.io/Turbo.Tutor/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TurboTutor: one-to-one tutoring at full throttle, Grades 1 to 8">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TurboTutor · 1:1 tutoring at full throttle">
+  <meta name="twitter:description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $30.">
+  <meta name="twitter:image" content="https://divitgangrade-lab.github.io/Turbo.Tutor/og-image.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +106,7 @@
     .progress { position: fixed; z-index: 120; top: 0; left: 0; right: 0; height: 3px; background: transparent; }
     .progress span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--red), var(--amber)); transform: scaleX(0); transform-origin: 0 50%; }
     .topline { height: 6px; background: repeating-conic-gradient(#12161a 0 25%, #f7f5f0 0 50%) 0 0 / 12px 12px; }
-    .site-header { position: sticky; z-index: 100; top: 0; background: rgba(10, 12, 15, .92); border-bottom: 1px solid rgba(255, 255, 255, .09); backdrop-filter: blur(14px); transition: background .25s, box-shadow .25s; }
+    .site-header { position: sticky; z-index: 100; top: 0; background: #0b0e11; border-bottom: 1px solid rgba(255, 255, 255, .09); transition: background .25s, box-shadow .25s; }
     .site-header.is-stuck { box-shadow: 0 14px 34px rgba(0, 0, 0, .35); }
     .header-inner { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 11px; color: #f7f5f0; font-family: var(--display); font-size: 27px; font-weight: 900; letter-spacing: .4px; line-height: 1; text-transform: uppercase; white-space: nowrap; }
@@ -167,7 +177,7 @@
     .hero-lights i:nth-child(5) { animation-delay: 2s; }
     @keyframes lights { 0%, 6% { background: #360909; box-shadow: none; } 8%, 16% { background: #ff2d1f; box-shadow: 0 0 16px #ff2d1f; } 22%, 100% { background: #360909; box-shadow: none; } }
     .hero-car { position: relative; width: min(700px, 116%); max-width: none; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)); animation: floatCar 7s ease-in-out infinite; will-change: transform; }
-    .hero-plate { position: absolute; right: 4%; bottom: 4%; display: flex; gap: 14px; border: 1px solid var(--carbon-line); background: rgba(10, 12, 15, .78); padding: 9px 13px; color: #9aa4aa; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.6px; backdrop-filter: blur(6px); }
+    .hero-plate { position: absolute; right: 4%; bottom: 4%; display: flex; gap: 14px; border: 1px solid var(--carbon-line); background: rgba(10, 12, 15, .9); padding: 9px 13px; color: #9aa4aa; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.6px; }
     .hero-plate b { color: var(--amber); }
     .hero-visual::after { position: absolute; right: 0; bottom: 12%; left: 0; height: 2px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 26px, transparent 26px 44px); content: ""; opacity: .5; transform: skewX(-18deg); }
 
@@ -247,7 +257,7 @@
     .price.bump { animation: bump .35s var(--ease); }
     .plan-list { display: grid; flex: 1; gap: 9px; margin: 14px 0 20px; padding: 14px 0 0; border-top: 1px solid var(--line); list-style: none; }
     .plan-list li { display: flex; align-items: flex-start; gap: 8px; color: var(--ink); font-size: 11.5px; line-height: 1.5; }
-    .plan-list li::before { flex: none; color: var(--green); content: "✓"; font-weight: 700; }
+    .plan-list li::before { width: 6px; height: 6px; flex: none; margin-top: .48em; background: var(--green); content: ""; }
     .plans-note { margin: 22px 0 0; color: var(--muted); font-size: 11.5px; line-height: 1.8; max-width: 940px; }
 
     /* ---------- specialty ---------- */
@@ -287,7 +297,7 @@
     .promise-copy { max-width: 470px; margin: 0 0 22px; color: #c6cdd2; font-size: 14px; line-height: 1.8; }
     .checks { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
     .checks li { display: flex; align-items: flex-start; gap: 10px; color: #e6e9e6; font-size: 13px; }
-    .checks li::before { display: inline-grid; width: 19px; height: 19px; flex: none; place-items: center; background: rgba(255, 212, 0, .16); color: var(--amber); content: "✓"; font-size: 11px; font-weight: 700; }
+    .checks li::before { width: 19px; height: 19px; flex: none; margin-top: 1px; border: 1px solid rgba(255, 212, 0, .42); background: rgba(255, 212, 0, .14); content: ""; }
     .promise-art { position: relative; display: grid; place-items: center; }
     .promise-art img { width: min(330px, 100%); filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .5)); animation: bob 6s ease-in-out infinite; }
     .promise-art::after { position: absolute; bottom: 4%; width: 62%; height: 22px; background: radial-gradient(closest-side, rgba(0, 0, 0, .65), transparent); content: ""; }
@@ -461,7 +471,8 @@
     .payment-opts { display: flex; flex-wrap: wrap; gap: 8px; }
     .pay-opt { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; border: 1px solid var(--line); padding: 0 12px; font-family: var(--ui); font-size: 11px; font-weight: 600; cursor: pointer; }
     .pay-opt:has(input:checked) { border-color: var(--ink); background: var(--surface-2); }
-    .pay-opt input { accent-color: var(--red); }
+    .pay-opt input { appearance: none; display: grid; width: 14px; height: 14px; place-items: center; margin: 0; border: 1px solid var(--muted); background: transparent; cursor: pointer; }
+    .pay-opt input:checked { border-color: var(--red); background: var(--red); box-shadow: inset 0 0 0 2px #fff; }
     .policy-ack { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.6; }
     .policy-ack input { margin-top: 2px; accent-color: var(--red); }
     .policy-ack a { color: var(--red); text-decoration: underline; text-underline-offset: 2px; }
@@ -502,6 +513,10 @@
     [data-theme="dark"] .gear-head .h2 { color: var(--ink); }
 
     /* ---------- responsive ---------- */
+    @media (max-width: 1260px) {
+      .status { display: none; }
+      .nav { gap: 18px; }
+    }
     @media (max-width: 1060px) {
       .nav { gap: 16px; }
       .nav-link { font-size: 11px; }
@@ -594,20 +609,50 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+    "@type": ["EducationalOrganization", "LocalBusiness"],
+    "@id": "https://divitgangrade-lab.github.io/Turbo.Tutor/#organization",
     "name": "TurboTutor",
-    "description": "One-to-one Math, English and Science tutoring for Grades 1–8, online via Zoom or in person at a public library.",
+    "description": "One-to-one Math, English and Science tutoring for Grades 1–8, online via Zoom or in person at a public library in Richmond, Virginia.",
     "url": "https://divitgangrade-lab.github.io/Turbo.Tutor/",
+    "image": "https://divitgangrade-lab.github.io/Turbo.Tutor/og-image.png",
     "telephone": "+1-804-847-3236",
     "email": "divit.gangrade@gmail.com",
-    "areaServed": "Richmond, Virginia",
     "priceRange": "$30–$49 per weekly session",
+    "currenciesAccepted": "USD",
+    "paymentAccepted": "Cash, Zelle",
+    "areaServed": { "@type": "City", "name": "Richmond", "addressRegion": "VA", "addressCountry": "US" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Richmond", "addressRegion": "VA", "addressCountry": "US" },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "16:00",
+      "closes": "20:00"
+    }],
+    "contactPoint": { "@type": "ContactPoint", "contactType": "enrollment", "telephone": "+1-804-847-3236", "email": "divit.gangrade@gmail.com", "areaServed": "US", "availableLanguage": "English" },
     "knowsAbout": ["Math tutoring", "English tutoring", "Science tutoring", "IB preparation", "High school application review"]
   }
   </script>
+  <link rel="stylesheet" href="enhance.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="boot" id="boot" role="status" aria-label="Loading TurboTutor">
+    <div class="boot-inner">
+      <div class="boot-glyph boot-hold">
+        <svg viewBox="0 0 120 132" aria-hidden="true">
+          <defs><clipPath id="boot-clip"><rect id="boot-rect" x="0" y="132" width="120" height="132"/></clipPath></defs>
+          <path class="boot-shell" d="M60 6C31 6 12 27 12 56v22c0 11 4 19 11 24l6 4c3 10 11 17 22 19h18c11-2 19-9 22-19l6-4c7-5 11-13 11-24V56C108 27 89 6 60 6Z"/>
+          <path class="boot-solid" clip-path="url(#boot-clip)" d="M60 6C31 6 12 27 12 56v22c0 11 4 19 11 24l6 4c3 10 11 17 22 19h18c11-2 19-9 22-19l6-4c7-5 11-13 11-24V56C108 27 89 6 60 6Z"/>
+        </svg>
+      </div>
+      <p class="boot-name boot-hold">Turbo<span>Tutor</span></p>
+      <p class="boot-meta boot-hold"><span id="boot-status">Warming the tyres</span><b id="boot-pct">0%</b></p>
+      <div class="boot-meter boot-hold" aria-hidden="true"><i id="boot-bar"></i></div>
+    </div>
+  </div>
+  <script>window.setTimeout(function () { if (!window.TTMotion) { var b = document.getElementById("boot"); if (b) b.remove(); } }, 1600);</script>
+  <div class="page-wipe" id="page-wipe" aria-hidden="true"><i></i><i></i></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
   <div class="progress" aria-hidden="true"><span id="scroll-bar"></span></div>
   <div class="topline" aria-hidden="true"></div>
 
@@ -640,11 +685,13 @@
 
   <main id="main">
     <section class="hero" id="home" aria-labelledby="hero-title">
+      <canvas class="contours" id="contours" aria-hidden="true"></canvas>
+      <div class="hero-shade" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> 1:1 tutoring · Grades 1–8 · Richmond, VA</p>
           <h1 id="hero-title"><span class="line">Learn</span><span class="line">at full</span><span class="line outline">throttle</span></h1>
-          <p class="hero-lede">One-to-one Math, English and Science coaching built around your student's own pace. Clear session lengths, honest prices, and a tutor who replies — no cold checkout, ever.</p>
+          <p class="hero-lede">One-to-one Math, English and Science coaching built around your student's own pace. Clear session lengths, honest prices, and a tutor who replies, with no cold checkout, ever.</p>
           <div class="hero-actions">
             <a class="btn" data-magnetic href="#plans">Build your lap plan <span class="arrow" aria-hidden="true">→</span></a>
             <a class="btn ghost" href="#offers">Spin for an offer</a>
@@ -658,7 +705,7 @@
         <div class="hero-visual">
           <div class="hero-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <img class="hero-car" src="open-wheel-car.svg" alt="A red TurboTutor formula-style racing car" width="820" height="300" fetchpriority="high">
-          <div class="hero-plate" aria-hidden="true"><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
+          <div class="hero-plate" aria-hidden="true"><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
         </div>
       </div>
     </section>
@@ -685,7 +732,7 @@
             <p class="kicker">The course garage</p>
             <h2 class="h2" id="plans-title">Choose your setup</h2>
           </div>
-          <p class="lead">Pick a grade, a subject and a lap length. Every price updates live — no surprise pit stops, no card, no checkout.</p>
+          <p class="lead">Pick a grade, a subject and a lap length. Every price updates live: no surprise pit stops, no card, no checkout.</p>
         </div>
 
         <div class="setup-bar reveal">
@@ -803,7 +850,7 @@
           <article class="specialty-card featured reveal" data-specialty="moody-ib" data-base-price="150">
             <p class="kicker">Advanced · by request</p>
             <h3>Moody IB Prep</h3>
-            <p>A premium 60-minute session for IB coursework. Bring the unit, the rubric and the questions you want to attack — we build the plan around them.</p>
+            <p>A premium 60-minute session for IB coursework. Bring the unit, the rubric and the questions you want to attack, and we build the plan around them.</p>
             <p class="specialty-price" data-specialty-price>$150 <small>/ 60-min session</small></p>
             <p class="specialty-note">Suggested Zoom rate · library rate updates with your location choice</p>
             <button class="btn" type="button" data-add-specialty="moody-ib">Request IB prep <span class="arrow" aria-hidden="true">→</span></button>
@@ -821,34 +868,50 @@
       </div>
     </section>
 
-    <section class="section" id="how" aria-labelledby="steps-title">
-      <div class="wrap">
-        <div class="section-head">
-          <div><p class="kicker">How tutoring begins</p><h2 class="h2" id="steps-title">Three steps to the <em>green flag</em></h2></div>
-          <p class="lead">Good tutoring starts with a good fit. The first steps should feel easy for both the student and the family.</p>
+    <section class="section track" id="how" aria-labelledby="steps-title">
+      <canvas class="flag-seam" data-carry="light" aria-hidden="true"></canvas>
+      <div class="wrap track-grid">
+        <div class="track-copy">
+          <p class="kicker">How tutoring begins</p>
+          <h2 class="h2" id="steps-title">Three steps to the <em>green flag</em></h2>
+          <p class="track-lede">Good tutoring starts with a good fit. Pick a setup, send the kart, and the first lap is a conversation with the tutor, never a checkout.</p>
+          <ol class="track-steps">
+            <li><span class="n" aria-hidden="true">01</span><div><h3>Pick your setup</h3><p>Choose the grade, subject and lap length. Prices update as you go, so there is nothing to guess.</p></div></li>
+            <li><span class="n" aria-hidden="true">02</span><div><h3>Send the kart</h3><p>Add the plan to your kart, drop in your contact details, and send the request by email or text.</p></div></li>
+            <li><span class="n" aria-hidden="true">03</span><div><h3>Build momentum</h3><p>Short, focused sessions turn practice into progress, one lap at a time, with feedback every week.</p></div></li>
+          </ol>
+          <div class="track-actions">
+            <a class="btn" href="#plans">Start with a plan <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="track-link" href="#walkthrough">See how a session runs</a>
+            <p>About a minute · no account · no card</p>
+          </div>
         </div>
-        <div class="steps-grid">
-          <article class="step reveal">
-            <span class="step-num" aria-hidden="true">01</span>
-            <h3>Pick your setup</h3>
-            <p>Choose the grade, subject and lap length. Prices update as you go, so there is nothing to guess.</p>
-          </article>
-          <article class="step reveal">
-            <span class="step-num" aria-hidden="true">02</span>
-            <h3>Send the kart</h3>
-            <p>Add the plan to your kart, drop in your contact details, and send the request by email or text.</p>
-          </article>
-          <article class="step reveal">
-            <img class="step-art" src="race-trophy.svg" alt="" loading="lazy" width="240" height="300">
-            <span class="step-num" aria-hidden="true">03</span>
-            <h3>Build momentum</h3>
-            <p>Short, focused sessions turn practice into progress — one lap at a time, with feedback every week.</p>
-          </article>
-        </div>
-        <div class="steps-cta">
-          <a class="btn" href="#plans">Start with a plan <span class="arrow" aria-hidden="true">→</span></a>
-          <p>Takes about a minute. No account, no card.</p>
-        </div>
+        <figure class="track-panel">
+          <div class="map-frame">
+            <canvas class="map-dots" data-map-dots aria-hidden="true"></canvas>
+            <svg class="map-svg" viewBox="0 0 760 470" role="img" aria-label="Circuit map of the intake route, with four turn markers that light as the lap passes them">
+              <g aria-hidden="true">
+                <path class="map-axis" d="M250 -60V530M500 -60V530M-60 235H820"/>
+                <circle class="map-ring" cx="500" cy="235" r="58"/>
+                <circle class="map-ring" cx="500" cy="235" r="120"/>
+                <circle class="map-ring map-ring--inner" cx="500" cy="235" r="176"/>
+                <circle class="map-hub" cx="500" cy="235" r="3"/>
+                <path class="map-corner" d="M18 34V18H34M726 18H742V34M742 436V452H726M34 452H18V436"/>
+              </g>
+              <path id="track-path" d="M132 372C96 362 78 330 86 296L112 198C120 166 150 146 182 150L286 168C314 172 340 160 358 138L404 82C428 52 476 52 500 82L544 138C562 162 590 176 620 172L668 164C700 160 724 184 718 216L692 322C686 352 660 372 630 372L470 372C446 372 428 384 418 404L392 444C372 474 322 474 300 444L268 396C254 374 230 364 196 366C168 368 148 370 132 372Z" fill="none" stroke="#1b2226" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="map-centre" d="M132 372C96 362 78 330 86 296L112 198C120 166 150 146 182 150L286 168C314 172 340 160 358 138L404 82C428 52 476 52 500 82L544 138C562 162 590 176 620 172L668 164C700 160 724 184 718 216L692 322C686 352 660 372 630 372L470 372C446 372 428 384 418 404L392 444C372 474 322 474 300 444L268 396C254 374 230 364 196 366C168 368 148 370 132 372Z" fill="none"/>
+            </svg>
+            <canvas class="map-trace" data-map-trace aria-hidden="true"></canvas>
+          </div>
+          <figcaption class="map-plate">
+            <span class="map-plate-inner">
+              <span><b>Intake circuit</b> · map 01</span>
+              <span>Grades 1–8</span>
+              <span>Start · $30 / week</span>
+            </span>
+          </figcaption>
+          <p class="map-hint" id="map-hint">Watch the lap · <b>then move your cursor over the map</b></p>
+        </figure>
       </div>
     </section>
 
@@ -860,7 +923,7 @@
           <p class="promise-copy">You see the session length, the number of sessions and the full suggested price before you request anything. The tutor confirms the schedule, answers your questions, and only then do you decide to enroll.</p>
           <ul class="checks">
             <li>Zoom or a mutually agreed public library</li>
-            <li>Cash or Zelle, arranged directly — never online</li>
+            <li>Cash or Zelle, arranged directly, never online</li>
             <li>Missed-class and reschedule terms in writing</li>
           </ul>
         </div>
@@ -907,6 +970,7 @@
     </section>
 
     <section class="section gear" id="gear" aria-labelledby="gear-title">
+      <canvas class="flag-seam" data-carry="dark" aria-hidden="true"></canvas>
       <div class="hazard" aria-hidden="true"></div>
       <div class="wrap">
         <div class="gear-head reveal">
@@ -916,7 +980,7 @@
         </div>
         <div class="gear-layout">
           <div class="gear-copy reveal">
-            <p><strong>The team gear store is still being built.</strong> The livery is drawn, the samples are in the wind tunnel, and the little guy with the sign is doing his job. There are no products, prices or orders yet — when drop 01 is real, it will land here first.</p>
+            <p><strong>The team gear store is still being built.</strong> The livery is drawn, the samples are in the wind tunnel, and the little guy with the sign is doing his job. There are no products, prices or orders yet. When drop 01 is real, it will land here first.</p>
             <ul class="gear-meta">
               <li><b>Drop 01</b> Sampling phase</li>
               <li><b>3 concepts</b> In the notebook</li>
@@ -964,11 +1028,36 @@
       </div>
       <div class="hazard" aria-hidden="true" style="margin-top:52px"></div>
     </section>
+    <section class="section lapcase" id="walkthrough" aria-labelledby="walkthrough-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Session walkthrough</p>
+            <h2 class="h2" id="walkthrough-title">Inside one 45-minute lap</h2>
+          </div>
+          <p class="lead">A real lesson structure, not a testimonial. Student names and results are never published on this site.</p>
+        </div>
+        <div class="lap-panel">
+          <p class="lap-head"><span>Run sheet</span><span>45 minutes · one student · one tutor</span></p>
+          <ol class="lap-timeline">
+            <li><span class="lap-time">00–05</span><div><h3>Warm-up</h3><p>Two quick questions from last week's work. This shows what stayed and what needs another look before anything new starts.</p></div><span class="lap-min">5 min</span></li>
+            <li><span class="lap-time">05–20</span><div><h3>The concept</h3><p>One idea at a time, worked in front of the student, then repeated back in their own words. No worksheet dump.</p></div><span class="lap-min">15 min</span></li>
+            <li><span class="lap-time">20–40</span><div><h3>Guided practice</h3><p>The student drives. The tutor watches the working, catches the first wrong turn, and asks the question that fixes it.</p></div><span class="lap-min">20 min</span></li>
+            <li><span class="lap-time">40–45</span><div><h3>Recap and next lap</h3><p>Three things that clicked, one thing to practise, and the plan for the next session. Sent in writing after the lap.</p></div><span class="lap-min">5 min</span></li>
+          </ol>
+          <div class="lap-note">
+            <p><b>What the family gets:</b> the lap length, the plan and the full price before the session, then a short written summary after it. No card and no online payment at any point.</p>
+            <a class="btn" href="#plans">Build a plan from this <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section alt" id="policies" aria-labelledby="policies-title">
       <div class="wrap">
         <div class="section-head">
           <div><p class="kicker">Clear before the green flag</p><h2 class="h2" id="policies-title">Attendance &amp; support</h2></div>
-          <p class="lead">These are the proposed service terms. Read them before requesting a session — this website never charges a fee or takes a payment.</p>
+          <p class="lead">These are the proposed service terms. Read them before requesting a session. This website never charges a fee or takes a payment.</p>
         </div>
         <div class="policy-grid">
           <article class="policy-card reveal"><strong>$25</strong><h3>Missed lap</h3><p>A $25 fee applies when a student misses a scheduled session without notice.</p></article>
@@ -984,14 +1073,14 @@
         <div>
           <p class="kicker">Talk to the tutor</p>
           <h2 id="contact-title">Questions?<br>Open a channel.</h2>
-          <p class="lede">Ask about subjects, schedules, pricing, or how cash and Zelle work. Expect a reply within one business day — usually much sooner.</p>
+          <p class="lede">Ask about subjects, schedules, pricing, or how cash and Zelle work. Expect a reply within one business day, usually much sooner.</p>
           <div class="contact-list">
             <div class="contact-card">
-              <a class="contact-link" href="tel:+18048473236"><span aria-hidden="true">☎</span> 804-847-3236</a>
+              <a class="contact-link" href="tel:+18048473236"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3l1.6 3.6-1.9 1.3a11 11 0 0 0 5 5l1.3-1.9L17.6 14v3A2 2 0 0 1 15.4 19C9.6 18.4 5.6 14.4 5 8.6A2 2 0 0 1 5 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg> 804-847-3236</a>
               <button class="copy-btn" type="button" data-copy="804-847-3236">Copy number</button>
             </div>
             <div class="contact-card">
-              <a class="contact-link" href="mailto:divit.gangrade@gmail.com"><span aria-hidden="true">✉</span> divit.gangrade@gmail.com</a>
+              <a class="contact-link" href="mailto:divit.gangrade@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.6 6.4 12 12.8l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> divit.gangrade@gmail.com</a>
               <button class="copy-btn" type="button" data-copy="divit.gangrade@gmail.com">Copy email</button>
             </div>
             <div class="contact-card">
@@ -1003,6 +1092,8 @@
         <div class="contact-aside">
           <img class="contact-art" src="pit-garage.svg" alt="A pit garage with an open door, tyre stacks and a toolbox" loading="lazy" width="340" height="260">
           <p class="contact-note">Richmond, VA · Mon–Sat · 4–8pm</p>
+          <p class="reply-promise"><span aria-hidden="true"></span> Replies within one business day</p>
+          <a class="directions-link" href="https://www.google.com/maps/search/Richmond+Public+Library+Richmond+VA" target="_blank" rel="noopener">Find a Richmond Public Library branch <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -1019,16 +1110,16 @@
           <p class="faq-count" id="faq-results" aria-live="polite">11 answers</p>
         </div>
         <div class="faq-list" id="faq-list">
-          <details><summary>What grades and subjects can my student choose?</summary><p>Grades 1 through 8, in Science, English or Math. You can add more than one course to a single kart request — each one keeps its own lap length and location.</p></details>
+          <details><summary>What grades and subjects can my student choose?</summary><p>Grades 1 through 8, in Science, English or Math. You can add more than one course to a single kart request, and each one keeps its own lap length and location.</p></details>
           <details><summary>How much does tutoring cost?</summary><p>Weekly sessions start at $30 for a 45-minute Grade 1 Science lap on Zoom. Math adds $4 and English adds $7 per weekly lap. A public-library session adds $15, a 30-minute lap is about 30% less, a 60-minute lap is about 60% more, and rates rise gently from Grade 1 to Grade 8. Every price appears before you add anything to the kart.</p></details>
           <details><summary>What does each plan include?</summary><p>Weekly includes one class per week, Monthly includes four, and Yearly includes 48 across 12 months at 10% off. Every plan lets you pick a 30-, 45- or 60-minute lap. The 60-minute option is the recommended one because it leaves room for guided practice and a proper wrap-up.</p></details>
           <details><summary>How do online and library sessions work?</summary><p>Online sessions meet on Zoom and the tutor confirms the link after enrollment. In-person sessions meet at a mutually agreed public library and cost $15 more per 45-minute lap. A parent or guardian must remain present for students under 18.</p></details>
           <details><summary>What are the special coaching programs?</summary><p>Moody IB Prep is a 60-minute advanced session at $150, and the High School Application Review is a 60-minute draft review at $65. Both are one-time requests; the listed rates are suggested starting prices and the tutor confirms scope and availability first.</p></details>
           <details><summary>Does the kart take payment?</summary><p>No. The kart is just a build sheet: it collects the plans you want and turns them into a tidy email or text request. No card fields, no checkout, no online payment anywhere on this site.</p></details>
-          <details><summary>When can I buy team gear?</summary><p>Not yet. The paddock shop is under construction — three concepts are in the pipeline and nothing is for sale. Register your interest and you will hear about drop 01 when it exists.</p></details>
+          <details><summary>When can I buy team gear?</summary><p>Not yet. The paddock shop is under construction: three concepts are in the pipeline and nothing is for sale. Register your interest and you will hear about drop 01 when it exists.</p></details>
           <details><summary>How do the seasonal offers work?</summary><p>The page checks the calendar and rotates the offer for New Year, back-to-school, Diwali season (Oct 1–Nov 10), Thanksgiving week and Christmas. Only one cash discount applies per request: the best eligible seasonal or wheel discount wins.</p></details>
           <details><summary>What happens if we miss or move a class?</summary><p>A missed scheduled class carries a $25 fee. A family-requested reschedule carries a $15 fee. If the tutor needs to move a session, they confirm a 15% credit toward the next request. These terms are shown before enrollment and the website never charges them.</p></details>
-          <details><summary>How do I request enrollment?</summary><p>Add your plans to the kart, enter the parent/guardian and student details, choose cash or Zelle as the preferred method, then prepare the request. Your email or messaging app opens with everything filled in — review it, press send, and the tutor replies to confirm.</p></details>
+          <details><summary>How do I request enrollment?</summary><p>Add your plans to the kart, enter the parent/guardian and student details, choose cash or Zelle as the preferred method, then prepare the request. Your email or messaging app opens with everything filled in. Review it, press send, and the tutor replies to confirm.</p></details>
           <details><summary>Can I pay by cash or Zelle?</summary><p>Yes. Pick cash or Zelle in the request form. The tutor confirms the amount, due date and Zelle details directly with you before any enrollment. This site never collects card numbers or online payments.</p></details>
         </div>
         <p class="faq-empty" id="faq-empty" hidden>No answers match that search. Try “price”, “kart”, “Zoom” or “gear”.</p>
@@ -1054,6 +1145,7 @@
         <a href="#policies">Attendance &amp; support</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact the tutor</a>
+        <a href="privacy.html">Terms &amp; privacy</a>
         <a href="LICENSE">License (MIT)</a>
       </div>
     </div>
@@ -1062,6 +1154,15 @@
       <span>No online payment · Cash &amp; Zelle direct · <a href="LICENSE">MIT licensed</a></span>
     </div>
   </footer>
+
+  <div class="mobile-cta" id="mobile-cta" aria-label="Quick actions">
+    <a class="btn" href="#plans">Build a plan</a>
+    <a class="btn light" href="sms:+18048473236">Text the tutor</a>
+  </div>
+  <a class="float-contact" id="float-contact" href="sms:+18048473236">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h4l1.8 4.2-2.3 1.6a12 12 0 0 0 5.2 5.2l1.6-2.3L18.5 16v4a1.5 1.5 0 0 1-1.7 1.5C9.6 20.6 3.4 14.4 2.5 7.2A1.5 1.5 0 0 1 4 5.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <span>Text the tutor</span>
+  </a>
 
   <div class="scrim" id="scrim" aria-hidden="true"></div>
 
@@ -1113,7 +1214,7 @@
         </div>
         <label class="policy-ack"><input type="checkbox" name="policiesAccepted" value="Yes" required><span>I have read the <a href="#policies">attendance and rescheduling policies</a>.</span></label>
       </div>
-      <p class="form-note">No payment is collected here. Your request opens as a draft — review it and press send in your email or messaging app.</p>
+      <p class="form-note">No payment is collected here. Your request opens as a draft. Review it and press send in your email or messaging app.</p>
       <p class="form-note" id="request-deal"></p>
       <button class="btn" type="submit">Prepare request <span class="arrow" aria-hidden="true">→</span></button>
       <p class="draft-status" id="draft-status" aria-live="polite"></p>
@@ -1121,6 +1222,7 @@
         <a class="btn" id="email-draft" href="mailto:divit.gangrade@gmail.com">Open email draft</a>
         <a class="btn light" id="sms-draft" href="sms:+18048473236">Open text draft</a>
       </div>
+      <p class="form-note"><a href="thanks.html">Already sent it? See what happens next</a></p>
     </form>
   </dialog>
 
@@ -1366,7 +1468,7 @@
 
         if (!kartItems) return;
         if (!count) {
-          kartItems.innerHTML = '<p class="kart-empty"><b>The kart is empty.</b>Pick a grade, subject and lap length, then add a plan. Nothing is charged — this is just your build sheet.</p>';
+          kartItems.innerHTML = '<p class="kart-empty"><b>The kart is empty.</b>Pick a grade, subject and lap length, then add a plan. Nothing is charged. This is just your build sheet.</p>';
         } else {
           kartItems.innerHTML = selectedCourses.map((plan, index) => {
             const meta = plan.term === "specialty"
@@ -1790,23 +1892,15 @@
         void worker.offsetWidth;
         worker.classList.add("honk");
         const messages = [
-          "Beep beep — gear is still in the wind tunnel.",
+          "Beep beep. Gear is still in the wind tunnel.",
           "The little guy says: drop 01 is not ready yet.",
           "Hard hat on. Samples are still being stitched.",
-          "No gear for sale yet — but he appreciates the visit."
+          "No gear for sale yet, but he appreciates the visit."
         ];
         showToast(messages[Math.floor(Math.random() * messages.length)]);
       });
 
-      // ---- magnetic buttons ----
-      $$("[data-magnetic]").forEach(button => {
-        button.addEventListener("pointermove", event => {
-          if (prefersReduced.matches) return;
-          const bounds = button.getBoundingClientRect();
-          button.style.transform = `translate(${(event.clientX - bounds.left - bounds.width / 2) * 0.06}px, ${(event.clientY - bounds.top - bounds.height / 2) * 0.08}px)`;
-        });
-        button.addEventListener("pointerleave", () => { button.style.transform = ""; });
-      });
+      // ---- magnetic buttons: handled by the spring layer in enhance.js ----
 
       // ---- scroll motion ----
       const scrollBar = $("#scroll-bar");
@@ -1815,7 +1909,8 @@
       function onScroll() {
         const max = document.documentElement.scrollHeight - window.innerHeight;
         const progress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-        if (scrollBar) scrollBar.style.transform = `scaleX(${progress})`;
+        if (window.TTMotion) window.TTMotion.setProgress(progress);
+        else if (scrollBar) scrollBar.style.transform = `scaleX(${progress})`;
         if (header) header.classList.toggle("is-stuck", window.scrollY > 8);
         ticking = false;
       }
@@ -1882,7 +1977,11 @@
         const sectionObserver = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (!entry.isIntersecting) return;
-            navLinks.forEach(link => link.classList.toggle("is-active", link.getAttribute("href") === `#${entry.target.id}`));
+            navLinks.forEach(link => {
+              if (link.getAttribute("href") !== `#${entry.target.id}`) return;
+              navLinks.forEach(other => other.classList.remove("is-active"));
+              link.classList.add("is-active");
+            });
           });
         }, { rootMargin: "-35% 0px -55% 0px" });
         $$("main section[id]").forEach(section => sectionObserver.observe(section));
@@ -1894,5 +1993,6 @@
       updateKart();
     })();
   </script>
+  <script src="enhance.js"></script>
 </body>
 </html>

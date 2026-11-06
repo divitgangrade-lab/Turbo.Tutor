@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0c0f">
+  <title>404 · Off the circuit · TurboTutor</title>
+  <meta name="description" content="That page is not on the TurboTutor grid. Head back to plans, programs or contact.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Chakra+Petch:wght@500;600;700&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --carbon:#0a0c0f; --amber:#ffd400; --red:#e10600; --paper:#f5f3ee; --ink:#12161a; --muted:#58636a; --display:"Barlow Condensed",Impact,sans-serif; --ui:"Chakra Petch",monospace; --body:"Titillium Web",system-ui,sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; display:flex; flex-direction:column; background:var(--carbon); color:#f5f3ee; font-family:var(--body); line-height:1.7; }
+    a { color:inherit; }
+    .in { width:100%; max-width:960px; margin:0 auto; padding-inline:22px; }
+    .top { border-bottom:1px solid #2a3239; }
+    .top .in { display:flex; min-height:64px; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { font-family:var(--display); font-size:24px; font-weight:900; letter-spacing:.5px; text-transform:uppercase; text-decoration:none; }
+    .brand em { color:var(--amber); font-style:normal; }
+    .back { border-bottom:1px solid var(--amber); padding-bottom:3px; font-family:var(--ui); font-size:10px; font-weight:700; letter-spacing:1.2px; text-decoration:none; text-transform:uppercase; }
+    main { flex:1; display:flex; align-items:center; padding-block:clamp(40px,8vw,90px); }
+    .grid { display:grid; grid-template-columns:1.15fr .85fr; align-items:center; gap:clamp(24px,5vw,60px); }
+    .kicker { margin:0 0 12px; color:var(--amber); font-family:var(--ui); font-size:10px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; }
+    h1 { margin:0 0 20px; font-family:var(--display); font-size:clamp(42px,6vw,64px); font-weight:900; letter-spacing:-.5px; line-height:.88; text-transform:uppercase; }
+    h1 span { display:block; color:var(--amber); }
+    p { max-width:46ch; margin:0 0 22px; color:#a9b3b9; font-size:14.5px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .btn { display:inline-flex; min-height:44px; align-items:center; padding:0 18px; background:var(--amber); color:#12161a; font-family:var(--ui); font-size:10px; font-weight:700; letter-spacing:1.1px; text-decoration:none; text-transform:uppercase; }
+    .btn.ghost { border:1px solid #3a464d; background:transparent; color:#f5f3ee; }
+    .code { position:relative; display:grid; place-items:center; aspect-ratio:1; border:1px solid #2a3239; background:radial-gradient(120% 120% at 30% 20%,#141a1e,#080a0c 70%); }
+    .code::before, .code::after { position:absolute; width:18px; height:18px; border:1px solid var(--amber); content:""; }
+    .code::before { top:12px; left:12px; border-right:0; border-bottom:0; }
+    .code::after { right:12px; bottom:12px; border-left:0; border-top:0; }
+    .code b { font-family:var(--display); font-size:clamp(90px,15vw,150px); font-weight:900; line-height:.8; letter-spacing:-4px; }
+    .code b small { display:block; margin-top:14px; color:var(--amber); font-family:var(--ui); font-size:9px; font-weight:700; letter-spacing:2px; text-align:center; }
+    .hazard { height:8px; background:repeating-linear-gradient(135deg,var(--amber) 0 14px,var(--carbon) 14px 28px); }
+    footer { border-top:1px solid #2a3239; color:#8d979d; font-size:12px; }
+    footer .in { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 18px; padding-block:18px; }
+    footer a { color:#f5f3ee; }
+    .crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 18px; color:#8d979d; font-family:var(--ui); font-size:9px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; }
+    .crumbs a { border-bottom:1px solid #3a464d; padding-bottom:1px; text-decoration:none; }
+    .crumbs a:hover { border-color:var(--amber); color:#fff; }
+    .crumbs span[aria-hidden] { color:var(--amber); }
+    :focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } .code { order:-1; max-width:300px; } }
+  </style>
+</head>
+<body>
+  <div class="hazard" aria-hidden="true"></div>
+  <header class="top">
+    <div class="in">
+      <a class="brand" href="index.html">Turbo<em>Tutor</em></a>
+      <a class="back" href="index.html">Back to the grid</a>
+    </div>
+  </header>
+  <main>
+    <div class="in grid">
+      <div>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">404</span>
+        </nav>
+        <p class="kicker">Off the circuit</p>
+        <h1>That page took<br><span>the escape road.</span></h1>
+        <p>There is nothing at this address. The useful pages are still on the grid, and the tutor is one message away.</p>
+        <div class="actions">
+          <a class="btn" href="index.html#plans">Plans &amp; pricing</a>
+          <a class="btn ghost" href="index.html#contact">Contact the tutor</a>
+        </div>
+      </div>
+      <div class="code" aria-hidden="true"><b>404<small>No lap recorded</small></b></div>
+    </div>
+  </main>
+  <footer>
+    <div class="in">
+      <span>© 2026 TurboTutor · Built for learners</span>
+      <a href="privacy.html">Terms &amp; privacy</a>
+    </div>
+  </footer>
+</body>
+</html>

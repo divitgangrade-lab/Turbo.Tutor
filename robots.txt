@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thanks.html
+
+Sitemap: https://divitgangrade-lab.github.io/Turbo.Tutor/sitemap.xml
