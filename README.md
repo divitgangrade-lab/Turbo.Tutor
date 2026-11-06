@@ -13,7 +13,7 @@ The whole site is a single static page with no build step, no framework, no back
 
 ### The plan builder
 - Pick a **grade** (1–8), a **subject** (Science, English, Math) and a **location** (Zoom or a public library).
-- Three terms — Weekly, Monthly, Yearly — each with 30, 45 or 60-minute laps.
+- Three terms - Weekly, Monthly, Yearly - each with 30, 45 or 60-minute laps.
 - Prices recalculate instantly and are announced through an `aria-live` region.
 - Every plan is described in plain words before it is added: session length, number of laps, location and suggested price.
 
@@ -34,7 +34,7 @@ A deliberate construction site: hazard tape, a blueprint pipeline with animated 
 
 ### Everything else
 - Sticky header with scroll progress, active-section highlighting and a theme toggle.
-- Scroll-reveal animations, animated counters, a looping ticker, magnetic buttons and SVG wheel animations — all disabled automatically under `prefers-reduced-motion`.
+- Scroll-reveal animations, animated counters, a looping ticker, magnetic buttons and SVG wheel animations - all disabled automatically under `prefers-reduced-motion`.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
 
@@ -73,7 +73,7 @@ Special coaching (60 minutes, suggested starting rates):
 | Moody IB Prep | $150 |
 | High School Application Review | $65 |
 
-Service terms: $25 missed session, $15 family-requested reschedule, and a 15% credit toward the next request when the tutor reschedules. Fees are arranged directly with the tutor — never on this site.
+Service terms: $25 missed session, $15 family-requested reschedule, and a 15% credit toward the next request when the tutor reschedules. Fees are arranged directly with the tutor - never on this site.
 
 ---
 
@@ -83,12 +83,13 @@ Service terms: $25 missed session, $15 family-requested reschedule, and a 15% cr
 .
 ├── index.html              # Everything: markup, styles and behaviour
 ├── open-wheel-car.svg      # Hero racing car
+├── monaco-harbour.svg      # Harbour scene behind the circuit map
 ├── go-kart.svg             # Kart panel illustration
 ├── helmet.svg              # Pit-wall promise illustration
 ├── race-trophy.svg         # Steps illustration
 ├── pit-garage.svg          # Contact illustration
 ├── checkered-flag.svg      # Gear section accent
-├── under-construction.svg  # The little sign guy
+├── under-construction.svg  # The sign worker in the gear section
 ├── favicon.svg             # Badge favicon
 ├── LICENSE                 # MIT
 └── README.md
@@ -115,11 +116,11 @@ There is nothing to install and nothing to build.
 
 Almost everything lives in the `<script>` block at the bottom of `index.html`:
 
-- **Rates** — `gradeBaseRates`, `subjectPremiums`, `deliveryPremiums`, `durationMultipliers`, `termDetails`.
-- **Special programs** — the `data-base-price` attribute on each `[data-specialty]` card, plus the card copy in the Specialty section.
-- **Contact details** — `tutorEmail` and `tutorPhone`, and the matching `href`s in the contact section and form drafts.
-- **Offers** — the `deals` array (labels and weights) next to `drawDealWheel()`, and `getSeasonSchedule()` for seasonal offers.
-- **Gear pipeline** — the inline `--p` progress values on each `.bp-bar span`.
+- **Rates** - `gradeBaseRates`, `subjectPremiums`, `deliveryPremiums`, `durationMultipliers`, `termDetails`.
+- **Special programs** - the `data-base-price` attribute on each `[data-specialty]` card, plus the card copy in the Specialty section.
+- **Contact details** - `tutorEmail` and `tutorPhone`, and the matching `href`s in the contact section and form drafts.
+- **Offers** - the `deals` array (labels and weights) next to `drawDealWheel()`, and `getSeasonSchedule()` for seasonal offers.
+- **Gear pipeline** - the inline `--p` progress values on each `.bp-bar span`.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
