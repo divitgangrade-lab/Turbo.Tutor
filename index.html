@@ -176,7 +176,7 @@
     .hero-lights i:nth-child(4) { animation-delay: 1.5s; }
     .hero-lights i:nth-child(5) { animation-delay: 2s; }
     @keyframes lights { 0%, 6% { background: #360909; box-shadow: none; } 8%, 16% { background: #ff2d1f; box-shadow: 0 0 16px #ff2d1f; } 22%, 100% { background: #360909; box-shadow: none; } }
-    .hero-car { position: relative; width: min(700px, 116%); max-width: none; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)); animation: floatCar 7s ease-in-out infinite; will-change: transform; }
+    .hero-car { position: relative; width: min(700px, 116%); max-width: none; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)); animation: floatCar 7s ease-in-out infinite; }
     .hero-plate { position: absolute; right: 4%; bottom: 4%; display: flex; gap: 14px; border: 1px solid var(--carbon-line); background: rgba(10, 12, 15, .9); padding: 9px 13px; color: #9aa4aa; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.6px; }
     .hero-plate b { color: var(--amber); }
     .hero-visual::after { position: absolute; right: 0; bottom: 12%; left: 0; height: 2px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 26px, transparent 26px 44px); content: ""; opacity: .5; transform: skewX(-18deg); }
@@ -510,6 +510,76 @@
     [data-theme="dark"] .construction-tag { border-color: var(--ink); color: var(--ink); }
     [data-theme="dark"] .policy-card { background: var(--card); }
     [data-theme="dark"] .faq-search, [data-theme="dark"] .field input { background: var(--card); color: var(--ink); }
+
+    /* ---------- real photography ---------- */
+    .hero-car.hero-photo { width: min(760px, 112%); aspect-ratio: 12 / 5; object-fit: cover; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 26px 44px rgba(0, 0, 0, .45); filter: none; animation-duration: 11s; }
+    .hero-visual::before { filter: none; }
+    .promise-art img.promise-photo { width: min(400px, 100%); aspect-ratio: 1; object-fit: cover; border: 6px solid #f7f5f0; box-shadow: 0 24px 50px rgba(0, 0, 0, .5); filter: none; animation: none; }
+    .promise-art:has(.promise-photo)::after { display: none; }
+    .kart-art img.kart-photo { width: 100%; height: 158px; margin: 0; object-fit: cover; animation: none; }
+    .photo-credit { display: flex; flex-wrap: wrap; gap: 6px 18px; border-top: 1px solid #232b31; padding-block: 12px 20px; color: #6f7a81; font-family: var(--ui); font-size: 9px; letter-spacing: .4px; }
+    .photo-credit a { color: #9aa4aa; text-decoration: underline; text-underline-offset: 2px; }
+    .photo-credit a:hover { color: var(--amber); }
+
+    /* ---------- Twin Hickory library card ---------- */
+    .library-card { display: grid; gap: 5px; max-width: 940px; margin-top: 24px; border: 3px solid var(--ink); background: linear-gradient(118deg, #fffdf6 0%, #f3ecd9 58%, #ffe6a3 100%); padding: 22px 26px 20px; box-shadow: 9px 9px 0 rgba(18, 22, 26, .13); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+    .library-card:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0 rgba(18, 22, 26, .16); }
+    .library-tag { color: var(--red); font-family: var(--ui); font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .library-card strong { color: #12161a; font-family: var(--display); font-size: clamp(32px, 4vw, 46px); font-weight: 900; letter-spacing: -.3px; line-height: .95; text-transform: uppercase; }
+    .library-meta { color: #5c5647; font-family: var(--ui); font-size: 10px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; }
+    .library-copy { max-width: 660px; margin: 3px 0 4px; color: #3c403f; font-size: 13px; line-height: 1.7; }
+    .library-cta { margin-top: 3px; color: #12161a; font-family: var(--ui); font-size: 11.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+    [data-theme="dark"] .library-card { background: linear-gradient(118deg, #1b2229 0%, #202830 58%, #2d2716 100%); border-color: var(--amber); box-shadow: 9px 9px 0 rgba(0, 0, 0, .35); }
+    [data-theme="dark"] .library-card strong, [data-theme="dark"] .library-cta { color: #f7f5f0; }
+    [data-theme="dark"] .library-meta { color: #a8b2b8; }
+    [data-theme="dark"] .library-copy { color: #c6cdd2; }
+
+    /* ---------- paddock club ---------- */
+    .club { position: relative; overflow: hidden; background: linear-gradient(135deg, #0b0e11 0%, #141b21 48%, #241116 100%); color: #f7f5f0; }
+    .club::before { position: absolute; top: -50%; left: -10%; width: 70%; height: 180%; background: radial-gradient(closest-side, rgba(255, 212, 0, .16), transparent 70%); content: ""; pointer-events: none; }
+    .club::after { position: absolute; right: -12%; bottom: -60%; width: 60%; height: 170%; background: radial-gradient(closest-side, rgba(225, 6, 0, .24), transparent 70%); content: ""; pointer-events: none; }
+    .club-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(320px, .94fr); align-items: center; gap: clamp(30px, 5vw, 64px); }
+    .club h2 { margin: 0 0 14px; font-family: var(--display); font-size: clamp(42px, 5.6vw, 70px); font-weight: 900; letter-spacing: -.6px; line-height: .86; text-transform: uppercase; }
+    .club h2 em { color: var(--amber); font-style: normal; }
+    .club-copy { max-width: 480px; margin: 0 0 18px; color: #c6cdd2; font-size: 14px; line-height: 1.8; }
+    .club-perks { display: grid; gap: 8px; margin: 0 0 4px; padding: 0; list-style: none; }
+    .club-perks li { display: flex; gap: 9px; color: #e6e9e6; font-size: 12.5px; }
+    .club-perks li::before { color: var(--amber); content: "✓"; font-weight: 700; }
+    .club-panel { border: 1px solid rgba(255, 255, 255, .22); background: linear-gradient(150deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03)); padding: 24px; box-shadow: 0 24px 50px rgba(0, 0, 0, .35); }
+    .club-panel h3 { margin: 0 0 4px; font-family: var(--display); font-size: 28px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; }
+    .club-panel p { margin: 0 0 14px; color: #a9b3b9; font-size: 11.5px; line-height: 1.7; }
+    .club-form { display: flex; gap: 8px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(0, 0, 0, .22); padding: 7px; }
+    .club-form input { width: 100%; min-height: 46px; border: 0; background: transparent; padding: 0 12px; color: #fff; font: inherit; font-size: 13px; }
+    .club-form input::placeholder { color: #8f9aa1; }
+    .club-form input:focus-visible { outline: 2px solid var(--amber); outline-offset: 1px; }
+    .club-form .btn { flex: none; }
+    .club-code { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; border: 1px dashed rgba(255, 212, 0, .55); padding: 8px 12px; color: var(--amber); font-family: var(--ui); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; }
+    .club-status { margin: 12px 0 0; color: #f7f5f0; font-size: 12px; line-height: 1.65; }
+    .club-status b { color: var(--amber); }
+    .club-fine { margin: 12px 0 0; color: #8f9aa1; font-size: 9.5px; line-height: 1.7; }
+
+    /* ---------- richer gradients ---------- */
+    #faq { background: linear-gradient(180deg, var(--surface) 0%, #f3eee2 42%, var(--surface) 100%); }
+    [data-theme="dark"] #faq { background: linear-gradient(180deg, var(--surface) 0%, #101821 46%, var(--surface) 100%); }
+    .faq-list details { border-left: 3px solid transparent; padding-inline: 16px; transition: background .25s, border-color .25s; }
+    .faq-list details[open] { border-left-color: var(--red); background: linear-gradient(100deg, rgba(225, 6, 0, .07), rgba(255, 212, 0, .07) 58%, transparent); }
+    .faq-list details:nth-child(even) { background: linear-gradient(90deg, rgba(18, 22, 26, .035), transparent 48%); }
+    [data-theme="dark"] .faq-list details:nth-child(even) { background: linear-gradient(90deg, rgba(255, 255, 255, .04), transparent 48%); }
+    .contact { background: linear-gradient(128deg, var(--red-2) 0%, var(--red) 46%, #ff3a1f 100%); }
+    .contact::before { position: absolute; inset: 0; background: radial-gradient(120% 120% at 88% 6%, rgba(255, 212, 0, .28) 0%, transparent 42%), radial-gradient(100% 120% at 6% 100%, rgba(0, 0, 0, .34) 0%, transparent 55%); content: ""; pointer-events: none; }
+    .contact-card { border-color: rgba(255, 255, 255, .46); background: linear-gradient(120deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .06)); }
+    .promise { background: linear-gradient(150deg, #0e1216 0%, #121a21 55%, #1b1114 100%); }
+    .plans-note { border-left: 3px solid var(--amber); padding-left: 12px; }
+    .split .w { will-change: auto; }
+    .directions-link { border: 2px solid currentColor; padding: 9px 13px; font-weight: 700; }
+    .flag-seam { z-index: 0; }
+    .track-grid, .gear-head, .gear-layout, .gear .blueprints { position: relative; z-index: 2; }
+
+    @media (max-width: 900px) {
+      .club-grid { grid-template-columns: 1fr; }
+      .club-form { flex-wrap: wrap; }
+      .club-form .btn { width: 100%; }
+    }
     [data-theme="dark"] .gear-head .h2 { color: var(--ink); }
 
     /* ---------- responsive ---------- */
@@ -704,7 +774,7 @@
         </div>
         <div class="hero-visual">
           <div class="hero-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-          <img class="hero-car" src="open-wheel-car.svg?v=3" alt="A red TurboTutor Formula 1 car with a titanium halo, carbon-fibre wings and yellow-marked slick tyres" width="860" height="320" fetchpriority="high">
+          <img class="hero-car hero-photo" src="f1-car.webp" alt="A real red Ferrari Formula 1 car on track at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
           <div class="hero-plate" aria-hidden="true"><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
         </div>
       </div>
@@ -837,6 +907,14 @@
           </article>
         </div>
         <p class="plans-note">New lower rates. Weekly laps start at $24 for 45 minutes on Zoom. Science is the base rate, Math adds $3 and English adds $5 per weekly lap, a public-library session adds $10 per 45-minute lap, the monthly block is 5% lower than paying weekly, and the yearly plan is 15% lower than 48 weekly laps. Shorter and longer laps scale from there, and grades rise gently from Grade 1 to Grade 8. No payment is collected on this website.</p>
+
+        <a class="library-card reveal" href="https://henricolibrary-va.libcal.com/spaces?lid=6277" target="_blank" rel="noopener">
+          <span class="library-tag">In-person home base</span>
+          <strong>Twin Hickory Library</strong>
+          <span class="library-meta">Henrico County Public Library · Glen Allen, VA</span>
+          <span class="library-copy">In-person laps meet at Twin Hickory. Study rooms fill up, so book a space on the library page first and the tutor confirms the session around it.</span>
+          <span class="library-cta">Check room availability <span aria-hidden="true">↗</span></span>
+        </a>
       </div>
     </section>
 
@@ -847,20 +925,20 @@
           <p class="lead">Focused one-time sessions for advanced coursework and applications. Confirm the scope, materials and timing with the tutor before requesting.</p>
         </div>
         <div class="specialty-grid">
-          <article class="specialty-card featured reveal" data-specialty="moody-ib" data-base-price="120">
+          <article class="specialty-card featured reveal" data-specialty="moody-ib" data-base-price="120" data-zoom-only="true" data-price-suffix="120-min Zoom session" data-kart-meta="120-minute Zoom session" data-minutes="120" data-period="session">
             <p class="kicker">Advanced · by request</p>
             <h3>Moody IB Prep</h3>
-            <p>A premium 60-minute session for IB coursework. Bring the unit, the rubric and the questions you want to attack, and we build the plan around them.</p>
-            <p class="specialty-price" data-specialty-price>$120 <small>/ 60-min session</small></p>
-            <p class="specialty-note">Suggested Zoom rate · library rate updates with your location choice</p>
+            <p>A full two-hour Zoom deep dive for IB coursework. Bring the unit, the rubric and the questions you want to attack, and we build the plan around them.</p>
+            <p class="specialty-price" data-specialty-price>$120 <small>/ 120-min Zoom session</small></p>
+            <p class="specialty-note">Two hours, one focused plan · Zoom only</p>
             <button class="btn" type="button" data-add-specialty="moody-ib">Request IB prep <span class="arrow" aria-hidden="true">→</span></button>
           </article>
-          <article class="specialty-card reveal" data-specialty="application-review" data-base-price="50">
+          <article class="specialty-card reveal" data-specialty="application-review" data-base-price="35" data-zoom-only="true" data-price-suffix="application" data-kart-meta="Application review · optional 90-min Zoom +$40" data-minutes="0" data-period="application">
             <p class="kicker">Application support</p>
             <h3>High School Application Review</h3>
-            <p>A focused 60-minute review of one application draft, plus a clear discussion of next steps with the student and parent.</p>
-            <p class="specialty-price" data-specialty-price>$50 <small>/ 60-min review</small></p>
-            <p class="specialty-note">Suggested Zoom rate · share the draft before the session</p>
+            <p>A full review of one application, with written notes on what to fix. Add a 90-minute Zoom meeting with the student and parent if you want to talk it through.</p>
+            <p class="specialty-price" data-specialty-price>$35 <small>/ application</small></p>
+            <p class="specialty-note">+$40 optional 90-minute Zoom meeting · share the draft first</p>
             <button class="btn" type="button" data-add-specialty="application-review">Request a review <span class="arrow" aria-hidden="true">→</span></button>
           </article>
         </div>
@@ -919,7 +997,7 @@
           </ul>
         </div>
         <div class="promise-art">
-          <img src="helmet.svg" alt="A white and red racing helmet with a yellow visor stripe" loading="lazy" width="340" height="300">
+          <img class="promise-photo" src="f1-helmet.webp" alt="A real Formula 1 helmet on display, painted in blue, yellow and orange" loading="lazy" decoding="async" width="760" height="760">
         </div>
       </div>
     </section>
@@ -1019,6 +1097,34 @@
       </div>
       <div class="hazard" aria-hidden="true" style="margin-top:52px"></div>
     </section>
+
+    <section class="section club" id="club" aria-labelledby="club-title">
+      <div class="wrap club-grid">
+        <div>
+          <p class="kicker">Paddock Club</p>
+          <h2 id="club-title">5% off, and a<br><em>Monday email.</em></h2>
+          <p class="club-copy">Join the list once. Your first month costs 5% less, and every Monday you get one short email about gear drops, new session openings and the study notes worth keeping.</p>
+          <ul class="club-perks">
+            <li>5% off the first month, code PADDOCK5</li>
+            <li>One email each Monday, nothing else</li>
+            <li>Unsubscribe in one click, any time</li>
+          </ul>
+        </div>
+        <div class="club-panel">
+          <h3>Get on the list</h3>
+          <p>No card, no account. Just an email address.</p>
+          <form class="club-form" id="club-form" data-endpoint="" novalidate>
+            <label class="sr-only" for="club-email">Email address</label>
+            <input id="club-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn" type="submit">Join the club</button>
+          </form>
+          <span class="club-code">PADDOCK5 · 5% OFF</span>
+          <p class="club-status" id="club-status" role="status" hidden></p>
+          <p class="club-fine">Monday emails cover the store and session openings. The discount applies to the first month of a new plan and is confirmed by the tutor.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section lapcase" id="walkthrough" aria-labelledby="walkthrough-title">
       <div class="wrap">
         <div class="section-head">
@@ -1084,7 +1190,7 @@
           <img class="contact-art" src="pit-garage.svg" alt="A pit garage with an open door, tyre stacks and a toolbox" loading="lazy" width="340" height="260">
           <p class="contact-note">Richmond, VA · Mon–Sat · 4–8pm</p>
           <p class="reply-promise"><span aria-hidden="true"></span> Replies within one business day</p>
-          <a class="directions-link" href="https://www.google.com/maps/search/Richmond+Public+Library+Richmond+VA" target="_blank" rel="noopener">Find a Richmond Public Library branch <span aria-hidden="true">↗</span></a>
+          <a class="directions-link" href="https://henricolibrary-va.libcal.com/spaces?lid=6277" target="_blank" rel="noopener">Twin Hickory Library rooms <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -1104,8 +1210,8 @@
           <details><summary>What grades and subjects can my student choose?</summary><p>Grades 1 through 8, in Science, English or Math. You can add more than one course to a single kart request, and each one keeps its own lap length and location.</p></details>
           <details><summary>How much does tutoring cost?</summary><p>Weekly sessions start at $24 for a 45-minute Grade 1 Science lap on Zoom. Math adds $3 and English adds $5 per weekly lap. A public-library session adds $10, a 30-minute lap is about 30% less, a 60-minute lap is about 50% more, and rates rise gently from Grade 1 to Grade 8. Monthly blocks are 5% lower than paying weekly and the yearly plan is 15% lower than 48 weekly laps. Every price appears before you add anything to the kart.</p></details>
           <details><summary>What does each plan include?</summary><p>Weekly includes one class per week, Monthly includes four, and Monthly is 5% lower than paying weekly, and Yearly includes 48 sessions across 12 months at 15% off. Every plan lets you pick a 30-, 45- or 60-minute lap. The 60-minute option is the recommended one because it leaves room for guided practice and a proper wrap-up.</p></details>
-          <details><summary>How do online and library sessions work?</summary><p>Online sessions meet on Zoom and the tutor confirms the link after enrollment. In-person sessions meet at a mutually agreed public library and cost $10 more per 45-minute lap. A parent or guardian must remain present for students under 18.</p></details>
-          <details><summary>What are the special coaching programs?</summary><p>Moody IB Prep is a 60-minute advanced session at $120, and the High School Application Review is a 60-minute draft review at $50. Both are one-time requests; the listed rates are suggested starting prices and the tutor confirms scope and availability first.</p></details>
+          <details><summary>How do online and library sessions work?</summary><p>Online sessions meet on Zoom and the tutor confirms the link after enrollment. In-person laps meet at Twin Hickory Library in Henrico County and cost $10 more per 45-minute lap. Rooms are booked through <a href="https://henricolibrary-va.libcal.com/spaces?lid=6277" target="_blank" rel="noopener">the library's room page</a>. A parent or guardian must remain present for students under 18.</p></details>
+          <details><summary>What are the special coaching programs?</summary><p>Moody IB Prep is a 120-minute Zoom session at $120. The High School Application Review is $35 per application, with an optional 90-minute Zoom meeting for $40 more. Both are one-time requests; the tutor confirms scope and availability first.</p></details>
           <details><summary>Does the kart take payment?</summary><p>No. The kart is just a build sheet: it collects the plans you want and turns them into a tidy email or text request. No card fields, no checkout, no online payment anywhere on this site.</p></details>
           <details><summary>When can I buy team gear?</summary><p>Not yet. The paddock shop is under construction: three concepts are in the pipeline and nothing is for sale. Register your interest and you will hear about drop 01 when it exists.</p></details>
           <details><summary>How do the seasonal offers work?</summary><p>The page checks the calendar and rotates the offer for New Year, back-to-school, Diwali season (Oct 1–Nov 10), Thanksgiving week and Christmas. Only one cash discount applies per request: the best eligible seasonal or wheel discount wins.</p></details>
@@ -1142,7 +1248,7 @@
     </div>
     <div class="wrap footer-bottom">
       <span>© 2026 TurboTutor · Built for learners</span>
-      <span>No online payment · Cash &amp; Zelle direct · <a href="LICENSE">MIT licensed</a></span>
+      <span>No online payment · Cash &amp; Zelle direct · <a href="LICENSE">MIT licensed</a> · <a href="credits.html">Photo credits</a></span>
     </div>
   </footer>
 
@@ -1168,7 +1274,7 @@
     </div>
     <div class="kart-art" aria-hidden="true">
       <span>Grid box · TT-07</span>
-      <img src="go-kart.svg" alt="" width="440" height="260">
+      <img class="kart-photo" src="go-kart.webp" alt="" width="960" height="620" loading="lazy" decoding="async">
     </div>
     <div class="kart-items" id="kart-items" aria-live="polite"></div>
     <div class="kart-foot">
@@ -1369,7 +1475,7 @@
         const deliverySummary = $("#delivery-summary");
         if (deliverySummary) deliverySummary.textContent = picker.delivery === "zoom"
           ? "Online sessions run on Zoom. The tutor confirms the meeting link after enrollment."
-          : "Meet at a mutually agreed public library. A parent or guardian must remain present for students under 18.";
+          : "In-person laps meet at Twin Hickory Library in Henrico County. A parent or guardian must remain present for students under 18.";
 
         $$("[data-plan]").forEach(card => {
           const term = card.dataset.plan;
@@ -1404,13 +1510,15 @@
 
       function renderSpecialtyCards() {
         $$("[data-specialty]").forEach(card => {
+          const zoomOnly = card.dataset.zoomOnly === "true";
           const basePrice = Number(card.dataset.basePrice);
-          const premium = picker.delivery === "library" ? specialtyLibraryPremium : 0;
+          const premium = !zoomOnly && picker.delivery === "library" ? specialtyLibraryPremium : 0;
           const amount = basePrice + premium;
           const priceEl = $("[data-specialty-price]", card);
-          if (priceEl) priceEl.innerHTML = `${money(amount)} <small>/ 60-min ${picker.delivery === "zoom" ? "Zoom session" : "library session"}</small>`;
+          const suffix = card.dataset.priceSuffix || (picker.delivery === "zoom" ? "60-min Zoom session" : "60-min library session");
+          if (priceEl) priceEl.innerHTML = `${money(amount)} <small>/ ${suffix}</small>`;
           const noteEl = $(".specialty-note", card);
-          if (noteEl) noteEl.textContent = picker.delivery === "zoom"
+          if (noteEl && !zoomOnly) noteEl.textContent = picker.delivery === "zoom"
             ? "Suggested Zoom rate · 60 minutes"
             : `Suggested library rate · includes ${money(premium)} in-person premium`;
         });
@@ -1419,18 +1527,20 @@
       function addSpecialtyPlan(id) {
         const card = document.querySelector(`[data-specialty="${id}"]`);
         if (!card) return;
-        const amount = Number(card.dataset.basePrice) + (picker.delivery === "library" ? specialtyLibraryPremium : 0);
+        const zoomOnly = card.dataset.zoomOnly === "true";
+        const amount = Number(card.dataset.basePrice) + (!zoomOnly && picker.delivery === "library" ? specialtyLibraryPremium : 0);
         const name = $("h3", card).textContent.trim();
         const plan = {
           name,
           term: "specialty",
           termName: "One-time",
-          duration: 60,
+          duration: Number(card.dataset.minutes || 60),
           classCount: 1,
           amount,
-          period: "session",
-          delivery: picker.delivery,
-          key: `${id}-${picker.delivery}`
+          period: card.dataset.period || "session",
+          delivery: zoomOnly ? "zoom" : picker.delivery,
+          kartMeta: card.dataset.kartMeta || "",
+          key: `${id}-${zoomOnly ? "zoom" : picker.delivery}`
         };
         if (selectedCourses.some(item => item.key === plan.key)) {
           showToast("That specialty session is already on the kart.");
@@ -1461,7 +1571,7 @@
         } else {
           kartItems.innerHTML = selectedCourses.map((plan, index) => {
             const meta = plan.term === "specialty"
-              ? `One-time session · 60 min · ${deliveryNames[plan.delivery]}`
+              ? (plan.kartMeta || `One-time session · ${plan.duration} min · ${deliveryNames[plan.delivery]}`)
               : `${plan.termName} · ${plan.duration} min · ${plan.classCount} ${plan.classCount === 1 ? "lap" : "laps"} per ${plan.period} · ${deliveryNames[plan.delivery]}`;
             return `<div class="kart-item">
               <span class="kart-item-num">${String(index + 1).padStart(2, "0")}</span>

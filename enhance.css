@@ -60,7 +60,7 @@
 .hero .contours { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .6; }
 .hero-shade { position: absolute; inset: 0; z-index: 4; background: #06080a; opacity: 0; pointer-events: none; }
 .hero-grid { position: relative; z-index: 2; }
-.hero-visual { will-change: transform; }
+.hero-visual { }
 
 /* ---------- bracket plate ---------- */
 .hero-plate { border: 0; background: rgba(8, 10, 12, .55); padding: 14px 18px; }
@@ -76,7 +76,7 @@
 .hero-plate .plate-meta b { color: #ffd400; font-family: var(--ui); font-size: 9px; font-weight: 700; letter-spacing: 1.2px; }
 
 /* ---------- text engine ---------- */
-.split .w { display: inline-block; will-change: transform, opacity; }
+.split .w { display: inline-block; }
 .hero h1.split span.line { animation: none; }
 .hero h1.split .w { padding-bottom: .02em; }
 

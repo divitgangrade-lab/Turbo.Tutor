@@ -12,6 +12,10 @@
   const subscribers = new Set();
   let frame = 0;
   function tick(now) {
+    if (document.hidden) {
+      frame = requestAnimationFrame(tick);
+      return;
+    }
     for (const sub of Array.from(subscribers)) {
       if (sub.fps && now - sub.last < sub.fps) continue;
       sub.last = now;
@@ -483,6 +487,10 @@
     if (!visual) return;
     const px = new Spring(0, { tension: 90, friction: 22, precision: 0.001 });
     const py = new Spring(0, { tension: 90, friction: 22, precision: 0.001 });
+    let heroVisible = true;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => { heroVisible = entries[0].isIntersecting; }).observe(visual);
+    }
     let last = performance.now();
     window.addEventListener(
       "pointermove",
@@ -495,13 +503,14 @@
       { passive: true }
     );
     every((now) => {
+      if (!heroVisible) { last = now; return; }
       const dt = now - last;
       last = now;
       px.step(dt);
       py.step(dt);
       visual.style.transform = `translate3d(${px.value * -12}px, ${py.value * -8}px, 0)`;
       if (plate) plate.style.transform = `translate3d(${px.value * 6}px, ${py.value * 5}px, 0)`;
-    });
+    }, 33);
   })();
 
   /* ---------- scroll parallax on framed artwork ---------- */
@@ -516,7 +525,7 @@
         const p = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
         element.style.transform = `translate3d(0, ${p * 34}px, 0)`;
       }
-    }, 16);
+    }, 50);
   })();
 
   /* ---------- contour backdrop (marching squares) ---------- */
@@ -542,7 +551,7 @@
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
       canvas.width = Math.round(width * dpr);
@@ -553,7 +562,7 @@
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
-      const step = 30;
+      const step = 38;
       const cols = Math.ceil(width / step);
       const rows = Math.ceil(height / step);
       const values = new Float32Array((cols + 1) * (rows + 1));
@@ -651,7 +660,7 @@
       if (!visible || document.hidden) return;
       time += dt;
       draw();
-    }, 34);
+    }, 20);
   })();
 
   /* ---------- chequered seams ---------- */
@@ -678,7 +687,7 @@
 
       function resize() {
         const rect = canvas.getBoundingClientRect();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         width = Math.max(1, rect.width);
         height = Math.max(1, rect.height);
         canvas.width = Math.round(width * dpr);
@@ -716,12 +725,13 @@
 
       every(() => {
         const rect = section.getBoundingClientRect();
+        if (rect.bottom < -120 || rect.top > window.innerHeight + 120 || document.hidden) return;
         const next = clamp(1 - rect.top / window.innerHeight, 0, 1);
-        if (Math.abs(next - progress) > 0.004) {
+        if (Math.abs(next - progress) > 0.006) {
           progress = next;
           draw();
         }
-      }, 24);
+      }, 80);
     }
   })();
 
@@ -735,6 +745,7 @@
     const dotsCtx = dotsCanvas.getContext("2d");
     const traceCtx = traceCanvas.getContext("2d");
     if (!dotsCtx || !traceCtx) return;
+    const dotsVisible = getComputedStyle(dotsCanvas).visibility !== "hidden";
 
     const W = 760;
     const H = 470;
@@ -766,7 +777,7 @@
 
     function resize() {
       const rect = dotsCanvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
       scale = width / W;
@@ -782,6 +793,7 @@
     }
 
     function bake() {
+      if (!dotsVisible) return;
       baked = document.createElement("canvas");
       baked.width = dotsCanvas.width;
       baked.height = dotsCanvas.height;
@@ -796,7 +808,7 @@
     }
 
     function drawDots(litHead) {
-      if (!baked) return;
+      if (!dotsVisible || !baked) return;
       dotsCtx.clearRect(0, 0, width, height);
       dotsCtx.drawImage(baked, 0, 0, width, height);
       const lights = [];
@@ -1130,8 +1142,48 @@
     every((now) => {
       if (!visible) return;
       frameLap(now);
-      if (pointer.on && armed) drawDots();
-    }, 16);
+      if (pointer.on && armed && dotsVisible) drawDots();
+    }, 33);
+  })();
+
+  /* ---------- Paddock Club signup ---------- */
+  (function paddockClub() {
+    const form = $("#club-form");
+    if (!form) return;
+    const status = $("#club-status");
+    const endpoint = form.dataset.endpoint;
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = form.querySelector("input[type=email]");
+      const email = (input.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        status.hidden = false;
+        status.textContent = "That email does not look right. Check it and try again.";
+        input.focus();
+        return;
+      }
+      if (endpoint) {
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email_address: email, tags: ["paddock-club"] })
+          });
+          if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
+          form.reset();
+          status.hidden = false;
+          status.innerHTML = "<b>You are on the grid.</b> Use code <b>PADDOCK5</b> for 5% off your first month. The first Monday email arrives next week.";
+          return;
+        } catch (error) {
+          console.warn("[TurboTutor club]", error);
+        }
+      }
+      const subject = encodeURIComponent("Paddock Club signup: 5% off");
+      const body = encodeURIComponent(`Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`);
+      window.location.href = `mailto:divit.gangrade@gmail.com?subject=${subject}&body=${body}`;
+      status.hidden = false;
+      status.innerHTML = "<b>Almost there.</b> Your email app should open with the signup ready to send. Your 5% code is <b>PADDOCK5</b>.";
+    });
   })();
 
   /* ---------- FAQ accordion height animation ---------- */

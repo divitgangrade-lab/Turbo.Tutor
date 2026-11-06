@@ -12,7 +12,7 @@ The whole site is a single static page with no build step, no framework, no back
 ## What is inside
 
 ### The plan builder
-- Pick a **grade** (1–8), a **subject** (Science, English, Math) and a **location** (Zoom or a public library).
+- Pick a **grade** (1–8), a **subject** (Science, English, Math) and a **location** (Zoom or Twin Hickory Library).
 - Three terms - Weekly, Monthly, Yearly - each with 30, 45 or 60-minute laps.
 - Prices recalculate instantly and are announced through an `aria-live` region.
 - Every plan is described in plain words before it is added: session length, number of laps, location and suggested price.
@@ -29,8 +29,18 @@ No payment is collected anywhere on the site.
 - A canvas prize wheel with published odds and a 30-day saved result (`localStorage`, with `sessionStorage` fallback).
 - Seasonal offers that rotate by date: Season Opener, Back-to-School Grand Prix, Diwali Night Race, Thanksgiving Sprint and Season Finale.
 
+### Paddock Club newsletter
+A signup panel under the gear section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about gear drops and session openings. It is wired in `enhance.js`:
+
+- With `data-endpoint` set on `#club-form`, the form POSTs `{ "email_address": "...", "tags": ["paddock-club"] }` and shows the code on success.
+- With it empty, the form opens a pre-filled email to the tutor instead, so no signup is lost.
+- The automated Monday send and the welcome email are handled by the newsletter provider. Create a [Buttondown](https://buttondown.com) account, then point `data-endpoint` at a small endpoint that holds the API key (GitHub Pages cannot keep a secret in client code).
+
 ### Team gear (under construction)
 A deliberate construction site: hazard tape, a blueprint pipeline with animated progress bars, and a hand-drawn little worker holding an **UNDER CONSTRUCTION** sign. Nothing is for sale; the "register interest" button opens a pre-filled email.
+
+### Twin Hickory Library
+In-person laps meet at **Twin Hickory Library** in Henrico County. The plan section carries a large bordered card linking to the library's room-booking page (`https://henricolibrary-va.libcal.com/spaces?lid=6277`), and the FAQ and contact panel link there too.
 
 ### Everything else
 - Sticky header with scroll progress, active-section highlighting and a theme toggle.
@@ -67,12 +77,13 @@ Adjustments:
 | Monthly plan | −5% vs. 4 weekly payments |
 | Yearly plan | −15% vs. 48 weekly payments |
 
-Special coaching (60 minutes, suggested starting rates):
+Special coaching:
 
 | Program | Price |
 | --- | --- |
-| Moody IB Prep | $120 |
-| High School Application Review | $50 |
+| Moody IB Prep | $120 per 120-minute Zoom session |
+| High School Application Review | $35 per application |
+| Optional 90-minute Zoom meeting | +$40 with an application review |
 
 Service terms: $15 missed session, $10 family-requested reschedule, and a 15% credit toward the next request when the tutor reschedules. Fees are arranged directly with the tutor - never on this site.
 
@@ -83,10 +94,13 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ```
 .
 ├── index.html              # Everything: markup, styles and behaviour
-├── open-wheel-car.svg      # Hero racing car
+├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
+├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
+├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
+├── open-wheel-car.svg      # Original hero car drawing (kept as a backup)
 ├── monaco-harbour.svg      # Harbour scene behind the circuit map
-├── go-kart.svg             # Kart panel illustration
-├── helmet.svg              # Pit-wall promise illustration
+├── go-kart.svg             # Original kart illustration (kept as a backup)
+├── helmet.svg              # Original helmet illustration (kept as a backup)
 ├── race-trophy.svg         # Steps illustration
 ├── pit-garage.svg          # Contact illustration
 ├── checkered-flag.svg      # Gear section accent
@@ -97,6 +111,18 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ```
 
 No dependencies, no bundler, no package manager, no server code. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+
+### Photography credits
+
+The site now uses real photographs instead of drawn stand-ins, all from Wikimedia Commons under share-alike licences. Credits are repeated in the site footer.
+
+| Use | File | Author | Licence |
+| --- | --- | --- | --- |
+| Hero car | Carlos Sainz, 2023 Austrian Grand Prix | Lukas Raich | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| Pit-wall promise | Oscar Piastri helmet, 2024 | Liauzh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| Kart panel | Go kart racing | Genevieve | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) |
+
+If a photo is replaced, keep the credit line accurate and update both the footer and this table.
 
 ---
 
