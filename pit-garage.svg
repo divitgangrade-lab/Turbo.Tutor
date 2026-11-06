@@ -1,9 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" fill="none">
-  <path d="M22 154V45l28-22h260l28 22v109" stroke="#202725" stroke-width="8"/>
-  <path d="M31 55h298M45 75h270" stroke="#d94232" stroke-width="8"/>
-  <path d="M52 82h76v72H52zm90 0h76v72h-76zm90 0h76v72h-76z" fill="#e5e2d8" stroke="#202725" stroke-width="6"/>
-  <path d="M60 91h60v9H60zm90 0h60v9h-60zm90 0h60v9h-60z" fill="#f2c54b"/>
-  <path d="M18 160h324" stroke="#202725" stroke-width="8"/>
-  <path d="M29 166h19m18 0h19m18 0h19m18 0h19m18 0h19m18 0h19m18 0h19m18 0h19m18 0h19" stroke="#d94232" stroke-width="5"/>
-  <path d="M146 36h68" stroke="#202725" stroke-width="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" role="img" aria-labelledby="garageTitle">
+  <title id="garageTitle">A racing pit garage with an open door, tyre stacks and a toolbox</title>
+  <defs>
+    <linearGradient id="garageWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f373f"/>
+      <stop offset="1" stop-color="#171d22"/>
+    </linearGradient>
+    <linearGradient id="garageDoor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfcbc0"/>
+      <stop offset="1" stop-color="#9ea39c"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="170" cy="232" rx="150" ry="12" fill="#000" opacity=".14"/>
+
+  <rect x="34" y="72" width="272" height="146" fill="url(#garageWall)"/>
+  <path d="M28 72 L170 40 L312 72 Z" fill="#3a434b"/>
+  <path d="M28 72 L170 40 L312 72 L312 80 L28 80 Z" fill="#e10600"/>
+  <rect x="34" y="210" width="272" height="8" fill="#0f1316"/>
+
+  <rect x="62" y="120" width="140" height="96" fill="#0d1114"/>
+  <rect x="66" y="124" width="132" height="88" fill="url(#garageDoor)"/>
+  <g stroke="#8b9089" stroke-width="2">
+    <line x1="66" y1="140" x2="198" y2="140"/>
+    <line x1="66" y1="156" x2="198" y2="156"/>
+    <line x1="66" y1="172" x2="198" y2="172"/>
+    <line x1="66" y1="188" x2="198" y2="188"/>
+  </g>
+  <rect x="66" y="124" width="132" height="12" fill="#ffd400"/>
+  <path d="M66 130 h16 l-14 6 z M104 124 h16 l-14 12 z M142 124 h16 l-14 12 z M180 124 h16 l-14 12 z" fill="#14171b"/>
+
+  <rect x="86" y="94" width="92" height="20" rx="3" fill="#14171b"/>
+  <text x="132" y="109" font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif" font-size="14" font-weight="800" fill="#ffd400" letter-spacing="2" text-anchor="middle">PIT 01</text>
+
+  <g>
+    <ellipse cx="262" cy="208" rx="30" ry="8" fill="#0d1114"/>
+    <ellipse cx="262" cy="192" rx="30" ry="8" fill="#151a1f"/>
+    <ellipse cx="262" cy="176" rx="30" ry="8" fill="#151a1f"/>
+    <path d="M232 176 a30 8 0 0 0 60 0 v32 a30 8 0 0 1 -60 0 z" fill="#1b2127"/>
+    <ellipse cx="262" cy="176" rx="18" ry="5" fill="#151a1f"/>
+    <ellipse cx="262" cy="192" rx="18" ry="5" fill="#20272d"/>
+    <path d="M244 170 a18 5 0 0 0 36 0" fill="none" stroke="#ffd400" stroke-width="2" opacity=".8"/>
+  </g>
+
+  <g>
+    <rect x="212" y="140" width="56" height="34" rx="3" fill="#c8ccd2"/>
+    <rect x="212" y="140" width="56" height="10" fill="#e10600"/>
+    <rect x="236" y="150" width="8" height="24" fill="#8e99a4"/>
+    <circle cx="240" cy="150" r="3" fill="#14171b"/>
+    <rect x="262" y="152" width="22" height="6" rx="3" fill="#14171b" opacity=".3"/>
+  </g>
+
+  <g fill="#ffd400">
+    <rect x="44" y="86" width="7" height="12" rx="2"/>
+    <rect x="40" y="98" width="15" height="5" rx="2.5"/>
+  </g>
+  <path d="M52 86 C52 74 70 74 70 86" fill="none" stroke="#20262d" stroke-width="3"/>
 </svg>

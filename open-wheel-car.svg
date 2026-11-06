@@ -1,11 +1,127 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" fill="none">
-  <path d="M38 116h51l38-43h82l32 38h74l61 20H39z" fill="#d94232"/>
-  <path d="m127 73 19-25h42l20 25" fill="#f2c54b"/>
-  <path d="M144 49h47m-42 0v19m36-19v19" stroke="#202725" stroke-width="7" stroke-linecap="square"/>
-  <path d="M132 112h196m-252 0H39m285 0 39 11" stroke="#f2c54b" stroke-width="7" stroke-linecap="square"/>
-  <path d="M55 125h-18v-17h39m272 17h27v-15h-38" stroke="#202725" stroke-width="8" stroke-linejoin="miter"/>
-  <circle cx="98" cy="132" r="24" fill="#202725"/><circle cx="98" cy="132" r="10" fill="#a8d1cf"/>
-  <circle cx="322" cy="132" r="24" fill="#202725"/><circle cx="322" cy="132" r="10" fill="#a8d1cf"/>
-  <path d="M170 73h27l21 35h-69l21-35Z" fill="#374644" stroke="#202725" stroke-width="5"/>
-  <path d="M8 156h404" stroke="#202725" stroke-width="5" stroke-dasharray="18 12"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" role="img" aria-labelledby="carTitle">
+  <title id="carTitle">TurboTutor Formula-style racing car in red livery</title>
+  <defs>
+    <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4234"/>
+      <stop offset=".42" stop-color="#e10600"/>
+      <stop offset="1" stop-color="#8a0300"/>
+    </linearGradient>
+    <linearGradient id="carBodyDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9c0400"/>
+      <stop offset="1" stop-color="#630200"/>
+    </linearGradient>
+    <linearGradient id="carDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a434d"/>
+      <stop offset="1" stop-color="#101418"/>
+    </linearGradient>
+    <linearGradient id="carRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fafc"/>
+      <stop offset=".5" stop-color="#bcc6d1"/>
+      <stop offset="1" stop-color="#78838f"/>
+    </linearGradient>
+    <radialGradient id="carTyre" cx=".34" cy=".26" r=".88">
+      <stop offset="0" stop-color="#4a545f"/>
+      <stop offset=".68" stop-color="#171c21"/>
+      <stop offset="1" stop-color="#080b0e"/>
+    </radialGradient>
+    <linearGradient id="carVisor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f7d8a"/>
+      <stop offset="1" stop-color="#161c22"/>
+    </linearGradient>
+    <style>
+      @keyframes carWheel { to { transform: rotate(360deg); } }
+      .car-wheel-spin { transform-box: fill-box; transform-origin: center; animation: carWheel 1.9s linear infinite; }
+      @media (prefers-reduced-motion: reduce) { .car-wheel-spin { animation: none; } }
+    </style>
+  </defs>
+
+  <ellipse cx="420" cy="262" rx="352" ry="16" fill="#000" opacity=".34"/>
+
+  <g fill="#ffffff" opacity=".14">
+    <rect x="6" y="128" width="96" height="6" rx="3"/>
+    <rect x="46" y="148" width="66" height="5" rx="2.5"/>
+    <rect x="0" y="168" width="58" height="5" rx="2.5"/>
+    <rect x="70" y="190" width="48" height="4" rx="2"/>
+  </g>
+
+  <g>
+    <path d="M596 78 C630 71 664 71 692 78 L692 94 C664 87 632 87 598 94 Z" fill="#e10600"/>
+    <path d="M604 104 C634 98 664 98 692 104 L692 118 C664 111 636 111 606 118 Z" fill="url(#carDark)"/>
+    <path d="M688 58 C694 58 700 63 700 70 L700 152 C700 159 694 164 688 164 L676 164 L676 58 Z" fill="#14171b"/>
+    <path d="M678 62 h10 v22 h-10 z" fill="#ffd400"/>
+    <path d="M678 96 h10 v14 h-10 z" fill="#ffd400"/>
+    <path d="M600 118 L618 121 L618 172 L600 168 Z" fill="url(#carDark)"/>
+    <path d="M604 124 h12 v8 h-12 z" fill="#ffd400" opacity=".85"/>
+  </g>
+
+  <path d="M96 216 C152 202 210 194 258 188 L300 183 C320 164 352 152 398 148 L476 140 C508 130 542 126 580 130 L664 140 L678 172 L598 180 C536 186 470 188 416 184 L352 193 C288 203 200 215 128 227 Z" fill="url(#carBody)"/>
+
+  <path d="M392 172 C444 166 512 164 586 172 L598 196 C526 207 448 209 396 201 Z" fill="url(#carBodyDark)"/>
+  <path d="M402 174 C452 168 508 166 560 170 L566 180 C512 176 456 178 406 184 Z" fill="#f7f5f0" opacity=".92"/>
+  <path d="M470 158 a21 21 0 1 0 .1 0 z" fill="#f7f5f0"/>
+  <text x="470" y="166" font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif" font-size="24" font-weight="900" fill="#14171b" text-anchor="middle">07</text>
+
+  <path d="M500 138 C520 116 550 106 582 110 L590 136 L536 146 Z" fill="#ffd400"/>
+  <path d="M510 134 C528 118 550 112 574 114 L578 126 L528 138 Z" fill="#14171b" opacity=".85"/>
+
+  <path d="M300 196 C380 188 500 186 596 194 L600 204 C500 199 380 201 302 210 Z" fill="#14171b" opacity=".9"/>
+
+  <path d="M302 176 C312 152 348 142 382 146 L396 164 L340 180 Z" fill="#1b2127"/>
+  <path d="M330 158 C338 130 392 122 424 144" fill="none" stroke="#101418" stroke-width="11" stroke-linecap="round"/>
+  <path d="M334 154 C342 132 390 126 418 144" fill="none" stroke="#f7f5f0" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
+
+  <g transform="translate(368 150)">
+    <circle r="19" fill="#f7f5f0"/>
+    <path d="M-19 -3 C-13 -16 7 -21 19 -9 L19 1 Z" fill="#e10600"/>
+    <path d="M-4 -5 h22 c2 0 4 2 4 5 v9 h-26 z" fill="#1b2127"/>
+    <path d="M-2 -2 h18" stroke="#f7f5f0" stroke-width="2" opacity=".45"/>
+    <path d="M-19 4 a19 19 0 0 0 12 13 l4 -13 z" fill="#14171b" opacity=".8"/>
+  </g>
+
+  <path d="M30 210 L130 201 L132 210 L32 219 Z" fill="#e10600"/>
+  <path d="M22 222 L134 211 L137 224 L24 236 Z" fill="url(#carDark)"/>
+  <path d="M18 204 h13 v36 h-13 z" fill="#14171b"/>
+  <path d="M126 204 h11 v22 h-11 z" fill="#14171b"/>
+  <path d="M20 208 h9 v8 h-9 z" fill="#ffd400"/>
+
+  <g transform="translate(628 200)">
+    <circle r="48" fill="url(#carTyre)"/>
+    <circle r="48" fill="none" stroke="#04070a" stroke-width="4" opacity=".8"/>
+    <circle r="40" fill="none" stroke="#ffd400" stroke-width="3" stroke-dasharray="5 9" opacity=".9"/>
+    <circle r="30" fill="#11161a"/>
+    <g class="car-wheel-spin">
+      <circle r="28" fill="url(#carRim)"/>
+      <g stroke="#3f4952" stroke-width="4" stroke-linecap="round">
+        <line x1="0" y1="-23" x2="0" y2="23"/>
+        <line x1="-23" y1="0" x2="23" y2="0"/>
+        <line x1="-16" y1="-16" x2="16" y2="16"/>
+        <line x1="-16" y1="16" x2="16" y2="-16"/>
+      </g>
+      <circle r="7" fill="#e10600"/>
+      <circle r="2.5" fill="#f7f5f0"/>
+    </g>
+    <path d="M-31 -31 A44 44 0 0 1 4 -44" fill="none" stroke="#5a646f" stroke-width="3" opacity=".45"/>
+  </g>
+
+  <g transform="translate(212 212)">
+    <circle r="43" fill="url(#carTyre)"/>
+    <circle r="43" fill="none" stroke="#04070a" stroke-width="4" opacity=".8"/>
+    <circle r="35" fill="none" stroke="#ffd400" stroke-width="3" stroke-dasharray="5 9" opacity=".9"/>
+    <circle r="26" fill="#11161a"/>
+    <g class="car-wheel-spin">
+      <circle r="24" fill="url(#carRim)"/>
+      <g stroke="#3f4952" stroke-width="3.5" stroke-linecap="round">
+        <line x1="0" y1="-20" x2="0" y2="20"/>
+        <line x1="-20" y1="0" x2="20" y2="0"/>
+        <line x1="-14" y1="-14" x2="14" y2="14"/>
+        <line x1="-14" y1="14" x2="14" y2="-14"/>
+      </g>
+      <circle r="6" fill="#e10600"/>
+      <circle r="2" fill="#f7f5f0"/>
+    </g>
+    <path d="M-27 -27 A38 38 0 0 1 3 -38" fill="none" stroke="#5a646f" stroke-width="3" opacity=".45"/>
+  </g>
+
+  <path d="M276 166 L318 160 L322 168 L280 174 Z" fill="#ffd400" opacity=".9"/>
+  <path d="M128 226 C200 214 288 202 352 193" fill="none" stroke="#ffffff" stroke-width="2" opacity=".18"/>
 </svg>
