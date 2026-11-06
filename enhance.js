@@ -357,13 +357,26 @@
       node.classList.toggle("is-hot", Boolean(hot));
     });
 
-    every((now) => {
+    let running = false;
+    const loop = (now) => {
       const dt = now - last;
       last = now;
       x.step(dt);
       y.step(dt);
       node.style.transform = `translate3d(${x.value}px, ${y.value}px, 0)`;
-    });
+      if (x.done && y.done) {
+        running = false;
+        return false;
+      }
+      return true;
+    };
+    const kick = () => {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      every(loop);
+    };
+    window.addEventListener("pointermove", kick, { passive: true });
   })();
 
   /* ---------- page wipe ---------- */
@@ -425,14 +438,14 @@
     if (mobileCta) mobileCta.classList.toggle("is-on", y > 380);
     if (floatContact) floatContact.classList.toggle("is-on", y > window.innerHeight * 0.7);
 
-    if (hero && ticker && showsMotion()) {
+    if (hero && ticker && showsMotion() && y < window.innerHeight * 1.1) {
       const rect = ticker.getBoundingClientRect();
       const p = clamp(1 - rect.top / window.innerHeight, 0, 1);
       hero.style.transform = p > 0 ? `scale(${1 - 0.055 * p})` : "";
       if (heroShade) heroShade.style.opacity = String(0.5 * p);
     }
     lastY = y;
-  }, 14);
+  }, 33);
 
   window.TTMotion = {
     setProgress(value) {
@@ -466,17 +479,32 @@
       },
       { passive: true }
     );
-    every((now) => {
+    let running = false;
+    const loop = (now) => {
       const dt = now - last;
       last = now;
+      let active = false;
       for (const item of items) {
         item.springX.step(dt);
         item.springY.step(dt);
         if (item.springX.value || item.springY.value) {
           item.element.style.transform = `translate(${item.springX.value}px, ${item.springY.value}px)`;
+          active = true;
         }
       }
-    });
+      if (!active) {
+        running = false;
+        return false;
+      }
+      return true;
+    };
+    const kick = () => {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      every(loop);
+    };
+    window.addEventListener("pointermove", kick, { passive: true });
   })();
 
   /* ---------- hero pointer parallax ---------- */
@@ -525,7 +553,7 @@
         const p = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
         element.style.transform = `translate3d(0, ${p * 34}px, 0)`;
       }
-    }, 50);
+    }, 100);
   })();
 
   /* ---------- contour backdrop (marching squares) ---------- */
@@ -653,14 +681,7 @@
     }
     resize();
 
-    if (!showsMotion()) return;
-    every((now) => {
-      const dt = now - last;
-      last = now;
-      if (!visible || document.hidden) return;
-      time += dt;
-      draw();
-    }, 20);
+    draw();
   })();
 
   /* ---------- chequered seams ---------- */
@@ -723,15 +744,7 @@
       else window.addEventListener("resize", resize);
       resize();
 
-      every(() => {
-        const rect = section.getBoundingClientRect();
-        if (rect.bottom < -120 || rect.top > window.innerHeight + 120 || document.hidden) return;
-        const next = clamp(1 - rect.top / window.innerHeight, 0, 1);
-        if (Math.abs(next - progress) > 0.006) {
-          progress = next;
-          draw();
-        }
-      }, 80);
+
     }
   })();
 

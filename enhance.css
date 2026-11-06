@@ -61,6 +61,7 @@
 .hero-shade { position: absolute; inset: 0; z-index: 4; background: #06080a; opacity: 0; pointer-events: none; }
 .hero-grid { position: relative; z-index: 2; }
 .hero-visual { }
+.section:not(.hero) { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 
 /* ---------- bracket plate ---------- */
 .hero-plate { border: 0; background: rgba(8, 10, 12, .55); padding: 14px 18px; }
