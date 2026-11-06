@@ -117,7 +117,7 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 .site-header.is-tucked { transform: translateY(-104%); }
 
 /* ---------- chequered seams ---------- */
-.flag-seam {
+.flag-seam { display: none !important;
   position: absolute; z-index: 0; top: 0; right: 0; left: 0;
   width: 100%; height: 30svh; pointer-events: none;
 }
@@ -200,7 +200,7 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
   .cursor, .page-wipe { display: none; }
   .site-header { transition: none; }
   .mobile-cta, .float-contact { transition: none; }
-  .flag-seam { display: none; }
+  .flag-seam { display: none !important; display: none; }
 }
 
 /* ---------- responsive ---------- */
