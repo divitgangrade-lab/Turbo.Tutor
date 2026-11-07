@@ -217,6 +217,13 @@
     /* ---------- shared section chrome ---------- */
     .section { padding-block: clamp(64px, 8vw, 108px); }
     .section.alt { background: var(--surface-2); }
+    #plans { position: relative; isolation: isolate; }
+    #plans > .wrap { position: relative; z-index: 1; }
+    .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .42; -webkit-mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); }
+    .plans-ether > div { position: absolute; inset: 0; }
+    .plans-ether .liquid-ether { position: absolute; inset: 0; }
+    [data-theme="dark"] .plans-ether { opacity: .55; }
+    @media (prefers-reduced-motion: reduce) { .plans-ether { display: none; } }
     .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 34px; margin-bottom: clamp(28px, 4vw, 46px); }
     .section-head .lead { max-width: 400px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
     .kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 12px; color: var(--red-2); font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
@@ -1062,6 +1069,9 @@
       </div>
     </section>
     <section class="section" id="plans" aria-labelledby="plans-title">
+      <div class="plans-ether" id="liquid-ether-root" aria-hidden="true">
+        <div id="liquid-ether-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -2732,6 +2742,39 @@
       };
       if ("requestIdleCallback" in window) requestIdleCallback(load, { timeout: 1500 });
       else setTimeout(load, 350);
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("liquid-ether-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "liquid-ether.css?v=20261107-22";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./liquid-ether.js?v=20261107-22").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
     })();
   </script>
   <script type="module">

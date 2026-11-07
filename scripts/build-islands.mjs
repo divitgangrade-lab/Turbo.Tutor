@@ -21,7 +21,8 @@ await build({
     'pixel-swap': 'src/pixel-swap/entry.jsx',
     'metallic-paint': 'src/metallic-paint/entry.jsx',
     'ribbons': 'src/ribbons/entry.jsx',
-    'acid-squares': 'src/acid-squares/entry.jsx'
+    'acid-squares': 'src/acid-squares/entry.jsx',
+    'liquid-ether': 'src/liquid-ether/entry.jsx'
   },
   bundle: true,
   minify: true,
