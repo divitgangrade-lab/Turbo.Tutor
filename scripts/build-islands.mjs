@@ -25,7 +25,8 @@ await build({
     'liquid-ether': 'src/liquid-ether/entry.jsx',
     'silk': 'src/silk/entry.jsx',
     'lightfall': 'src/lightfall/entry.jsx',
-    'decay-card': 'src/decay-card/entry.jsx'
+    'decay-card': 'src/decay-card/entry.jsx',
+    'plasma': 'src/plasma/entry.jsx'
   },
   bundle: true,
   minify: true,

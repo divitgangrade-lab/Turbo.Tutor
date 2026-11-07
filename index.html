@@ -344,8 +344,11 @@
     .promise-art::after { position: absolute; bottom: 4%; width: 62%; height: 22px; background: radial-gradient(closest-side, rgba(0, 0, 0, .65), transparent); content: ""; }
 
     /* ---------- offers / wheel ---------- */
-    .offers { position: relative; overflow: hidden; background: linear-gradient(150deg, #14181d 0%, #0b0e11 60%); color: #f7f5f0; }
+    .offers { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(150deg, #14181d 0%, #0b0e11 60%); color: #f7f5f0; }
     .offers::before { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 2px, transparent 2px 26px); content: ""; }
+    .offers-plasma { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+    .offers-plasma #plasma-mount, .offers-plasma .plasma-container { position: absolute; inset: 0; }
+    .offers > .wrap { position: relative; z-index: 2; }
     .offers-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr); align-items: center; gap: clamp(32px, 5vw, 62px); }
     .offers .kicker { color: var(--amber); }
     .offers h2 { margin: 0 0 14px; font-family: var(--display); font-size: clamp(40px, 5.4vw, 66px); font-weight: 900; letter-spacing: -.5px; line-height: .88; text-transform: uppercase; }
@@ -1308,6 +1311,9 @@
     </section>
 
     <section class="section offers" id="offers" aria-labelledby="offers-title">
+      <div class="offers-plasma" id="plasma-root" aria-hidden="true">
+        <div id="plasma-mount"></div>
+      </div>
       <div class="wrap offers-grid">
         <div class="offer-copy-wrap">
           <p class="kicker">Optional parent offer</p>
@@ -2884,6 +2890,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./decay-card.js?v=20261107-25").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("plasma-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "plasma.css?v=20261107-26";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./plasma.js?v=20261107-26").catch(() => {});
         });
       };
       const near = () => {
