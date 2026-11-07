@@ -22,7 +22,8 @@ await build({
     'metallic-paint': 'src/metallic-paint/entry.jsx',
     'ribbons': 'src/ribbons/entry.jsx',
     'acid-squares': 'src/acid-squares/entry.jsx',
-    'liquid-ether': 'src/liquid-ether/entry.jsx'
+    'liquid-ether': 'src/liquid-ether/entry.jsx',
+    'silk': 'src/silk/entry.jsx'
   },
   bundle: true,
   minify: true,
