@@ -230,12 +230,14 @@
     .track-lightfall > div { position: absolute; inset: 0; }
     .track-lightfall .lightfall-container { position: absolute; inset: 0; }
     @media (prefers-reduced-motion: reduce) { .track-lightfall { display: none; } }
-    #plans { position: relative; isolation: isolate; }
+    #plans { position: relative; isolation: isolate; --muted: #38372f; }
+    #plans > .wrap { text-shadow: 0 0 9px rgba(245, 243, 238, .8); }
+    #plans .tab[aria-selected="false"] { background: var(--surface); }
     #plans > .wrap { position: relative; z-index: 1; }
-    .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .42; -webkit-mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); }
+    .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .7; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); }
     .plans-ether > div { position: absolute; inset: 0; }
     .plans-ether .liquid-ether { position: absolute; inset: 0; }
-    [data-theme="dark"] .plans-ether { opacity: .55; }
+    [data-theme="dark"] .plans-ether { opacity: .78; mix-blend-mode: normal; }
     @media (prefers-reduced-motion: reduce) { .plans-ether { display: none; } }
     .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 34px; margin-bottom: clamp(28px, 4vw, 46px); }
     .section-head .lead { max-width: 400px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
@@ -2869,14 +2871,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "liquid-ether.css?v=20261107-22";
+        css.href = "liquid-ether.css?v=20261107-27";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./liquid-ether.js?v=20261107-22").catch(() => {});
+          if (ok) import("./liquid-ether.js?v=20261107-27").catch(() => {});
         });
       };
       const near = () => {
