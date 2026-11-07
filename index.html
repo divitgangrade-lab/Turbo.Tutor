@@ -345,7 +345,6 @@
 
     /* ---------- offers / wheel ---------- */
     .offers { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(150deg, #14181d 0%, #0b0e11 60%); color: #f7f5f0; }
-    .offers::before { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 2px, transparent 2px 26px); content: ""; }
     .offers-plasma { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
     .offers-plasma #plasma-mount, .offers-plasma .plasma-container { position: absolute; inset: 0; }
     .offers > .wrap { position: relative; z-index: 2; }
@@ -363,11 +362,11 @@
     .odds strong { color: var(--amber); font-family: var(--ui); font-size: 11px; letter-spacing: .6px; }
     .terms { max-width: 520px; margin: 0; color: #8f9aa1; font-size: 10px; line-height: 1.75; }
     .wheel-panel { display: grid; justify-items: center; gap: 14px; }
-    .wheel-frame { position: relative; display: grid; width: min(300px, 74vw); aspect-ratio: 1; place-items: center; border: 13px solid #1b2127; border-radius: 50%; background: repeating-conic-gradient(#3c454c 0 4deg, #1c2329 4deg 8deg); box-shadow: inset 0 0 0 3px #7c858c, 0 0 0 3px #363f46, 0 22px 50px rgba(0, 0, 0, .45); }
-    .wheel-frame::before { position: absolute; z-index: 1; inset: 8px; border: 2px solid rgba(238, 235, 222, .7); border-radius: 50%; content: ""; pointer-events: none; }
-    .wheel-frame canvas { display: block; width: 84%; height: 84%; border: 4px solid #d5d1c5; border-radius: 50%; transition: transform 4.8s cubic-bezier(.12, .72, .12, 1); }
+    .wheel-frame { position: relative; display: grid; width: min(300px, 74vw); aspect-ratio: 1; place-items: center; border: 13px solid #121820; border-radius: 50%; background: repeating-conic-gradient(from 8deg, #566270 0 4deg, #1e252b 4deg 8deg); box-shadow: inset 0 0 0 2px #ffffff, inset 0 0 0 4px #aab5bd, inset 0 2px 10px rgba(255, 255, 255, .5), inset 0 -8px 18px rgba(0, 0, 0, .5), 0 0 0 3px #2b343b, 0 0 26px rgba(228, 238, 246, .24), 0 22px 50px rgba(0, 0, 0, .5); }
+    .wheel-frame::before { position: absolute; z-index: 1; inset: 8px; border: 2px solid rgba(255, 255, 255, .95); border-radius: 50%; box-shadow: 0 0 12px rgba(255, 255, 255, .4), inset 0 0 10px rgba(255, 255, 255, .3); content: ""; pointer-events: none; }
+    .wheel-frame canvas { display: block; width: 84%; height: 84%; border: 4px solid #eef2f5; border-radius: 50%; box-shadow: 0 0 14px rgba(255, 255, 255, .35), 0 0 30px rgba(255, 255, 255, .16); transition: transform 4.8s cubic-bezier(.12, .72, .12, 1); }
     .wheel-pointer { position: absolute; z-index: 2; top: -19px; left: 50%; width: 0; height: 0; border-right: 13px solid transparent; border-left: 13px solid transparent; border-top: 26px solid var(--amber); transform: translateX(-50%); filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .5)); }
-    .wheel-center { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; width: 54px; height: 54px; place-items: center; border: 3px solid #d5d1c5; border-radius: 50%; background: #12161a; color: var(--amber); font-family: var(--display); font-size: 15px; font-weight: 900; transform: translate(-50%, -50%); pointer-events: none; }
+    .wheel-center { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; width: 54px; height: 54px; place-items: center; border: 3px solid #f4f7fa; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #3c4750, #10151a 72%); box-shadow: inset 0 0 8px rgba(255, 255, 255, .45), 0 0 12px rgba(255, 255, 255, .32); color: var(--amber); font-family: var(--display); font-size: 15px; font-weight: 900; transform: translate(-50%, -50%); pointer-events: none; }
     .deal-result { min-height: 24px; margin: 0; color: var(--amber); font-family: var(--ui); font-size: 12px; font-weight: 600; letter-spacing: .4px; text-align: center; }
     .deal-result b { color: #fff; }
     .spin-btn { min-width: 250px; }
