@@ -2,6 +2,6 @@ User-agent: *
 Allow: /
 
 # Public summary for AI assistants and language models:
-# https://divitgangrade-lab.github.io/Turbo.Tutor/llms.txt
+# https://turbotutor.dpdns.org/llms.txt
 
-Sitemap: https://divitgangrade-lab.github.io/Turbo.Tutor/sitemap.xml
+Sitemap: https://turbotutor.dpdns.org/sitemap.xml

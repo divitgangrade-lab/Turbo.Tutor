@@ -1,4 +1,7 @@
+import { rmSync } from 'node:fs';
 import { build } from 'esbuild';
+
+rmSync('island-chunks', { recursive: true, force: true });
 
 await build({
   entryPoints: {
@@ -22,6 +25,8 @@ await build({
   bundle: true,
   minify: true,
   format: 'esm',
+  splitting: true,
+  chunkNames: 'island-chunks/[name]-[hash]',
   target: ['es2020'],
   outdir: '.',
   entryNames: '[name]',

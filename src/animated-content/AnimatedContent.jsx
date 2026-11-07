@@ -8,11 +8,8 @@
 
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import './AnimatedContent.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -65,10 +62,9 @@ const AnimatedContent = ({
     const el = ref.current;
     if (!el) return undefined;
 
-    let scroller = container || document.getElementById('snap-main-container') || null;
-    if (typeof scroller === 'string') scroller = document.querySelector(scroller);
-
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+    let observer = null;
 
     const ctx = gsap.context(() => {
       const targets = stagger > 0 && el.children.length ? Array.from(el.children) : [el];
@@ -156,36 +152,32 @@ const AnimatedContent = ({
         return;
       }
 
-      const start = `top ${(1 - threshold) * 100}%`;
-
-      if (scrub) {
-        ScrollTrigger.create({
-          trigger: el,
-          scroller,
-          start,
-          end: `top ${Math.max((1 - threshold) * 100 - 45, 5)}%`,
-          scrub: scrub === true ? true : Math.max(Number(scrub) || 0, 0.01),
-          animation: tl
-        });
+      if (!('IntersectionObserver' in window)) {
+        tl.play();
         return;
       }
 
-      ScrollTrigger.create({
-        trigger: el,
-        scroller,
-        start,
-        once,
-        onEnter: () => tl.play(),
-        onLeaveBack: once
-          ? undefined
-          : () => {
+      observer = new IntersectionObserver(
+        entries => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              tl.play();
+              if (once) observer.disconnect();
+            } else if (!once) {
               if (mask) gsap.set(targets, { maskImage: mask, webkitMaskImage: mask });
               tl.reverse();
             }
-      });
+          }
+        },
+        { threshold: Math.min(Math.max(threshold, 0.01), 1) }
+      );
+      observer.observe(el);
     }, el);
 
-    return () => ctx.revert();
+    return () => {
+      observer?.disconnect();
+      ctx.revert();
+    };
   }, [
     container,
     distance,

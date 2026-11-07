@@ -4,7 +4,7 @@
 
 The site is a set of static HTML pages with no backend and no online payment. Sixteen small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap loads after first paint. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
-- **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
+- **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
 
 ---
@@ -157,6 +157,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── target-cursor.js        # Generated cursor island (Preact + TargetCursor)
 ├── metallic-paint.js       # Generated footer island (Preact + MetallicPaint)
 ├── ribbons.js              # Generated footer island (Preact + Ribbons)
+├── island-chunks/          # Shared GSAP and Preact code loaded once for all islands
 ├── target-cursor.css       # Generated TargetCursor styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
