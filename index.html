@@ -409,12 +409,31 @@
     .gear-note { margin: 0; color: var(--muted); font-size: 11px; }
 
     /* ---------- policies ---------- */
+    #policies { position: relative; isolation: isolate; overflow: hidden; border-block: 1px solid #27303a; background: #070c12; color: #eef2f7; }
+    #policies > .wrap { position: relative; z-index: 2; }
+    .policies-iridescence { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .78; }
+    .policies-iridescence #iridescence-mount, .policies-iridescence .iridescence-container { position: absolute; inset: 0; }
+    #policies::before { position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(5, 9, 14, .62) 0%, rgba(5, 9, 14, .12) 45%, rgba(5, 9, 14, .74) 100%), radial-gradient(72% 95% at 78% 0%, rgba(255, 212, 0, .08), transparent 64%); content: ""; pointer-events: none; }
+    #policies .section-head { border-bottom: 1px solid rgba(255, 255, 255, .14); padding-bottom: 22px; }
+    #policies .kicker { color: var(--amber); }
+    #policies .h2 { color: #f7f5f0; }
+    #policies .section-head .lead { max-width: 430px; color: #b9c4d0; font-family: var(--ui); font-size: 12.5px; letter-spacing: .12px; line-height: 1.75; }
     .policy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .policy-card { border: 1px solid var(--line); border-top: 3px solid var(--red); background: var(--card); padding: 20px; }
     .policy-card strong { display: block; color: var(--red); font-family: var(--display); font-size: 40px; font-weight: 900; letter-spacing: -.5px; line-height: 1; }
     .policy-card h3 { margin: 8px 0 7px; font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; }
     .policy-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
     .policy-note { max-width: 880px; margin: 24px 0 0; color: var(--muted); font-size: 11.5px; line-height: 1.8; }
+    #policies .policy-grid { gap: 14px; }
+    #policies .policy-card { position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, .15); border-top: 1px solid rgba(255, 255, 255, .2); background: linear-gradient(145deg, rgba(19, 28, 39, .86), rgba(8, 13, 20, .72)); padding: 22px 22px 24px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 22px 38px rgba(0, 0, 0, .24); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+    #policies .policy-card::before { position: absolute; top: -38%; right: -18%; width: 72%; height: 92%; background: radial-gradient(closest-side, rgba(142, 172, 232, .18), transparent); content: ""; pointer-events: none; }
+    #policies .policy-card::after { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, rgba(255, 212, 0, .95), rgba(153, 181, 231, .7) 45%, rgba(153, 181, 231, 0) 90%); content: ""; pointer-events: none; }
+    #policies .policy-card > * { position: relative; z-index: 1; }
+    #policies .policy-card strong { color: var(--amber); font-size: clamp(42px, 4.6vw, 56px); font-variant-numeric: tabular-nums; letter-spacing: -.045em; line-height: .9; text-shadow: 0 0 30px rgba(255, 212, 0, .13); }
+    #policies .policy-card h3 { margin: 12px 0 8px; color: #f7f5f0; font-size: 23px; letter-spacing: .4px; }
+    #policies .policy-card p { color: #b8c3ce; font-size: 12.5px; line-height: 1.75; }
+    #policies .policy-note { max-width: 900px; margin-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); padding-top: 16px; color: #a3aebb; font-size: 11.5px; line-height: 1.8; }
+    @media (max-width: 860px) { #policies .section-head { padding-bottom: 18px; } #policies .policy-card { padding: 20px; } }
 
     /* ---------- warp statement ---------- */
     .warp-band { position: relative; overflow: hidden; border-block: 1px solid #2a3238; background: radial-gradient(80% 130% at 50% 55%, rgba(225, 6, 0, .2), transparent 68%), #0a0d10; color: #f7f5f0; }
@@ -1438,6 +1457,9 @@
     </section>
 
     <section class="section alt" id="policies" aria-labelledby="policies-title">
+      <div class="policies-iridescence" id="iridescence-root" aria-hidden="true">
+        <div id="iridescence-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div><p class="kicker">Clear before the green flag</p><h2 class="h2" id="policies-title">Attendance &amp; support</h2></div>
@@ -2999,6 +3021,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./plasma.js?v=20261107-26").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("iridescence-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "iridescence.css?v=20261107-29";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./iridescence.js?v=20261107-29").catch(() => {});
         });
       };
       const near = () => {

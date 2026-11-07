@@ -28,7 +28,8 @@ await build({
     'decay-card': 'src/decay-card/entry.jsx',
     'plasma': 'src/plasma/entry.jsx',
     'grid-scan': 'src/grid-scan/entry.jsx',
-    'dot-field': 'src/dot-field/entry.jsx'
+    'dot-field': 'src/dot-field/entry.jsx',
+    'iridescence': 'src/iridescence/entry.jsx'
   },
   bundle: true,
   minify: true,
