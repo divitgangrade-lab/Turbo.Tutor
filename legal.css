@@ -1,0 +1,114 @@
+/* Shared layout for TurboTutor legal pages. Text colours meet WCAG 2.1 AA on paper. */
+:root {
+  --carbon: #0a0c0f;
+  --amber: #ffd400;
+  --red: #e10600;
+  --red-text: #b00500;
+  --paper: #f5f3ee;
+  --ink: #12161a;
+  --muted: #58636a;
+  --line: #d8d4cb;
+  --display: "Barlow Condensed", Impact, sans-serif;
+  --ui: "Chakra Petch", monospace;
+  --body: "Titillium Web", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.7; }
+a { color: var(--red-text); text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+.skip {
+  position: absolute; top: -60px; left: 16px; z-index: 10;
+  background: var(--amber); padding: 10px 14px; color: var(--carbon);
+  font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; text-decoration: none;
+}
+.skip:focus { top: 12px; }
+.in, main { width: 100%; max-width: 920px; margin: 0 auto; padding-inline: 22px; }
+.top { background: var(--carbon); border-bottom: 1px solid #2a3239; color: #f5f3ee; }
+.top .in { display: flex; min-height: 62px; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { font-family: var(--display); font-size: 24px; font-weight: 900; letter-spacing: .5px; text-transform: uppercase; text-decoration: none; color: #f5f3ee; }
+.brand em { color: var(--amber); font-style: normal; }
+.back {
+  border-bottom: 1px solid var(--amber); padding-bottom: 3px; color: #f5f3ee;
+  font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+  text-decoration: none; text-transform: uppercase;
+}
+main { padding-block: clamp(40px, 7vw, 78px) clamp(50px, 8vw, 86px); }
+.crumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 18px;
+  color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+}
+.crumbs a { border-bottom: 1px solid var(--line); padding-bottom: 1px; color: var(--muted); text-decoration: none; }
+.crumbs a:hover { border-color: var(--red); color: var(--ink); }
+.crumbs span[aria-hidden] { color: var(--red-text); }
+.kicker {
+  margin: 0 0 10px; color: var(--red-text); font-family: var(--ui); font-size: 10px;
+  font-weight: 700; letter-spacing: 1.7px; text-transform: uppercase;
+}
+h1 {
+  margin: 0 0 16px; font-family: var(--display); font-size: clamp(42px, 7vw, 68px);
+  font-weight: 900; letter-spacing: -.5px; line-height: .9; text-transform: uppercase;
+}
+.rule { width: 64px; height: 4px; margin: 0 0 22px; background: var(--red); }
+.lede { max-width: 66ch; margin: 0 0 8px; color: #2b3339; font-size: 15px; }
+.meta { color: var(--muted); font-family: var(--ui); font-size: 9.5px; letter-spacing: 1.1px; text-transform: uppercase; }
+h2 {
+  margin: 36px 0 6px; font-family: var(--display); font-size: 26px; font-weight: 800;
+  letter-spacing: .2px; text-transform: uppercase;
+}
+h3 { margin: 22px 0 4px; font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: .2px; }
+p, li { max-width: 70ch; font-size: 14px; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 700; }
+code { font-family: var(--ui); font-size: 12px; background: #e9e5db; padding: 1px 4px; }
+.note {
+  margin: 24px 0; border-left: 3px solid var(--amber); background: #eeeae1;
+  padding: 13px 16px; font-size: 13.5px;
+}
+.note p { margin: 0; }
+.operator {
+  margin: 22px 0 8px; border: 1px solid var(--line); background: #eeeae1;
+  padding: 16px 18px;
+}
+.operator dl { display: grid; gap: 8px; margin: 0; }
+.operator div { display: grid; grid-template-columns: 150px 1fr; gap: 10px; border-top: 1px solid var(--line); padding-top: 8px; }
+.operator div:first-child { border-top: 0; padding-top: 0; }
+.operator dt { color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; }
+.operator dd { margin: 0; font-size: 13px; }
+table { width: 100%; margin: 14px 0 20px; border-collapse: collapse; font-size: 13px; }
+caption { margin-bottom: 8px; color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 700; letter-spacing: 1.1px; text-align: left; text-transform: uppercase; }
+th, td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; }
+th { background: #e9e5db; font-family: var(--ui); font-size: 10px; letter-spacing: .6px; text-transform: uppercase; }
+.legal-nav {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 30px 0 0; border-top: 1px solid var(--line);
+  padding-top: 16px; font-family: var(--ui); font-size: 9.5px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.legal-nav a { color: var(--red-text); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+.legal-nav a:hover, .legal-nav a[aria-current="page"] { border-color: var(--red-text); color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.btn {
+  display: inline-flex; min-height: 44px; align-items: center; padding: 0 18px;
+  border: 1px solid var(--carbon); background: var(--carbon); color: #f5f3ee;
+  font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 1.1px;
+  text-decoration: none; text-transform: uppercase;
+}
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+footer { background: var(--carbon); color: #9aa4aa; font-size: 12px; }
+footer .in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px; padding-block: 20px; }
+footer a { color: #f5f3ee; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+@media (max-width: 560px) {
+  .operator div { grid-template-columns: 1fr; gap: 2px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  th { border-bottom: 0; }
+  td { border-top: 0; }
+}
+@media print {
+  .top, footer, .actions, .legal-nav { display: none; }
+  body { background: #fff; }
+}

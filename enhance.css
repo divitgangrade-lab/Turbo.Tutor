@@ -240,14 +240,14 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
   color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 600;
   letter-spacing: 1.2px; text-transform: uppercase;
 }
-.lap-head span:first-child { color: var(--red); }
+.lap-head span:first-child { color: #b00500; }
 .lap-timeline { margin: 0; padding: 0; list-style: none; }
 .lap-timeline li {
   display: grid; grid-template-columns: 86px 1fr 62px; gap: 18px; align-items: start;
   border-bottom: 1px solid var(--line); padding: 18px 20px;
 }
 .lap-timeline li:last-child { border-bottom: 0; }
-.lap-time { padding-top: 5px; color: var(--red); font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 1.1px; }
+.lap-time { padding-top: 5px; color: #b00500; font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 1.1px; }
 .lap-timeline h3 { margin: 0 0 3px; font-family: var(--display); font-size: 21px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; }
 .lap-timeline p { max-width: 64ch; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .lap-min { padding-top: 6px; color: var(--muted); font-family: var(--ui); font-size: 9px; letter-spacing: 1px; text-align: right; text-transform: uppercase; white-space: nowrap; }

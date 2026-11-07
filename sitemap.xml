@@ -19,6 +19,24 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://turbotutor.dpdns.org/terms.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotutor.dpdns.org/cookies.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://turbotutor.dpdns.org/refunds.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://turbotutor.dpdns.org/credits.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>yearly</changefreq>

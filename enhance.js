@@ -1041,11 +1041,18 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const input = form.querySelector("input[type=email]");
+      const consent = form.querySelector("input[name=privacyAccepted]");
       const email = (input.value || "").trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
         status.hidden = false;
         status.textContent = "That email does not look right. Check it and try again.";
         input.focus();
+        return;
+      }
+      if (consent && !consent.checked) {
+        status.hidden = false;
+        status.textContent = "Please agree to the Privacy Policy and Terms before joining.";
+        consent.focus();
         return;
       }
       if (endpoint) {
@@ -1058,7 +1065,7 @@
           if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
           form.reset();
           status.hidden = false;
-          status.innerHTML = "<b>You are on the grid.</b> Use code <b>PADDOCK5</b> for 5% off your first month. The first Monday email arrives next week.";
+          status.innerHTML = "<b>You are on the grid.</b> Use code <b>PADDOCK5</b> for 5% off your first month. The next Monday email goes to the address you sent.";
           return;
         } catch (error) {
           console.warn("[TurboTutor club]", error);
@@ -1068,7 +1075,7 @@
       const body = encodeURIComponent(`Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`);
       window.location.href = `mailto:divit.gangrade@gmail.com?subject=${subject}&body=${body}`;
       status.hidden = false;
-      status.innerHTML = "<b>Almost there.</b> Your email app should open with the signup ready to send. Your 5% code is <b>PADDOCK5</b>.";
+      status.innerHTML = "<b>Almost there.</b> Your email app should open with the signup ready to send. Your 5% code is <b>PADDOCK5</b>. Replying to any club email removes you from the list.";
     });
   })();
 

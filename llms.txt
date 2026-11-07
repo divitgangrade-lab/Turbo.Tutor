@@ -6,7 +6,10 @@
 
 - [Home](https://turbotutor.dpdns.org/): plans, special coaching, welcome offers, session walkthrough, policies, FAQ and contact.
 - [About the tutor](https://turbotutor.dpdns.org/about.html): who runs TurboTutor and how one-to-one sessions work.
-- [Terms, privacy and payments](https://turbotutor.dpdns.org/privacy.html): what a request contains, browser storage, attendance and reschedule terms.
+- [Privacy policy](https://turbotutor.dpdns.org/privacy.html): what a request contains, browser storage, children's data and privacy rights.
+- [Terms and conditions](https://turbotutor.dpdns.org/terms.html): requests, pricing, payment, attendance, liability and Virginia law.
+- [Cookie policy](https://turbotutor.dpdns.org/cookies.html): no cookies are set; the two functional browser-storage keys and how to clear them.
+- [Refund and cancellation policy](https://turbotutor.dpdns.org/refunds.html): tutor and family cancellations, unused sessions and how to request a refund.
 - [Photo credits](https://turbotutor.dpdns.org/credits.html): sources and licences for the real Formula 1 and kart photographs.
 
 ## Key facts
@@ -31,7 +34,8 @@
 
 - Prices shown on the site are suggested rates. The tutor confirms availability, schedule and the final amount in writing before enrollment.
 - Requests are prepared in the browser and sent by the visitor from their own email or messaging app.
-- The site has no analytics, advertising pixels, third-party cookies or online payment.
+- The site has no analytics, advertising pixels or online payment. It sets no cookies and loads no third-party fonts or embeds; two functional browser-storage keys remember the theme and a welcome offer.
+- Legal pages: Privacy, Terms, Cookies and Refunds, all effective 7 November 2026.
 - Testimonials, ratings and a team photograph are not published because they do not exist yet.
 
 ## Sitemap

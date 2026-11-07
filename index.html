@@ -31,9 +31,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" as="image" href="f1-car.webp" fetchpriority="high">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Chakra+Petch:wght@500;600;700&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
   <script>document.documentElement.classList.add("js");</script>
   <style>
     :root {
@@ -212,7 +210,7 @@
     .section.alt { background: var(--surface-2); }
     .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 34px; margin-bottom: clamp(28px, 4vw, 46px); }
     .section-head .lead { max-width: 400px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
-    .kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 12px; color: var(--red); font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 12px; color: var(--red-2); font-family: var(--ui); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
     .kicker::before { width: 24px; height: 2px; background: currentColor; content: ""; }
     .h2 { margin: 0; font-family: var(--display); font-size: clamp(40px, 5.6vw, 68px); font-weight: 900; letter-spacing: -.5px; line-height: .88; text-transform: uppercase; }
     .h2 em { color: var(--red); font-style: normal; }
@@ -246,7 +244,7 @@
     .plan-card.featured::before { background: var(--red); opacity: 1; }
     .plan-card[hidden] { display: none; }
     .plan-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-    .plan-kicker { margin: 0 0 4px; color: var(--red); font-family: var(--ui); font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+    .plan-kicker { margin: 0 0 4px; color: var(--red-2); font-family: var(--ui); font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
     .plan-badge { border: 1px solid #bfb9ab; padding: 4px 7px; color: #4b5359; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; white-space: nowrap; }
     .plan-badge.hot { border-color: var(--red); background: var(--red); color: #fff; }
     .plan-card h3 { margin: 0 0 7px; font-family: var(--display); font-size: 34px; font-weight: 900; letter-spacing: .3px; line-height: 1; text-transform: uppercase; }
@@ -402,10 +400,10 @@
     .contact-link { display: inline-flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; font-weight: 600; letter-spacing: .3px; }
     .contact-link:hover { text-decoration: underline; text-underline-offset: 4px; }
     .copy-btn { min-height: 30px; border: 1px solid rgba(255, 255, 255, .6); background: transparent; padding: 0 9px; color: #fff; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s; }
-    .copy-btn:hover { background: #fff; color: var(--red); }
+    .copy-btn:hover { background: #fff; color: var(--red-2); }
     .contact-aside { position: relative; display: grid; gap: 14px; justify-items: center; }
     .contact-art { width: min(300px, 78%); filter: drop-shadow(0 18px 26px rgba(0, 0, 0, .28)); }
-    .contact-note { margin: 0; color: #ffe3e0; font-family: var(--ui); font-size: 9.5px; font-weight: 600; letter-spacing: 1.3px; text-align: center; text-transform: uppercase; }
+    .contact-note { margin: 0; color: #fff; font-family: var(--ui); font-size: 9.5px; font-weight: 600; letter-spacing: 1.3px; text-align: center; text-transform: uppercase; }
 
     /* ---------- faq ---------- */
     .faq-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
@@ -415,10 +413,10 @@
     .faq-list details { border-bottom: 1px solid var(--line); }
     .faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; font-family: var(--display); font-size: 23px; font-weight: 700; letter-spacing: .2px; text-transform: uppercase; cursor: pointer; list-style: none; transition: color .2s; }
     .faq-list summary::-webkit-details-marker { display: none; }
-    .faq-list summary::after { flex: none; display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid var(--line); color: var(--red); content: "+"; font-family: var(--body); font-size: 16px; transition: transform .2s, background .2s, color .2s; }
-    .faq-list details[open] summary { color: var(--red); }
+    .faq-list summary::after { flex: none; display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid var(--line); color: var(--red-2); content: "+"; font-family: var(--body); font-size: 16px; transition: transform .2s, background .2s, color .2s; }
+    .faq-list details[open] summary { color: var(--red-2); }
     .faq-list details[open] summary::after { background: var(--red); border-color: var(--red); color: #fff; content: "−"; }
-    .faq-list summary:hover { color: var(--red); }
+    .faq-list summary:hover { color: var(--red-2); }
     .faq-list details p { max-width: 720px; margin: -2px 0 20px; color: var(--muted); font-size: 14px; line-height: 1.8; }
     .faq-list details[hidden] { display: none; }
     .faq-empty { padding: 24px 0; color: var(--muted); font-size: 13px; }
@@ -461,18 +459,18 @@
     .kart-item-name { font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: .3px; line-height: 1.1; text-transform: uppercase; }
     .kart-item-price { font-family: var(--ui); font-size: 11px; font-weight: 600; text-align: right; white-space: nowrap; }
     .kart-item-meta { grid-column: 2 / -1; color: var(--muted); font-size: 10px; line-height: 1.55; }
-    .remove-btn { grid-column: 2 / -1; justify-self: start; border: 0; background: none; padding: 2px 0 0; color: var(--red); font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; cursor: pointer; }
+    .remove-btn { grid-column: 2 / -1; justify-self: start; border: 0; background: none; padding: 2px 0 0; color: var(--red-2); font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; cursor: pointer; }
     .remove-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
     .kart-foot { flex: none; padding: 14px 22px 20px; border-top: 1px solid var(--line); background: var(--card); }
     .kart-total { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
     .kart-total span { color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; }
     .kart-total strong { font-family: var(--display); font-size: 36px; font-weight: 900; letter-spacing: -.5px; line-height: 1; }
     .kart-savings { min-height: 28px; margin: 5px 0 12px; color: var(--muted); font-size: 10px; line-height: 1.5; }
-    .kart-savings b { color: var(--red); }
+    .kart-savings b { color: var(--red-2); }
     .kart-actions { display: flex; align-items: center; gap: 12px; }
     .kart-actions .btn { flex: 1; }
     .link-btn { border: 0; background: none; padding: 6px 0; color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; cursor: pointer; }
-    .link-btn:hover { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+    .link-btn:hover { color: var(--red-2); text-decoration: underline; text-underline-offset: 3px; }
     .kart-disclaimer { margin: 10px 0 0; color: var(--muted); font-size: 9.5px; line-height: 1.6; }
 
     /* ---------- dialogs + form ---------- */
@@ -494,7 +492,7 @@
     .pay-opt input:checked { border-color: var(--red); background: var(--red); box-shadow: inset 0 0 0 2px #fff; }
     .policy-ack { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.6; }
     .policy-ack input { margin-top: 2px; accent-color: var(--red); }
-    .policy-ack a { color: var(--red); text-decoration: underline; text-underline-offset: 2px; }
+    .policy-ack a { color: var(--red-2); text-decoration: underline; text-underline-offset: 2px; }
     .form-note { margin: 0; color: var(--muted); font-size: 10.5px; line-height: 1.65; }
     .form-note:empty { display: none; }
     .draft-status { min-height: 16px; margin: 0; color: var(--green); font-size: 10.5px; }
@@ -578,7 +576,9 @@
     .club-panel { border: 1px solid rgba(255, 255, 255, .22); background: linear-gradient(150deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03)); padding: 24px; box-shadow: 0 24px 50px rgba(0, 0, 0, .35); }
     .club-panel h3 { margin: 0 0 4px; font-family: var(--display); font-size: 28px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; }
     .club-panel p { margin: 0 0 14px; color: #a9b3b9; font-size: 11.5px; line-height: 1.7; }
-    .club-form { display: flex; gap: 8px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(0, 0, 0, .22); padding: 7px; }
+    .club-form { display: flex; flex-wrap: wrap; gap: 8px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(0, 0, 0, .22); padding: 7px; }
+    .club-form .club-consent { flex: 1 1 100%; order: 2; padding: 0 4px; }
+    .club-form .btn { order: 3; }
     .club-form input { width: 100%; min-height: 46px; border: 0; background: transparent; padding: 0 12px; color: #fff; font: inherit; font-size: 13px; }
     .club-form input::placeholder { color: #8f9aa1; }
     .club-form input:focus-visible { outline: 2px solid var(--amber); outline-offset: 1px; }
@@ -587,6 +587,10 @@
     .club-status { margin: 12px 0 0; color: #f7f5f0; font-size: 12px; line-height: 1.65; }
     .club-status b { color: var(--amber); }
     .club-fine { margin: 12px 0 0; color: #8f9aa1; font-size: 9.5px; line-height: 1.7; }
+    .club-consent { display: flex; gap: 9px; align-items: flex-start; margin: 10px 2px 2px; color: #d6dde1; font-size: 11.5px; line-height: 1.55; }
+    .club-consent input { width: 15px; height: 15px; margin: 3px 0 0; flex: none; accent-color: var(--red); }
+    .club-consent a { color: #ffd400; text-decoration: underline; }
+    .club-consent a:hover { color: #fff; }
 
     /* ---------- flying launch ---------- */
     .launch { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 58%, #efe9dc 100%); }
@@ -1322,11 +1326,11 @@
         <div>
           <p class="kicker">Paddock Club</p>
           <h2 id="club-title">5% off, and a<br> <em>Monday email.</em></h2>
-          <p class="club-copy">Join the list once. Your first month costs 5% less, and every Monday you get one short email about new session openings, study notes and the occasional offer.</p>
+          <p class="club-copy">Join the list once. Your first month costs 5% less, and most Mondays you get one short email about new session openings, study notes and the occasional offer.</p>
           <ul class="club-perks">
             <li>5% off the first month, code PADDOCK5</li>
-            <li>One email each Monday, nothing else</li>
-            <li>Unsubscribe in one click, any time</li>
+            <li>One short email most Mondays, nothing else</li>
+            <li>Unsubscribe by replying to any email</li>
           </ul>
         </div>
         <div class="club-panel">
@@ -1335,6 +1339,7 @@
           <form class="club-form" id="club-form" data-endpoint="" novalidate>
             <label class="sr-only" for="club-email">Email address</label>
             <input id="club-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            <label class="club-consent"><input type="checkbox" id="club-consent" name="privacyAccepted" value="Yes"><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.</span></label>
             <button class="btn" type="submit" data-cursor-label="Join">Join the club</button>
           </form>
           <span class="club-code">PADDOCK5 · 5% OFF</span>
@@ -1399,7 +1404,7 @@
         <div>
           <p class="kicker">Talk to the tutor</p>
           <h2 id="contact-title">Questions?<br> Open a channel.</h2>
-          <p class="lede">Ask about subjects, schedules, pricing, or how cash and Zelle work. Expect a reply within one business day, usually much sooner.</p>
+          <p class="lede">Ask about subjects, schedules, pricing, or how cash and Zelle work. The tutor aims to reply within one business day.</p>
           <div class="contact-list">
             <div class="contact-card">
               <a class="contact-link" data-cursor-label="Call" href="tel:+18048473236"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3l1.6 3.6-1.9 1.3a11 11 0 0 0 5 5l1.3-1.9L17.6 14v3A2 2 0 0 1 15.4 19C9.6 18.4 5.6 14.4 5 8.6A2 2 0 0 1 5 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg> 804-847-3236</a>
@@ -1418,7 +1423,7 @@
         <div class="contact-aside">
           <img class="contact-art" src="pit-garage.svg" alt="A pit garage with an open door, tyre stacks and a toolbox" loading="lazy" width="340" height="260">
           <p class="contact-note">Richmond, VA · Mon–Sat · 4–8pm</p>
-          <p class="reply-promise"><span aria-hidden="true"></span> Replies within one business day</p>
+          <p class="reply-promise"><span aria-hidden="true"></span> Aims to reply within one business day</p>
           <a class="directions-link" href="https://henricolibrary-va.libcal.com/spaces?lid=6277" target="_blank" rel="noopener">Twin Hickory Library rooms <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -1478,12 +1483,15 @@
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact the tutor</a>
         <a href="about.html">About the tutor</a>
-        <a href="privacy.html">Terms &amp; privacy</a>
+        <a href="terms.html">Terms &amp; conditions</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="cookies.html">Cookie policy</a>
+        <a href="refunds.html">Refunds</a>
         <a href="LICENSE">License (MIT)</a>
       </div>
     </div>
     <div class="wrap footer-bottom">
-      <span>© 2026 TurboTutor · Built for learners</span>
+      <span>© 2026 TurboTutor · Divit Gangrade, independent tutor · Richmond, VA</span>
       <span>No online payment · Cash &amp; Zelle direct · <a href="LICENSE">MIT licensed</a> · <a href="credits.html">Photo credits</a></span>
     </div>
   </footer>
@@ -1549,6 +1557,7 @@
           </div>
         </div>
         <label class="policy-ack"><input type="checkbox" name="policiesAccepted" value="Yes" required><span>I have read the <a href="#policies">attendance and rescheduling policies</a>.</span></label>
+        <label class="policy-ack"><input type="checkbox" name="privacyAccepted" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>, and I am 18 or older.</span></label>
       </div>
       <p class="form-note">No payment is collected here. Your request opens as a draft. Review it and press send in your email or messaging app.</p>
       <p class="form-note" id="request-deal"></p>
@@ -2133,6 +2142,7 @@
           `Phone: ${formData.get("phone")}`,
           `Preferred payment: ${formData.get("payment")}`,
           "Attendance and rescheduling policies acknowledged.",
+          "Privacy Policy and Terms and Conditions accepted. Parent or guardian is 18 or older.",
           "",
           "Plans requested:",
           courses,

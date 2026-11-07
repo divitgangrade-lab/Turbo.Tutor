@@ -63,3 +63,19 @@ The TextLoop, MaskedHeading and AnimatedContent islands bundle GSAP 3.15.1 (http
 The PatternWaves and WarpText islands use `ogl` 1.0.11 (https://github.com/oframe/ogl) under the Unlicense. The library is bundled into `pattern-waves.js` and `warp-text.js`.
 
 This is free and unencumbered software released into the public domain. Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
+
+## Self-hosted fonts
+
+The site serves its own copies of three typefaces instead of requesting them from Google Fonts, so no visitor data is sent to a font provider.
+
+- Barlow Condensed, weights 600, 700, 800 and 900. Copyright the Barlow Project Authors.
+- Chakra Petch, weights 500, 600 and 700. Copyright the Chakra Petch Project Authors.
+- Titillium Web, weights 400, 600 and 700. Copyright the Titillium Web Project Authors.
+
+All three are licensed under the SIL Open Font License, Version 1.1. The full licence texts are stored with the font files:
+
+- `fonts/OFL-Barlow-Condensed.txt`
+- `fonts/OFL-Chakra-Petch.txt`
+- `fonts/OFL-Titillium-Web.txt`
+
+The font files in `fonts/` are unmodified WOFF2 builds of the upstream Google Fonts releases.
