@@ -303,3 +303,28 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 @media (max-width: 560px) {
   .footer-wordmark { height: 112px; padding-block: 10px; }
 }
+
+/* ---------- text loop subject ribbon ---------- */
+.loop-band {
+  position: relative;
+  height: clamp(190px, 17vw, 238px);
+  overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, .12);
+  background:
+    linear-gradient(90deg, rgba(255, 212, 0, .06), transparent 18%, transparent 82%, rgba(255, 212, 0, .06)),
+    #0a0d10;
+  isolation: isolate;
+}
+.loop-band::before {
+  position: absolute; inset: 0; content: ""; pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+.loop-band-host { position: absolute; inset: 0; z-index: 1; }
+.loop-band .text-loop { position: absolute; top: 50%; left: 0; width: 100%; transform: translateY(-50%); }
+.loop-band .text-loop-svg { height: auto; }
+@media (max-width: 860px) {
+  .loop-band { height: clamp(130px, 26vw, 170px); }
+}

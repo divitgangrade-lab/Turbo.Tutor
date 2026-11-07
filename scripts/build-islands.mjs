@@ -5,7 +5,8 @@ await build({
     'flying-button': 'src/flying-button/entry.jsx',
     'flux-lines': 'src/flux-lines/entry.jsx',
     'pattern-waves': 'src/pattern-waves/entry.jsx',
-    'tech-text': 'src/tech-text/entry.jsx'
+    'tech-text': 'src/tech-text/entry.jsx',
+    'text-loop': 'src/text-loop/entry.jsx'
   },
   bundle: true,
   minify: true,
