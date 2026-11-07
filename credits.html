@@ -86,6 +86,7 @@
     ]
   }
   </script>
+  <link rel="stylesheet" href="legal-scene.css?v=20261108-1">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -97,7 +98,12 @@
       <span aria-current="page">Photo credits</span>
     </nav>
     <h1>Photo credits</h1>
+
+
     <p>The three 1200x630 social share cards (<code>og-image.jpg</code>, <code>og-terms.jpg</code> and <code>og-credits.jpg</code>) are cropped from the hero photograph below and carry the same CC BY-SA 4.0 licence.</p>
+
+    <div class="legal-fall" data-legal-fall="BORROWED LIGHT // GIVEN CREDIT" aria-hidden="true"></div>
+    <p class="legal-prompt"><span aria-hidden="true">//</span> Click the surface to shove the pit and send a pulse through the map.</p>
     <p>The hero car, the pit wall helmet and the kart panel use real photographs from Wikimedia Commons. Each one keeps its original licence, and the credits below are the attribution those licences require.</p>
     <ul>
       <li>
@@ -134,5 +140,17 @@
       <a href="refunds.html">Refunds</a>
     </footer>
   </main>
+  <script>
+    (() => {
+      const load = () => {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = './legal-bg.js?v=20261108-3';
+        document.body.appendChild(script);
+      };
+      if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1600 });
+      else window.setTimeout(load, 500);
+    })();
+  </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ The security model, audit results and residual risks are documented in `SECURITY
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Twenty-nine small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Thirty small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating and LegalBackground, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
@@ -225,6 +225,9 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── enhance.js              # Shared motion, forms and UI behaviour
 ├── enhance.css             # Shared enhancement styles
 ├── legal.css               # Legal page styles
+├── legal-scene.css         # Legal page background, panel and falling-chip styles
+├── legal-bg.js             # Generated legal background island (Topography + Ballpit + FallingText)
+├── legal-bg.css            # Generated topography and falling text styles
 ├── fonts.css               # Self-hosted font faces
 ├── fonts/                  # Self-hosted WOFF2 files and OFL licences
 ├── scripts/                # esbuild build script for all twenty-nine islands
@@ -388,6 +391,7 @@ The pages are plain HTML, CSS and JavaScript. The optional FlyingButton, FluxLin
 
 Additional pages and assets:
 
+- A legal console background. Privacy, terms, cookies, refunds, credits, EULA and DMCA share a live contour map with chrome balls rolling over it. Both react to the pointer, and a click sends a pulse through the terrain and a burst through the pit. The document sits on a paper panel, a falling chip banner reuses the footer's physics text, and reduced-motion visitors get a static grid.
 - `about.html`: the tutor bio, experience in plain terms, and the Person schema used for authorship.
 - `privacy.html`: privacy policy, children's data, retention and privacy rights.
 - `terms.html`: terms and conditions, payment, attendance, liability and Virginia law.

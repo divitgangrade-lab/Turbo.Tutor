@@ -36,6 +36,7 @@
   <link rel="preload" href="fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="legal.css">
+  <link rel="stylesheet" href="legal-bg.css?v=20261108-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,6 +63,7 @@
     ]
   }
   </script>
+  <link rel="stylesheet" href="legal-scene.css?v=20261108-2">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -72,6 +74,7 @@
     </div>
   </header>
   <main id="main">
+    <div class="legal-hero">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span aria-hidden="true">/</span>
@@ -83,6 +86,12 @@
     <p class="lede">This page explains what happens to personal information when you use the TurboTutor website or contact the tutor. It is written to match what the site actually does, not what a template assumes.</p>
     <p class="meta">Effective 7 November 2026</p>
 
+    <div class="legal-fall" data-legal-fall="YOUR DATA // YOUR RULES" aria-hidden="true"></div>
+    <p class="legal-prompt"><span aria-hidden="true">//</span> Click the surface to shove the pit and send a pulse through the map.</p>
+
+    </div>
+
+    <div class="legal-paper">
     <div class="operator">
       <dl>
         <div><dt>Service</dt><dd>TurboTutor, one-to-one tutoring for Grades 1-8</dd></div>
@@ -173,6 +182,7 @@
       <a class="btn" href="index.html#contact">Contact the tutor</a>
       <a class="btn ghost" href="cookies.html">Read the cookie policy</a>
     </div>
+      </div>
   </main>
   <footer>
     <div class="in">
@@ -180,5 +190,17 @@
       <span><a href="about.html">About the tutor</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="refunds.html">Refunds</a> · <a href="eula.html">EULA</a> · <a href="dmca.html">DMCA</a> · <a href="credits.html">Photo credits</a></span>
     </div>
   </footer>
+  <script>
+    (() => {
+      const load = () => {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = './legal-bg.js?v=20261108-3';
+        document.body.appendChild(script);
+      };
+      if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1600 });
+      else window.setTimeout(load, 500);
+    })();
+  </script>
 </body>
 </html>

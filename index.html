@@ -3252,14 +3252,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "falling-text.css?v=20261107-34";
+        css.href = "falling-text.css?v=20261107-35";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./falling-text.js?v=20261107-34").catch(() => {});
+          if (ok) import("./falling-text.js?v=20261107-35").catch(() => {});
         });
       };
       const near = () => {
