@@ -1410,6 +1410,9 @@
     </section>
 
     <section class="section lapcase" id="walkthrough" aria-labelledby="walkthrough-title">
+      <div class="lapcase-dots" id="dot-field-root" aria-hidden="true">
+        <div id="dot-field-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -2897,6 +2900,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./decay-card.js?v=20261107-25").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("dot-field-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "dot-field.css?v=20261107-28";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./dot-field.js?v=20261107-28").catch(() => {});
         });
       };
       const near = () => {

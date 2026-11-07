@@ -27,7 +27,8 @@ await build({
     'lightfall': 'src/lightfall/entry.jsx',
     'decay-card': 'src/decay-card/entry.jsx',
     'plasma': 'src/plasma/entry.jsx',
-    'grid-scan': 'src/grid-scan/entry.jsx'
+    'grid-scan': 'src/grid-scan/entry.jsx',
+    'dot-field': 'src/dot-field/entry.jsx'
   },
   bundle: true,
   minify: true,

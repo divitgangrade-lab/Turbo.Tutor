@@ -232,8 +232,13 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 .track-link:hover { color: #ffd400; }
 
 /* ---------- session walkthrough ---------- */
-.lapcase { border-top: 1px solid var(--line); background: var(--surface); }
-.lap-panel { margin-top: 26px; border: 1px solid var(--line); background: var(--surface-2); }
+.lapcase { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); background: var(--surface); }
+.lapcase > .wrap { position: relative; z-index: 1; }
+.lapcase-dots { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .55; }
+.lapcase-dots #dot-field-mount, .lapcase-dots .dot-field { position: absolute; inset: 0; }
+[data-theme="dark"] .lapcase-dots { opacity: .48; }
+@media (prefers-reduced-motion: reduce) { .lapcase-dots { display: none; } }
+.lap-panel { margin-top: 26px; border: 1px solid var(--line); background: var(--surface-2); background: color-mix(in srgb, var(--surface-2) 90%, transparent); }
 .lap-head {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
   margin: 0; border-bottom: 1px solid var(--line); padding: 11px 20px;

@@ -4,7 +4,7 @@ The security model, audit results and residual risks are documented in `SECURITY
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Twenty-three small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma and GridScan, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, and GridScan loads as the pit-lane warm-up section approaches. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Twenty-four small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan and DotField, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, and DotField loads as the session walkthrough approaches. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
@@ -62,6 +62,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A DecayCard promise helmet. The helmet photo tears and settles around the edges as the pointer moves over it, with a slow idle fray. The original photo remains as the no-JS and no-WebGL fallback, and the island loads only near the promise section.
 - A Plasma welcome-offer backdrop. Slow amber plasma folds drift behind the optional-offer copy and wheel, softening at the edges and turning gently toward the pointer. It loads only near the offers section and is skipped for reduced-motion visitors or browsers without WebGL2.
 - A GridScan pit-lane backdrop. A dim 3D wireframe room sits behind the warm-up copy and launch pad, with a slow scan, small wall points and a click ping. It follows the pointer, switches between warm red and amber with the theme, loads only near the section, and is skipped for reduced-motion visitors or browsers without WebGL2.
+- A DotField walkthrough backdrop. A slow grid of red and amber dots drifts behind the 45-minute lap breakdown, with a soft lens around the pointer and a few twinkling points. The run sheet stays on a lightly tinted panel, and the island loads only near the section.
 - An AnimatedContent policy grid. The three attendance cards enter in sequence when the section approaches the viewport, while the plain cards remain as the no-JS fallback.
 - A TargetCursor reticle. On fine-pointer devices it follows the pointer, locks onto links, buttons, fields and the hero swap, and shows short labels on key actions. It skips touch and reduced-motion visitors, and the native cursor stays when the island is unavailable.
 - A MetallicPaint footer monogram. A liquid-metal TT crest loads as the footer approaches the viewport, tilts with the pointer and stays still under `prefers-reduced-motion`. The plain TT stays visible when WebGL2 or the island is unavailable.
@@ -194,6 +195,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── plasma.css              # Generated Plasma styles
 ├── grid-scan.js            # Generated pit-lane backdrop island (Preact + GridScan)
 ├── grid-scan.css           # Generated GridScan styles
+├── dot-field.js            # Generated walkthrough backdrop island (Preact + DotField)
+├── dot-field.css           # Generated DotField styles
 ├── island-chunks/          # Shared GSAP and Preact code loaded once for all islands
 ├── target-cursor.css       # Generated TargetCursor styles
 ├── package.json            # Build script for the islands
@@ -206,7 +209,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── legal.css               # Legal page styles
 ├── fonts.css               # Self-hosted font faces
 ├── fonts/                  # Self-hosted WOFF2 files and OFL licences
-├── scripts/                # esbuild build script for all twenty-three islands
+├── scripts/                # esbuild build script for all twenty-four islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -230,6 +233,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/decay-card/         # DecayCard source and mount entry
 ├── src/plasma/             # Plasma source and mount entry
 ├── src/grid-scan/          # GridScan source and mount entry
+├── src/dot-field/          # DotField source and mount entry
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
@@ -253,7 +257,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The twenty-three optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma and GridScan, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the site makes no third-party requests.
+No runtime dependencies and no server code. The twenty-four optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan and DotField, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the site makes no third-party requests.
 
 ### Photography credits
 
@@ -285,7 +289,7 @@ npm ci
 npm run build
 ```
 
-`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all twenty-three islands, and the local server command above checks that the folder serves.
+`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all twenty-four islands, and the local server command above checks that the folder serves.
 
 ---
 
@@ -320,6 +324,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **DecayCard island** - the promise helmet image, tear intensity, grain, idle drift, hover decay, travel, tilt and scope live in `src/decay-card/entry.jsx`; run `npm run build` after changing them.
 - **Plasma island** - the optional-offer plasma colour, speed, twist, softness, shine, brightness, quality, fade and opacity live in `src/plasma/entry.jsx`; run `npm run build` after changing them.
 - **GridScan island** - the pit-lane room colours, grid density, depth, scan speed, trail, glow, pointer parallax and theme colours live in `src/grid-scan/entry.jsx`; run `npm run build` after changing them.
+- **DotField island** - the walkthrough dot colours, spacing, pattern, pointer lens, glow, wave, sparkle, speed and opacity live in `src/dot-field/entry.jsx`; run `npm run build` after changing them.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -331,7 +336,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all twenty-three islands reduce or stop their continuous motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all twenty-four islands reduce or stop their continuous motion.
 
 ## A note on payment
 
@@ -343,11 +348,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma and GridScan islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan and DotField islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The pages are plain HTML, CSS and JavaScript. The optional FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma and GridScan islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
+The pages are plain HTML, CSS and JavaScript. The optional FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan and DotField islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
