@@ -32,11 +32,9 @@ No payment is collected anywhere on the site.
 - Seasonal offers that rotate by date: Season Opener, Back-to-School Grand Prix, Diwali Night Race, Thanksgiving Sprint and Season Finale.
 
 ### Paddock Club newsletter
-A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about new session openings, study notes and occasional offers. It is wired in `enhance.js`:
+A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one short email most Mondays about new session openings, study notes and occasional offers. The form is intentionally email-only: `enhance.js` checks the address and the privacy consent, then opens a pre-filled message to the tutor. No address is sent to this site or stored in the browser.
 
-- With `data-endpoint` set on `#club-form`, the form POSTs `{ "email_address": "...", "tags": ["paddock-club"] }` and shows the code on success.
-- With it empty, the form opens a pre-filled email to the tutor instead, so no signup is lost.
-- The automated Monday send and the welcome email are handled by the newsletter provider. Create a [Buttondown](https://buttondown.com) account, then point `data-endpoint` at a small endpoint that holds the API key (GitHub Pages cannot keep a secret in client code).
+The code is shown after the draft opens. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. There is no newsletter provider or API key in the repository, and GitHub Pages could not keep one secret in client code.
 
 ### Twin Hickory Library
 In-person laps meet at **Twin Hickory Library** in Henrico County. The plan section carries a large bordered card linking to the library's room-booking page (`https://henricolibrary-va.libcal.com/spaces?lid=6277`), and the FAQ and contact panel link there too.
@@ -74,14 +72,23 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 
 ## Custom domain
 
-The site currently uses the GitHub Pages address above. No `CNAME` file is committed, because a CNAME for a domain that is not registered would take the site offline.
+The site is served at `https://turbotutor.dpdns.org/`, and the repository's `CNAME` file contains that exact host. GitHub Pages reads it on every deploy.
 
-When a domain is registered:
+To move to another domain:
 
-1. Add a `CNAME` file at the repository root containing only the exact host, such as `www.example.com`.
+1. Replace the contents of `CNAME` with the new host, such as `www.example.com`.
 2. Point the domain at GitHub Pages using GitHub's published A and AAAA records for an apex domain, or a CNAME to `divitgangrade-lab.github.io` for `www`.
-3. Set the custom domain in the repository's Pages settings and enable HTTPS.
+3. Set the same custom domain in the repository's Pages settings and enable HTTPS.
 4. Update every absolute URL in `index.html`, `privacy.html`, `terms.html`, `cookies.html`, `refunds.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
+5. Keep `CNAME` in the repository; removing it drops the custom domain.
+
+## Security and privacy
+
+- The site has no backend, accounts, database or payment code, so there are no server sessions, passwords or API keys to protect here.
+- Every HTML page carries a meta Content Security Policy and a `strict-origin-when-cross-origin` referrer policy. GitHub Pages cannot send HSTS, `X-Frame-Options` or `X-Content-Type-Options` as response headers; `SECURITY.md` records that limit.
+- Forms validate locally and then open a pre-filled email or text. Nothing is posted to this origin.
+- No analytics, advertising pixels, third-party embeds or cookies. Browser storage is limited to the theme choice and the saved offer.
+- `_config.yml` keeps source, build tooling and package files out of the published GitHub Pages site.
 
 ---
 
@@ -130,6 +137,13 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 .
 ├── index.html              # Main page: markup, styles and behaviour
 ├── about.html              # Tutor bio and about page
+├── privacy.html            # Privacy policy and data rights
+├── terms.html              # Terms, payment and attendance
+├── cookies.html            # Cookie-free storage explanation
+├── refunds.html            # Cancellation and refund policy
+├── credits.html            # Photo attribution and licences
+├── thanks.html             # Post-request confirmation (noindex)
+├── 404.html                # Branded not-found page
 ├── flying-button.js        # Generated lazy island (Preact + FlyingButton)
 ├── flying-button.css       # Generated FlyingButton styles
 ├── flux-lines.js           # Generated lazy island (Preact + FluxLines)
@@ -163,6 +177,14 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── target-cursor.css       # Generated TargetCursor styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
+├── CNAME                   # GitHub Pages custom domain
+├── SECURITY.md             # Security model and audit results
+├── _config.yml             # Files GitHub Pages must not publish
+├── enhance.js              # Shared motion, forms and UI behaviour
+├── enhance.css             # Shared enhancement styles
+├── legal.css               # Legal page styles
+├── fonts.css               # Self-hosted font faces
+├── fonts/                  # Self-hosted WOFF2 files and OFL licences
 ├── scripts/                # esbuild build script for all sixteen islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
@@ -178,6 +200,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/animated-content/   # AnimatedContent source and mount entry
 ├── src/target-cursor/      # TargetCursor source and mount entry
 ├── src/pixel-swap/         # PixelSwap source and mount entry
+├── src/metallic-paint/     # MetallicPaint source and mount entry
+├── src/ribbons/            # Ribbons source and mount entry
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
@@ -226,12 +250,14 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/metallic-paint/`, `src/ribbons/`, or their props:
+The generated islands are already committed, so serving the folder needs no build. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/metallic-paint/`, `src/ribbons/`, or their props:
 
 ```bash
-npm install
+npm ci
 npm run build
 ```
+
+`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all sixteen islands, and the local server command above checks that the folder serves.
 
 ---
 
@@ -282,11 +308,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor and MetallicPaint islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the optional FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor and MetallicPaint islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/` and `src/target-cursor/` into their generated JS and CSS files. `enhance.css` and
+The pages are plain HTML, CSS and JavaScript. The optional FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
