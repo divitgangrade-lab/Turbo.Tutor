@@ -224,6 +224,12 @@
     .specialty-silk .silk-container { position: absolute; inset: 0; }
     [data-theme="dark"] .specialty-silk { opacity: .55; }
     @media (prefers-reduced-motion: reduce) { .specialty-silk { display: none; } }
+    #how { isolation: isolate; }
+    #how > .wrap { position: relative; z-index: 2; }
+    .track-lightfall { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+    .track-lightfall > div { position: absolute; inset: 0; }
+    .track-lightfall .lightfall-container { position: absolute; inset: 0; }
+    @media (prefers-reduced-motion: reduce) { .track-lightfall { display: none; } }
     #plans { position: relative; isolation: isolate; }
     #plans > .wrap { position: relative; z-index: 1; }
     .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .42; -webkit-mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); mask-image: radial-gradient(95% 90% at 50% 42%, #000 30%, transparent 100%); }
@@ -1236,6 +1242,7 @@
 
     <section class="section track" id="how" aria-labelledby="steps-title">
       <canvas class="flag-seam" data-carry="light" aria-hidden="true"></canvas>
+      <div class="track-lightfall" id="lightfall-root" aria-hidden="true"><div id="lightfall-mount"></div></div>
       <div class="wrap track-grid">
         <div class="track-copy">
           <p class="kicker">How tutoring begins</p>
@@ -2804,6 +2811,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./silk.js?v=20261107-23").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("lightfall-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "lightfall.css?v=20261107-24";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./lightfall.js?v=20261107-24").catch(() => {});
         });
       };
       const near = () => {
