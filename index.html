@@ -21,6 +21,7 @@
   <meta name="twitter:description" content="One-to-one Math, English and Science tutoring for Grades 1–8. Weekly sessions from $24.">
   <meta name="twitter:image" content="https://divitgangrade-lab.github.io/Turbo.Tutor/og-image.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" as="image" href="f1-car.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Chakra+Petch:wght@500;600;700&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
@@ -152,7 +153,7 @@
     /* ---------- hero ---------- */
     .hero { position: relative; overflow: hidden; background: radial-gradient(120% 130% at 78% 18%, #2a3238 0, #12161a 46%, #080a0c 100%); color: #f7f5f0; isolation: isolate; }
     .hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px); background-size: 84px 84px; content: ""; mask-image: radial-gradient(80% 80% at 50% 40%, #000 30%, transparent 100%); }
-    .hero::after { position: absolute; right: -12%; bottom: -34%; width: 70%; height: 80%; background: radial-gradient(closest-side, rgba(225, 6, 0, .4), transparent); content: ""; filter: blur(10px); pointer-events: none; }
+    .hero::after { position: absolute; right: -12%; bottom: -34%; width: 70%; height: 80%; background: radial-gradient(closest-side, rgba(225, 6, 0, .4), transparent); content: ""; pointer-events: none; }
     .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 30px; min-height: clamp(600px, 82vh, 800px); padding-block: clamp(52px, 7vw, 82px) clamp(58px, 7vw, 92px); }
     .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--amber); font-family: var(--ui); font-size: 11px; font-weight: 600; letter-spacing: 1.9px; text-transform: uppercase; }
     .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(225, 6, 0, .8); animation: pulse 2.4s infinite; }
@@ -167,7 +168,7 @@
     .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
     .hero-chips li { border: 1px solid rgba(255, 255, 255, .2); padding: 7px 11px; color: #c6cdd2; font-family: var(--ui); font-size: 10px; font-weight: 500; letter-spacing: .7px; text-transform: uppercase; }
     .hero-chips li b { color: var(--amber); font-weight: 700; }
-    .hero-visual { position: relative; display: grid; place-items: center; min-height: 320px; }
+    .hero-visual { position: relative; display: grid; place-items: center; min-height: 0; }
     .hero-visual::before { position: absolute; inset: auto 4% 16% 4%; height: 46%; background: radial-gradient(closest-side, rgba(225, 6, 0, .32), transparent); content: ""; filter: blur(24px); }
     .hero-lights { position: absolute; top: 0; right: 2%; display: flex; gap: 9px; border: 1px solid var(--carbon-line); background: #07090b; padding: 9px 12px; }
     .hero-lights i { width: 15px; height: 15px; border-radius: 50%; background: #360909; animation: lights 5s linear infinite; }
@@ -512,7 +513,7 @@
     [data-theme="dark"] .faq-search, [data-theme="dark"] .field input { background: var(--card); color: var(--ink); }
 
     /* ---------- real photography ---------- */
-    .hero-car.hero-photo { width: min(760px, 112%); aspect-ratio: 12 / 5; object-fit: cover; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 26px 44px rgba(0, 0, 0, .45); filter: none; animation: none; }
+    .hero-car.hero-photo { width: min(760px, 100%); aspect-ratio: 12 / 5; object-fit: cover; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 26px 44px rgba(0, 0, 0, .45); filter: none; animation: none; }
     .hero-visual::before { filter: none; }
     .promise-art img.promise-photo { width: min(400px, 100%); aspect-ratio: 1; object-fit: cover; border: 6px solid #f7f5f0; box-shadow: 0 24px 50px rgba(0, 0, 0, .5); filter: none; animation: none; }
     .promise-art:has(.promise-photo)::after { display: none; }
@@ -591,11 +592,6 @@
       .nav { gap: 16px; }
       .nav-link { font-size: 11px; }
       .status { display: none; }
-      .hero-grid { grid-template-columns: 1fr; gap: 10px; min-height: 0; }
-      .hero { text-align: left; }
-      .hero-visual { min-height: 260px; margin-top: 8px; }
-      .hero-car { width: min(620px, 92%); }
-      .hero-lights { top: -6px; right: 4%; }
       .rail-grid { grid-template-columns: repeat(2, 1fr); }
       .rail-item:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255, 255, 255, .1); }
       .rail-item:nth-child(4) { border-top: 1px solid rgba(255, 255, 255, .1); }
@@ -610,6 +606,14 @@
       .wheel-panel { padding-top: 12px; }
       .offer-copy-wrap { max-width: 640px; }
       .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 10px; min-height: 0; }
+      .hero { text-align: left; }
+      .hero-visual { min-height: 260px; margin-top: 8px; }
+      .hero-car { width: min(620px, 92%); }
+      .hero-car.hero-photo { width: min(680px, 100%); }
+      .hero-lights { top: -6px; right: 4%; }
     }
     @media (max-width: 860px) {
       .wrap { width: min(100% - 36px, 620px); }
@@ -626,6 +630,7 @@
       .hero-lede { font-size: 15px; }
       .hero-visual { min-height: 210px; }
       .hero-car { width: 100%; }
+      .hero-car.hero-photo { width: 100%; }
       .hero-lights { top: -4px; right: 0; padding: 7px 9px; }
       .hero-lights i { width: 12px; height: 12px; }
       .hero-plate { display: none; }
@@ -702,25 +707,82 @@
     "knowsAbout": ["Math tutoring", "English tutoring", "Science tutoring", "IB preparation", "High school application review"]
   }
   </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What grades and subjects can my student choose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Grades 1 through 8, in Science, English or Math. You can add more than one course to a single kart request, and each one keeps its own lap length and location."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does tutoring cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Weekly sessions start at $24 for a 45-minute Grade 1 Science lap on Zoom. Math adds $3 and English adds $5 per weekly lap. A public-library session adds $10, a 30-minute lap is about 30 percent less, and a 60-minute lap is about 50 percent more. Monthly blocks are 5 percent lower than paying weekly, and the yearly plan is 15 percent lower than 48 weekly laps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do online and library sessions work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Online sessions meet on Zoom and the tutor confirms the link after enrollment. In-person laps meet at Twin Hickory Library in Henrico County and cost $10 more per 45-minute lap. Rooms are booked through the library's room page, and a parent or guardian must remain present for students under 18."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the special coaching programs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Moody IB Prep is a 120-minute Zoom session at $120. The High School Application Review is $35 per application, with an optional 90-minute Zoom meeting for $40 more. Both are one-time requests; the tutor confirms scope and availability first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the kart take payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The kart collects the plans you want and turns them into an email or text request. There are no card fields, no checkout and no online payment anywhere on this site."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if we miss or move a class?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A missed scheduled class carries a $15 fee. A family-requested reschedule carries a $10 fee. If the tutor needs to move a session, they confirm a 15 percent credit toward the next request."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I request enrollment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add your plans to the kart, enter the parent or guardian and student details, choose cash or Zelle, then prepare the request. Your email or messaging app opens with everything filled in. Review it, press send, and the tutor replies to confirm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I pay by cash or Zelle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Pick cash or Zelle in the request form. The tutor confirms the amount, due date and Zelle details directly with you before any enrollment."
+      }
+    }
+  ]
+}
+  </script>
   <link rel="stylesheet" href="enhance.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="boot" id="boot" role="status" aria-label="Loading TurboTutor">
-    <div class="boot-inner">
-      <div class="boot-glyph boot-hold">
-        <svg viewBox="0 0 120 132" aria-hidden="true">
-          <defs><clipPath id="boot-clip"><rect id="boot-rect" x="0" y="132" width="120" height="132"/></clipPath></defs>
-          <path class="boot-shell" d="M60 6C31 6 12 27 12 56v22c0 11 4 19 11 24l6 4c3 10 11 17 22 19h18c11-2 19-9 22-19l6-4c7-5 11-13 11-24V56C108 27 89 6 60 6Z"/>
-          <path class="boot-solid" clip-path="url(#boot-clip)" d="M60 6C31 6 12 27 12 56v22c0 11 4 19 11 24l6 4c3 10 11 17 22 19h18c11-2 19-9 22-19l6-4c7-5 11-13 11-24V56C108 27 89 6 60 6Z"/>
-        </svg>
-      </div>
-      <p class="boot-name boot-hold">Turbo<span>Tutor</span></p>
-      <p class="boot-meta boot-hold"><span id="boot-status">Warming the tyres</span><b id="boot-pct">0%</b></p>
-      <div class="boot-meter boot-hold" aria-hidden="true"><i id="boot-bar"></i></div>
-    </div>
-  </div>
-  <script>window.setTimeout(function () { if (!window.TTMotion) { var b = document.getElementById("boot"); if (b) b.remove(); } }, 1600);</script>
   <div class="page-wipe" id="page-wipe" aria-hidden="true"><i></i><i></i></div>
   <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
   <div class="progress" aria-hidden="true"><span id="scroll-bar"></span></div>
@@ -2086,7 +2148,7 @@
         $$("main section[id]").forEach(section => sectionObserver.observe(section));
       }
 
-      // ---- boot ----
+      // ---- initial render ----
       renderSpecialtyCards();
       renderPlanCards();
       updateKart();

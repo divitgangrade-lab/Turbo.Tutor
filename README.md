@@ -122,7 +122,7 @@ The site now uses real photographs instead of drawn stand-ins, all from Wikimedi
 | Pit-wall promise | Oscar Piastri helmet, 2024 | Liauzh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | Kart panel | Go kart racing | Genevieve | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) |
 
-If a photo is replaced, keep the credit line accurate and update both the footer and this table.
+The 1200x630 social share card (`og-image.png`) is cropped from the hero photograph and carries the same CC BY-SA 4.0 licence. If a photo is replaced, keep the credit line accurate and update the footer, the credits page and this table.
 
 ---
 
@@ -177,11 +177,11 @@ The site ships as plain HTML, CSS and JavaScript with no build step. `enhance.cs
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
-- A damped spring solver runs the text reveals, hero entrance, magnetic controls, parallax,
+- A damped spring solver runs the text reveals, hero entrance, magnetic controls,
   counters, cursor and the scroll progress bar.
-- `index.html` includes a boot veil (helmet fill and a 4px meter), a marching-squares contour
-  backdrop in the hero, chequered dissolve seams, and a circuit map whose lap is drawn in
-  canvas with corner braking, marker flares and a cursor reticle with a lit halftone.
+- The hero draws a marching-squares contour backdrop, and the circuit map draws its lap in
+  canvas with corner braking, marker flares and a light pointer reticle. The lap animates
+  only while the map is on screen, then stops. There is no loading veil.
 - The FAQ uses an animated `<details>` body, the header tucks on scroll, and the mobile
   sticky CTA appears after the hero. All of it is disabled under `prefers-reduced-motion`.
 
@@ -191,7 +191,9 @@ Additional pages and assets:
 - `thanks.html`: what happens after a request is sent (noindex).
 - `404.html`: a branded off-circuit page.
 - `robots.txt` and `sitemap.xml`.
-- `og-image.png`: the 1200x630 social share card referenced by the Open Graph tags.
+- `og-image.png`: the 1200x630 social share card, cropped from the hero photograph and
+  referenced by the Open Graph and Twitter tags.
+- `credits.html`: photograph attribution and licence details.
 
 There is no analytics, advertising pixel or third-party cookie on the site. Web fonts come
 from Google Fonts and hosting logs come from GitHub Pages. Reviews and a team photograph are

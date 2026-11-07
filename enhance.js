@@ -1,4 +1,4 @@
-/* TurboTutor motion layer — hand-written springs, ticker, scroll work and canvas set pieces. */
+/* TurboTutor motion layer: hand-written springs, ticker, scroll work and canvas set pieces. */
 (() => {
   "use strict";
 
@@ -184,8 +184,7 @@
     splitGroups.forEach((group) => observer.observe(group.element));
   }
 
-  /* ---------- boot veil ---------- */
-  const boot = $("#boot");
+  /* ---------- hero entrance ---------- */
   let handover = false;
 
   function startHeroEntrance() {
@@ -197,7 +196,7 @@
       heroWords.done = true;
       revealWords(heroWords.words, { base: 60, stagger: 80 });
     }
-    bootBits();
+    enterHeroBits();
   }
 
   const heroBits = [];
@@ -210,7 +209,7 @@
     }
   }
 
-  function bootBits() {
+  function enterHeroBits() {
     if (!heroBits.length) return;
     if (!showsMotion()) {
       heroBits.forEach(({ element }) => {
@@ -247,81 +246,11 @@
     });
   }
 
-  function runBoot() {
-    const bar = $("#boot-bar");
-    const percent = $("#boot-pct");
-    const status = $("#boot-status");
-    const rect = $("#boot-rect");
-    const progress = new Spring(0, { tension: 10, friction: 30, precision: 0.001 });
-    let phase = "loading";
-    let started = false;
-    let liftedAt = 0;
-    progress.to(0.7);
-
-    every((now) => {
-      progress.step(16);
-      const value = clamp(progress.value, 0, 1);
-      if (bar) bar.style.transform = `scaleX(${value})`;
-      if (percent) percent.textContent = `${Math.round(value * 100)}%`;
-      if (rect) rect.setAttribute("y", String(132 - 132 * value));
-
-      if (!started && phase === "finishing" && progress.done) {
-        started = true;
-        if (status) status.textContent = "Lights out";
-        boot.classList.add("is-clearing");
-        window.setTimeout(() => {
-          boot.classList.add("is-lifting");
-          startHeroEntrance();
-          liftedAt = performance.now();
-        }, 430);
-      }
-      if (liftedAt && now - liftedAt > 480) {
-        if (boot && boot.parentNode) boot.remove();
-        document.documentElement.classList.remove("is-booting");
-        liftedAt = 0;
-        return false;
-      }
-      return true;
-    });
-
-    const finish = () => {
-      if (phase !== "loading") return;
-      phase = "finishing";
-      progress.tension = 170;
-      progress.friction = 26;
-      progress.precision = 0.01;
-      progress.to(1);
-      if (status) status.textContent = "Ready";
-    };
-
-    if (document.readyState === "complete") {
-      window.setTimeout(finish, 260);
-    } else {
-      window.addEventListener("load", () => window.setTimeout(finish, 260), { once: true });
-      window.setTimeout(finish, 2400);
-    }
-    window.setTimeout(finish, 3000);
-  }
-
   prepareSplits();
   prepareHeroBits();
   watchSplits();
 
-  if (boot) {
-    if (!showsMotion() || sessionStorage.getItem("tt-booted") === "1") {
-      boot.remove();
-      startHeroEntrance();
-    } else {
-      runBoot();
-      try {
-        sessionStorage.setItem("tt-booted", "1");
-      } catch (error) {
-        /* private mode — no session store, no problem */
-      }
-    }
-  } else {
-    startHeroEntrance();
-  }
+  startHeroEntrance();
 
   /* ---------- custom cursor ---------- */
   (function cursor() {
