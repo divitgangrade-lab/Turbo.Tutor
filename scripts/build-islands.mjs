@@ -34,6 +34,7 @@ await build({
     'falling-text': 'src/falling-text/entry.jsx',
     'paper-crumple': 'src/paper-crumple/entry.jsx',
     'pit-rating': 'src/pit-rating/entry.jsx',
+    'topography': 'src/topography/entry.jsx',
     'legal-bg': 'src/legal-bg/entry.jsx'
   },
   bundle: true,

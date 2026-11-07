@@ -206,7 +206,10 @@
     .ticker-track span::after { color: var(--red); content: "◆"; font-size: 9px; }
 
     /* ---------- stats rail ---------- */
-    .rail { background: var(--carbon); color: #f7f5f0; }
+    .rail { position: relative; overflow: hidden; background: var(--carbon); color: #f7f5f0; isolation: isolate; }
+    .rail > .wrap { position: relative; z-index: 1; }
+    .rail-topo { position: absolute; inset: 0; z-index: 0; opacity: .6; pointer-events: none; }
+    .warp-topo { position: absolute; inset: 0; z-index: 0; opacity: .5; pointer-events: none; }
     .rail-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
     .rail-item { padding: 26px 20px; border-left: 1px solid rgba(255, 255, 255, .1); }
     .rail-item:first-child { border-left: 0; padding-left: 0; }
@@ -1133,6 +1136,7 @@
     </div>
 
     <section class="rail" aria-label="TurboTutor by the numbers">
+      <div class="rail-topo" data-topography="rail" aria-hidden="true"></div>
       <div class="wrap rail-grid">
         <div class="rail-item reveal"><strong><span data-counter data-target="8">8</span></strong><span>Grades covered</span></div>
         <div class="rail-item reveal"><strong><span data-counter data-target="3">3</span></strong><span>Core subjects</span></div>
@@ -1507,6 +1511,7 @@
     </section>
 
     <section class="warp-band" aria-labelledby="warp-title">
+      <div class="warp-topo" data-topography="band" aria-hidden="true"></div>
       <h2 class="sr-only" id="warp-title">Learning in the fast lane</h2>
       <div class="wrap warp-band-stage" id="warp-text-root" aria-hidden="true">
         <span class="warp-band-fallback">LEARNING IN<br>THE FAST LANE</span>
@@ -3382,5 +3387,41 @@
     })();
   </script>
   <script src="enhance.js"></script>
+  <script>
+    (() => {
+      const hosts = document.querySelectorAll("[data-topography]");
+      if (!hosts.length) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "topography.css?v=20261108-5";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./topography.js?v=20261108-5").catch(() => {});
+        });
+      };
+      const near = () => {
+        for (const host of hosts) {
+          const rect = host.getBoundingClientRect();
+          if (rect.bottom < -360 || rect.top > window.innerHeight + 360) continue;
+          window.removeEventListener("scroll", near);
+          window.removeEventListener("resize", near);
+          load();
+          return;
+        }
+      };
+      near();
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+    })();
+  </script>
 </body>
 </html>
