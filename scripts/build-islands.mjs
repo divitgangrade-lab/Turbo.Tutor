@@ -16,7 +16,8 @@ await build({
     'animated-content': 'src/animated-content/entry.jsx',
     'target-cursor': 'src/target-cursor/entry.jsx',
     'pixel-swap': 'src/pixel-swap/entry.jsx',
-    'metallic-paint': 'src/metallic-paint/entry.jsx'
+    'metallic-paint': 'src/metallic-paint/entry.jsx',
+    'ribbons': 'src/ribbons/entry.jsx'
   },
   bundle: true,
   minify: true,

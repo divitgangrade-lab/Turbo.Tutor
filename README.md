@@ -2,7 +2,7 @@
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Fifteen small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor and MetallicPaint, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap loads after first paint. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Sixteen small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap loads after first paint. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
 - **License:** [MIT](LICENSE)
@@ -57,6 +57,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - An AnimatedContent policy grid. The three attendance cards enter in sequence when the section approaches the viewport, while the plain cards remain as the no-JS fallback.
 - A TargetCursor reticle. On fine-pointer devices it follows the pointer, locks onto links, buttons, fields and the hero swap, and shows short labels on key actions. It skips touch and reduced-motion visitors, and the native cursor stays when the island is unavailable.
 - A MetallicPaint footer monogram. A liquid-metal TT crest loads as the footer approaches the viewport, tilts with the pointer and stays still under `prefers-reduced-motion`. The plain TT stays visible when WebGL2 or the island is unavailable.
+- A Ribbons footer trail. Amber, red and bone ribbons trail the pointer across the footer as the footer approaches the viewport. It runs only on fine-pointer devices with motion allowed, and the footer reads the same without it.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
 
@@ -154,10 +155,11 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── pixel-swap.css          # Generated PixelSwap styles
 ├── target-cursor.js        # Generated cursor island (Preact + TargetCursor)
 ├── metallic-paint.js       # Generated footer island (Preact + MetallicPaint)
+├── ribbons.js              # Generated footer island (Preact + Ribbons)
 ├── target-cursor.css       # Generated TargetCursor styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
-├── scripts/                # esbuild build script for all fifteen islands
+├── scripts/                # esbuild build script for all sixteen islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -195,7 +197,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The fifteen optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor and MetallicPaint, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+No runtime dependencies and no server code. The sixteen optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
 
 ### Photography credits
 
@@ -220,7 +222,7 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/metallic-paint/`, or their props:
+The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/metallic-paint/`, `src/ribbons/`, or their props:
 
 ```bash
 npm install
@@ -252,6 +254,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **AnimatedContent island** - the policy card copy mirrors the no-JS fallback in `index.html`; the stagger and entrance props live in `src/animated-content/entry.jsx`; run `npm run build` after changing them.
 - **TargetCursor island** - reticle size, colour, spin timing and target selector live in `src/target-cursor/entry.jsx`; action labels live on the target elements in `index.html`; run `npm run build` after changing them.
 - **MetallicPaint island** - the footer monogram text, font, metal tint, density, dispersion, edge bend and tilt live in `src/metallic-paint/entry.jsx`; run `npm run build` after changing them.
+- **Ribbons island** - the footer trail colours, thickness, length, spread, spring, wave and opacity live in `src/ribbons/entry.jsx`; run `npm run build` after changing them.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -263,7 +266,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all fifteen islands reduce or stop their continuous motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all sixteen islands reduce or stop their continuous motion.
 
 ## A note on payment
 

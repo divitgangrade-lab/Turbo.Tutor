@@ -334,3 +334,10 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
   .footer-metal { width: 76px; height: 76px; margin-bottom: 10px; }
   .footer-metal-fallback { font-size: 64px; }
 }
+
+/* ---------- ribbons footer trails ---------- */
+.footer-ribbons { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.footer-ribbons .ribbons { position: absolute; inset: 0; height: 100%; }
+@media (max-width: 860px) {
+  .footer-ribbons { display: none; }
+}

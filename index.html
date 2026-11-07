@@ -1454,6 +1454,7 @@
 
   <footer class="site-footer">
     <div class="footer-particles" id="particle-text-root" aria-hidden="true"></div>
+    <div class="footer-ribbons" id="ribbons-root" aria-hidden="true"></div>
     <div class="wrap footer-wordmark" id="tech-text-root" aria-hidden="true"></div>
     <div class="wrap footer-top">
       <div>
@@ -2733,6 +2734,40 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./metallic-paint.js?v=20261107-19").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("ribbons-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "ribbons.css?v=20261107-20";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./ribbons.js?v=20261107-20").catch(() => {});
         });
       };
       const near = () => {
