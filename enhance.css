@@ -1,7 +1,8 @@
 /* TurboTutor motion layer - loaded after the inline sheet. */
 
 /* ---------- page wipe ---------- */
-.page-wipe { position: fixed; inset: 0; z-index: 290; display: grid; grid-template-rows: 1fr 1fr; pointer-events: none; }
+.page-wipe { position: fixed; inset: 0; z-index: 290; display: none; grid-template-rows: 1fr 1fr; pointer-events: none; }
+.js .page-wipe { display: grid; }
 .page-wipe i { display: block; background: #080a0c; transform: scaleY(1); transform-origin: top; transition: transform .62s cubic-bezier(.7, 0, .2, 1); }
 .page-wipe i + i { transform-origin: bottom; }
 .page-wipe.is-out i { transform: scaleY(0); }
@@ -93,6 +94,46 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 }
 .track > .wrap, .gear > .wrap, .promise > .wrap { position: relative; z-index: 2; }
 
+/* ---------- pattern waves (#club) ---------- */
+.club { isolation: isolate; }
+.club > .pattern-waves-host {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .82;
+  pointer-events: none;
+}
+.club > .pattern-waves-host .pattern-waves { height: 100%; }
+@media (max-width: 900px) {
+  .club > .pattern-waves-host { opacity: .64; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .club > .pattern-waves-host { opacity: .55; }
+}
+
+/* ---------- flux lines (#promise) ---------- */
+.promise { isolation: isolate; }
+.promise > .promise-flux {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: .7;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(84% 92% at 76% 48%, #000 0 24%, rgba(0, 0, 0, .62) 55%, transparent 84%);
+  mask-image: radial-gradient(84% 92% at 76% 48%, #000 0 24%, rgba(0, 0, 0, .62) 55%, transparent 84%);
+}
+.promise > .promise-flux .flux-lines-container { height: 100%; }
+@media (max-width: 1060px) {
+  .promise > .promise-flux {
+    opacity: .62;
+    -webkit-mask-image: radial-gradient(108% 74% at 50% 22%, #000 0 22%, rgba(0, 0, 0, .58) 55%, transparent 86%);
+    mask-image: radial-gradient(108% 74% at 50% 22%, #000 0 22%, rgba(0, 0, 0, .58) 55%, transparent 86%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .promise > .promise-flux { opacity: .32; }
+}
+
 /* ---------- circuit panel (#how) ---------- */
 .track {
   position: relative; overflow: hidden;
@@ -167,7 +208,7 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .cursor, .page-wipe { display: none; }
+  .cursor, .page-wipe, .js .page-wipe { display: none; }
   .site-header { transition: none; }
   .mobile-cta, .float-contact { transition: none; }
   .flag-seam { display: none !important; display: none; }
@@ -245,3 +286,20 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 .worker-btn img { width: min(350px, 80%); }
 @media (max-width: 1060px) { .worker-btn img { width: min(320px, 76%); } }
 @media (max-width: 860px) { .worker-btn img { width: min(250px, 64%); } }
+
+/* ---------- tech text footer wordmark ---------- */
+.footer-wordmark {
+  position: relative;
+  height: clamp(150px, 19vw, 230px);
+  border-bottom: 1px solid #232b31;
+  padding-block: 24px;
+  color: #f7f5f0;
+  font-family: var(--display);
+}
+.footer-wordmark .tech-text { height: 100%; }
+@media (max-width: 860px) {
+  .footer-wordmark { height: 130px; padding-block: 14px; }
+}
+@media (max-width: 560px) {
+  .footer-wordmark { height: 112px; padding-block: 10px; }
+}

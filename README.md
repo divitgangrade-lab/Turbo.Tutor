@@ -2,7 +2,7 @@
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no build step, no framework, no backend and no online payment. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Four small, lazy-loaded Preact islands, FlyingButton, FluxLines, PatternWaves and TechText, are bundled locally with esbuild; their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
 - **License:** [MIT](LICENSE)
@@ -30,7 +30,7 @@ No payment is collected anywhere on the site.
 - Seasonal offers that rotate by date: Season Opener, Back-to-School Grand Prix, Diwali Night Race, Thanksgiving Sprint and Season Finale.
 
 ### Paddock Club newsletter
-A signup panel under the gear section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about new session openings, study notes and occasional offers. It is wired in `enhance.js`:
+A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about new session openings, study notes and occasional offers. It is wired in `enhance.js`:
 
 - With `data-endpoint` set on `#club-form`, the form POSTs `{ "email_address": "...", "tags": ["paddock-club"] }` and shows the code on success.
 - With it empty, the form opens a pre-filled email to the tutor instead, so no signup is lost.
@@ -42,6 +42,10 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 ### Everything else
 - Sticky header with scroll progress, active-section highlighting and a theme toggle.
 - Scroll-reveal animations, animated counters, a looping ticker, magnetic buttons and SVG wheel animations - all disabled automatically under `prefers-reduced-motion`.
+- A contained FlyingButton launch pad between the offers wheel and the Paddock Club. It loads only as it approaches the viewport, keeps a plain fallback link, and stays still under `prefers-reduced-motion`.
+- A FluxLines fluid-line backdrop behind the pit-wall promise. It loads only near the viewport, sits behind the copy, and stays still under `prefers-reduced-motion`.
+- A PatternWaves silk-dot surface behind the Paddock Club panel. It loads on approach and stays quiet enough for the signup form.
+- A TechText footer wordmark. It lazy-loads near the end of the page and lets visitors reveal dashed letter outlines, drag letters and send a small kick through the wordmark.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
 
@@ -109,7 +113,22 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 
 ```
 .
-├── index.html              # Everything: markup, styles and behaviour
+├── index.html              # Main page: markup, styles and behaviour
+├── flying-button.js        # Generated lazy island (Preact + FlyingButton)
+├── flying-button.css       # Generated FlyingButton styles
+├── flux-lines.js           # Generated lazy island (Preact + FluxLines)
+├── flux-lines.css          # Generated FluxLines styles
+├── pattern-waves.js        # Generated lazy island (Preact + PatternWaves)
+├── pattern-waves.css       # Generated PatternWaves styles
+├── tech-text.js            # Generated lazy island (Preact + TechText)
+├── tech-text.css           # Generated TechText styles
+├── package.json            # Build script for the islands
+├── package-lock.json       # Locked build tool versions
+├── scripts/                # esbuild build script for all four islands
+├── src/flying-button/      # FlyingButton source and mount entry
+├── src/flux-lines/         # FluxLines source and mount entry
+├── src/pattern-waves/      # PatternWaves source and mount entry
+├── src/tech-text/          # TechText source and mount entry
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
@@ -128,11 +147,12 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── robots.txt              # Crawler rules
 ├── sitemap.xml             # Public page index
 ├── llms.txt                # Plain-text summary for AI assistants
+├── THIRD_PARTY_NOTICES.md  # React Bits licences
 ├── LICENSE                 # MIT
 └── README.md
 ```
 
-No dependencies, no bundler, no package manager, no server code. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+No runtime dependencies and no server code. The four optional islands, FlyingButton, FluxLines, PatternWaves and TechText, are built with esbuild and Preact, and their generated JS and CSS are committed. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
 
 ### Photography credits
 
@@ -157,7 +177,12 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-There is nothing to install and nothing to build.
+The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, or their props:
+
+```bash
+npm install
+npm run build
+```
 
 ---
 
@@ -169,6 +194,10 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **Special programs** - the `data-base-price` attribute on each `[data-specialty]` card, plus the card copy in the Specialty section.
 - **Contact details** - `tutorEmail` and `tutorPhone`, and the matching `href`s in the contact section and form drafts.
 - **Offers** - the `deals` array (labels and weights) next to `drawDealWheel()`, and `getSeasonSchedule()` for seasonal offers.
+- **FlyingButton island** - props and the label live in `src/flying-button/entry.jsx`; run `npm run build` after changing them.
+- **FluxLines island** - colours and visual props live in `src/flux-lines/entry.jsx`; run `npm run build` after changing them.
+- **PatternWaves island** - preset, colour, opacity and interaction props live in `src/pattern-waves/entry.jsx`; run `npm run build` after changing them.
+- **TechText island** - wording, font size, colours and interaction props live in `src/tech-text/entry.jsx`; run `npm run build` after changing them.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -180,7 +209,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all four islands stop their motion.
 
 ## A note on payment
 
@@ -192,9 +221,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
+The FlyingButton, FluxLines, PatternWaves and TechText islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves also bundles `ogl` 1.0.11 under the Unlicense. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ## Motion layer and extra pages
 
-The site ships as plain HTML, CSS and JavaScript with no build step. `enhance.css` and
+The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the lazy-loaded FlyingButton, FluxLines, PatternWaves and TechText islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/` and `src/tech-text/` into their generated JS and CSS files. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.

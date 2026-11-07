@@ -1,0 +1,14 @@
+{
+  "name": "turbotutor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static TurboTutor site with lazy-loaded Preact islands.",
+  "scripts": {
+    "build": "node scripts/build-islands.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "ogl": "^1.0.11",
+    "preact": "^11.2.0"
+  }
+}
