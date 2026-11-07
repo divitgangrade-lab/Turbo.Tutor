@@ -85,9 +85,12 @@
     @media (max-width:560px) { .card.c5 { display:none; } .card, .card.c1 { width:calc(50% - 18px); max-width:170px; } }
     :focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
     @media (max-width:760px) { .grid { grid-template-columns:1fr; } .code { order:-1; max-width:300px; } }
-  </style>
+      .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+    .skip:focus { top: 12px; }
+</style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <div class="hazard" aria-hidden="true"></div>
   <header class="top">
     <div class="in">
@@ -95,7 +98,7 @@
       <a class="back" href="/">Back to the grid</a>
     </div>
   </header>
-  <main>
+  <main id="main">
     <div class="in grid">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb">

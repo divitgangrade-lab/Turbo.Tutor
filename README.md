@@ -79,7 +79,7 @@ When a domain is registered:
 1. Add a `CNAME` file at the repository root containing only the exact host, such as `www.example.com`.
 2. Point the domain at GitHub Pages using GitHub's published A and AAAA records for an apex domain, or a CNAME to `divitgangrade-lab.github.io` for `www`.
 3. Set the custom domain in the repository's Pages settings and enable HTTPS.
-4. Update every absolute URL in `index.html`, `privacy.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
+4. Update every absolute URL in `index.html`, `privacy.html`, `terms.html`, `cookies.html`, `refunds.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
 
 ---
 
@@ -199,7 +199,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The sixteen optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+No runtime dependencies and no server code. The sixteen optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the site makes no third-party requests.
 
 ### Photography credits
 
@@ -299,7 +299,10 @@ The main site ships as plain HTML, CSS and JavaScript with no build step. The ex
 Additional pages and assets:
 
 - `about.html`: the tutor bio, experience in plain terms, and the Person schema used for authorship.
-- `privacy.html`: service terms, privacy, browser storage, payment and attendance policy.
+- `privacy.html`: privacy policy, children's data, retention and privacy rights.
+- `terms.html`: terms and conditions, payment, attendance, liability and Virginia law.
+- `cookies.html`: no cookies are set; the two functional browser-storage keys.
+- `refunds.html`: cancellation, tutor cancellations and how to request a refund.
 - `thanks.html`: what happens after a request is sent (noindex).
 - `404.html`: a branded off-circuit page.
 - `robots.txt`, `sitemap.xml` and `llms.txt`.
@@ -308,6 +311,6 @@ Additional pages and assets:
 - `site.webmanifest`: web app name, colours and installable icons.
 - `credits.html`: photograph attribution and licence details.
 
-There is no analytics, advertising pixel or third-party cookie on the site. Web fonts come
-from Google Fonts and hosting logs come from GitHub Pages. Reviews and a team photograph are
+There is no analytics, advertising pixel or cookie on the site. Web fonts are self-hosted
+and hosting logs come from GitHub Pages. Reviews and a team photograph are
 not published because neither exists yet; the site does not invent them.

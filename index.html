@@ -438,8 +438,8 @@
     /* ---------- kart panel ---------- */
     .scrim { position: fixed; z-index: 130; inset: 0; background: rgba(6, 8, 10, .6); opacity: 0; pointer-events: none; transition: opacity .25s; }
     .scrim.open { opacity: 1; pointer-events: auto; }
-    .kart-panel { position: fixed; z-index: 140; top: 0; right: 0; bottom: 0; display: flex; width: min(430px, 100%); flex-direction: column; background: var(--surface); box-shadow: -24px 0 60px rgba(0, 0, 0, .35); transform: translateX(102%); transition: transform .35s var(--ease); }
-    .kart-panel.open { transform: translateX(0); }
+    .kart-panel { position: fixed; z-index: 140; top: 0; right: 0; bottom: 0; display: flex; width: min(430px, 100%); flex-direction: column; background: var(--surface); box-shadow: -24px 0 60px rgba(0, 0, 0, .35); transform: translateX(102%); visibility: hidden; transition: transform .35s var(--ease), visibility .35s; }
+    .kart-panel.open { visibility: visible; transform: translateX(0); }
     .kart-strip { height: 12px; flex: none; background: repeating-conic-gradient(#12161a 0 25%, #f7f5f0 0 50%) 0 0 / 16px 16px; }
     .kart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 20px 22px 14px; }
     .kart-head h2 { margin: 0; font-family: var(--display); font-size: 34px; font-weight: 900; letter-spacing: .4px; line-height: .95; text-transform: uppercase; }
@@ -747,7 +747,9 @@
       .nav { top: 66px; }
       .footer-bottom { justify-content: flex-start; }
     }
-  </style>
+      .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+    .skip:focus { top: 12px; }
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -969,6 +971,7 @@
   <link rel="stylesheet" href="enhance.css">
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page-wipe" id="page-wipe" aria-hidden="true"><i></i><i></i></div>
   <div class="progress" aria-hidden="true"><span id="scroll-bar"></span></div>
@@ -1528,7 +1531,7 @@
       <div class="kart-total"><span>Estimated first payment</span><strong id="kart-total">$0</strong></div>
       <p class="kart-savings" id="kart-savings">0 plans selected. The billing period depends on the plan.</p>
       <div class="kart-actions">
-        <button class="btn" id="kart-checkout" type="button" data-cursor-label="Send">Send it to the pits <span class="arrow" aria-hidden="true">→</span></button>
+        <button class="btn" id="kart-checkout" type="button" data-cursor-label="Review">Review your request <span class="arrow" aria-hidden="true">→</span></button>
         <button class="link-btn" id="clear-kart" type="button" data-cursor-label="Clear">Clear</button>
       </div>
       <p class="kart-disclaimer">No payment is taken here. The tutor confirms availability, schedule and the final amount before anything is booked.</p>
