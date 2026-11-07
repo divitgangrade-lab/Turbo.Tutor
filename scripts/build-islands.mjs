@@ -8,7 +8,8 @@ await build({
     'tech-text': 'src/tech-text/entry.jsx',
     'text-loop': 'src/text-loop/entry.jsx',
     'masked-heading': 'src/masked-heading/entry.jsx',
-    'particle-text': 'src/particle-text/entry.jsx'
+    'particle-text': 'src/particle-text/entry.jsx',
+    'split-flap-text': 'src/split-flap-text/entry.jsx'
   },
   bundle: true,
   minify: true,

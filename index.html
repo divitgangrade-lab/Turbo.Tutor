@@ -575,6 +575,10 @@
     .launch::before { position: absolute; top: 0; right: 0; left: 0; height: 5px; background: repeating-linear-gradient(90deg, var(--carbon) 0 18px, var(--amber) 18px 36px); content: ""; }
     .launch::after { position: absolute; right: -8%; bottom: -45%; width: 44%; height: 120%; background: radial-gradient(closest-side, rgba(225, 6, 0, .12), transparent 70%); content: ""; pointer-events: none; }
     .launch-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); align-items: center; gap: clamp(30px, 5vw, 66px); }
+    .launch-board { min-height: 28px; margin: 0 0 12px; }
+    .launch-board .kicker { margin-bottom: 0; }
+    .launch-board .split-flap-text { display: flex; }
+    @media (max-width: 560px) { .launch-board { min-height: 26px; } }
     .launch h2 { margin: 0 0 16px; font-family: var(--display); font-size: clamp(42px, 5.6vw, 70px); font-weight: 900; letter-spacing: -.6px; line-height: .86; text-transform: uppercase; }
     .launch h2 em { color: var(--red); font-style: normal; }
     .launch-copy { max-width: 440px; margin: 0 0 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
@@ -1269,7 +1273,9 @@
     <section class="section launch" id="launch" aria-labelledby="launch-title">
       <div class="wrap launch-grid">
         <div>
-          <p class="kicker">Pit lane warm-up</p>
+          <div class="launch-board" id="split-flap-root">
+            <p class="kicker launch-board-fallback">Pit lane warm-up</p>
+          </div>
           <h2 id="launch-title">Give it a<br><em>little throttle.</em></h2>
           <p class="launch-copy">Every plan starts with a conversation, not a checkout. Hover the launch button for a small pit-lane warm-up, then build the plan you actually want.</p>
           <ul class="launch-notes">
@@ -2495,6 +2501,38 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./particle-text.js?v=20261107-11").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("split-flap-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "split-flap-text.css?v=20261107-12";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./split-flap-text.js?v=20261107-12").catch(() => {});
         });
       };
       const near = () => {
