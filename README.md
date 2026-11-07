@@ -2,7 +2,7 @@
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Six small, lazy-loaded Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop and MaskedHeading, are bundled locally with esbuild; their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Seven small, lazy-loaded Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading and ParticleText, are bundled locally with esbuild; their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
 - **License:** [MIT](LICENSE)
@@ -48,6 +48,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A TechText footer wordmark. It lazy-loads near the end of the page and lets visitors reveal dashed letter outlines, drag letters and send a small kick through the wordmark.
 - A TextLoop subject ribbon between the plans and special coaching. It lazy-loads near the viewport, scrolls the subject list along a yellow wave, pauses on hover and stays still under `prefers-reduced-motion`.
 - A MaskedHeading promise title. It replaces the static "Every lap counts." heading with a helmet-filled lettering treatment when the island loads, keeping the plain heading as the no-JS fallback.
+- A ParticleText footer watermark. It fills the footer background with a subtle particle-built "TURBO TUTOR" wordmark, forming when the footer approaches the viewport. It is decorative, kept out of the accessibility tree, and paused when the footer is off screen.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
 
@@ -129,15 +130,18 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── text-loop.css           # Generated TextLoop styles
 ├── masked-heading.js       # Generated lazy island (Preact + MaskedHeading + GSAP)
 ├── masked-heading.css      # Generated MaskedHeading styles
+├── particle-text.js        # Generated lazy island (Preact + ParticleText)
+├── particle-text.css       # Generated ParticleText styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
-├── scripts/                # esbuild build script for all six islands
+├── scripts/                # esbuild build script for all seven islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
 ├── src/tech-text/          # TechText source and mount entry
 ├── src/text-loop/          # TextLoop source and mount entry
 ├── src/masked-heading/     # MaskedHeading source and mount entry
+├── src/particle-text/      # ParticleText source and mount entry
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
@@ -161,7 +165,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The six optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop and MaskedHeading, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop and MaskedHeading islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+No runtime dependencies and no server code. The seven optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading and ParticleText, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop and MaskedHeading islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
 
 ### Photography credits
 
@@ -186,7 +190,7 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, or their props:
+The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, or their props:
 
 ```bash
 npm install
@@ -209,6 +213,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **TechText island** - wording, font size, colours and interaction props live in `src/tech-text/entry.jsx`; run `npm run build` after changing them.
 - **TextLoop island** - wording, shape, ribbon colour and speed live in `src/text-loop/entry.jsx`; run `npm run build` after changing them.
 - **MaskedHeading island** - heading copy, media source, reveal and spotlight props live in `src/masked-heading/entry.jsx`; run `npm run build` after changing them.
+- **ParticleText island** - watermark wording, particle density, colours and motion props live in `src/particle-text/entry.jsx`; run `npm run build` after changing them.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -220,7 +225,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all six islands stop their motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all seven islands stop their motion.
 
 ## A note on payment
 
@@ -232,11 +237,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop and MaskedHeading islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves also bundles `ogl` 1.0.11 under the Unlicense, and TextLoop and MaskedHeading bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading and ParticleText islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves also bundles `ogl` 1.0.11 under the Unlicense, and TextLoop and MaskedHeading bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the lazy-loaded FlyingButton, FluxLines, PatternWaves, TechText, TextLoop and MaskedHeading islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/` and `src/masked-heading/` into their generated JS and CSS files. `enhance.css` and
+The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the lazy-loaded FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading and ParticleText islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/` and `src/particle-text/` into their generated JS and CSS files. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.

@@ -417,7 +417,9 @@
     .faq-empty { padding: 24px 0; color: var(--muted); font-size: 13px; }
 
     /* ---------- footer ---------- */
-    .site-footer { background: var(--carbon); color: #c6cdd2; }
+    .site-footer { position: relative; overflow: hidden; isolation: isolate; background: var(--carbon); color: #c6cdd2; }
+    .footer-particles { position: absolute; z-index: 0; inset: 0; opacity: .42; pointer-events: none; }
+    .site-footer > .footer-wordmark, .site-footer > .footer-top, .site-footer > .footer-bottom { position: relative; z-index: 1; }
     .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; padding-block: 46px 30px; }
     .footer-brand { display: inline-flex; align-items: center; gap: 10px; color: #f7f5f0; font-family: var(--display); font-size: 24px; font-weight: 900; letter-spacing: .4px; text-transform: uppercase; }
     .footer-tag { max-width: 280px; margin: 12px 0 0; color: #8f9aa1; font-size: 12px; line-height: 1.7; }
@@ -1413,6 +1415,7 @@
   </main>
 
   <footer class="site-footer">
+    <div class="footer-particles" id="particle-text-root" aria-hidden="true"></div>
     <div class="wrap footer-wordmark" id="tech-text-root" aria-hidden="true"></div>
     <div class="wrap footer-top">
       <div>
@@ -2460,6 +2463,38 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./tech-text.js?v=20261107-8").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("particle-text-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "particle-text.css?v=20261107-11";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./particle-text.js?v=20261107-11").catch(() => {});
         });
       };
       const near = () => {

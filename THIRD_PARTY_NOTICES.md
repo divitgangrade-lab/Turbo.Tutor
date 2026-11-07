@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, and the MaskedHeading component in `src/masked-heading/` are adapted from React Bits by David Haz.
+The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, and the ParticleText component in `src/particle-text/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits
