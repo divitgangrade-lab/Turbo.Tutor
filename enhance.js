@@ -1037,8 +1037,7 @@
     const form = $("#club-form");
     if (!form) return;
     const status = $("#club-status");
-    const endpoint = form.dataset.endpoint;
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       const input = form.querySelector("input[type=email]");
       const consent = form.querySelector("input[name=privacyAccepted]");
@@ -1054,22 +1053,6 @@
         status.textContent = "Please agree to the Privacy Policy and Terms before joining.";
         consent.focus();
         return;
-      }
-      if (endpoint) {
-        try {
-          const response = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email_address: email, tags: ["paddock-club"] })
-          });
-          if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
-          form.reset();
-          status.hidden = false;
-          status.innerHTML = "<b>You are on the grid.</b> Use code <b>PADDOCK5</b> for 5% off your first month. The next Monday email goes to the address you sent.";
-          return;
-        } catch (error) {
-          console.warn("[TurboTutor club]", error);
-        }
       }
       const subject = encodeURIComponent("Paddock Club signup: 5% off");
       const body = encodeURIComponent(`Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`);

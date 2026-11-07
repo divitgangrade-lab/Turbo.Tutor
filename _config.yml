@@ -1,0 +1,10 @@
+# Keep build tooling and source out of the published static site.
+exclude:
+  - src
+  - scripts
+  - node_modules
+  - artifacts
+  - package.json
+  - package-lock.json
+  - components.json
+  - README.md

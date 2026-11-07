@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' mailto: sms:; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0a0c0f">
   <title>TurboTutor | 1:1 Math, English &amp; Science Tutoring, Grades 1–8</title>
   <meta name="description" content="One-to-one Math, English and Science tutoring for Grades 1–8 in Richmond, VA. Weekly sessions from $24 on Zoom or at Twin Hickory Library.">
@@ -1339,9 +1341,9 @@
         <div class="club-panel">
           <h3>Get on the list</h3>
           <p>No card, no account. Just an email address.</p>
-          <form class="club-form" id="club-form" data-endpoint="" novalidate>
+          <form class="club-form" id="club-form" novalidate>
             <label class="sr-only" for="club-email">Email address</label>
-            <input id="club-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            <input id="club-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="120" required>
             <label class="club-consent"><input type="checkbox" id="club-consent" name="privacyAccepted" value="Yes"><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.</span></label>
             <button class="btn" type="submit" data-cursor-label="Join">Join the club</button>
           </form>
@@ -1844,9 +1846,14 @@
         if (totalEl) totalEl.textContent = money(Math.max(0, firstPayment - discountDetails.amount));
         const savingsEl = $("#kart-savings");
         if (savingsEl) {
-          savingsEl.innerHTML = count
-            ? `${count} ${count === 1 ? "entry" : "entries"} · one best eligible offer applies${discountDetails.amount ? ` · <b>${discountDetails.label} saves ${money(discountDetails.amount)}</b>` : ""}`
+          savingsEl.textContent = count
+            ? `${count} ${count === 1 ? "entry" : "entries"} · one best eligible offer applies`
             : "0 plans selected. The billing period depends on the plan.";
+          if (count && discountDetails.amount) {
+            const saving = document.createElement("b");
+            saving.textContent = ` · ${discountDetails.label} saves ${money(discountDetails.amount)}`;
+            savingsEl.append(saving);
+          }
         }
       }
 
@@ -1873,8 +1880,12 @@
       }
 
       function getActiveDeal() {
+        const active = normalizeDeal(selectedDeal);
+        if (active) {
+          selectedDeal = active;
+          return active;
+        }
         if (!selectedDeal) return null;
-        if (isValidDeal(selectedDeal)) return selectedDeal;
         selectedDeal = null;
         try { localStorage.removeItem(dealStorageKey); } catch { }
         try { sessionStorage.removeItem(dealStorageKey); } catch { }
@@ -1890,19 +1901,25 @@
         return null;
       }
 
-      function isValidDeal(deal) {
-        return Boolean(deal && deals.some(prize => prize.id === deal.id)
-          && Number.isFinite(deal.wonAt) && Date.now() - deal.wonAt < dealValidityMs);
+      // Only the known prize list is trusted. Stored data contributes its date,
+      // never its label or value, so edited storage cannot inject markup or a fake discount.
+      function normalizeDeal(deal) {
+        const prize = deal && deals.find(item => item.id === deal.id);
+        if (!prize || !Number.isFinite(deal.wonAt)) return null;
+        if (Date.now() - deal.wonAt >= dealValidityMs) return null;
+        return { ...prize, wonAt: deal.wonAt };
       }
 
       function loadSavedDeal() {
         try {
           const saved = JSON.parse(window.localStorage.getItem(dealStorageKey));
-          if (isValidDeal(saved)) return saved;
+          const valid = normalizeDeal(saved);
+          if (valid) return valid;
         } catch { }
         try {
           const saved = JSON.parse(window.sessionStorage.getItem(dealStorageKey));
-          if (isValidDeal(saved)) return saved;
+          const valid = normalizeDeal(saved);
+          if (valid) return valid;
         } catch { }
         return null;
       }
@@ -1949,7 +1966,12 @@
       function showSavedDeal(deal) {
         const result = $("#deal-result");
         const expiry = new Date(deal.wonAt + dealValidityMs).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-        if (result) result.innerHTML = `Your offer: <b>${deal.label}</b> · expires ${expiry}`;
+        if (result) {
+          result.textContent = "Your offer: ";
+          const prizeLabel = document.createElement("b");
+          prizeLabel.textContent = deal.label;
+          result.append(prizeLabel, ` · expires ${expiry}`);
+        }
         const spinButton = $("#spin-deal");
         if (spinButton) {
           spinButton.disabled = true;

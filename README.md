@@ -1,5 +1,7 @@
 # TurboTutor
 
+The security model, audit results and residual risks are documented in `SECURITY.md`.
+
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
 The site is a set of static HTML pages with no backend and no online payment. Sixteen small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, MetallicPaint and Ribbons, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap loads after first paint. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
