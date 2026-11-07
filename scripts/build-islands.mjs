@@ -14,6 +14,7 @@ await build({
     'elastic-mesh': 'src/elastic-mesh/entry.jsx',
     'halftone-reveal': 'src/halftone-reveal/entry.jsx',
     'animated-content': 'src/animated-content/entry.jsx',
+    'target-cursor': 'src/target-cursor/entry.jsx',
     'pixel-swap': 'src/pixel-swap/entry.jsx'
   },
   bundle: true,

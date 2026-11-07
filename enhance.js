@@ -252,62 +252,6 @@
 
   startHeroEntrance();
 
-  /* ---------- custom cursor ---------- */
-  (function cursor() {
-    const node = $("#cursor");
-    if (!node || !hasPointer() || !showsMotion()) return;
-    const x = new Spring(window.innerWidth / 2, { tension: 320, friction: 30, precision: 0.01 });
-    const y = new Spring(window.innerHeight / 2, { tension: 320, friction: 30, precision: 0.01 });
-    let seen = false;
-    let last = performance.now();
-
-    window.addEventListener(
-      "pointermove",
-      (event) => {
-        if (!seen) {
-          seen = true;
-          x.jump(event.clientX);
-          y.jump(event.clientY);
-          node.classList.add("is-on");
-        }
-        x.to(event.clientX);
-        y.to(event.clientY);
-      },
-      { passive: true }
-    );
-    window.addEventListener("pointerdown", () => node.classList.add("is-down"));
-    window.addEventListener("pointerup", () => node.classList.remove("is-down"));
-    window.addEventListener("pointerleave", () => {
-      seen = false;
-      node.classList.remove("is-on");
-    });
-    document.addEventListener("pointerover", (event) => {
-      const hot = event.target.closest("a, button, summary, input, select, textarea, [data-cursor]");
-      node.classList.toggle("is-hot", Boolean(hot));
-    });
-
-    let running = false;
-    const loop = (now) => {
-      const dt = now - last;
-      last = now;
-      x.step(dt);
-      y.step(dt);
-      node.style.transform = `translate3d(${x.value}px, ${y.value}px, 0)`;
-      if (x.done && y.done) {
-        running = false;
-        return false;
-      }
-      return true;
-    };
-    const kick = () => {
-      if (running) return;
-      running = true;
-      last = performance.now();
-      every(loop);
-    };
-    window.addEventListener("pointermove", kick, { passive: true });
-  })();
-
   /* ---------- page wipe ---------- */
   (function wipe() {
     const node = $("#page-wipe");
