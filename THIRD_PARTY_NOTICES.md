@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, the TargetCursor component in `src/target-cursor/`, the MetallicPaint component in `src/metallic-paint/`, the Ribbons component in `src/ribbons/`, the AcidSquares component in `src/acid-squares/`, the LiquidEther component in `src/liquid-ether/`, the Silk component in `src/silk/`, the Lightfall component in `src/lightfall/`, the DecayCard component in `src/decay-card/`, the Plasma component in `src/plasma/`, the GridScan component in `src/grid-scan/`, the DotField component in `src/dot-field/`, the Iridescence component in `src/iridescence/`, the Waves component in `src/waves/`, the GridMotion component in `src/grid-motion/`, and the LiquidChrome component in `src/liquid-chrome/` are adapted from React Bits by David Haz.
+The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, the TargetCursor component in `src/target-cursor/`, the Ribbons component in `src/ribbons/`, the AcidSquares component in `src/acid-squares/`, the LiquidEther component in `src/liquid-ether/`, the Silk component in `src/silk/`, the Lightfall component in `src/lightfall/`, the DecayCard component in `src/decay-card/`, the Plasma component in `src/plasma/`, the GridScan component in `src/grid-scan/`, the DotField component in `src/dot-field/`, the Iridescence component in `src/iridescence/`, the Waves component in `src/waves/`, the GridMotion component in `src/grid-motion/`, the FallingText component in `src/falling-text/`, the PaperCrumple component in `src/paper-crumple/`, and the PeekRating component in `src/pit-rating/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits
@@ -63,6 +63,14 @@ The TextLoop, MaskedHeading and AnimatedContent islands bundle GSAP 3.15.1 (http
 The PatternWaves and WarpText islands use `ogl` 1.0.11 (https://github.com/oframe/ogl) under the Unlicense. The library is bundled into `pattern-waves.js` and `warp-text.js`.
 
 This is free and unencumbered software released into the public domain. Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
+
+## Matter.js
+
+The FallingText island bundles `matter-js` (https://brm.io/matter-js/) under the MIT licence. Copyright (c) 2014 Liam Brummitt and contributors.
+
+## three.js
+
+The PaperCrumple island bundles `three` (https://threejs.org) under the MIT licence. Copyright (c) 2010-2025 three.js authors.
 
 ## Self-hosted fonts
 

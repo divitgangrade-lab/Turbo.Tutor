@@ -19,7 +19,6 @@ await build({
     'animated-content': 'src/animated-content/entry.jsx',
     'target-cursor': 'src/target-cursor/entry.jsx',
     'pixel-swap': 'src/pixel-swap/entry.jsx',
-    'metallic-paint': 'src/metallic-paint/entry.jsx',
     'ribbons': 'src/ribbons/entry.jsx',
     'acid-squares': 'src/acid-squares/entry.jsx',
     'liquid-ether': 'src/liquid-ether/entry.jsx',
@@ -32,7 +31,9 @@ await build({
     'iridescence': 'src/iridescence/entry.jsx',
     'waves': 'src/waves/entry.jsx',
     'grid-motion': 'src/grid-motion/entry.jsx',
-    'liquid-chrome': 'src/liquid-chrome/entry.jsx'
+    'falling-text': 'src/falling-text/entry.jsx',
+    'paper-crumple': 'src/paper-crumple/entry.jsx',
+    'pit-rating': 'src/pit-rating/entry.jsx'
   },
   bundle: true,
   minify: true,

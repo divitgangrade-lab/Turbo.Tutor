@@ -482,10 +482,6 @@
     /* ---------- footer ---------- */
     .site-footer { position: relative; overflow: hidden; isolation: isolate; background: var(--carbon); color: #c6cdd2; }
     .footer-particles { position: absolute; z-index: 0; inset: 0; opacity: .42; pointer-events: none; }
-    .footer-chrome { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .56; }
-    .footer-chrome #liquid-chrome-mount, .footer-chrome .liquid-chrome { position: absolute; inset: 0; }
-    .footer-chrome::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 9, 12, .58) 0%, rgba(7, 9, 12, .1) 42%, rgba(7, 9, 12, .64) 100%); content: ""; pointer-events: none; }
-    @media (prefers-reduced-motion: reduce) { .footer-chrome { display: none; } }
     .site-footer > .footer-wordmark, .site-footer > .footer-top, .site-footer > .footer-bottom { position: relative; z-index: 1; }
     .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; padding-block: 46px 30px; }
     .footer-brand { display: inline-flex; align-items: center; gap: 10px; color: #f7f5f0; font-family: var(--display); font-size: 24px; font-weight: 900; letter-spacing: .4px; text-transform: uppercase; }
@@ -496,6 +492,22 @@
     .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #232b31; padding-block: 18px; color: #7f8a91; font-family: var(--ui); font-size: 9.5px; letter-spacing: .7px; text-transform: uppercase; }
     .footer-bottom a { color: var(--amber); }
     .footer-bottom a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .footer-lab { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; gap: clamp(18px, 4vw, 46px); border-top: 1px solid #232b31; padding-block: 34px 18px; }
+    .footer-falling { position: relative; min-height: 152px; color: #f7f5f0; }
+    .footer-falling .falling-text__text { padding: 0; font-family: var(--display); font-size: clamp(26px, 3.4vw, 40px); font-weight: 900; letter-spacing: -.4px; line-height: 1.12; text-align: left; text-transform: uppercase; }
+    .footer-falling-fallback { margin: 0; font-family: var(--display); font-size: clamp(26px, 3.4vw, 40px); font-weight: 900; letter-spacing: -.4px; line-height: 1.12; text-transform: uppercase; }
+    .footer-falling-fallback em { color: var(--amber); font-style: normal; }
+    .footer-falling-hint { margin: 14px 0 0; color: #7f8a91; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; }
+    .footer-lab-side { display: grid; justify-items: center; gap: 10px; }
+    .footer-paper { position: relative; width: min(300px, 100%); }
+    .footer-paper #paper-crumple-mount { width: 100%; }
+    .footer-paper-fallback { display: block; width: 74%; height: auto; margin: 0 auto; transform: rotate(-3deg); }
+    .footer-paper-caption { max-width: 250px; margin: 0; color: #8f9aa1; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.1px; line-height: 1.6; text-align: center; text-transform: uppercase; }
+    .footer-rating { position: relative; z-index: 1; }
+    .footer-rating-fallback { margin: 0; border-top: 1px solid #232b31; padding-block: 22px 0; color: #8f9aa1; font-size: 12px; }
+    #pit-rating-mount[data-mounted] + .footer-rating-fallback { display: none; }
+    @media (max-width: 860px) { .footer-lab { grid-template-columns: 1fr; } .footer-falling { min-height: 128px; } }
 
     /* ---------- kart panel ---------- */
     .scrim { position: fixed; z-index: 130; inset: 0; background: rgba(6, 8, 10, .6); opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -1563,18 +1575,34 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-chrome" id="liquid-chrome-root" aria-hidden="true">
-      <div id="liquid-chrome-mount"></div>
-    </div>
     <div class="footer-particles" id="particle-text-root" aria-hidden="true"></div>
     <div class="footer-ribbons" id="ribbons-root" aria-hidden="true"></div>
     <div class="wrap footer-wordmark" id="tech-text-root" aria-hidden="true"></div>
+    <div class="wrap footer-lab">
+      <div class="footer-lab-main">
+        <p class="kicker">Pit wall</p>
+        <div class="footer-falling" id="falling-text-root">
+          <div id="falling-text-mount">
+            <p class="footer-falling-fallback">Every lap is a <em>lesson</em>. Every lesson <em>sticks</em>.</p>
+          </div>
+        </div>
+        <p class="footer-falling-hint">Tap the words to scatter them. Drag a piece and throw it.</p>
+      </div>
+      <div class="footer-lab-side">
+        <div class="footer-paper" id="paper-crumple-root">
+          <div id="paper-crumple-mount">
+            <img class="footer-paper-fallback" src="f1-helmet.webp" alt="A Formula 1 racing helmet photographed on display" width="320" height="400" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <p class="footer-paper-caption">Pit note. Hold to crumple it, drag it, then let go.</p>
+      </div>
+    </div>
+    <div class="wrap footer-rating" id="pit-rating-root">
+      <div id="pit-rating-mount"></div>
+      <p class="footer-rating-fallback">Rate the lap once the pit wall loads.</p>
+    </div>
     <div class="wrap footer-top">
       <div>
-        <div class="footer-metal" id="metallic-paint-root" aria-hidden="true">
-          <span class="footer-metal-fallback">TT</span>
-          <div class="footer-metal-mount" id="metallic-paint-mount"></div>
-        </div>
         <a class="footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">TT</span> TurboTutor</a>
         <p class="footer-tag">One-to-one tutoring for Grades 1–8, built around real progress instead of pressure. Learning in the fast lane, one lap at a time.</p>
       </div>
@@ -3189,39 +3217,7 @@
       near();
     })();
   </script>
-  <script type="module">
-    (() => {
-      const host = document.getElementById("liquid-chrome-root");
-      if (!host) return;
-      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
-      let started = false;
-      const load = () => {
-        if (started) return;
-        started = true;
-        const css = document.createElement("link");
-        css.rel = "stylesheet";
-        css.href = "liquid-chrome.css?v=20261107-33";
-        const ready = new Promise(resolve => {
-          css.addEventListener("load", () => resolve(true), { once: true });
-          css.addEventListener("error", () => resolve(false), { once: true });
-        });
-        document.head.appendChild(css);
-        ready.then(ok => {
-          if (ok) import("./liquid-chrome.js?v=20261107-33").catch(() => {});
-        });
-      };
-      const near = () => {
-        const rect = host.getBoundingClientRect();
-        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
-        window.removeEventListener("scroll", near);
-        window.removeEventListener("resize", near);
-        load();
-      };
-      window.addEventListener("scroll", near, { passive: true });
-      window.addEventListener("resize", near, { passive: true });
-      near();
-    })();
-  </script>
+
   <div id="target-cursor-root"></div>
   <script type="module">
     (() => {
@@ -3244,22 +3240,23 @@
   </script>
   <script type="module">
     (() => {
-      const host = document.getElementById("metallic-paint-root");
+      const host = document.getElementById("falling-text-root");
       if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
       let started = false;
       const load = () => {
         if (started) return;
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "metallic-paint.css?v=20261107-19";
+        css.href = "falling-text.css?v=20261107-34";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./metallic-paint.js?v=20261107-19").catch(() => {});
+          if (ok) import("./falling-text.js?v=20261107-34").catch(() => {});
         });
       };
       const near = () => {
@@ -3274,6 +3271,77 @@
       near();
     })();
   </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("paper-crumple-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      try {
+        if (!document.createElement("canvas").getContext("webgl2")) return;
+      } catch {
+        return;
+      }
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "paper-crumple.css?v=20261107-35";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./paper-crumple.js?v=20261107-35").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("pit-rating-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "pit-rating.css?v=20261107-36";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./pit-rating.js?v=20261107-36").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
   <script type="module">
     (() => {
       const host = document.getElementById("ribbons-root");
