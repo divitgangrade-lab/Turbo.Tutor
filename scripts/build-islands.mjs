@@ -29,7 +29,8 @@ await build({
     'plasma': 'src/plasma/entry.jsx',
     'grid-scan': 'src/grid-scan/entry.jsx',
     'dot-field': 'src/dot-field/entry.jsx',
-    'iridescence': 'src/iridescence/entry.jsx'
+    'iridescence': 'src/iridescence/entry.jsx',
+    'waves': 'src/waves/entry.jsx'
   },
   bundle: true,
   minify: true,

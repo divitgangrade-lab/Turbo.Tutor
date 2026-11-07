@@ -443,10 +443,14 @@
     @media (max-width: 560px) { .warp-band-stage { height: 240px; } }
 
     /* ---------- contact ---------- */
-    .contact { position: relative; overflow: hidden; background: var(--red); color: #fff; }
+    .contact { position: relative; isolation: isolate; overflow: hidden; background: var(--red); color: #fff; }
+    .contact-waves { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .82; }
+    .contact-waves #waves-mount, .contact-waves .waves { position: absolute; inset: 0; }
+    .contact::before, .contact::after { z-index: 1; pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { .contact-waves { display: none; } }
     .contact::before { position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, .16) 1px, transparent 1px); background-size: 26px 26px; opacity: .45; content: ""; }
     .contact::after { position: absolute; top: -30%; right: -8%; width: 46%; height: 160%; background: radial-gradient(closest-side, rgba(0, 0, 0, .3), transparent); content: ""; }
-    .contact-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(26px, 4vw, 56px); }
+    .contact-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(26px, 4vw, 56px); }
     .contact .kicker { color: #ffd400; }
     .contact h2 { margin: 0 0 14px; font-family: var(--display); font-size: clamp(40px, 5.4vw, 66px); font-weight: 900; letter-spacing: -.5px; line-height: .88; text-transform: uppercase; }
     .contact p.lede { max-width: 460px; margin: 0 0 22px; color: #ffe3e0; font-size: 14px; line-height: 1.75; }
@@ -1485,6 +1489,9 @@
     </section>
 
     <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-waves" id="waves-root" aria-hidden="true">
+        <div id="waves-mount"></div>
+      </div>
       <div class="wrap contact-grid">
         <div>
           <p class="kicker">Talk to the tutor</p>
@@ -3054,6 +3061,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./iridescence.js?v=20261107-29").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("waves-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "waves.css?v=20261107-30";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./waves.js?v=20261107-30").catch(() => {});
         });
       };
       const near = () => {
