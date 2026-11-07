@@ -20,7 +20,8 @@ await build({
     'target-cursor': 'src/target-cursor/entry.jsx',
     'pixel-swap': 'src/pixel-swap/entry.jsx',
     'metallic-paint': 'src/metallic-paint/entry.jsx',
-    'ribbons': 'src/ribbons/entry.jsx'
+    'ribbons': 'src/ribbons/entry.jsx',
+    'acid-squares': 'src/acid-squares/entry.jsx'
   },
   bundle: true,
   minify: true,
