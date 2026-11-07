@@ -24,7 +24,8 @@ await build({
     'acid-squares': 'src/acid-squares/entry.jsx',
     'liquid-ether': 'src/liquid-ether/entry.jsx',
     'silk': 'src/silk/entry.jsx',
-    'lightfall': 'src/lightfall/entry.jsx'
+    'lightfall': 'src/lightfall/entry.jsx',
+    'decay-card': 'src/decay-card/entry.jsx'
   },
   bundle: true,
   minify: true,

@@ -336,7 +336,11 @@
     .checks li { display: flex; align-items: flex-start; gap: 10px; color: #e6e9e6; font-size: 13px; }
     .checks li::before { width: 19px; height: 19px; flex: none; margin-top: 1px; border: 1px solid rgba(255, 212, 0, .42); background: rgba(255, 212, 0, .14); content: ""; }
     .promise-art { position: relative; display: grid; place-items: center; }
-    .promise-art img { width: min(330px, 100%); filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .5)); animation: bob 6s ease-in-out infinite; }
+    .promise-art .promise-photo { width: 100%; height: 100%; object-fit: cover; filter: none; animation: none; }
+    .promise-decay { position: relative; width: min(360px, 100%); aspect-ratio: 4 / 5; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .5)); }
+    .promise-decay #decay-mount { position: absolute; inset: 0; z-index: 1; }
+    .promise-decay .promise-photo { position: absolute; inset: 0; z-index: 0; }
+    #decay-root[data-mounted="true"] .promise-photo { opacity: 0; }
     .promise-art::after { position: absolute; bottom: 4%; width: 62%; height: 22px; background: radial-gradient(closest-side, rgba(0, 0, 0, .65), transparent); content: ""; }
 
     /* ---------- offers / wheel ---------- */
@@ -566,7 +570,7 @@
     .hero-swap .pixel-swap:focus-visible { outline-offset: -5px; }
     .hero-swap-image { display: block; width: 100%; height: 100%; object-fit: cover; }
     .hero-visual::before { filter: none; }
-    .promise-art img.promise-photo { width: min(400px, 100%); aspect-ratio: 1; object-fit: cover; border: 6px solid #f7f5f0; box-shadow: 0 24px 50px rgba(0, 0, 0, .5); filter: none; animation: none; }
+    .promise-art .promise-photo { border: 0; box-shadow: none; }
     .promise-art:has(.promise-photo)::after { display: none; }
     .kart-art img.kart-photo { width: 100%; height: 158px; margin: 0; object-fit: cover; animation: none; }
     .kart-mesh { position: relative; z-index: 1; width: 100%; height: 158px; overflow: hidden; background: #f7f5f0; }
@@ -695,7 +699,7 @@
       .flag-deco { width: 110px; right: 2%; }
       .promise-grid { grid-template-columns: 1fr; }
       .promise-art { order: -1; }
-      .promise-art img { width: min(300px, 62%); }
+      .promise-decay { width: min(300px, 78%); }
       .offers-grid { grid-template-columns: 1fr; }
       .wheel-panel { padding-top: 12px; }
       .offer-copy-wrap { max-width: 640px; }
@@ -1295,7 +1299,10 @@
           </ul>
         </div>
         <div class="promise-art">
-          <img class="promise-photo" src="f1-helmet.webp" alt="Oscar Piastri's 2024 Formula 1 helmet on display, painted blue, yellow and orange" loading="lazy" decoding="async" width="760" height="760">
+          <div class="promise-decay" id="decay-root">
+            <div id="decay-mount"></div>
+            <img class="promise-photo" src="f1-helmet.webp" alt="Oscar Piastri's 2024 Formula 1 helmet on display, painted blue, yellow and orange" loading="lazy" decoding="async" width="760" height="760">
+          </div>
         </div>
       </div>
     </section>
@@ -2844,6 +2851,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./lightfall.js?v=20261107-24").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("decay-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "decay-card.css?v=20261107-25";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./decay-card.js?v=20261107-25").catch(() => {});
         });
       };
       const near = () => {
