@@ -30,7 +30,8 @@ await build({
     'grid-scan': 'src/grid-scan/entry.jsx',
     'dot-field': 'src/dot-field/entry.jsx',
     'iridescence': 'src/iridescence/entry.jsx',
-    'waves': 'src/waves/entry.jsx'
+    'waves': 'src/waves/entry.jsx',
+    'grid-motion': 'src/grid-motion/entry.jsx'
   },
   bundle: true,
   minify: true,

@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-VI7TZ3EL.js";import{e as oe,g as ae,h as I,j as h,n as f}from"./island-chunks/chunk-OS2XOP7G.js";var _e=["window","card"],be=1.24,Se=`#version 300 es
+import"./island-chunks/chunk-F7TZUDVZ.js";import{e as oe,g as ae,h as I,j as h,n as f}from"./island-chunks/chunk-OS2XOP7G.js";var _e=["window","card"],be=1.24,Se=`#version 300 es
 in vec2 position;
 out vec2 vUv;
 void main() {

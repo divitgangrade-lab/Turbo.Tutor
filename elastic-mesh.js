@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-VI7TZ3EL.js";import{e as dt,h as Ne,j as ye,n as Le}from"./island-chunks/chunk-OS2XOP7G.js";var Rt=`#version 300 es
+import"./island-chunks/chunk-F7TZUDVZ.js";import{e as dt,h as Ne,j as ye,n as Le}from"./island-chunks/chunk-OS2XOP7G.js";var Rt=`#version 300 es
 in vec2 aPosition;
 in vec2 aRest;
 in vec4 aStrain;

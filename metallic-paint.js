@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-VI7TZ3EL.js";import{e as se,h as z,j as G,n as N}from"./island-chunks/chunk-OS2XOP7G.js";var pe=512,O=2048,ce=2560*1600*2,ve=`#version 300 es
+import"./island-chunks/chunk-F7TZUDVZ.js";import{e as se,h as z,j as G,n as N}from"./island-chunks/chunk-OS2XOP7G.js";var pe=512,O=2048,ce=2560*1600*2,ve=`#version 300 es
 layout(location = 0) in vec2 a_position;
 uniform vec2 u_resolution;
 uniform float u_imageAspect;

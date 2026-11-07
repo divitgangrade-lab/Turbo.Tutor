@@ -690,6 +690,13 @@
     /* ---------- richer gradients ---------- */
     #faq { background: linear-gradient(180deg, var(--surface) 0%, #f3eee2 42%, var(--surface) 100%); }
     [data-theme="dark"] #faq { background: linear-gradient(180deg, var(--surface) 0%, #101821 46%, var(--surface) 100%); }
+    #faq { position: relative; isolation: isolate; overflow: hidden; }
+    #faq > .wrap { position: relative; z-index: 2; }
+    .faq-motion { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .88; }
+    .faq-motion #grid-motion-mount, .faq-motion .grid-motion { position: absolute; inset: 0; }
+    #faq::before { position: absolute; z-index: 1; inset: 0; background: var(--surface); background: radial-gradient(75% 95% at 50% 45%, color-mix(in srgb, var(--surface) 92%, transparent) 0%, color-mix(in srgb, var(--surface) 86%, transparent) 62%, color-mix(in srgb, var(--surface) 80%, transparent) 100%); content: ""; pointer-events: none; }
+    @media (max-width: 760px) { #faq::before { background: var(--surface); background: radial-gradient(90% 85% at 50% 45%, color-mix(in srgb, var(--surface) 94%, transparent) 0%, color-mix(in srgb, var(--surface) 88%, transparent) 62%, color-mix(in srgb, var(--surface) 82%, transparent) 100%); } }
+    @media (prefers-reduced-motion: reduce) { .faq-motion { display: none; } }
     .faq-list details { border-left: 3px solid transparent; padding-inline: 16px; transition: background .25s, border-color .25s; }
     .faq-list details[open] { border-left-color: var(--red); background: linear-gradient(100deg, rgba(225, 6, 0, .07), rgba(255, 212, 0, .07) 58%, transparent); }
     .faq-list details:nth-child(even) { background: linear-gradient(90deg, rgba(18, 22, 26, .035), transparent 48%); }
@@ -1522,6 +1529,9 @@
     </section>
 
     <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="faq-motion" id="grid-motion-root" aria-hidden="true">
+        <div id="grid-motion-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div><p class="kicker">Quick answers</p><h2 class="h2" id="faq-title">Before the start</h2></div>
@@ -3094,6 +3104,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./waves.js?v=20261107-30").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("grid-motion-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "grid-motion.css?v=20261107-31";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./grid-motion.js?v=20261107-31").catch(() => {});
         });
       };
       const near = () => {
