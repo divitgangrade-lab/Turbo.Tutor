@@ -26,7 +26,8 @@ await build({
     'silk': 'src/silk/entry.jsx',
     'lightfall': 'src/lightfall/entry.jsx',
     'decay-card': 'src/decay-card/entry.jsx',
-    'plasma': 'src/plasma/entry.jsx'
+    'plasma': 'src/plasma/entry.jsx',
+    'grid-scan': 'src/grid-scan/entry.jsx'
   },
   bundle: true,
   minify: true,

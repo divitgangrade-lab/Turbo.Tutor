@@ -629,10 +629,14 @@
     .club-consent a:hover { color: #fff; }
 
     /* ---------- flying launch ---------- */
-    .launch { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 58%, #efe9dc 100%); }
-    .launch::before { position: absolute; top: 0; right: 0; left: 0; height: 5px; background: repeating-linear-gradient(90deg, var(--carbon) 0 18px, var(--amber) 18px 36px); content: ""; }
-    .launch::after { position: absolute; right: -8%; bottom: -45%; width: 44%; height: 120%; background: radial-gradient(closest-side, rgba(225, 6, 0, .12), transparent 70%); content: ""; pointer-events: none; }
-    .launch-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); align-items: center; gap: clamp(30px, 5vw, 66px); }
+    .launch { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 58%, #efe9dc 100%); }
+    .launch::before { position: absolute; z-index: 3; top: 0; right: 0; left: 0; height: 5px; background: repeating-linear-gradient(90deg, var(--carbon) 0 18px, var(--amber) 18px 36px); content: ""; pointer-events: none; }
+    .launch::after { position: absolute; z-index: 1; right: -8%; bottom: -45%; width: 44%; height: 120%; background: radial-gradient(closest-side, rgba(225, 6, 0, .12), transparent 70%); content: ""; pointer-events: none; }
+    .launch-gridscan { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .46; }
+    .launch-gridscan #grid-scan-mount, .launch-gridscan .grid-scan { position: absolute; inset: 0; }
+    [data-theme="dark"] .launch-gridscan { opacity: .52; }
+    @media (prefers-reduced-motion: reduce) { .launch-gridscan { display: none; } }
+    .launch-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); align-items: center; gap: clamp(30px, 5vw, 66px); }
     .launch-board { min-height: 28px; margin: 0 0 12px; }
     .launch-board .kicker { margin-bottom: 0; }
     .launch-board .split-flap-text { display: flex; }
@@ -1350,6 +1354,9 @@
     </section>
 
     <section class="section launch" id="launch" aria-labelledby="launch-title">
+      <div class="launch-gridscan" id="grid-scan-root" aria-hidden="true">
+        <div id="grid-scan-mount"></div>
+      </div>
       <div class="wrap launch-grid">
         <div>
           <div class="launch-board" id="split-flap-root">
@@ -2890,6 +2897,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./decay-card.js?v=20261107-25").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("grid-scan-root");
+      if (!host) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "grid-scan.css?v=20261107-27";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./grid-scan.js?v=20261107-27").catch(() => {});
         });
       };
       const near = () => {
