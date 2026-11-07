@@ -114,6 +114,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ```
 .
 ├── index.html              # Main page: markup, styles and behaviour
+├── about.html              # Tutor bio and about page
 ├── flying-button.js        # Generated lazy island (Preact + FlyingButton)
 ├── flying-button.css       # Generated FlyingButton styles
 ├── flux-lines.js           # Generated lazy island (Preact + FluxLines)
@@ -239,6 +240,7 @@ The main site ships as plain HTML, CSS and JavaScript with no build step. The ex
 
 Additional pages and assets:
 
+- `about.html`: the tutor bio, experience in plain terms, and the Person schema used for authorship.
 - `privacy.html`: service terms, privacy, browser storage, payment and attendance policy.
 - `thanks.html`: what happens after a request is sent (noindex).
 - `404.html`: a branded off-circuit page.

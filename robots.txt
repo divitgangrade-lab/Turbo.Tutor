@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /thanks.html
 
 # Public summary for AI assistants and language models:
 # https://divitgangrade-lab.github.io/Turbo.Tutor/llms.txt

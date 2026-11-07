@@ -5,6 +5,7 @@
 ## Pages
 
 - [Home](https://divitgangrade-lab.github.io/Turbo.Tutor/): plans, special coaching, welcome offers, session walkthrough, policies, FAQ and contact.
+- [About the tutor](https://divitgangrade-lab.github.io/Turbo.Tutor/about.html): who runs TurboTutor and how one-to-one sessions work.
 - [Terms, privacy and payments](https://divitgangrade-lab.github.io/Turbo.Tutor/privacy.html): what a request contains, browser storage, attendance and reschedule terms.
 - [Photo credits](https://divitgangrade-lab.github.io/Turbo.Tutor/credits.html): sources and licences for the real Formula 1 and kart photographs.
 
