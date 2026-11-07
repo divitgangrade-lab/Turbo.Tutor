@@ -9,7 +9,8 @@ await build({
     'text-loop': 'src/text-loop/entry.jsx',
     'masked-heading': 'src/masked-heading/entry.jsx',
     'particle-text': 'src/particle-text/entry.jsx',
-    'split-flap-text': 'src/split-flap-text/entry.jsx'
+    'split-flap-text': 'src/split-flap-text/entry.jsx',
+    'warp-text': 'src/warp-text/entry.jsx'
   },
   bundle: true,
   minify: true,

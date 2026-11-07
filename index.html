@@ -382,6 +382,13 @@
     .policy-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
     .policy-note { max-width: 880px; margin: 24px 0 0; color: var(--muted); font-size: 11.5px; line-height: 1.8; }
 
+    /* ---------- warp statement ---------- */
+    .warp-band { position: relative; overflow: hidden; border-block: 1px solid #2a3238; background: radial-gradient(80% 130% at 50% 55%, rgba(225, 6, 0, .2), transparent 68%), #0a0d10; color: #f7f5f0; }
+    .warp-band::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px); background-size: 72px 72px; content: ""; pointer-events: none; }
+    .warp-band-stage { position: relative; z-index: 1; height: clamp(240px, 28vw, 330px); }
+    .warp-band-fallback { display: flex; height: 100%; align-items: center; justify-content: center; padding: 0 7%; font-family: var(--display); font-size: clamp(2.6rem, 8vw, 6.8rem); font-weight: 900; letter-spacing: -.03em; line-height: .88; text-align: center; text-transform: uppercase; }
+    @media (max-width: 560px) { .warp-band-stage { height: 240px; } }
+
     /* ---------- contact ---------- */
     .contact { position: relative; overflow: hidden; background: var(--red); color: #fff; }
     .contact::before { position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, .16) 1px, transparent 1px); background-size: 26px 26px; opacity: .45; content: ""; }
@@ -1359,6 +1366,13 @@
           <article class="policy-card reveal"><strong>15% off</strong><h3>Tutor reschedule</h3><p>If the tutor needs to move a session, they confirm a 15% credit toward the next purchase request.</p></article>
         </div>
         <p class="policy-note">Contact the tutor as soon as plans change. For in-person sessions, a parent or guardian must remain present with students under 18. Any reschedule credit is confirmed by the tutor and applied to the next request. Fees are arranged directly between the family and the tutor; this site does not process payments.</p>
+      </div>
+    </section>
+
+    <section class="warp-band" aria-labelledby="warp-title">
+      <h2 class="sr-only" id="warp-title">Learning in the fast lane</h2>
+      <div class="wrap warp-band-stage" id="warp-text-root" aria-hidden="true">
+        <span class="warp-band-fallback">LEARNING IN<br>THE FAST LANE</span>
       </div>
     </section>
 
@@ -2533,6 +2547,38 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./split-flap-text.js?v=20261107-12").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("warp-text-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "warp-text.css?v=20261107-13";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./warp-text.js?v=20261107-13").catch(() => {});
         });
       };
       const near = () => {

@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, and the SplitFlapText component in `src/split-flap-text/` are adapted from React Bits by David Haz.
+The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, and the WarpText component in `src/warp-text/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits
@@ -60,6 +60,6 @@ The TextLoop and MaskedHeading islands bundle GSAP 3.15.1 (https://gsap.com) und
 
 ## ogl
 
-The PatternWaves island uses `ogl` 1.0.11 (https://github.com/oframe/ogl) under the Unlicense. The library is bundled into `pattern-waves.js`.
+The PatternWaves and WarpText islands use `ogl` 1.0.11 (https://github.com/oframe/ogl) under the Unlicense. The library is bundled into `pattern-waves.js` and `warp-text.js`.
 
 This is free and unencumbered software released into the public domain. Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
