@@ -179,7 +179,7 @@
     .hero-chips li b { color: var(--amber); font-weight: 700; }
     .hero-visual { position: relative; display: grid; place-items: center; min-height: 0; }
     .hero-visual::before { position: absolute; inset: auto 4% 16% 4%; height: 46%; background: radial-gradient(closest-side, rgba(225, 6, 0, .32), transparent); content: ""; filter: blur(24px); }
-    .hero-lights { position: absolute; top: 0; right: 2%; display: flex; gap: 9px; border: 1px solid var(--carbon-line); background: #07090b; padding: 9px 12px; }
+    .hero-lights { position: absolute; z-index: 3; top: 0; right: 2%; display: flex; gap: 9px; border: 1px solid var(--carbon-line); background: #07090b; padding: 9px 12px; }
     .hero-lights i { width: 15px; height: 15px; border-radius: 50%; background: #360909; animation: lights 5s linear infinite; }
     .hero-lights i:nth-child(2) { animation-delay: .5s; }
     .hero-lights i:nth-child(3) { animation-delay: 1s; }
@@ -187,9 +187,9 @@
     .hero-lights i:nth-child(5) { animation-delay: 2s; }
     @keyframes lights { 0%, 6% { background: #360909; box-shadow: none; } 8%, 16% { background: #ff2d1f; box-shadow: 0 0 16px #ff2d1f; } 22%, 100% { background: #360909; box-shadow: none; } }
     .hero-car { position: relative; width: min(700px, 116%); max-width: none; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)); animation: floatCar 7s ease-in-out infinite; }
-    .hero-plate { position: absolute; right: 4%; bottom: 4%; display: flex; gap: 14px; border: 1px solid var(--carbon-line); background: rgba(10, 12, 15, .9); padding: 9px 13px; color: #9aa4aa; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.6px; }
+    .hero-plate { position: absolute; z-index: 3; right: 4%; bottom: 4%; display: flex; gap: 14px; border: 1px solid var(--carbon-line); background: rgba(10, 12, 15, .9); padding: 9px 13px; color: #9aa4aa; font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1.6px; }
     .hero-plate b { color: var(--amber); }
-    .hero-visual::after { position: absolute; right: 0; bottom: 12%; left: 0; height: 2px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 26px, transparent 26px 44px); content: ""; opacity: .5; transform: skewX(-18deg); }
+    .hero-visual::after { position: absolute; z-index: 2; right: 0; bottom: 12%; left: 0; height: 2px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 26px, transparent 26px 44px); content: ""; opacity: .5; transform: skewX(-18deg); }
 
     /* ---------- ticker ---------- */
     .ticker { overflow: hidden; border-block: 1px solid #12161a; background: var(--amber); color: #12161a; }
@@ -532,6 +532,12 @@
 
     /* ---------- real photography ---------- */
     .hero-car.hero-photo { width: min(760px, 100%); aspect-ratio: 12 / 5; object-fit: cover; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 26px 44px rgba(0, 0, 0, .45); filter: none; animation: none; }
+    .hero-swap { position: relative; width: min(760px, 100%); aspect-ratio: 12 / 5; overflow: hidden; border: 1px solid rgba(255, 255, 255, .16); background: #0a0c0f; box-shadow: 0 26px 44px rgba(0, 0, 0, .45); cursor: crosshair; }
+    .hero-swap-fallback { position: absolute; z-index: 0; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+    .hero-swap-mount { position: absolute; z-index: 1; inset: 0; }
+    .hero-swap .pixel-swap { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-swap .pixel-swap:focus-visible { outline-offset: -5px; }
+    .hero-swap-image { display: block; width: 100%; height: 100%; object-fit: cover; }
     .hero-visual::before { filter: none; }
     .promise-art img.promise-photo { width: min(400px, 100%); aspect-ratio: 1; object-fit: cover; border: 6px solid #f7f5f0; box-shadow: 0 24px 50px rgba(0, 0, 0, .5); filter: none; animation: none; }
     .promise-art:has(.promise-photo)::after { display: none; }
@@ -668,6 +674,7 @@
       .hero-visual { min-height: 260px; margin-top: 8px; }
       .hero-car { width: min(620px, 92%); }
       .hero-car.hero-photo { width: min(680px, 100%); }
+      .hero-swap { width: min(680px, 100%); }
       .hero-lights { top: -6px; right: 4%; }
     }
     @media (max-width: 860px) {
@@ -686,6 +693,7 @@
       .hero-visual { min-height: 210px; }
       .hero-car { width: 100%; }
       .hero-car.hero-photo { width: 100%; }
+      .hero-swap { width: 100%; }
       .hero-lights { top: -4px; right: 0; padding: 7px 9px; }
       .hero-lights i { width: 12px; height: 12px; }
       .hero-plate { display: none; }
@@ -1011,7 +1019,10 @@
         </div>
         <div class="hero-visual">
           <div class="hero-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-          <img class="hero-car hero-photo" src="f1-car.webp" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
+          <div class="hero-swap">
+            <img class="hero-swap-fallback" src="f1-car.webp" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
+            <div class="hero-swap-mount" id="pixel-swap-mount"></div>
+          </div>
           <div class="hero-plate" aria-hidden="true"><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
         </div>
       </div>
@@ -2627,6 +2638,23 @@
       };
       new MutationObserver(check).observe(panel, { attributes: true, attributeFilter: ["class", "aria-hidden"] });
       check();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const mount = document.getElementById("pixel-swap-mount");
+      if (!mount) return;
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "pixel-swap.css?v=20261107-16";
+      const ready = new Promise(resolve => {
+        css.addEventListener("load", () => resolve(true), { once: true });
+        css.addEventListener("error", () => resolve(false), { once: true });
+      });
+      document.head.appendChild(css);
+      ready.then(ok => {
+        if (ok) import("./pixel-swap.js?v=20261107-16").catch(() => {});
+      });
     })();
   </script>
   <script src="enhance.js"></script>
