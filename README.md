@@ -2,7 +2,7 @@
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Nine small, lazy-loaded Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText and WarpText, are bundled locally with esbuild; their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend and no online payment. Ten small, lazy-loaded Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText and ElasticMesh, are bundled locally with esbuild; their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
 - **License:** [MIT](LICENSE)
@@ -51,6 +51,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A ParticleText footer watermark. It fills the footer background with a subtle particle-built "TURBO TUTOR" wordmark, forming when the footer approaches the viewport. It is decorative, kept out of the accessibility tree, and paused when the footer is off screen.
 - A SplitFlapText launch board above the launch heading. It cycles through "PLANS READY", "ZOOM ONLINE" and "KART OPEN" with mechanical flap tiles, keeps the static "Pit lane warm-up" kicker as its no-JS fallback, and respects reduced motion.
 - A WarpText statement band before the contact section. It turns "Learning in the fast lane" into a glass-warped display, keeps a hidden heading and static fallback, and pauses when it is off screen.
+- An ElasticMesh 404 visual. The decorative code block on `404.html` becomes a drag-and-poke 404 balloon, with the original code block retained as its no-JS fallback.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
 
@@ -138,9 +139,11 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── split-flap-text.css     # Generated SplitFlapText styles
 ├── warp-text.js            # Generated lazy island (Preact + WarpText + ogl)
 ├── warp-text.css           # Generated WarpText styles
+├── elastic-mesh.js         # Generated lazy island (Preact + ElasticMesh)
+├── elastic-mesh.css        # Generated ElasticMesh styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
-├── scripts/                # esbuild build script for all nine islands
+├── scripts/                # esbuild build script for all ten islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -150,6 +153,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/particle-text/      # ParticleText source and mount entry
 ├── src/split-flap-text/    # SplitFlapText source and mount entry
 ├── src/warp-text/          # WarpText source and mount entry
+├── src/elastic-mesh/       # ElasticMesh source and mount entry
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
@@ -173,7 +177,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The nine optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText and WarpText, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop and MaskedHeading islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
+No runtime dependencies and no server code. The ten optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText and ElasticMesh, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop and MaskedHeading islands. Google Fonts (Barlow Condensed, Chakra Petch, Titillium Web) is the only external request.
 
 ### Photography credits
 
@@ -198,7 +202,7 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, or their props:
+The generated islands are already committed. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, or their props:
 
 ```bash
 npm install
@@ -224,6 +228,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **ParticleText island** - watermark wording, particle density, colours and motion props live in `src/particle-text/entry.jsx`; run `npm run build` after changing them.
 - **SplitFlapText island** - board phrases, timing, colours and tile styling live in `src/split-flap-text/entry.jsx`; run `npm run build` after changing them.
 - **WarpText island** - statement copy, lens mode, warp colours and pointer behaviour live in `src/warp-text/entry.jsx`; run `npm run build` after changing them.
+- **ElasticMesh island** - the 404 copy, material, inflate and wobble props live in `src/elastic-mesh/entry.jsx`; run `npm run build` after changing them.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -235,7 +240,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all nine islands stop their motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all ten islands stop their motion.
 
 ## A note on payment
 
@@ -247,11 +252,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText and WarpText islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop and MaskedHeading bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText and ElasticMesh islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop and MaskedHeading bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the lazy-loaded FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText and WarpText islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/` and `src/warp-text/` into their generated JS and CSS files. `enhance.css` and
+The main site ships as plain HTML, CSS and JavaScript with no build step. The exceptions are the lazy-loaded FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText and ElasticMesh islands, built from `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/` and `src/elastic-mesh/` into their generated JS and CSS files. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
