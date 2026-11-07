@@ -6,7 +6,8 @@ await build({
     'flux-lines': 'src/flux-lines/entry.jsx',
     'pattern-waves': 'src/pattern-waves/entry.jsx',
     'tech-text': 'src/tech-text/entry.jsx',
-    'text-loop': 'src/text-loop/entry.jsx'
+    'text-loop': 'src/text-loop/entry.jsx',
+    'masked-heading': 'src/masked-heading/entry.jsx'
   },
   bundle: true,
   minify: true,

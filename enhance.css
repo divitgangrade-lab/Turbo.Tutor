@@ -328,3 +328,11 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 @media (max-width: 860px) {
   .loop-band { height: clamp(130px, 26vw, 170px); }
 }
+
+/* ---------- masked heading (#promise) ---------- */
+.promise-mask { position: relative; color: #f7f5f0; }
+.promise-mask .masked-heading { margin: 0 0 16px; }
+.promise-mask .masked-heading__source { object-position: center 42%; }
+@media (max-width: 860px) {
+  .promise-mask .masked-heading { margin-bottom: 14px; }
+}

@@ -1212,7 +1212,9 @@
       <div class="wrap promise-grid">
         <div>
           <p class="kicker">The pit wall promise</p>
-          <h2 id="promise-title">Every lap<br> <em>counts.</em></h2>
+          <div class="promise-mask" id="masked-heading-root">
+            <h2 id="promise-title">Every lap<br> <em>counts.</em></h2>
+          </div>
           <p class="promise-copy">You see the session length, the number of sessions and the full suggested price before you request anything. The tutor confirms the schedule, answers your questions, and only then do you decide to enroll.</p>
           <ul class="checks">
             <li>Zoom or a mutually agreed public library</li>
@@ -2394,6 +2396,38 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./text-loop.js?v=20261107-9").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("masked-heading-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "masked-heading.css?v=20261107-10";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./masked-heading.js?v=20261107-10").catch(() => {});
         });
       };
       const near = () => {
