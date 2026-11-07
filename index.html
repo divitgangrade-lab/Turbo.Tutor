@@ -687,10 +687,11 @@
     .launch-notes li::before { width: 7px; height: 7px; background: var(--red); content: ""; }
     .launch-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
     .launch-hint { margin: 0; color: var(--muted); font-family: var(--ui); font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-    .launch-pad { position: relative; height: clamp(370px, 44vw, 440px); overflow: hidden; border: 1px solid #2b333a; background: radial-gradient(90% 80% at 50% 100%, rgba(225, 6, 0, .19), transparent 58%), linear-gradient(180deg, #0a0e12 0%, #121a21 100%); box-shadow: 0 26px 50px rgba(18, 22, 26, .22); isolation: isolate; }
-    .launch-pad::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .055) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .055) 1px, transparent 1px); background-size: 34px 34px; content: ""; pointer-events: none; }
-    .launch-pad::after { position: absolute; z-index: 2; right: 14px; bottom: 11px; color: #6e7a82; font-family: var(--ui); font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; content: "Launch control // TT-01"; pointer-events: none; }
-    .launch-pad > .flying-button { position: relative; z-index: 1; }
+    .launch-pad { position: relative; height: clamp(370px, 44vw, 440px); overflow: hidden; border: 1px dashed rgba(18, 22, 26, .24); border-radius: 18px; background: radial-gradient(90% 80% at 50% 100%, rgba(225, 6, 0, .12), transparent 62%); isolation: isolate; }
+    .launch-pad::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(18, 22, 26, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 22, 26, .07) 1px, transparent 1px); background-size: 34px 34px; -webkit-mask-image: radial-gradient(75% 70% at 50% 45%, #000 35%, transparent 100%); mask-image: radial-gradient(75% 70% at 50% 45%, #000 35%, transparent 100%); content: ""; pointer-events: none; }
+    .launch-pad::after { position: absolute; z-index: 2; right: 14px; bottom: 11px; color: #9a8f7c; font-family: var(--ui); font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; content: "Launch control // TT-01"; pointer-events: none; }
+    .launch-pad > .flying-button { position: relative; z-index: 1; transition: transform .6s var(--ease), opacity .3s ease; }
+    .launch-pad[data-launching] > .flying-button { transform: translate3d(0, -340px, 0); opacity: 0; transition: transform 2.1s cubic-bezier(.45, .02, .85, .4), opacity 1s ease 1.2s; }
     .launch-fallback { position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; }
     .launch-fallback:hover { transform: translate(-50%, calc(-50% - 2px)); }
     @media (max-width: 900px) {
@@ -1408,7 +1409,7 @@
             <p class="kicker launch-board-fallback">Pit lane warm-up</p>
           </div>
           <h2 id="launch-title">Give it a<br><em>little throttle.</em></h2>
-          <p class="launch-copy">Every plan starts with a conversation, not a checkout. Hover the launch button for a small pit-lane warm-up, then build the plan you actually want.</p>
+          <p class="launch-copy">Every plan starts with a conversation, not a checkout. Hover the launch button for a small pit-lane warm-up, then tap it to drift up to the plans at a calmer pace.</p>
           <ul class="launch-notes">
             <li>From $24 a week</li>
             <li>Grades 1–8</li>
@@ -1416,7 +1417,7 @@
           </ul>
           <div class="launch-actions">
             <a class="btn" id="launch-cta" data-cursor-label="Plan" href="#plans">Build your lap plan <span class="arrow" aria-hidden="true">→</span></a>
-            <p class="launch-hint">Hover or tap the button</p>
+            <p class="launch-hint">Tap to fly up to the plans</p>
           </div>
         </div>
         <div class="launch-pad" id="flying-button-root">
@@ -2507,14 +2508,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "flying-button.css?v=20261107-3";
+        css.href = "flying-button.css?v=20261107-4";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./flying-button.js?v=20261107-3").catch(() => {});
+          if (ok) import("./flying-button.js?v=20261107-4").catch(() => {});
         });
       };
       const near = () => {

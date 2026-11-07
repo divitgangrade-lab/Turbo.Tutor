@@ -42,7 +42,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 ### Everything else
 - Sticky header with scroll progress, active-section highlighting and a theme toggle.
 - Scroll-reveal animations, animated counters, a looping ticker, magnetic buttons and SVG wheel animations - all disabled automatically under `prefers-reduced-motion`.
-- A contained FlyingButton launch pad between the offers wheel and the Paddock Club. It loads only as it approaches the viewport, keeps a plain fallback link, and stays still under `prefers-reduced-motion`.
+- A contained FlyingButton launch pad between the offers wheel and the Paddock Club. The rounded button is themed in the site red with amber thrust, sits on a light track instead of a dark panel, and tapping it flies the button upward while the page glides to the plans section over two seconds. It loads only as it approaches the viewport, keeps a plain fallback link, and jumps straight to the plans under `prefers-reduced-motion`.
 - A FluxLines fluid-line backdrop behind the pit-wall promise. It loads only near the viewport, sits behind the copy, and stays still under `prefers-reduced-motion`.
 - A PatternWaves silk-dot surface behind the Paddock Club panel. It loads on approach and stays quiet enough for the signup form.
 - A TechText footer wordmark. It lazy-loads near the end of the page and lets visitors reveal dashed letter outlines, drag letters and send a small kick through the wordmark.
