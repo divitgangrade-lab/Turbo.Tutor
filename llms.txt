@@ -1,0 +1,38 @@
+# TurboTutor
+
+> One-to-one Math, English and Science tutoring for Grades 1-8, online via Zoom or in person at Twin Hickory Library in Henrico County, Virginia. Weekly sessions start at $24. No online payment is collected.
+
+## Pages
+
+- [Home](https://divitgangrade-lab.github.io/Turbo.Tutor/): plans, special coaching, welcome offers, session walkthrough, policies, FAQ and contact.
+- [Terms, privacy and payments](https://divitgangrade-lab.github.io/Turbo.Tutor/privacy.html): what a request contains, browser storage, attendance and reschedule terms.
+- [Photo credits](https://divitgangrade-lab.github.io/Turbo.Tutor/credits.html): sources and licences for the real Formula 1 and kart photographs.
+
+## Key facts
+
+- Grades 1-8, in Math, English or Science.
+- 30, 45 and 60 minute sessions.
+- Weekly, monthly and yearly plans. Monthly saves 5 percent; yearly saves 15 percent.
+- Online on Zoom, or in person at Twin Hickory Library, Glen Allen, Virginia.
+- Weekly 45-minute Zoom sessions start at $24. Math adds $3, English adds $5, and a library session adds $10.
+- Moody IB Prep is $120 for one 120-minute Zoom session.
+- High School Application Review is $35 per application, with an optional 90-minute Zoom meeting for $40 more.
+- No card fields, checkout or payment processor. Cash or Zelle is arranged directly with the tutor after confirmation.
+- A missed session carries a $15 fee; a family-requested reschedule carries a $10 fee; a tutor reschedule earns a 15 percent credit.
+
+## Contact
+
+- Email: divit.gangrade@gmail.com
+- Phone and text: +1 804 847 3236
+- Hours: Monday to Saturday, 4pm to 8pm
+
+## Notes
+
+- Prices shown on the site are suggested rates. The tutor confirms availability, schedule and the final amount in writing before enrollment.
+- Requests are prepared in the browser and sent by the visitor from their own email or messaging app.
+- The site has no analytics, advertising pixels, third-party cookies or online payment.
+- Testimonials, ratings and a team photograph are not published because they do not exist yet.
+
+## Sitemap
+
+- https://divitgangrade-lab.github.io/Turbo.Tutor/sitemap.xml

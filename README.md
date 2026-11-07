@@ -2,7 +2,7 @@
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The whole site is a single static page with no build step, no framework, no backend and no online payment. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no build step, no framework, no backend and no online payment. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://divitgangrade-lab.github.io/Turbo.Tutor/
 - **License:** [MIT](LICENSE)
@@ -18,7 +18,7 @@ The whole site is a single static page with no build step, no framework, no back
 - Every plan is described in plain words before it is added: session length, number of laps, location and suggested price.
 
 ### The kart (not a cart)
-The cart is a go-kart. The slide-out panel is styled like a grid box with a little kart illustration, numbered entries and an estimated first payment. It:
+The kart is a go-kart. The slide-out panel is styled like a grid box with a little kart illustration, numbered entries and an estimated first payment. It:
 - adds and removes plans,
 - applies the best eligible seasonal or wheel discount (cash discounts never stack),
 - builds a complete email or SMS draft with every selection, the discount applied and the estimated total.
@@ -30,14 +30,11 @@ No payment is collected anywhere on the site.
 - Seasonal offers that rotate by date: Season Opener, Back-to-School Grand Prix, Diwali Night Race, Thanksgiving Sprint and Season Finale.
 
 ### Paddock Club newsletter
-A signup panel under the gear section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about gear drops and session openings. It is wired in `enhance.js`:
+A signup panel under the gear section offers **5% off the first month** (code `PADDOCK5`) and one email every Monday about new session openings, study notes and occasional offers. It is wired in `enhance.js`:
 
 - With `data-endpoint` set on `#club-form`, the form POSTs `{ "email_address": "...", "tags": ["paddock-club"] }` and shows the code on success.
 - With it empty, the form opens a pre-filled email to the tutor instead, so no signup is lost.
 - The automated Monday send and the welcome email are handled by the newsletter provider. Create a [Buttondown](https://buttondown.com) account, then point `data-endpoint` at a small endpoint that holds the API key (GitHub Pages cannot keep a secret in client code).
-
-### Team gear (under construction)
-A deliberate construction site: hazard tape, a blueprint pipeline with animated progress bars, and a hand-drawn little worker holding an **UNDER CONSTRUCTION** sign. Nothing is for sale; the "register interest" button opens a pre-filled email.
 
 ### Twin Hickory Library
 In-person laps meet at **Twin Hickory Library** in Henrico County. The plan section carries a large bordered card linking to the library's room-booking page (`https://henricolibrary-va.libcal.com/spaces?lid=6277`), and the FAQ and contact panel link there too.
@@ -47,6 +44,25 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - Scroll-reveal animations, animated counters, a looping ticker, magnetic buttons and SVG wheel animations - all disabled automatically under `prefers-reduced-motion`.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
+
+## Metadata, sharing and discovery
+
+- Every page has one `h1`, a unique title and description, a self-referencing canonical URL where it is indexable, and a complete Open Graph and Twitter card.
+- Three 1200x630 JPEG share cards cover the home page, terms and photo credits.
+- JSON-LD covers the tutoring business and its offer catalogue, the website, each indexable page, the FAQ and breadcrumbs on the subpages.
+- `sitemap.xml`, `robots.txt` and `llms.txt` describe the public pages. `site.webmanifest` and the PNG/ICO icons cover browser tabs, home screens and installable web apps.
+- `thanks.html` and `404.html` are marked `noindex,follow` and are deliberately excluded from the sitemap.
+
+## Custom domain
+
+The site currently uses the GitHub Pages address above. No `CNAME` file is committed, because a CNAME for a domain that is not registered would take the site offline.
+
+When a domain is registered:
+
+1. Add a `CNAME` file at the repository root containing only the exact host, such as `www.example.com`.
+2. Point the domain at GitHub Pages using GitHub's published A and AAAA records for an apex domain, or a CNAME to `divitgangrade-lab.github.io` for `www`.
+3. Set the custom domain in the repository's Pages settings and enable HTTPS.
+4. Update every absolute URL in `index.html`, `privacy.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
 
 ---
 
@@ -97,15 +113,21 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── f1-car.webp             # Hero photo (real Ferrari, CC BY-SA 4.0)
 ├── f1-helmet.webp          # Pit-wall promise photo (real F1 helmet, CC BY-SA 4.0)
 ├── go-kart.webp            # Kart panel photo (real kart race, CC BY 2.0)
-├── open-wheel-car.svg      # Original hero car drawing (kept as a backup)
 ├── monaco-harbour.svg      # Harbour scene behind the circuit map
-├── go-kart.svg             # Original kart illustration (kept as a backup)
-├── helmet.svg              # Original helmet illustration (kept as a backup)
-├── race-trophy.svg         # Steps illustration
 ├── pit-garage.svg          # Contact illustration
-├── checkered-flag.svg      # Gear section accent
-├── under-construction.svg  # The sign worker in the gear section
-├── favicon.svg             # Badge favicon
+├── favicon.svg             # Scalable browser icon
+├── favicon.ico             # 16/32/48px browser icon
+├── favicon-32.png          # Browser icon
+├── favicon-192.png         # Web app icon
+├── favicon-512.png         # Web app icon
+├── apple-touch-icon.png    # iOS home screen icon
+├── site.webmanifest        # Web app name, colours and icons
+├── og-image.jpg            # Home social share card
+├── og-terms.jpg            # Terms social share card
+├── og-credits.jpg          # Credits social share card
+├── robots.txt              # Crawler rules
+├── sitemap.xml             # Public page index
+├── llms.txt                # Plain-text summary for AI assistants
 ├── LICENSE                 # MIT
 └── README.md
 ```
@@ -122,7 +144,7 @@ The site now uses real photographs instead of drawn stand-ins, all from Wikimedi
 | Pit-wall promise | Oscar Piastri helmet, 2024 | Liauzh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | Kart panel | Go kart racing | Genevieve | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) |
 
-The 1200x630 social share card (`og-image.png`) is cropped from the hero photograph and carries the same CC BY-SA 4.0 licence. If a photo is replaced, keep the credit line accurate and update the footer, the credits page and this table.
+The three 1200x630 social share cards (`og-image.jpg`, `og-terms.jpg` and `og-credits.jpg`) are cropped from the hero photograph and carry the same CC BY-SA 4.0 licence. If a photo is replaced, keep the credit line accurate and update the footer, the credits page and this table.
 
 ---
 
@@ -147,7 +169,6 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **Special programs** - the `data-base-price` attribute on each `[data-specialty]` card, plus the card copy in the Specialty section.
 - **Contact details** - `tutorEmail` and `tutorPhone`, and the matching `href`s in the contact section and form drafts.
 - **Offers** - the `deals` array (labels and weights) next to `drawDealWheel()`, and `getSeasonSchedule()` for seasonal offers.
-- **Gear pipeline** - the inline `--p` progress values on each `.bp-bar span`.
 
 Design tokens (colour, type, spacing) are CSS custom properties at the top of the `<style>` block. Dark mode is a `data-theme="dark"` attribute on `<html>`.
 
@@ -190,9 +211,10 @@ Additional pages and assets:
 - `privacy.html`: service terms, privacy, browser storage, payment and attendance policy.
 - `thanks.html`: what happens after a request is sent (noindex).
 - `404.html`: a branded off-circuit page.
-- `robots.txt` and `sitemap.xml`.
-- `og-image.png`: the 1200x630 social share card, cropped from the hero photograph and
-  referenced by the Open Graph and Twitter tags.
+- `robots.txt`, `sitemap.xml` and `llms.txt`.
+- `og-image.jpg`, `og-terms.jpg` and `og-credits.jpg`: 1200x630 social share cards,
+  cropped from the hero photograph and referenced by the Open Graph and Twitter tags.
+- `site.webmanifest`: web app name, colours and installable icons.
 - `credits.html`: photograph attribution and licence details.
 
 There is no analytics, advertising pixel or third-party cookie on the site. Web fonts come
