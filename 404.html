@@ -68,6 +68,23 @@
     .crumbs a { border-bottom:1px solid #3a464d; padding-bottom:1px; text-decoration:none; }
     .crumbs a:hover { border-color:var(--amber); color:#fff; }
     .crumbs span[aria-hidden] { color:var(--amber); }
+    .cards-band { border-top:1px solid #2a3239; background:radial-gradient(90% 120% at 50% 0%,#13191e,#0a0c0f 70%); padding-block:clamp(26px,4vw,44px); }
+    .cards-kicker { margin:0 0 18px; color:var(--amber); font-family:var(--ui); font-size:9px; font-weight:700; letter-spacing:1.8px; text-align:center; text-transform:uppercase; }
+    .card-scatter { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:clamp(10px,2vw,22px); }
+    .card { position:relative; width:clamp(120px,17vw,176px); margin:0; border:1px solid #2a3239; background:#0f1418; box-shadow:0 18px 30px rgba(0,0,0,.45); transform:rotate(var(--turn,-2deg)) translateY(var(--lift,0)); transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+    .card img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:cover; }
+    .card figcaption { border-top:1px solid rgba(255,255,255,.14); padding:6px 8px; color:#e7ecf0; font-family:var(--ui); font-size:8px; font-weight:700; letter-spacing:1.4px; text-align:center; text-transform:uppercase; }
+    .card.c1 { --turn:-6deg; --lift:6px; width:clamp(170px,24vw,236px); border-color:var(--amber); background:#201a05; }
+    .card.c1 img { aspect-ratio:4 / 3; }
+    .card.c2 { --turn:4deg; --lift:-8px; border-color:var(--red); background:#1e0705; }
+    .card.c3 { --turn:-3deg; --lift:2px; border-color:#f5f3ee; background:#141a1f; }
+    .card.c4 { --turn:6deg; --lift:-4px; border-color:var(--amber); background:#101820; }
+    .card.c5 { --turn:-5deg; --lift:8px; border-color:#7c868d; background:#0e1317; }
+    @media (hover:hover) and (pointer:fine) {
+      .card:hover { transform:rotate(0deg) translateY(-6px); box-shadow:0 24px 40px rgba(0,0,0,.55); }
+    }
+    @media (prefers-reduced-motion:reduce) { .card { transition:none; } }
+    @media (max-width:560px) { .card.c5 { display:none; } .card, .card.c1 { width:calc(50% - 18px); max-width:170px; } }
     :focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
     @media (max-width:760px) { .grid { grid-template-columns:1fr; } .code { order:-1; max-width:300px; } }
   </style>
@@ -105,6 +122,34 @@
       </div>
     </div>
   </main>
+
+  <section class="cards-band" aria-hidden="true">
+    <div class="in">
+      <p class="cards-kicker">Loose parts from the last lap</p>
+      <div class="card-scatter">
+        <figure class="card c1">
+          <img src="https://turbotutor.dpdns.org/f1-car.webp" alt="" width="1200" height="500" loading="lazy" decoding="async">
+          <figcaption>Race day</figcaption>
+        </figure>
+        <figure class="card c2">
+          <img src="https://turbotutor.dpdns.org/f1-helmet.webp" alt="" width="760" height="760" loading="lazy" decoding="async">
+          <figcaption>Helmet on</figcaption>
+        </figure>
+        <figure class="card c3">
+          <img src="https://turbotutor.dpdns.org/go-kart.webp" alt="" width="960" height="620" loading="lazy" decoding="async">
+          <figcaption>Karting</figcaption>
+        </figure>
+        <figure class="card c4">
+          <img src="https://turbotutor.dpdns.org/pit-garage.svg" alt="" width="340" height="260" loading="lazy" decoding="async">
+          <figcaption>Pit stop</figcaption>
+        </figure>
+        <figure class="card c5">
+          <img src="https://turbotutor.dpdns.org/monaco-harbour.svg" alt="" width="420" height="300" loading="lazy" decoding="async">
+          <figcaption>Harbour lap</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
   <footer>
     <div class="in">
       <span>© 2026 TurboTutor · Built for learners</span>

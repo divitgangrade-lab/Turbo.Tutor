@@ -52,6 +52,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A SplitFlapText launch board above the launch heading. It cycles through "PLANS READY", "ZOOM ONLINE" and "KART OPEN" with mechanical flap tiles, keeps the static "Pit lane warm-up" kicker as its no-JS fallback, and respects reduced motion.
 - A WarpText statement band before the contact section. It turns "Learning in the fast lane" into a glass-warped display, keeps a hidden heading and static fallback, and pauses when it is off screen.
 - An ElasticMesh 404 visual. The decorative code block on `404.html` becomes a drag-and-poke 404 balloon, with the original code block retained as its no-JS fallback.
+- A scattered F1 card band on the 404 page. Five framed photos and illustrations sit below the 404 copy at slight angles, straightening on hover and dropping the smallest card on phones.
 - A HalftoneReveal kart print. The go-kart photo in the kart panel becomes an interactive halftone print, loads only when the kart is first opened, and keeps the original photo as its fallback.
 - A PixelSwap hero photograph. Hovering or focusing the Formula 1 hero swaps in the kart photo with a pixel wave, while the plain photograph remains as the LCP and no-JS fallback.
 - An AnimatedContent policy grid. The three attendance cards enter in sequence when the section approaches the viewport, while the plain cards remain as the no-JS fallback.
