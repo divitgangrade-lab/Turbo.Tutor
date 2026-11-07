@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, and the PixelSwap component in `src/pixel-swap/` are adapted from React Bits by David Haz.
+The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, and the PixelSwap component in `src/pixel-swap/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits
@@ -56,7 +56,7 @@ SOFTWARE.
 
 ## GSAP
 
-The TextLoop and MaskedHeading islands bundle GSAP 3.15.1 (https://gsap.com) under the GSAP Standard "No Charge" License. The licence permits use in commercial projects but does not permit selling, sublicensing or redistributing GSAP itself. See https://gsap.com/standard-license/.
+The TextLoop, MaskedHeading and AnimatedContent islands bundle GSAP 3.15.1 (https://gsap.com) under the GSAP Standard "No Charge" License. The licence permits use in commercial projects but does not permit selling, sublicensing or redistributing GSAP itself. See https://gsap.com/standard-license/.
 
 ## ogl
 
