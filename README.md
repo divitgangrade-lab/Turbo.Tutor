@@ -92,7 +92,7 @@ To move to another domain:
 1. Replace the contents of `CNAME` with the new host, such as `www.example.com`.
 2. Point the domain at GitHub Pages using GitHub's published A and AAAA records for an apex domain, or a CNAME to `divitgangrade-lab.github.io` for `www`.
 3. Set the same custom domain in the repository's Pages settings and enable HTTPS.
-4. Update every absolute URL in `index.html`, `privacy.html`, `terms.html`, `cookies.html`, `refunds.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
+4. Update every absolute URL in `index.html`, `privacy.html`, `terms.html`, `cookies.html`, `refunds.html`, `eula.html`, `dmca.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
 5. Keep `CNAME` in the repository; removing it drops the custom domain.
 
 ## Security and privacy
@@ -154,6 +154,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── terms.html              # Terms, payment and attendance
 ├── cookies.html            # Cookie-free storage explanation
 ├── refunds.html            # Cancellation and refund policy
+├── eula.html               # Licence for worksheets and session materials
+├── dmca.html               # Copyright notices and counter-notices
 ├── credits.html            # Photo attribution and licences
 ├── thanks.html             # Post-request confirmation (noindex)
 ├── 404.html                # Branded not-found page
@@ -391,6 +393,8 @@ Additional pages and assets:
 - `terms.html`: terms and conditions, payment, attendance, liability and Virginia law.
 - `cookies.html`: no cookies are set; the two functional browser-storage keys.
 - `refunds.html`: cancellation, tutor cancellations and how to request a refund.
+- `eula.html`: the licence for worksheets, notes and session materials, including what a family may do with them, student ownership and termination.
+- `dmca.html`: the copyright policy, the elements of a valid notice, where to send it, counter-notification and the repeat infringement position.
 - `thanks.html`: what happens after a request is sent (noindex).
 - `404.html`: a branded off-circuit page.
 - `robots.txt`, `sitemap.xml` and `llms.txt`.

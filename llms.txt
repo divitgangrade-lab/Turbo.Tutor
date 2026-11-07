@@ -8,6 +8,8 @@
 - [About the tutor](https://turbotutor.dpdns.org/about.html): who runs TurboTutor and how one-to-one sessions work.
 - [Privacy policy](https://turbotutor.dpdns.org/privacy.html): what a request contains, browser storage, children's data and privacy rights.
 - [Terms and conditions](https://turbotutor.dpdns.org/terms.html): requests, pricing, payment, attendance, liability and Virginia law.
+- [End user licence agreement](https://turbotutor.dpdns.org/eula.html): the licence for worksheets, notes and session materials, and what families may do with them.
+- [Copyright and DMCA policy](https://turbotutor.dpdns.org/dmca.html): how to report infringement, what a notice contains, counter-notices and repeat infringement.
 - [Cookie policy](https://turbotutor.dpdns.org/cookies.html): no cookies are set; the two functional browser-storage keys and how to clear them.
 - [Refund and cancellation policy](https://turbotutor.dpdns.org/refunds.html): tutor and family cancellations, unused sessions and how to request a refund.
 - [Photo credits](https://turbotutor.dpdns.org/credits.html): sources and licences for the real Formula 1 and kart photographs.
@@ -35,7 +37,7 @@
 - Prices shown on the site are suggested rates. The tutor confirms availability, schedule and the final amount in writing before enrollment.
 - Requests are prepared in the browser and sent by the visitor from their own email or messaging app.
 - The site has no analytics, advertising pixels or online payment. It sets no cookies and loads no third-party fonts or embeds; two functional browser-storage keys remember the theme and a welcome offer.
-- Legal pages: Privacy, Terms, Cookies and Refunds, all effective 7 November 2026.
+- Legal pages: Privacy, Terms, Cookies, Refunds, EULA and the copyright and DMCA policy, all effective 7 November 2026.
 - Testimonials, ratings and a team photograph are not published because they do not exist yet.
 
 ## Sitemap
