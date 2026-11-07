@@ -1457,6 +1457,10 @@
     <div class="wrap footer-wordmark" id="tech-text-root" aria-hidden="true"></div>
     <div class="wrap footer-top">
       <div>
+        <div class="footer-metal" id="metallic-paint-root" aria-hidden="true">
+          <span class="footer-metal-fallback">TT</span>
+          <div class="footer-metal-mount" id="metallic-paint-mount"></div>
+        </div>
         <a class="footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">TT</span> TurboTutor</a>
         <p class="footer-tag">One-to-one tutoring for Grades 1–8, built around real progress instead of pressure. Learning in the fast lane, one lap at a time.</p>
       </div>
@@ -2709,6 +2713,38 @@
       ready.then(ok => {
         if (ok) import("./target-cursor.js?v=20261107-18").catch(() => {});
       });
+    })();
+  </script>
+  <script type="module">
+    (() => {
+      const host = document.getElementById("metallic-paint-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "metallic-paint.css?v=20261107-19";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./metallic-paint.js?v=20261107-19").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
     })();
   </script>
   <script src="enhance.js"></script>

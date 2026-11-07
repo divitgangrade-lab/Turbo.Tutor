@@ -15,7 +15,8 @@ await build({
     'halftone-reveal': 'src/halftone-reveal/entry.jsx',
     'animated-content': 'src/animated-content/entry.jsx',
     'target-cursor': 'src/target-cursor/entry.jsx',
-    'pixel-swap': 'src/pixel-swap/entry.jsx'
+    'pixel-swap': 'src/pixel-swap/entry.jsx',
+    'metallic-paint': 'src/metallic-paint/entry.jsx'
   },
   bundle: true,
   minify: true,

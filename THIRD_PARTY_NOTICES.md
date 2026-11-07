@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, and the TargetCursor component in `src/target-cursor/` are adapted from React Bits by David Haz.
+The FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, the TargetCursor component in `src/target-cursor/`, and the MetallicPaint component in `src/metallic-paint/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits

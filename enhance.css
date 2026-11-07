@@ -318,3 +318,19 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 @media (max-width: 860px) {
   .promise-mask .masked-heading { margin-bottom: 14px; }
 }
+
+/* ---------- metallic paint monogram ---------- */
+.footer-metal { position: relative; width: 96px; height: 96px; margin-bottom: 14px; }
+.footer-metal-fallback {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  color: #3d4952; font-family: var(--display); font-size: 80px; font-weight: 900;
+  letter-spacing: -3px; line-height: .78;
+}
+.footer-metal[data-mounted="true"] .footer-metal-fallback { display: none; }
+.footer-metal-mount { position: absolute; inset: 0; }
+.footer-metal .metallic-paint,
+.footer-metal .metallic-paint-canvas { width: 100%; height: 100%; }
+@media (max-width: 860px) {
+  .footer-metal { width: 76px; height: 76px; margin-bottom: 10px; }
+  .footer-metal-fallback { font-size: 64px; }
+}
