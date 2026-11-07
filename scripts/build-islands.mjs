@@ -31,7 +31,8 @@ await build({
     'dot-field': 'src/dot-field/entry.jsx',
     'iridescence': 'src/iridescence/entry.jsx',
     'waves': 'src/waves/entry.jsx',
-    'grid-motion': 'src/grid-motion/entry.jsx'
+    'grid-motion': 'src/grid-motion/entry.jsx',
+    'liquid-chrome': 'src/liquid-chrome/entry.jsx'
   },
   bundle: true,
   minify: true,
