@@ -3201,14 +3201,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "liquid-chrome.css?v=20261107-32";
+        css.href = "liquid-chrome.css?v=20261107-33";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./liquid-chrome.js?v=20261107-32").catch(() => {});
+          if (ok) import("./liquid-chrome.js?v=20261107-33").catch(() => {});
         });
       };
       const near = () => {

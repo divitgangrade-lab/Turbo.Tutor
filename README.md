@@ -69,7 +69,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - An AnimatedContent policy grid. The three attendance cards enter in sequence when the section approaches the viewport, while the plain cards remain as the no-JS fallback.
 - A TargetCursor reticle. On fine-pointer devices it follows the pointer, locks onto links, buttons, fields and the hero swap, and shows short labels on key actions. It skips touch and reduced-motion visitors, and the native cursor stays when the island is unavailable.
 - A MetallicPaint footer monogram. A liquid-metal TT crest loads as the footer approaches the viewport, tilts with the pointer and stays still under `prefers-reduced-motion`. The plain TT stays visible when WebGL2 or the island is unavailable.
-- A LiquidChrome footer floor. Slow cool chrome folds move beneath the footer links and wordmark, with a dark gradient keeping the text and existing footer effects readable. It loads only near the footer and is skipped for reduced-motion visitors or browsers without WebGL2.
+- A LiquidChrome footer floor. Slow gold chrome folds move beneath the footer links and wordmark, with a dark gradient keeping the text and existing footer effects readable. It loads only near the footer and is skipped for reduced-motion visitors or browsers without WebGL2.
 - A Ribbons footer trail. Amber, red and bone ribbons trail the pointer across the footer as the footer approaches the viewport. It runs only on fine-pointer devices with motion allowed, and the footer reads the same without it.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.

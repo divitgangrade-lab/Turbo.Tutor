@@ -20,23 +20,13 @@ const supportsLiquidChrome = () => {
 if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && supportsLiquidChrome()) {
   render(
     <LiquidChrome
-      color="#b8c2d2"
-      speed={0.12}
-      amplitude={0.2}
-      frequencyX={2.2}
-      frequencyY={2.6}
-      detail={3}
-      thickness={0.9}
-      depth={0.8}
-      roughness={0.46}
-      exposure={0.95}
+      color="#f2c46d"
+      speed={0.2}
+      amplitude={0.3}
+      detail={4}
+      thickness={1}
       interactive
-      rippleStrength={0.35}
-      rippleSize={0.9}
-      tilt={0.55}
-      intro
-      lightMode={false}
-      maxDevicePixelRatio={compact ? 1.3 : 1.6}
+      maxDevicePixelRatio={compact ? 1.4 : 1.8}
     />,
     host
   );
