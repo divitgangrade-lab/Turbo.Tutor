@@ -11,7 +11,8 @@ await build({
     'particle-text': 'src/particle-text/entry.jsx',
     'split-flap-text': 'src/split-flap-text/entry.jsx',
     'warp-text': 'src/warp-text/entry.jsx',
-    'elastic-mesh': 'src/elastic-mesh/entry.jsx'
+    'elastic-mesh': 'src/elastic-mesh/entry.jsx',
+    'halftone-reveal': 'src/halftone-reveal/entry.jsx'
   },
   bundle: true,
   minify: true,
