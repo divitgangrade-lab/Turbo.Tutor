@@ -26,6 +26,8 @@ const spring = (state, goal, stiffness, damping, dt) => {
 const resolveElement = value => (value && 'current' in value ? value.current : value) || null;
 
 const MAX_CURSOR_LABEL = 24;
+const MAX_TARGET_WIDTH = 360;
+const MAX_TARGET_HEIGHT = 220;
 
 const cleanCursorLabel = value => {
   let text = String(value || '')
@@ -206,6 +208,13 @@ const TargetCursor = ({
       const found = node?.closest?.(s.targetSelector) || null;
       const scope = scopeOf();
       if (found && scope && !scope.contains(found)) return null;
+      if (!found) return null;
+      // Cards and whole sections are not cursor targets: framing them balloons the
+      // reticle across the page and drags it away from the pointer.
+      const box = found.getBoundingClientRect();
+      const maxW = Math.min(MAX_TARGET_WIDTH, (window.innerWidth || 1) * 0.42);
+      const maxH = Math.min(MAX_TARGET_HEIGHT, (window.innerHeight || 1) * 0.32);
+      if (box.width > maxW || box.height > maxH) return null;
       return found;
     };
 
@@ -246,7 +255,7 @@ const TargetCursor = ({
       if (locked) {
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const lean = s.parallaxOn ? 0.08 : 0;
+        const lean = 0;
         goalX = cx + (pointer.x - cx) * lean;
         goalY = cy + (pointer.y - cy) * lean;
         const odd = Math.abs(quarter) % 2 === 1;
@@ -266,10 +275,16 @@ const TargetCursor = ({
         pointer.seen = pointer.inside;
       }
 
-      const follow = locked ? snapK : 2200;
-      const followC = locked ? snapC : 2 * Math.sqrt(2200);
-      spring(centerX, goalX, follow, followC, dt);
-      spring(centerY, goalY, follow, followC, dt);
+      if (locked) {
+        spring(centerX, goalX, snapK, snapC, dt);
+        spring(centerY, goalY, snapK, snapC, dt);
+      } else {
+        // Track the pointer exactly; only size and rotation ease into place.
+        centerX.x = goalX;
+        centerX.v = 0;
+        centerY.x = goalY;
+        centerY.v = 0;
+      }
       spring(halfW, goalW, snapK, snapC, dt);
       spring(halfH, goalH, snapK, snapC, dt);
       spring(radius, goalR, snapK, 2 * snapW, dt);

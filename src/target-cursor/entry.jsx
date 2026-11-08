@@ -9,12 +9,12 @@ const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)').ma
 if (host && !reduced && finePointer) {
   render(
     <TargetCursor
-      targetSelector="a, button, summary, label, input, select, textarea, [data-cursor], [data-cursor-label], [role='button'], [role='tab'], [role='switch'], .hero-swap"
+      targetSelector="a, button, summary, label, input, select, textarea, [data-cursor], [data-cursor-label], [role='button'], [role='tab'], [role='switch']"
       cursorColor="#ffffff"
       cursorColorOnTarget="#ffd400"
-      spinDuration={2.4}
+      spinDuration={0}
       hoverDuration={0.2}
-      parallaxOn
+      parallaxOn={false}
       hideDefaultCursor
       size={34}
       cornerSize={12}
