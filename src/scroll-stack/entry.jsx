@@ -42,7 +42,7 @@ if (root && mount) {
     <ScrollStack
       itemDistance={92}
       itemStackDistance={18}
-      stackPosition="18%"
+      stackPosition={96}
       itemScale={0.04}
       baseScale={0.86}
       dimAmount={0.14}
