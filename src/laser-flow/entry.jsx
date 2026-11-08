@@ -12,17 +12,17 @@ if (host && surface) {
     <LaserFlow
       surfaceRef={surfaceRef}
       beamPosition={0.62}
-      color="#ffd400"
-      intensity={1.7}
-      beamWidth={1.6}
-      flare={1.4}
-      spread={1.5}
-      spill={1.1}
-      fog={0.4}
-      dust={1.5}
+      color="#ffd75e"
+      intensity={2.7}
+      beamWidth={2.2}
+      flare={1.9}
+      spread={1.9}
+      spill={1.5}
+      fog={0.55}
+      dust={1.9}
       streaks={1.5}
       dots={1}
-      pulse={1.4}
+      pulse={1.7}
       speed={1.2}
       seed={7}
       theme="dark"
