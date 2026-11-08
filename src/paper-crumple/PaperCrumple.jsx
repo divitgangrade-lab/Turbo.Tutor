@@ -277,6 +277,7 @@ const PaperCrumple = ({
   detail = 64,
   disabled = false,
   resetKey = 0,
+  discardSelector = '#helmet-trash',
   onStateChange,
   onError,
   className = '',
@@ -289,6 +290,7 @@ const PaperCrumple = ({
   const focusRef = useRef(null);
   const resetRef = useRef(null);
   const cancelRef = useRef(null);
+  const discardRef = useRef(null);
   const [status, setStatus] = useState('loading');
   const options = useRef({
     releaseBehavior,
@@ -304,6 +306,7 @@ const PaperCrumple = ({
     throwStrength,
     throwFriction,
     disabled,
+    discardSelector,
     onStateChange,
     onError
   });
@@ -321,6 +324,7 @@ const PaperCrumple = ({
     throwStrength,
     throwFriction,
     disabled,
+    discardSelector,
     onStateChange,
     onError
   };
@@ -542,6 +546,17 @@ const PaperCrumple = ({
     let velocityX = 0,
       velocityY = 0,
       gliding = false;
+    let discarding = false,
+      regenerate = false,
+      pendingDiscard = false,
+      phaseStart = 0,
+      renderScale = 1;
+    let trashFromX = 0,
+      trashFromY = 0,
+      trashToX = 0,
+      trashToY = 0,
+      trashControlX = 0,
+      trashControlY = 0;
     let homeX = 0,
       homeY = 0,
       hasInteracted = false;
@@ -631,6 +646,12 @@ const PaperCrumple = ({
       lighting.value = THREE.MathUtils.smoothstep(fold + memory.value, 0, 0.4);
     }
     function placeHitTarget() {
+      if (discarding || regenerate) {
+        hit.style.transform = 'translate3d(-9999px, -9999px, 0)';
+        hit.style.width = '0';
+        hit.style.height = '0';
+        return;
+      }
       const bounds = geometry.boundingBox;
       if (!bounds) return;
       let minX = Infinity,
@@ -669,49 +690,97 @@ const PaperCrumple = ({
       lastTime = time;
       const opts = options.current;
       let moving = false;
-      const duration = held ? finite(opts.crumpleDuration, 0.55) : finite(opts.releaseDuration, 0.4);
-      for (const s of springs)
-        moving =
-          advance(
-            s,
-            dt,
-            s === amount || s === memory ? duration : held && (s === posX || s === posY) ? 0.24 : 0.42,
-            reduceMotion || keyboard
-          ) || moving;
-      if (gliding && !held) {
-        const damping = Math.exp(-finite(options.current.throwFriction, 1.8) * dt);
-        velocityX *= damping;
-        velocityY *= damping;
-        posX.value += velocityX * dt;
-        posY.value += velocityY * dt;
+      if (discarding) {
+        const progress = Math.min(1, (time - phaseStart) / 920);
+        const eased = progress * progress * (3 - 2 * progress);
+        const inverse = 1 - eased;
+        posX.value = inverse * inverse * trashFromX + 2 * inverse * eased * trashControlX + eased * eased * trashToX;
+        posY.value = inverse * inverse * trashFromY + 2 * inverse * eased * trashControlY + eased * eased * trashToY;
         posX.target = posX.value;
         posY.target = posY.value;
-        posX.velocity = posY.velocity = 0;
-        if (Math.hypot(velocityX, velocityY) < 3) {
-          gliding = false;
-          velocityX = velocityY = 0;
-        }
+        sheet.rotation.set(0, 0, baseRotation + eased * Math.PI * 3);
+        renderScale = 1 - eased * 0.84;
         moving = true;
-      }
-      peak = Math.max(peak, amount.value);
-      deform();
-      sheet.rotation.set(tiltX.value, tiltY.value, baseRotation);
-      if (held && !keyboard && opts.draggable) {
-        const attribute = geometry.attributes.position;
-        anchor.set(0, 0, 0);
-        for (let i = 0; i < 3; i++) {
-          a.fromBufferAttribute(attribute, gripIndices[i]);
-          anchor.addScaledVector(a, weights.getComponent(i));
+        if (progress >= 1) {
+          discarding = false;
+          sheet.visible = false;
+          regenerate = true;
+          phaseStart = performance.now() + 260;
+          posX.value = posX.target = freeRoam ? homeX : 0;
+          posY.value = posY.target = freeRoam ? homeY : 0;
+          amount.value = amount.target = 0;
+          amount.velocity = 0;
+          memory.value = memory.target = 0;
+          memory.velocity = 0;
+          peak = 0;
+          renderScale = 0.05;
+          deform();
+          publish('regenerating');
+          window.dispatchEvent(new CustomEvent('turbotutor:helmet-regenerating'));
         }
-        anchor.multiplyScalar(scale).applyEuler(sheet.rotation);
-        plane.constant = -anchor.z;
-        setPointer(pointerX, pointerY);
-        if (raycaster.ray.intersectPlane(plane, world)) {
-          posX.target = world.x - anchor.x;
-          posY.target = world.y - anchor.y;
+      } else if (regenerate) {
+        const progress = clamp((time - phaseStart) / 1900, 0, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        renderScale = 0.05 + 0.95 * eased;
+        sheet.visible = progress > 0;
+        moving = true;
+        posX.value = posX.target = freeRoam ? homeX : 0;
+        posY.value = posY.target = freeRoam ? homeY : 0;
+        sheet.rotation.set(0, 0, baseRotation);
+        if (progress >= 1) {
+          regenerate = false;
+          renderScale = 1;
+          sheet.visible = true;
+          hit.disabled = options.current.disabled;
+          publish('flat');
+          window.dispatchEvent(new CustomEvent('turbotutor:helmet-regenerated'));
+        }
+      } else {
+        const duration = held ? finite(opts.crumpleDuration, 0.55) : finite(opts.releaseDuration, 0.4);
+        for (const s of springs)
+          moving =
+            advance(
+              s,
+              dt,
+              s === amount || s === memory ? duration : held && (s === posX || s === posY) ? 0.24 : 0.42,
+              reduceMotion || keyboard
+            ) || moving;
+        if (gliding && !held) {
+          const damping = Math.exp(-finite(options.current.throwFriction, 1.8) * dt);
+          velocityX *= damping;
+          velocityY *= damping;
+          posX.value += velocityX * dt;
+          posY.value += velocityY * dt;
+          posX.target = posX.value;
+          posY.target = posY.value;
+          posX.velocity = posY.velocity = 0;
+          if (Math.hypot(velocityX, velocityY) < 3) {
+            gliding = false;
+            velocityX = velocityY = 0;
+          }
+          moving = true;
+        }
+        peak = Math.max(peak, amount.value);
+        deform();
+        sheet.rotation.set(tiltX.value, tiltY.value, baseRotation);
+        if (held && !keyboard && opts.draggable) {
+          const attribute = geometry.attributes.position;
+          anchor.set(0, 0, 0);
+          for (let i = 0; i < 3; i++) {
+            a.fromBufferAttribute(attribute, gripIndices[i]);
+            anchor.addScaledVector(a, weights.getComponent(i));
+          }
+          anchor.multiplyScalar(scale).applyEuler(sheet.rotation);
+          plane.constant = -anchor.z;
+          setPointer(pointerX, pointerY);
+          if (raycaster.ray.intersectPlane(plane, world)) {
+            posX.target = world.x - anchor.x;
+            posY.target = world.y - anchor.y;
+          }
         }
       }
       sheet.position.set(posX.value, posY.value, 0);
+      sheet.scale.setScalar(scale * renderScale);
       sheet.updateMatrixWorld(true);
       const shadowBounds = geometry.boundingBox;
       if (shadowBounds) {
@@ -745,7 +814,7 @@ const PaperCrumple = ({
       scale =
         paperWidth *
         Math.min(1, Math.max(1, fitWidth - 48) / paperWidth, Math.max(1, fitHeight - 48) / paperHeight);
-      sheet.scale.setScalar(scale);
+      sheet.scale.setScalar(scale * renderScale);
       camera.aspect = viewportWidth / viewportHeight;
       camera.position.z = viewportHeight / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
       camera.updateProjectionMatrix();
@@ -876,6 +945,12 @@ const PaperCrumple = ({
     function reset() {
       finish(true);
       gliding = false;
+      discarding = false;
+      regenerate = false;
+      pendingDiscard = false;
+      renderScale = 1;
+      sheet.visible = true;
+      hit.disabled = options.current.disabled;
       velocityX = velocityY = 0;
       for (const s of springs) s.target = s.value = s.velocity = 0;
       if (freeRoam) {
@@ -887,7 +962,43 @@ const PaperCrumple = ({
       publish('flat');
       wake();
     }
+    function discard() {
+      if (disposed || contextLost || !freeRoam || discarding || regenerate) return;
+      if (!ready) {
+        pendingDiscard = true;
+        return;
+      }
+      pendingDiscard = false;
+      finish(true);
+      gliding = false;
+      velocityX = velocityY = 0;
+      const trash = document.querySelector(options.current.discardSelector);
+      const rect = trash?.getBoundingClientRect();
+      const startX = viewportWidth / 2 + posX.value;
+      const startY = viewportHeight / 2 - posY.value;
+      const endX = rect?.width ? rect.left + rect.width / 2 : 48;
+      const endY = rect?.height ? rect.top + rect.height * 0.57 : viewportHeight - 56;
+      const controlX = (startX + endX) / 2 + (startX < endX ? 76 : -76);
+      const controlY = Math.min(startY, endY) - Math.min(240, 100 + Math.abs(startY - endY) * 0.28);
+      trashFromX = posX.value;
+      trashFromY = posY.value;
+      trashToX = endX - viewportWidth / 2;
+      trashToY = viewportHeight / 2 - endY;
+      trashControlX = controlX - viewportWidth / 2;
+      trashControlY = viewportHeight / 2 - controlY;
+      discarding = true;
+      regenerate = false;
+      phaseStart = performance.now();
+      renderScale = 1;
+      sheet.visible = true;
+      hit.disabled = true;
+      peak = 0;
+      publish('discarding');
+      window.dispatchEvent(new CustomEvent('turbotutor:helmet-discarded'));
+      wake();
+    }
     resetRef.current = reset;
+    discardRef.current = discard;
     cancelRef.current = () => finish(true);
     function start() {
       held = true;
@@ -902,7 +1013,7 @@ const PaperCrumple = ({
       wake();
     }
     function pointerDown(event) {
-      if (!ready || options.current.disabled || held || event.button !== 0 || !event.isPrimary) return;
+      if (!ready || options.current.disabled || held || discarding || regenerate || event.button !== 0 || !event.isPrimary) return;
       const rect = freeRoam ? canvas.getBoundingClientRect() : root.getBoundingClientRect();
       pointerX = lastX = event.clientX - rect.left;
       pointerY = lastY = event.clientY - rect.top;
@@ -1123,6 +1234,7 @@ const PaperCrumple = ({
           ready = true;
           setStatus('ready');
           hit.disabled = options.current.disabled;
+          if (pendingDiscard) discard();
           wake();
         })
         .catch(error => {
@@ -1138,7 +1250,7 @@ const PaperCrumple = ({
       disposed = true;
       cancelAnimationFrame(frame);
       if (pointerId !== null && hit.hasPointerCapture(pointerId)) hit.releasePointerCapture(pointerId);
-      resetRef.current = cancelRef.current = null;
+      resetRef.current = cancelRef.current = discardRef.current = null;
       observer.disconnect();
       intersectionObserver?.disconnect();
       hit.removeEventListener('pointerdown', pointerDown);
@@ -1188,8 +1300,14 @@ const PaperCrumple = ({
     detail,
     freeRoam,
     throwStrength,
-    throwFriction
+    throwFriction,
+    discardSelector
   ]);
+  useEffect(() => {
+    const discard = () => discardRef.current?.();
+    window.addEventListener('turbotutor:discard-helmet', discard);
+    return () => window.removeEventListener('turbotutor:discard-helmet', discard);
+  }, []);
   useEffect(() => {
     resetRef.current?.();
   }, [resetKey]);

@@ -41,4 +41,5 @@ if (host) {
     host
   );
   host.dataset.mounted = 'true';
+  window.dispatchEvent(new Event('turbotutor:helmet-mounted'));
 }

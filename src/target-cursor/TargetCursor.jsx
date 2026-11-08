@@ -136,10 +136,20 @@ const TargetCursor = ({
 
   useEffect(() => {
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-    const update = () => setHost(finePointer.matches ? document.body : null);
+    const layer = () => document.querySelector('dialog[open]') || document.body;
+    const update = () => setHost(finePointer.matches ? layer() : null);
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['open']
+    });
     update();
     finePointer.addEventListener('change', update);
-    return () => finePointer.removeEventListener('change', update);
+    return () => {
+      observer.disconnect();
+      finePointer.removeEventListener('change', update);
+    };
   }, []);
 
   useEffect(() => {

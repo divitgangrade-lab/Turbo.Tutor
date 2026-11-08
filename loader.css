@@ -11,10 +11,10 @@
   align-content: center;
   gap: 14px;
   overflow: hidden;
-  background: #080b0e;
+  background: #05080b;
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
 }
 
 .tt-loader::before {
@@ -22,8 +22,7 @@
   z-index: 1;
   inset: 0;
   background:
-    radial-gradient(52% 46% at 50% 42%, rgba(8, 11, 14, 0.04) 0%, rgba(8, 11, 14, 0.34) 68%, rgba(8, 11, 14, 0.82) 100%),
-    linear-gradient(180deg, rgba(8, 11, 14, 0.58) 0%, rgba(8, 11, 14, 0.06) 46%, rgba(8, 11, 14, 0.72) 100%);
+    radial-gradient(74% 68% at 50% 45%, transparent 0 48%, rgba(8, 11, 14, 0.06) 68%, rgba(8, 11, 14, 0.42) 100%);
   content: "";
   pointer-events: none;
 }

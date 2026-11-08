@@ -67,10 +67,10 @@
   </script>
   <link rel="stylesheet" href="legal-scene.css?v=20261108-7">
   <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
-  <link rel="stylesheet" href="./loader.css?v=20261108-8">
-  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-1">
-  <script src="./loader.js?v=20261108-8" defer></script>
-  <script type="module" src="./liquid-chrome.js?v=20261108-1" defer></script>
+  <link rel="stylesheet" href="./loader.css?v=20261108-9">
+  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-2">
+  <script src="./loader.js?v=20261108-9" defer></script>
+  <script type="module" src="./liquid-chrome.js?v=20261108-2" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
@@ -171,7 +171,7 @@
     <p>TurboTutor is a trading name used by Divit Gangrade for independent tutoring. This site does not publish a company registration number or a registered office. If a separate legal entity is used for a booking, the tutor will tell you in writing before you pay anything.</p>
 
     <div class="note">
-      <p><b>The short version.</b> This is a static website. It has no accounts, no analytics, no advertising, no cookies and no online payment. A request, message or club signup is sent from this site through FormSubmit, a form-to-email processor, to the tutor's inbox. The only personal information the tutor receives is what you choose to submit.</p>
+      <p><b>The short version.</b> This is a static website with no accounts, analytics, advertising, cookies or online payment. Request, contact and club forms go through FormSubmit to the tutor's inbox. Pit-wall notes are different: the rating and note you post are stored in a small review database and shown publicly to every visitor. Only post what you are happy for anyone to read.</p>
     </div>
 
     <h2>1. What this policy covers</h2>
@@ -180,11 +180,13 @@
     <h2>2. Information you give</h2>
     <p>The request form asks for a parent or guardian name, the student's name, an email address, a phone number, the plans you selected, your preferred payment method, and an acknowledgement of the policies. That information is needed to reply to you, check availability, plan sessions and agree a price. If you leave it out, the tutor cannot prepare a request.</p>
     <p>The Paddock Club form asks for an email address and your agreement to these documents. Direct emails, text messages and calls contain whatever you choose to include.</p>
-    <p><b>Please do not send</b> Social Security numbers, government identification, payment card numbers, bank details, passwords, medical records or other sensitive information. None of it is needed to arrange tutoring, and email and text are not secure ways to send it.</p>
+    <p>The pit-wall review form asks for a star rating and a short note. It does not ask for a name or contact details. The note is public and is shown to every visitor.</p>
+    <p><b>Please do not send</b> Social Security numbers, government identification, payment card numbers, bank details, passwords, medical records or other sensitive information. None of it is needed to arrange tutoring, and email and text are not secure ways to send it. Do not put personal information in a public pit-wall note.</p>
 
     <h2>3. How a request leaves your browser</h2>
-    <p>There is no TurboTutor server or database behind the forms. When you choose Send, the details go from your browser to FormSubmit, which forwards them to the tutor's email address. FormSubmit is a form-to-email processor; TurboTutor does not keep a copy on this website. The details are not stored in browser storage after you send them. FormSubmit says it keeps submissions for up to 30 days while delivering them.</p>
+    <p>There is no TurboTutor server or database behind the request, contact or Paddock Club forms. When you choose Send, the details go from your browser to FormSubmit, which forwards them to the tutor's email address. FormSubmit is a form-to-email processor; TurboTutor does not keep a copy on this website. The details are not stored in browser storage after you send them. FormSubmit says it keeps submissions for up to 30 days while delivering them.</p>
     <p>Once you send it, the message is delivered through your email provider or mobile carrier and arrives in the tutor's email inbox or phone. The tutor uses it to reply and to keep a record of what was agreed.</p>
+    <p>The pit-wall review form is handled separately. When you send a rating and note, they go to a small review API hosted on Freebuff Sites and are stored in a Cloudflare D1 database. The latest notes are returned to every visitor and displayed on this page. A note is not linked to a name or account, and it is public by design.</p>
 
     <h2>4. Children and students</h2>
     <p>The site is intended for parents and guardians aged 18 or over. Students do not create accounts and the site does not ask them to submit anything. A parent or guardian sends the request and remains responsible for the information in it.</p>
@@ -194,19 +196,21 @@
     <p>This site does not set cookies. It stores two small preferences in your own browser so that features work as expected: your light or dark theme choice, and the record of a welcome-offer spin so the same offer is not revealed twice. The <a href="cookies.html">cookie policy</a> lists them, explains why they are functional rather than tracking, and shows how to clear them.</p>
 
     <h2>6. Analytics, advertising and embeds</h2>
-    <p>There are no analytics scripts, advertising pixels, heat maps, session recordings, social plugins or third-party iframes on this site. Fonts, images, styles and scripts are served from this domain, so loading a page does not send your IP address to a font network or an embed provider. The only cross-origin request is made when you choose to send a form: it goes to FormSubmit.co so the message can reach the tutor's inbox. Outbound links open another site only when you choose them.</p>
+    <p>There are no analytics scripts, advertising pixels, heat maps, session recordings, social plugins or third-party iframes on this site. Fonts, images, styles and scripts are served from this domain, so loading a page does not send your IP address to a font network or an embed provider. Cross-origin requests happen only when you choose to send a form: request, contact and club messages go to FormSubmit.co, and a pit-wall note goes to the review API. Outbound links open another site only when you choose them.</p>
     <p>The site does not track you across other websites, does not build a profile of you and does not make automated decisions about you. Because there is no tracking, a Do Not Track or Global Privacy Control signal has nothing to switch off here.</p>
 
     <h2>7. Hosting and service providers</h2>
     <p>The site is hosted by GitHub Pages, a service of GitHub, Inc. in the United States. Like any web host, GitHub processes technical request data such as your IP address, browser type and the time of your visit in order to deliver the site and protect it from abuse. GitHub handles that data under its own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">privacy statement</a>.</p>
     <p>The tutor also relies on an email provider, a mobile carrier, and Zoom for online sessions. Those providers process messages and meeting data under their own terms. Personal information is not sold, rented or shared for advertising. It is shared only with those providers as needed to run tutoring, or where the law requires it.</p>
     <p>FormSubmit (formsubmit.co) is the form-to-email processor used by the request, contact and Paddock Club forms. It receives the name, email address, phone number, student details, message and any other information you enter, and forwards it to the tutor's email address. FormSubmit says it retains submissions for up to 30 days while delivering them and handles them under its <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">privacy policy</a>. Do not send identity documents, card numbers or medical records through these forms.</p>
+    <p>The pit-wall review API is hosted on Freebuff Sites and uses Cloudflare D1 for storage. It receives the star rating, note and ordinary request data such as your IP address and browser type, which the host processes to deliver the service and protect it from abuse. The note and rating are displayed publicly; the review API does not receive your name, email address or phone number unless you put them in the note yourself.</p>
 
     <h2>8. How long information is kept</h2>
     <ul>
       <li>An enquiry that does not lead to tutoring is deleted within 12 months of the last message.</li>
       <li>Student and session records are kept while tutoring continues and for up to 12 months after the last session, then deleted.</li>
       <li>A Paddock Club email address is kept until you ask to be removed.</li>
+      <li>A pit-wall note and rating are kept on the public wall until the tutor removes them or you ask for deletion.</li>
       <li>Records may be kept longer where tax, accounting or other law requires it, or to establish or defend a legal claim.</li>
       <li>Messages may remain in provider backups for a limited period after deletion, under the provider's own schedule.</li>
     </ul>
@@ -224,7 +228,7 @@
     <p>Where the GDPR or UK GDPR applies, the lawful basis for handling a request is to take steps at your request before entering a contract, and the legitimate interest in replying to enquiries and running tutoring. Marketing emails rely on your consent, which you can withdraw at any time. You have the rights listed above, plus the right to restrict processing, the right to data portability and the right to complain to your local supervisory authority. In the UK that is the Information Commissioner's Office.</p>
 
     <h2>11. Security</h2>
-    <p>The site is served over HTTPS. Because it has no login, no database and no payment form, there is very little to breach. The main risk is the ordinary one: email and text messages can be intercepted or misdirected. Send only what is necessary, and tell the tutor straight away if you think a message went to the wrong person. If a breach affects your information and the law requires notice, the tutor will contact you and the relevant authority without undue delay.</p>
+    <p>The site is served over HTTPS. Because it has no login and no payment form, there is little to breach. Request and club messages are not stored on the site; pit-wall notes are public by design. The main risk is the ordinary one: email and text messages can be intercepted or misdirected. Send only what is necessary, and tell the tutor straight away if you think a message went to the wrong person. If a breach affects your information and the law requires notice, the tutor will contact you and the relevant authority without undue delay.</p>
 
     <h2>12. Links to other sites</h2>
     <p>Pages on this site link to Wikimedia Commons, Creative Commons, the Henrico County library booking system, GitHub and Zoom. Those links are there for reference. Once you follow one, the destination's privacy policy applies, not this one.</p>

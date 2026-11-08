@@ -4,7 +4,7 @@
   const loader = document.querySelector('.tt-loader');
   if (!loader) return;
 
-  const MIN_VISIBLE = 500;
+  const MIN_VISIBLE = 1200;
   const started = performance.now();
   let finished = false;
 

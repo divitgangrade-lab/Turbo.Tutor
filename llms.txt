@@ -38,7 +38,8 @@
 - Requests are prepared in the browser and sent by the visitor from their own email or messaging app.
 - The site has no analytics, advertising pixels or online payment. It sets no cookies and loads no third-party fonts or embeds; two functional browser-storage keys remember the theme and a welcome offer.
 - Legal pages: Privacy, Terms, Cookies, Refunds, EULA and the copyright and DMCA policy, all effective 7 November 2026.
-- Testimonials, ratings and a team photograph are not published because they do not exist yet.
+- A team photograph is not published; pit-wall ratings and notes are public and appear when visitors submit them.
+- Pit-wall reviews are stored by a small anonymous review API; there are no accounts or private profiles.
 
 ## Sitemap
 

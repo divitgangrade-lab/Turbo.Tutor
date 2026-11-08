@@ -36,22 +36,22 @@ const LoaderChrome = () => {
 
   return (
     <LiquidChrome
-      color="#dfe3e8"
-      speed={reduced ? 0 : compact ? 1.25 : 1.55}
-      amplitude={0.9}
-      frequencyX={4.2}
-      frequencyY={3.4}
-      detail={compact ? 6 : 8}
-      thickness={1.2}
-      depth={2}
-      roughness={0.22}
-      exposure={1.1}
+      color="#f4f7fb"
+      speed={reduced ? 0 : compact ? 1.8 : 2.2}
+      amplitude={1.1}
+      frequencyX={4.4}
+      frequencyY={3.6}
+      detail={compact ? 7 : 8}
+      thickness={0.9}
+      depth={2.8}
+      roughness={0.08}
+      exposure={1.45}
       interactive={!reduced}
-      rippleStrength={3.5}
-      rippleSize={2.8}
-      tilt={1.4}
+      rippleStrength={5}
+      rippleSize={2.4}
+      tilt={1.7}
       intro={false}
-      maxDevicePixelRatio={compact ? 1.5 : 1.75}
+      maxDevicePixelRatio={compact ? 1.6 : 2}
       active={active}
     />
   );

@@ -7,6 +7,34 @@ import './PitRating.css';
 const LABELS = ['Rough lap', 'Getting there', 'Solid lap', 'Quick lap', 'Personal best'];
 const MAX_NOTE = 240;
 const MAX_REVIEWS = 5;
+const REVIEWS_ENDPOINT = document.getElementById('pit-rating-mount')?.dataset.reviewsEndpoint || '';
+
+const relativeTime = value => {
+  const timestamp = Date.parse(value);
+  if (!Number.isFinite(timestamp)) return 'recently';
+  const seconds = Math.max(0, Math.round((Date.now() - timestamp) / 1000));
+  if (seconds < 60) return 'just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  return new Date(timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+};
+
+const normalizeReview = review => {
+  if (!review || typeof review !== 'object') return null;
+  const stars = Number(review.stars);
+  const note = typeof review.note === 'string' ? review.note.trim() : '';
+  if (!Number.isInteger(stars) || stars < 1 || stars > 5 || !note) return null;
+  return {
+    id: String(review.id ?? `${Date.now()}-${Math.random()}`),
+    stars,
+    note: note.slice(0, MAX_NOTE),
+    createdAt: typeof review.createdAt === 'string' ? review.createdAt : new Date().toISOString()
+  };
+};
 
 const Car = () => (
   <svg viewBox="0 0 200 70" aria-hidden="true" focusable="false">
@@ -49,10 +77,13 @@ function PitRating() {
   const [status, setStatus] = useState('');
   const [note, setNote] = useState('');
   const [reviews, setReviews] = useState([]);
+  const [loadState, setLoadState] = useState(REVIEWS_ENDPOINT ? 'loading' : 'offline');
+  const [submitting, setSubmitting] = useState(false);
   const sectionRef = useRef(null);
   const animations = useRef([]);
   const timers = useRef([]);
   const dropCleanup = useRef(null);
+  const alive = useRef(true);
 
   const cancelAnimations = () => {
     animations.current.forEach(animation => animation.cancel());
@@ -70,14 +101,50 @@ function PitRating() {
     timers.current = [];
   };
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    alive.current = true;
+    if (!REVIEWS_ENDPOINT) {
+      setLoadState('offline');
+      return () => {
+        alive.current = false;
+        clearTimers();
+        clearDrop();
+        cancelAnimations();
+      };
+    }
+
+    const controller = new AbortController();
+    const load = async () => {
+      setLoadState('loading');
+      try {
+        const response = await fetch(`${REVIEWS_ENDPOINT}?limit=${MAX_REVIEWS}`, {
+          signal: controller.signal,
+          cache: 'no-store',
+          headers: { Accept: 'application/json' }
+        });
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) throw new Error(payload?.error || `The pit wall returned ${response.status}.`);
+        if (!alive.current) return;
+        const next = Array.isArray(payload?.reviews)
+          ? payload.reviews.map(normalizeReview).filter(Boolean).slice(0, MAX_REVIEWS)
+          : [];
+        setReviews(next);
+        setLoadState('ready');
+      } catch (error) {
+        if (error?.name === 'AbortError' || !alive.current) return;
+        setLoadState('error');
+      }
+    };
+    load();
+
+    return () => {
+      controller.abort();
+      alive.current = false;
       clearTimers();
       clearDrop();
       cancelAnimations();
-    },
-    []
-  );
+    };
+  }, []);
 
   const dropStars = selected => {
     const section = sectionRef.current;
@@ -310,9 +377,9 @@ function PitRating() {
     if (next) setStatus('');
   };
 
-  const postReview = event => {
+  const postReview = async event => {
     event.preventDefault();
-    if (state !== 'idle') return;
+    if (state !== 'idle' || submitting) return;
     const text = note.trim();
     if (!value) {
       setStatus('Pick a star rating first.');
@@ -322,10 +389,43 @@ function PitRating() {
       setStatus('Add a line about the lap.');
       return;
     }
+    if (!REVIEWS_ENDPOINT) {
+      setStatus('The shared pit wall is offline right now.');
+      return;
+    }
+
     const rating = value;
-    setReviews(previous => [{ id: `${Date.now()}-${previous.length}`, stars: value, text: text.slice(0, MAX_NOTE) }, ...previous].slice(0, MAX_REVIEWS));
+    setSubmitting(true);
+    setStatus('Sending your lap to the pit wall.');
+
+    let saved;
+    try {
+      const response = await fetch(REVIEWS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({ stars: rating, note: text.slice(0, MAX_NOTE) })
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(payload?.error || `The pit wall returned ${response.status}.`);
+      saved = normalizeReview(payload?.review);
+      if (!saved) throw new Error('The pit wall sent back something unreadable.');
+    } catch (error) {
+      if (!alive.current) return;
+      setSubmitting(false);
+      setState('idle');
+      setStatus(`${error?.message || 'The pit wall could not save that.'} Try again.`);
+      return;
+    }
+
+    if (!alive.current) return;
+    setReviews(previous => [saved, ...previous.filter(review => review.id !== saved.id)].slice(0, MAX_REVIEWS));
+    setLoadState('ready');
     setNote('');
     setValue(0);
+    setSubmitting(false);
     clearTimers();
     clearDrop();
     cancelAnimations();
@@ -333,13 +433,13 @@ function PitRating() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
       setState('idle');
-      setStatus('Review posted below.');
+      setStatus('Review posted for everyone.');
       timers.current.push(setTimeout(() => setStatus(''), 4200));
       return;
     }
 
     setState('ok');
-    setStatus('Sending your lap to the pit wall.');
+    setStatus('Lap logged. Sending the car down the pit lane.');
     timers.current.push(
       setTimeout(() => {
         setState('falling');
@@ -356,7 +456,7 @@ function PitRating() {
     timers.current.push(
       setTimeout(() => {
         setState('idle');
-        setStatus('Review posted below.');
+        setStatus('Review posted for everyone.');
         clearDrop();
       }, 9000)
     );
@@ -396,7 +496,7 @@ function PitRating() {
 
       <form className="pit-rating__form" onSubmit={postReview}>
         <label className="pit-rating__field">
-          <span>Leave a note</span>
+          <span>Leave a public note</span>
           <textarea
             id="pit-review-note"
             name="reviewNote"
@@ -404,10 +504,10 @@ function PitRating() {
             maxLength={MAX_NOTE}
             value={note}
             onInput={event => setNote(event.currentTarget.value)}
-            placeholder="What did the lap feel like?"
+            placeholder="What did the lap feel like? Notes are public."
           />
         </label>
-        <button className="pit-rating__send" type="submit" disabled={state !== 'idle'} aria-label="Post review and send the car">
+        <button className="pit-rating__send" type="submit" disabled={state !== 'idle' || submitting || !REVIEWS_ENDPOINT} aria-label="Post review and send the car">
           <span className="back" aria-hidden="true" />
           <span className="front" aria-hidden="true">
             <Arrow />
@@ -425,7 +525,7 @@ function PitRating() {
 
       <div className="pit-rating__log">
         <p className="pit-rating__log-head">
-          Pit wall notes <span>{reviews.length ? `${reviews.length} logged this visit` : 'waiting for the first lap'}</span>
+          Pit wall notes <span>{loadState === 'loading' ? 'loading the wall' : reviews.length ? `${reviews.length} on the wall` : 'waiting for the first lap'}</span>
         </p>
         {reviews.length ? (
           <ol className="pit-rating__log-list">
@@ -436,13 +536,19 @@ function PitRating() {
                   {'★'.repeat(review.stars)}
                   <span>{'★'.repeat(5 - review.stars)}</span>
                 </p>
-                <p className="pit-rating__log-text">{review.text}</p>
+                <p className="pit-rating__log-text">{review.note}</p>
                 <span className="pit-rating__log-meta">
-                  {LABELS[review.stars - 1]} · just now
+                  {LABELS[review.stars - 1]} · {relativeTime(review.createdAt)}
                 </span>
               </li>
             ))}
           </ol>
+        ) : loadState === 'loading' ? (
+          <p className="pit-rating__log-empty">Loading the latest notes from the pit wall.</p>
+        ) : loadState === 'error' ? (
+          <p className="pit-rating__log-empty">The pit wall did not load. Refresh the page to try again.</p>
+        ) : loadState === 'offline' ? (
+          <p className="pit-rating__log-empty">The shared pit wall is not connected yet.</p>
         ) : (
           <p className="pit-rating__log-empty">No notes yet. Rate the lap, leave a line, and send it down.</p>
         )}

@@ -4,7 +4,7 @@ The security model, audit results and residual risks are documented in `SECURITY
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend and no online payment. Thirty-two small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography and SmoothScroll, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the warp band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend of its own and no online payment. Thirty-three small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography, SmoothScroll and LiquidChrome, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the warp band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
@@ -36,6 +36,10 @@ A signup panel below the launch section offers **5% off the first month** (code 
 
 The code is shown after the signup sends. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. The form uses FormSubmit's public endpoint, so no newsletter API key is kept in the repository. FormSubmit requires one activation click from the tutor inbox before the first message can be delivered.
 
+### Pit wall reviews
+
+The footer pit wall posts a star rating and public note to a small review API at `https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page/api/reviews`. Its source and Sites manifest are in `reviews-api/`; reviews are stored in Cloudflare D1 and the latest five are shown to every visitor. The endpoint is intentionally public and anonymous, and it validates the rating, note length and JSON shape before writing.
+
 ### Twin Hickory Library
 In-person laps meet at **Twin Hickory Library** in Henrico County. The plan section carries a large bordered card linking to the library's room-booking page (`https://henricolibrary-va.libcal.com/spaces?lid=6277`), and the FAQ and contact panel link there too.
 
@@ -57,7 +61,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A PixelSwap hero photograph. Hovering or focusing the Formula 1 hero swaps in the kart photo with a pixel wave, while the plain photograph remains as the LCP and no-JS fallback.
 - An AcidSquares hero backdrop. A dark, red-lit WebGL surface of raised tiles moves slowly behind the hero copy and Formula 1 photograph. It loads after first paint, uses a lighter mesh on small screens, and is skipped entirely for reduced-motion visitors or browsers without WebGL2.
 - A LiquidEther course-garage backdrop. A slow red and amber ink flow drifts behind the plan builder, follows the pointer gently, and switches between soft ink on light and luminous flow on dark. It loads only near the plans section and is skipped for reduced-motion visitors or browsers without WebGL2 float targets.
-- A cloud loading overlay. A small Uiverse cloud loader covers the first page load and same-site navigation, then fades once the page is ready. Reduced-motion visitors see the mark without the loop.
+- A LiquidChrome loading overlay. The supplied React Bits chrome shader fills the first page load and same-site navigation with moving polished-metal folds, pointer ripples and a warm studio reflection. It stays visible long enough to read the motion, then fades; reduced-motion visitors get a still chrome surface.
 - A Lenis smooth-scroll layer. Wheel and trackpad scrolling glides with a short ease, anchor links land below the sticky header, and reduced-motion visitors keep native scrolling.
 - A Silk special-coaching backdrop. Pale warm folds drift behind the advanced-program cards in light mode, shifting to a darker amber-sheened fabric in dark mode. It follows the pointer gently, fades at the edges, loads only near the section, and is skipped for reduced-motion visitors or browsers without WebGL2.
 - A Lightfall steps backdrop. Thin red and amber light streaks fall through a dark tunnel behind the three-step explanation. The cursor bends the light like a lens and brightens nearby streaks, while the effect fades at the edges, loads only near the section, and is skipped for reduced-motion visitors or browsers without WebGL2.
@@ -72,7 +76,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A TargetCursor reticle. On fine-pointer devices it follows the pointer, locks onto links, buttons, fields and the hero swap, and shows short labels on key actions. It skips touch and reduced-motion visitors, and the native cursor stays when the island is unavailable.
 - A FallingText footer statement. The pit-wall line scatters into a small physics pile when tapped, pieces can be dragged and thrown, and it flies back into place a few seconds after the pointer leaves. It loads only near the footer and is skipped for reduced-motion visitors.
 - A PaperCrumple footer pit note. The helmet photograph crumples while held, can be dragged, and keeps soft creases after release, with the original photo kept as the no-JS and no-WebGL fallback. It loads only near the footer.
-- A PeekRating pit-wall rating. Five stars preview, lift and pop, and a short note with a round send button posts the lap: the stars break and drop into a small F1 car, the car leaves with a thank-you, and the note appears in a pit-wall list below. Reviews stay in the page for that visit and are never sent or stored; reduced-motion visitors get a plain confirmation instead of the animation.
+- A PeekRating pit-wall rating. Five stars preview, lift and pop, and a short note with a round send button posts the lap: the stars break and drop into a small F1 car, the car leaves with a thank-you, and the saved note appears below. Reviews are stored in the shared pit-wall database and shown to every visitor; reduced-motion visitors get a plain confirmation instead of the animation.
 - A Ribbons footer trail. Amber, red and bone ribbons trail the pointer across the footer as the footer approaches the viewport. It runs only on fine-pointer devices with motion allowed, and the footer reads the same without it.
 - Searchable FAQ, policy cards, contact cards with copy-to-clipboard, and a fully validated request dialog.
 - Responsive down to small phones, with a mobile menu and a full-width kart panel.
@@ -90,7 +94,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 
 ## Custom domain
 
-The site is served at `https://turbotutor.dpdns.org/`, and the repository's `CNAME` file contains that exact host. GitHub Pages reads it on every deploy.
+The site is served at `https://turbotutor.dpdns.org/`, and the repository's `CNAME` file contains that exact host. GitHub Pages reads it on every deploy. The shared pit wall is a separate deployment at `https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page`; it is not the site's custom domain.
 
 To move to another domain:
 
@@ -102,7 +106,7 @@ To move to another domain:
 
 ## Security and privacy
 
-- The site has no backend, accounts, database or payment code, so there are no server sessions, passwords or API keys to protect here.
+- The static pages have no accounts, no payment code and no server sessions. The pit wall uses a separate review API backed by Cloudflare D1; its public endpoint is intentionally anonymous and contains only public star ratings and notes.
 - Every HTML page carries a meta Content Security Policy and a `strict-origin-when-cross-origin` referrer policy. GitHub Pages cannot send HSTS, `X-Frame-Options` or `X-Content-Type-Options` as response headers; `SECURITY.md` records that limit.
 - Forms validate locally and then post to FormSubmit.co, which forwards them to the tutor's inbox. Nothing is posted to this origin, and the site stores no form data.
 - No analytics, advertising pixels, third-party embeds or cookies. Browser storage is limited to the theme choice and the saved offer.
@@ -225,6 +229,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
 ├── CNAME                   # GitHub Pages custom domain
+├── reviews-api/            # Shared pit-wall Worker, D1 schema and Sites manifest
 ├── SECURITY.md             # Security model and audit results
 ├── _config.yml             # Files GitHub Pages must not publish
 ├── enhance.js              # Shared motion, forms and UI behaviour
@@ -235,7 +240,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── legal-bg.css            # Generated topography and falling text styles
 ├── fonts.css               # Self-hosted font faces
 ├── fonts/                  # Self-hosted WOFF2 files and OFL licences
-├── scripts/                # esbuild build script for all twenty-nine islands
+├── scripts/                # esbuild build script for all thirty-three islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -249,6 +254,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/halftone-reveal/    # HalftoneReveal source and mount entry
 ├── src/animated-content/   # AnimatedContent source and mount entry
 ├── src/target-cursor/      # TargetCursor source and mount entry
+├── src/liquid-chrome/      # LiquidChrome source and loader entry
 ├── src/pixel-swap/         # PixelSwap source and mount entry
 ├── src/ribbons/            # Ribbons source and mount entry
 ├── src/acid-squares/       # AcidSquares source and mount entry
@@ -282,7 +288,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies and no server code. The twenty-nine optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and Matter.js and three.js are bundled into the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the site makes no third-party requests.
+No runtime dependencies for the static site. The separate review API is a small Worker with no third-party runtime dependencies. The thirty-three optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LiquidChrome, LegalBackground, Topography and SmoothScroll, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and Matter.js and three.js are bundled into the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the static pages make no third-party font or asset requests; the forms are contacted only when you submit, and the footer pit wall fetches its public review list when it approaches the viewport.
 
 ### Photography credits
 
@@ -314,7 +320,7 @@ npm ci
 npm run build
 ```
 
-`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all twenty-nine islands, and the local server command above checks that the folder serves.
+`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all thirty-three islands, and the local server command above checks that the folder serves.
 
 ---
 
@@ -366,7 +372,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all twenty-nine islands reduce or stop their continuous motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all thirty-three islands reduce or stop their continuous motion.
 
 ## A note on payment
 
@@ -413,5 +419,4 @@ Additional pages and assets:
 - `credits.html`: photograph attribution and licence details.
 
 There is no analytics, advertising pixel or cookie on the site. Web fonts are self-hosted
-and hosting logs come from GitHub Pages. Reviews and a team photograph are
-not published because neither exists yet; the site does not invent them.
+and hosting logs come from GitHub Pages. A team photograph is not published, and the site does not invent reviews. Pit-wall notes appear when visitors submit them.

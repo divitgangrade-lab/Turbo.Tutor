@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0a0c0f">
   <title>TurboTutor | 1:1 Math, English &amp; Science Tutoring, Grades 1–8</title>
@@ -1069,10 +1069,11 @@
   </script>
   <link rel="stylesheet" href="enhance.css?v=20261108-8">
   <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
-  <link rel="stylesheet" href="./loader.css?v=20261108-8">
-  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-1">
-  <script src="./loader.js?v=20261108-8" defer></script>
-  <script type="module" src="./liquid-chrome.js?v=20261108-1" defer></script>
+  <link rel="stylesheet" href="./loader.css?v=20261108-9">
+  <link rel="stylesheet" href="./helmet-trash.css?v=20261108-1">
+  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-2">
+  <script src="./loader.js?v=20261108-9" defer></script>
+  <script type="module" src="./liquid-chrome.js?v=20261108-2" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
@@ -1675,7 +1676,7 @@
       </div>
     </div>
     <div class="wrap footer-rating" id="pit-rating-root">
-      <div id="pit-rating-mount"></div>
+      <div id="pit-rating-mount" data-reviews-endpoint="https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page/api/reviews"></div>
       <p class="footer-rating-fallback">Rate the lap once the pit wall loads.</p>
     </div>
     <div class="wrap footer-top">
@@ -1827,6 +1828,19 @@
     <form method="dialog"><button class="btn" type="submit">Got it</button></form>
   </dialog>
 
+  <div class="helmet-trash" id="helmet-trash" aria-hidden="true">
+    <svg viewBox="0 0 64 78" role="presentation">
+      <path class="helmet-trash__body" d="M15 25h34l-4 44H19z"/>
+      <path class="helmet-trash__band" d="M18 48h28l-.6 8H18.6z"/>
+      <path class="helmet-trash__rim" d="M11 20h42l-3 6H14z"/>
+      <g class="helmet-trash__lid">
+        <path class="helmet-trash__lid-top" d="M11 13h42l-3 7H14z"/>
+        <path class="helmet-trash__handle" d="M26 13V9h12v4"/>
+      </g>
+      <path d="M22 32v27M32 32v27M42 32v27" fill="none" stroke="#66727a" stroke-width="1.4"/>
+      <text class="helmet-trash__label" x="32" y="75" text-anchor="middle">PIT BIN</text>
+    </svg>
+  </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     (() => {
@@ -1880,6 +1894,8 @@
       const emailDialog = $("#email-dialog");
       const emailForm = $("#email-form");
       const toast = $("#toast");
+      const helmetTrash = $("#helmet-trash");
+      let helmetTrashTimer;
       const dealCanvas = $("#deal-wheel");
       const openKartBtn = $("#open-kart");
       let selectedDeal = loadSavedDeal();
@@ -1918,6 +1934,32 @@
         toast.classList.add("show");
         window.clearTimeout(toastTimer);
         toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2800);
+      }
+
+      function discardHelmetForEnrollment() {
+        if (!helmetTrash) return;
+        window.clearTimeout(helmetTrashTimer);
+        helmetTrash.classList.remove("is-full");
+        helmetTrash.classList.add("is-visible", "is-receiving");
+        let fired = false;
+        const fire = () => {
+          if (fired) return;
+          fired = true;
+          window.setTimeout(() => window.dispatchEvent(new Event("turbotutor:discard-helmet")), 80);
+        };
+        if ($("#paper-crumple-mount")?.dataset.mounted === "true") fire();
+        else {
+          window.addEventListener("turbotutor:helmet-mounted", fire, { once: true });
+          window.dispatchEvent(new Event("turbotutor:prepare-helmet"));
+          window.setTimeout(fire, 3000);
+        }
+        window.setTimeout(() => {
+          helmetTrash.classList.remove("is-receiving");
+          helmetTrash.classList.add("is-full");
+        }, 1400);
+        helmetTrashTimer = window.setTimeout(() => {
+          helmetTrash.classList.remove("is-visible", "is-full");
+        }, 6500);
       }
 
       async function postForm(payload) {
@@ -2416,6 +2458,12 @@
 
       // ---- request form ----
       $("#close-request").addEventListener("click", () => requestDialog.close());
+      requestDialog.addEventListener("close", () => {
+        if (requestForm.dataset.sent !== "true") return;
+        requestForm.reset();
+        requestForm.dataset.sent = "false";
+        discardHelmetForEnrollment();
+      });
       requestForm.addEventListener("input", () => {
         draftActions.classList.remove("ready");
         $("#draft-status").textContent = "";
@@ -2473,7 +2521,7 @@
         draftActions.classList.remove("ready");
         try {
           await postForm(payload);
-          requestForm.reset();
+          requestForm.dataset.sent = "true";
           status.textContent = "Request sent. The tutor aims to reply within one business day.";
           window.setTimeout(() => {
             if (requestDialog.open) requestDialog.close();
@@ -3446,14 +3494,14 @@
       if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
       const css = document.createElement("link");
       css.rel = "stylesheet";
-      css.href = "target-cursor.css?v=20261108-1";
+      css.href = "target-cursor.css?v=20261108-2";
       const ready = new Promise(resolve => {
         css.addEventListener("load", () => resolve(true), { once: true });
         css.addEventListener("error", () => resolve(false), { once: true });
       });
       document.head.appendChild(css);
       ready.then(ok => {
-        if (ok) import("./target-cursor.js?v=20261108-1").catch(() => {});
+        if (ok) import("./target-cursor.js?v=20261108-2").catch(() => {});
       });
     })();
   </script>
@@ -3506,16 +3554,17 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "paper-crumple.css?v=20261108-7";
+        css.href = "paper-crumple.css?v=20261108-9";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./paper-crumple.js?v=20261108-7").catch(() => {});
+          if (ok) import("./paper-crumple.js?v=20261108-9").catch(() => {});
         });
       };
+      window.addEventListener("turbotutor:prepare-helmet", load);
       const near = () => {
         const rect = host.getBoundingClientRect();
         if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
@@ -3538,14 +3587,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "pit-rating.css?v=20261108-7";
+        css.href = "pit-rating.css?v=20261108-8";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./pit-rating.js?v=20261108-7").catch(() => {});
+          if (ok) import("./pit-rating.js?v=20261108-8").catch(() => {});
         });
       };
       const near = () => {

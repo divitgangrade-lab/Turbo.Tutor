@@ -4,6 +4,7 @@ exclude:
   - scripts
   - node_modules
   - artifacts
+  - reviews-api
   - seo
   - package.json
   - package-lock.json
