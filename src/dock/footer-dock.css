@@ -1,0 +1,17 @@
+.footer-dock {
+  position: relative;
+  height: 90px;
+  margin: 2px 0 12px;
+}
+
+.footer-dock .dock {
+  max-width: 100%;
+}
+
+.footer-dock .dock-face svg {
+  display: block;
+}
+
+[data-theme='light'] .footer-dock {
+  --dock-panel: rgba(240, 240, 243, 0.9);
+}

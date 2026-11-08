@@ -4,7 +4,7 @@ The security model, audit results and residual risks are documented in `SECURITY
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend of its own and no online payment. Forty small islands, ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography, SmoothScroll, ShaderAnimation, HeroCar, AnimatedList, ScrollStack, MagicBento and CircularGallery, ModelViewer, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap, the AcidSquares backdrop and the ClickSpark tap layer load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the statement band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend of its own and no online payment. Forty-one small islands, ClickSpark, Dock, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography, SmoothScroll, ShaderAnimation, HeroCar, AnimatedList, ScrollStack, MagicBento and CircularGallery, ModelViewer, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap, the AcidSquares backdrop and the ClickSpark tap layer load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the statement band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
@@ -244,6 +244,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── target-cursor.css       # Generated TargetCursor styles
 ├── click-spark.js          # Generated tap-spark island (Preact + ClickSpark)
 ├── click-spark.css         # Generated ClickSpark styles
+├── dock.js                 # Generated footer dock island (Preact + Dock)
+├── dock.css                # Generated Dock and footer dock styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
 ├── CNAME                   # GitHub Pages custom domain
@@ -258,7 +260,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── legal-bg.css            # Generated topography and falling text styles
 ├── fonts.css               # Self-hosted font faces
 ├── fonts/                  # Self-hosted WOFF2 files and OFL licences
-├── scripts/                # esbuild build script for all forty islands
+├── scripts/                # esbuild build script for all forty-one islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -273,6 +275,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/animated-content/   # AnimatedContent source and mount entry
 ├── src/target-cursor/      # TargetCursor source and mount entry
 ├── src/click-spark/        # ClickSpark source and mount entry
+├── src/dock/              # Dock source, footer entry and wrapper styles
 ├── src/shader-animation/   # ShaderAnimation source and loader entry
 ├── src/pixel-swap/         # PixelSwap source and mount entry
 ├── src/hero-3d/            # Three.js hero car source and styles
@@ -313,7 +316,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies for the static site. The separate review API is a small Worker with no third-party runtime dependencies. The forty optional islands, ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, ShaderAnimation, HeroCar, AnimatedList, ScrollStack, MagicBento, CircularGallery, ModelViewer, LegalBackground, Topography and SmoothScroll, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and three.js is bundled into the hero car and the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the static pages make no third-party font requests; so the static pages make no third-party font or asset requests; the forms are contacted only when you submit, and the footer pit wall fetches its public review list when it approaches the viewport.
+No runtime dependencies for the static site. The separate review API is a small Worker with no third-party runtime dependencies. The forty-one optional islands, ClickSpark, Dock, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, ShaderAnimation, HeroCar, AnimatedList, ScrollStack, MagicBento, CircularGallery, ModelViewer, LegalBackground, Topography and SmoothScroll, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and three.js is bundled into the hero car and the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the static pages make no third-party font requests; so the static pages make no third-party font or asset requests; the forms are contacted only when you submit, and the footer pit wall fetches its public review list when it approaches the viewport.
 
 ### Photography credits
 
@@ -345,7 +348,7 @@ npm ci
 npm run build
 ```
 
-`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all forty islands, and the local server command above checks that the folder serves.
+`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all forty-one islands, and the local server command above checks that the folder serves.
 
 ---
 
@@ -372,6 +375,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **AnimatedContent island** - the policy card copy mirrors the no-JS fallback in `index.html`; the stagger and entrance props live in `src/animated-content/entry.jsx`; run `npm run build` after changing them.
 - **TargetCursor island** - reticle size, colour, spin timing and target selector live in `src/target-cursor/entry.jsx`; action labels live on the target elements in `index.html`; run `npm run build` after changing them.
 - **ClickSpark island** - spark colours, size, radius, count, duration, easing, randomness and glow live in `src/click-spark/entry.jsx`; run `npm run build` after changing them.
+- **Dock island** - the footer details dock's items, icons, link targets and the "More details" menu live in `src/dock/entry.jsx`; the magnifying tile behaviour is in `src/dock/Dock.jsx` and the footer spacing in `src/dock/footer-dock.css`; run `npm run build` after changing them.
 - **Ribbons island** - the footer trail colours, thickness, length, spread, spring, wave and opacity live in `src/ribbons/entry.jsx`; run `npm run build` after changing them.
 - **AcidSquares island** - the hero tile colours, lighting, motion, density and opacity live in `src/acid-squares/entry.jsx`; run `npm run build` after changing them.
 - **LiquidEther island** - the plan backdrop colours, flow, pointer force, persistence and resolution live in `src/liquid-ether/entry.jsx`; run `npm run build` after changing them.
@@ -405,19 +409,16 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
 - One skip link, WCAG AA contrast for text on flat surfaces, and underlined inline links in the footer so colour is never the only cue.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all forty islands reduce or stop their continuous motion.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all forty-one islands reduce or stop their continuous motion.
 
 ## Changelog
 
 ### November 2026 polish pass
 
+- Added the React Bits **Dock** to the footer details column: a magnifying tile dock of the six main detail links, with a "More details" menu for the cookie, refunds, EULA, DMCA and licence pages, keyboard and long-press support, and the plain text links kept underneath as the no-JS fallback. It lazy-loads near the footer and respects reduced motion.
 - Added the React Bits **MagicBento** standard-kit grid after the plan builder: four tiles — one-to-one, Grades 1–8, Zoom or library, written recap — with cursor-following border glow, a spotlight, staggered intro and a light click wave. It keeps a static four-card grid as the no-JS fallback, lazy-loads near the section, and respects reduced motion.
-- Added the React Bits **CircularGallery** to the homepage: a draggable WebGL2 arc of the site's three real photographs, with grayscale-by-default frames that colour on hover or open, keyboard and wheel support, and auto-drift that stops when you interact. The section keeps a plain three-photo grid when WebGL2 is unavailable.
-- Added the React Bits **ModelViewer** as a "The car, in the round" band: the Ferrari narrated in 3D, drag to turn, pinch or Ctrl-scroll to zoom, double-click to reset. It runs in its own React 19 root with three, @react-three/fiber and @react-three/drei, swaps the CDN environment presets for a local light rig so the CSP is untouched, and keeps a photograph fallback when WebGL2 or the model is missing.
 - Added the React Bits **ScrollStack** term section after the three-step explanation: four checkpoint cards — diagnose, build, apply, review — pin and stack as the page scrolls, dimming and scaling the buried cards. It uses window scrolling without its own wheel handling so Lenis stays in charge, keeps a static card list as the no-JS fallback, and lazy-loads near the section.
 - Added the React Bits **AnimatedList** lap pack below the 45-minute run sheet: five rows covering the plan, practice set, worked notes, progress note and next-lap plan, with Hugeicons row icons, hover and arrow-key selection, a spring selection ring, scroll-in pop animation, and a plain fallback list for no-JS visitors. It lazy-loads near the section and respects reduced motion.
-- Added the React Bits **CircularGallery** to the homepage: a draggable WebGL2 arc of the site's three real photographs, with grayscale-by-default frames that colour on hover or open, keyboard and wheel support, and auto-drift that stops when you interact. The section keeps a plain three-photo grid when WebGL2 is unavailable.
-- Added the React Bits **ModelViewer** as a "The car, in the round" band: the Ferrari narrated in 3D, drag to turn, pinch or Ctrl-scroll to zoom, double-click to reset. It runs in its own React 19 root with three, @react-three/fiber and @react-three/drei, swaps the CDN environment presets for a local light rig so the CSP is untouched, and keeps a photograph fallback when WebGL2 or the model is missing.
 - Added a **Three.js hero car**: a 3D view control opens a stylised low-poly Formula 1 car over the hero photograph, which stays as the LCP and no-JS fallback. The car renders only while open, pauses offscreen, and spins with the pointer.
 - Hardened the Paddock Club signup and centred its consent checkbox: a failed FormSubmit call now offers a prefilled email to the tutor plus the text number, instead of only an error, and the privacy checkboxes line up with their notes in the request, contact and club forms.
 - Made the pit-note helmet droppable into the **PIT BIN**: the bin slides in while the helmet is held, releasing it over the bin sends it in and regenerates the helmet after the swallow, and the same bin now also animates when a request is sent.
@@ -455,11 +456,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, AnimatedList, ScrollStack, MagicBento, CircularGallery and ModelViewer islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and FluidGlass also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License, FallingText bundles Matter.js under the MIT licence, and PaperCrumple bundles three.js under the MIT licence. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The ClickSpark, Dock, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, AnimatedList, ScrollStack, MagicBento, CircularGallery and ModelViewer islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and FluidGlass also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License, FallingText bundles Matter.js under the MIT licence, and PaperCrumple bundles three.js under the MIT licence. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The pages are plain HTML, CSS and JavaScript. The optional ClickSpark, FlyingButton, AnimatedList, ScrollStack, MagicBento, CircularGallery, ModelViewer, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
+The pages are plain HTML, CSS and JavaScript. The optional ClickSpark, Dock, FlyingButton, AnimatedList, ScrollStack, MagicBento, CircularGallery, ModelViewer, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, FluidGlass, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.

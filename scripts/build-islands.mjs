@@ -44,6 +44,8 @@ await build({
     'magic-bento': 'src/magic-bento/entry.jsx',
     'circular-gallery': 'src/circular-gallery/entry.jsx',
     'click-spark': 'src/click-spark/entry.jsx'
+,
+    'dock': 'src/dock/entry.jsx'
   },
   bundle: true,
   minify: true,
