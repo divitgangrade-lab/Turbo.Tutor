@@ -1,0 +1,28 @@
+.specialty-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.specialty-pixel-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.specialty-pixel-layer .pixel-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.specialty-pixel-layer .pixel-card::after {
+  display: none;
+}
+
+.specialty-card > :not(.specialty-pixel-layer) {
+  position: relative;
+  z-index: 1;
+}

@@ -46,6 +46,8 @@ await build({
     'click-spark': 'src/click-spark/entry.jsx'
 ,
     'dock': 'src/dock/entry.jsx'
+,
+    'pixel-card': 'src/pixel-card/entry.jsx'
   },
   bundle: true,
   minify: true,
