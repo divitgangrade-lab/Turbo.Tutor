@@ -1151,7 +1151,16 @@
         button.disabled = false;
         button.textContent = original;
         status.hidden = false;
-        status.innerHTML = 'The signup did not send. Try again in a moment, or <a href="sms:+18048473236">text the tutor</a>.';
+        status.textContent = 'The list could not be reached just now. Send the tutor the note instead and the 5% code still applies: ';
+        const mail = document.createElement("a");
+        mail.href = `mailto:divit.gangrade@gmail.com?subject=${encodeURIComponent("Paddock Club signup")}&body=${encodeURIComponent(
+          `Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`
+        )}`;
+        mail.textContent = "email the tutor to join";
+        const sms = document.createElement("a");
+        sms.href = "sms:+18048473236";
+        sms.textContent = "text +1 804 847 3236";
+        status.append(mail, document.createTextNode(", or "), sms, document.createTextNode("."));
       }
     });
   })();

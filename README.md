@@ -34,7 +34,7 @@ No payment is collected anywhere on the site.
 ### Paddock Club newsletter
 A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one short email most Mondays about new session openings, study notes and occasional offers. The form is intentionally email-only: `enhance.js` checks the address and the privacy consent, then sends the signup directly to the tutor's inbox through FormSubmit. The address is not stored in the browser.
 
-The code is shown after the signup sends. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. The form uses FormSubmit's public endpoint, so no newsletter API key is kept in the repository. FormSubmit requires one activation click from the tutor inbox before the first message can be delivered.
+The code is shown after the signup sends. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. If FormSubmit is unavailable or the address has not been activated yet, the form falls back to a prefilled email link and the tutor's text number, so the signup still arrives. The form uses FormSubmit's public endpoint, so no newsletter API key is kept in the repository. FormSubmit requires one activation click from the tutor inbox before the first message can be delivered.
 
 ### Pit wall reviews
 
@@ -384,6 +384,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 
 ### November 2026 polish pass
 
+- Hardened the Paddock Club signup and centred its consent checkbox: a failed FormSubmit call now offers a prefilled email to the tutor plus the text number, instead of only an error, and the privacy checkboxes line up with their notes in the request, contact and club forms.
 - Made the pit-note helmet droppable into the **PIT BIN**: the bin slides in while the helmet is held, releasing it over the bin sends it in and regenerates the helmet after the swallow, and the same bin now also animates when a request is sent.
 - Removed the duplicate skip link from the home page so keyboard visitors get one clear target.
 - Added the React Bits **ClickSpark** tap layer: a short amber, red and bone spark burst on pointer and keyboard activation, drawn on viewport-clipped canvases that remove themselves when finished. The layer is inert to pointer events, hidden from assistive technology, capped at 16 concurrent bursts and disabled under `prefers-reduced-motion`.

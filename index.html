@@ -573,8 +573,8 @@
     .pay-opt:has(input:checked) { border-color: var(--ink); background: var(--surface-2); }
     .pay-opt input { appearance: none; display: grid; width: 14px; height: 14px; place-items: center; margin: 0; border: 1px solid var(--muted); background: transparent; cursor: pointer; }
     .pay-opt input:checked { border-color: var(--red); background: var(--red); box-shadow: inset 0 0 0 2px #fff; }
-    .policy-ack { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.6; }
-    .policy-ack input { margin-top: 2px; accent-color: var(--red); }
+    .policy-ack { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .policy-ack input { margin: 0; flex: none; accent-color: var(--red); }
     .policy-ack a { color: var(--red-2); text-decoration: underline; text-underline-offset: 2px; }
     .form-note { margin: 0; color: var(--muted); font-size: 10.5px; line-height: 1.65; }
     .form-note:empty { display: none; }
@@ -672,8 +672,8 @@
     .club-status { margin: 12px 0 0; color: #f7f5f0; font-size: 12px; line-height: 1.65; }
     .club-status b { color: var(--amber); }
     .club-fine { margin: 12px 0 0; color: #8f9aa1; font-size: 9.5px; line-height: 1.7; }
-    .club-consent { display: flex; gap: 9px; align-items: flex-start; margin: 10px 2px 2px; color: #d6dde1; font-size: 11.5px; line-height: 1.55; }
-    .club-consent input { width: 15px; height: 15px; margin: 3px 0 0; flex: none; accent-color: var(--red); }
+    .club-consent { display: flex; gap: 9px; align-items: center; margin: 10px 2px 2px; color: #d6dde1; font-size: 11.5px; line-height: 1.55; }
+    .club-consent input { width: 15px; height: 15px; margin: 0; flex: none; accent-color: var(--red); }
     .club-consent a { color: #ffd400; text-decoration: underline; }
     .club-consent a:hover { color: #fff; }
 
@@ -3691,7 +3691,7 @@
       near();
     })();
   </script>
-  <script src="enhance.js?v=20261108-8"></script>
+  <script src="enhance.js?v=20261108-9"></script>
   <script>
     (() => {
       const hosts = document.querySelectorAll("[data-topography]");
