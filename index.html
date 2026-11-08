@@ -1363,6 +1363,9 @@
     </div>
 
     <section class="section included-bento" id="included" aria-labelledby="included-title">
+      <div class="included-ambient" id="included-field-root" aria-hidden="true">
+        <div id="included-field-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -1449,6 +1452,9 @@
     </section>
 
     <section class="section term-stack" id="term" aria-labelledby="term-title">
+      <div class="term-ambient" id="term-field-root" aria-hidden="true">
+        <div id="term-field-mount"></div>
+      </div>
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -4190,5 +4196,46 @@
     })();
   </script>
   <script type="module" src="./smooth-scroll.js?v=20261108-7"></script>
+  <script type="module">
+    (() => {
+      const hosts = [
+        document.getElementById("included-field-root"),
+        document.getElementById("term-field-root")
+      ].filter(Boolean);
+      if (!hosts.length) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+      if (!("WebGL2RenderingContext" in window)) return;
+      let started = false;
+      const sheets = ["dot-field.css?v=20261107-28", "iridescence.css?v=20261107-29"];
+      const load = () => {
+        if (started) return;
+        started = true;
+        Promise.all(sheets.map(href => new Promise(resolve => {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = href;
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+          document.head.appendChild(css);
+        }))).then(results => {
+          if (results.some(Boolean)) import("./ambient-band.js?v=20261108-1").catch(() => {});
+        });
+      };
+      const near = () => {
+        const visible = hosts.some(host => {
+          const rect = host.getBoundingClientRect();
+          return rect.bottom >= -320 && rect.top <= window.innerHeight + 320;
+        });
+        if (!visible) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
 </body>
 </html>

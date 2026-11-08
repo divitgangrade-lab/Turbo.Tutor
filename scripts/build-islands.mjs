@@ -43,7 +43,8 @@ await build({
     'scroll-stack': 'src/scroll-stack/entry.jsx',
     'magic-bento': 'src/magic-bento/entry.jsx',
     'circular-gallery': 'src/circular-gallery/entry.jsx',
-    'click-spark': 'src/click-spark/entry.jsx'
+    'click-spark': 'src/click-spark/entry.jsx',
+    'ambient-band': 'src/ambient-band/entry.jsx'
 ,
     'dock': 'src/dock/entry.jsx'
 ,
