@@ -199,7 +199,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── pixel-swap.js           # Generated hero island (Preact + PixelSwap)
 ├── hero-car.js             # Generated hero 3D car island (Three.js)
 ├── hero-car.css            # Generated hero 3D car styles
-├── f1.html                 # Standalone Spline F1 scene page (noindex, viewer loaded on open)
+├── f1.html                 # Standalone Spline F1 scene page (viewer loaded on open)
 ├── vendor/spline/          # Self-hosted Spline viewer build and F1 scene
 ├── animated-list.js        # Generated lap-pack list island (Preact + Hugeicons)
 ├── animated-list.css       # Generated AnimatedList and lap-pack styles
@@ -433,7 +433,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 
 ### November 2026 polish pass
 
-- Added the supplied **Spline F1 scene** on its own `f1.html` page, linked from a **Full F1 scene** chip beside the hero 3D view. The 2.5 MB self-hosted WebGL viewer and 4.6 MB scene are requested only when that page is opened, so the home page pays nothing for them; the page carries the same same-origin CSP plus the `blob:`, worker and WebAssembly allowances the viewer needs for its in-memory textures and Draco decoder, and keeps the viewer's "Built with Spline" badge. The hero itself keeps the instant low-poly car, which is what visitors see in the 3D view.
+- Added the supplied **Spline F1 scene** on its own `f1.html` page, linked from a **Full F1 scene** chip beside the hero 3D view. The 2.5 MB self-hosted WebGL viewer and 4.6 MB scene are requested only when that page is opened, so the home page pays nothing for them; the page carries the same same-origin CSP plus the `blob:`, worker and WebAssembly allowances the viewer needs for its in-memory textures and Draco decoder, and keeps the viewer's "Built with Spline" badge. The hero itself keeps the instant low-poly car, which is what visitors see in the 3D view. The scene page caps the renderer's pixel ratio to a fixed pixel budget instead of the scene's default "use devicePixelRatio", which renders four times the pixels on a retina screen and nine times on a 3x phone, and steps that cap down again if interaction frames stay slow.
 
 - Fixed the hero **3D view** button: it sat underneath the TT-07 plate, so the click landed on the plate instead. It now sits at the bottom left, toggles the car model in and out, and its label and pressed state follow the view.
 - Added the React Bits **LaserFlow** to the hero: an amber beam drops onto the top edge of the car card, splashes along it and leaves smoke and dust drifting through the dark grid, following the cursor with a soft lens. It is skipped on narrow screens and for reduced motion, waits for idle time before loading its shader, and pauses whenever it scrolls out of view.

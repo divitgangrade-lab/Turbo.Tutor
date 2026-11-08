@@ -45,6 +45,74 @@
   .scene-note.is-hidden { display: none; }
   .scene-note strong { color: #f7f5f0; font-weight: 600; }
 </style>
+<script>
+  // The scene asks for pixelRatio 0, which the viewer resolves to devicePixelRatio:
+  // four times the pixels of a 1x frame on a retina screen and nine times on a 3x
+  // phone. Cap the drawing buffer to a pixel budget, and step the cap down again if
+  // interaction frames stay slow.
+  (function () {
+    var coarse = window.matchMedia('(pointer: coarse)').matches;
+    var budget = coarse ? 1.3e6 : 2.1e6;
+    var fit = function () {
+      var w = window.innerWidth || 1;
+      var h = Math.max(1, (window.innerHeight || 1) - 56);
+      return Math.max(1, Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(budget / (w * h))));
+    };
+    var apply = function () {
+      var scene = document.getElementById('f1-scene');
+      var app = scene && scene._spline;
+      var renderer = app && app._renderer;
+      if (!renderer || !renderer.setPixelRatio) return;
+      var cap = window.__ttPixelCap;
+      if (renderer.getPixelRatio() === cap) return;
+      renderer.setPixelRatio(cap);
+      // the viewer only resizes its buffers when the viewport changes, so nudge it
+      if (renderer.setSize) {
+        var w = renderer.viewportWidth;
+        var h = renderer.viewportHeight;
+        renderer.setSize(w, h + 1, false);
+        renderer.setSize(w, h, false);
+      }
+      if (app._requestRenderAutoMode) app._requestRenderAutoMode();
+    };
+    window.__ttPixelCap = fit();
+    window.addEventListener('resize', function () {
+      window.__ttPixelCap = Math.min(window.__ttPixelCap, fit());
+      apply();
+    }, { passive: true });
+
+    var frames = [];
+    var last = 0;
+    var seen = 0;
+    var sampling = false;
+    var tick = function (now) {
+      if (!sampling) return;
+      if (seen++ > 2 && last) frames.push(now - last);
+      last = now;
+      window.requestAnimationFrame(tick);
+    };
+    window.addEventListener('pointerdown', function () {
+      if (sampling) return;
+      sampling = true;
+      frames = [];
+      last = 0;
+      seen = 0;
+      window.requestAnimationFrame(tick);
+    }, { passive: true });
+    var settle = function () {
+      if (!sampling) return;
+      sampling = false;
+      if (frames.length < 20 || window.__ttPixelCap <= 1) return;
+      frames.sort(function (a, b) { return a - b; });
+      if (frames[frames.length >> 1] > 22) {
+        window.__ttPixelCap = Math.max(1, window.__ttPixelCap - 0.3);
+        apply();
+      }
+    };
+    window.addEventListener('pointerup', settle, { passive: true });
+    window.addEventListener('pointercancel', settle, { passive: true });
+  })();
+</script>
 <script type="module" src="vendor/spline/spline-viewer.js"></script>
 </head>
 <body>

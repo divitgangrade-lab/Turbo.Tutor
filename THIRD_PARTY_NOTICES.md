@@ -55,7 +55,7 @@ SOFTWARE.
 
 ## Spline viewer and F1 scene
 
-`f1.html` renders a Spline scene authored by the site owner in Spline (https://spline.design). `vendor/spline/spline-viewer.js` is the WebGL-only Spline Viewer build 2.0.151, self-hosted so the scene page keeps a same-origin CSP, and `vendor/spline/f1-scene.splinecode` is the owner's exported scene. The page fetches the viewer and scene only when a visitor opens it. The viewer keeps its "Made with Spline" credit badge. Spline and the Spline Viewer are copyright Spline, Inc. and are used under the Spline terms (https://spline.design/terms).
+`f1.html` renders a Spline scene authored by the site owner in Spline (https://spline.design). `vendor/spline/spline-viewer.js` is the WebGL-only Spline Viewer build 2.0.151, self-hosted so the scene page keeps a same-origin CSP, and `vendor/spline/f1-scene.splinecode` is the owner's exported scene. The page fetches the viewer and scene only when a visitor opens it. The viewer keeps its "Made with Spline" credit badge. The self-hosted copy is patched in place in three small ways: the Draco decoder path points at `vendor/spline/draco/`, the renderer's pixel ratio is clamped to a pixel budget set by `f1.html` instead of the scene's `devicePixelRatio` default. No other behaviour is changed. Spline and the Spline Viewer are copyright Spline, Inc. and are used under the Spline terms (https://spline.design/terms).
 
 ## Hugeicons
 
