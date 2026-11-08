@@ -2,7 +2,7 @@
 
 ## React Bits components
 
-The ClickSpark component in `src/click-spark/`, the FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, the TargetCursor component in `src/target-cursor/`, the Ribbons component in `src/ribbons/`, the AcidSquares component in `src/acid-squares/`, the LiquidEther component in `src/liquid-ether/`, the Silk component in `src/silk/`, the Lightfall component in `src/lightfall/`, the DecayCard component in `src/decay-card/`, the Plasma component in `src/plasma/`, the GridScan component in `src/grid-scan/`, the DotField component in `src/dot-field/`, the Iridescence component in `src/iridescence/`, the Waves component in `src/waves/`, the GridMotion component in `src/grid-motion/`, the FallingText component in `src/falling-text/`, the PaperCrumple component in `src/paper-crumple/`, the PeekRating component in `src/pit-rating/`, the Topography component in `src/legal-bg/Topography.jsx` are adapted from React Bits by David Haz.
+The ClickSpark component in `src/click-spark/`, the FlyingButton component in `src/flying-button/`, the FluxLines component in `src/flux-lines/`, the PatternWaves component in `src/pattern-waves/`, the TechText component in `src/tech-text/`, the TextLoop component in `src/text-loop/`, the MaskedHeading component in `src/masked-heading/`, the ParticleText component in `src/particle-text/`, the SplitFlapText component in `src/split-flap-text/`, the WarpText component in `src/warp-text/`, the ElasticMesh component in `src/elastic-mesh/`, the HalftoneReveal component in `src/halftone-reveal/`, the AnimatedContent component in `src/animated-content/`, the PixelSwap component in `src/pixel-swap/`, the TargetCursor component in `src/target-cursor/`, the Ribbons component in `src/ribbons/`, the AcidSquares component in `src/acid-squares/`, the LiquidEther component in `src/liquid-ether/`, the Silk component in `src/silk/`, the Lightfall component in `src/lightfall/`, the DecayCard component in `src/decay-card/`, the Plasma component in `src/plasma/`, the GridScan component in `src/grid-scan/`, the DotField component in `src/dot-field/`, the Iridescence component in `src/iridescence/`, the Waves component in `src/waves/`, the GridMotion component in `src/grid-motion/`, the FallingText component in `src/falling-text/`, the PaperCrumple component in `src/paper-crumple/`, the PeekRating component in `src/pit-rating/`, the Topography component in `src/legal-bg/Topography.jsx` and the AnimatedList component in `src/animated-list/` are adapted from React Bits by David Haz.
 
 - Project: https://reactbits.dev
 - Source: https://github.com/DavidHDev/react-bits
@@ -53,6 +53,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Hugeicons
+
+The AnimatedList lap pack renders its row icons with `@hugeicons/react` 1.1.10 and `@hugeicons/core-free-icons` 4.4.0 (https://hugeicons.com), both under the MIT licence. The packages are bundled into `animated-list.js`, and only the five icons used by the lap pack are pulled into the bundle.
 
 ## Uiverse cloud loader
 

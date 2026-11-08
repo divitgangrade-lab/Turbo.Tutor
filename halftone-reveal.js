@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-SXAG5OYS.js";import{e as Te,h as ne,j as G,n as V}from"./island-chunks/chunk-OS2XOP7G.js";import"./island-chunks/chunk-SSQABL5H.js";var Ve="https://images.unsplash.com/photo-1693250707557-a846a014b321?q=80&w=1400&auto=format&fit=crop",Oe=`#version 300 es
+import"./island-chunks/chunk-RRE72WVH.js";import{f as Te,i as ne,k as G,o as V}from"./island-chunks/chunk-XJDH345I.js";import"./island-chunks/chunk-SSQABL5H.js";var Ve="https://images.unsplash.com/photo-1693250707557-a846a014b321?q=80&w=1400&auto=format&fit=crop",Oe=`#version 300 es
 in vec2 aPosition;
 void main() {
   gl_Position = vec4(aPosition, 0.0, 1.0);

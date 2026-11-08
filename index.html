@@ -1564,6 +1564,25 @@
             <a class="btn" href="#plans">Build a plan from this <span class="arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
+
+        <div class="lap-pack" id="animated-list-root">
+          <div class="lap-pack-copy">
+            <p class="lap-pack-kicker">After the lap</p>
+            <h3>What lands in your inbox</h3>
+            <p>Every lap ends with the same paper trail: the plan before it, the work after it, and a clear note on what comes next.</p>
+            <p class="lap-pack-status" id="lap-pack-status" role="status">Pick a row to see what it covers.</p>
+          </div>
+          <div class="lap-pack-panel">
+            <ul class="lap-pack-fallback">
+              <li><b>Session plan</b><span>Before</span></li>
+              <li><b>Practice set</b><span>PDF</span></li>
+              <li><b>Worked notes</b><span>After</span></li>
+              <li><b>Progress note</b><span>24 h</span></li>
+              <li><b>Next-lap plan</b><span>48 h</span></li>
+            </ul>
+            <div id="animated-list-mount"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -3521,6 +3540,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./animated-content.js?v=20261107-17").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("animated-list-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "animated-list.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./animated-list.js?v=20261108-1").catch(() => {});
         });
       };
       const near = () => {

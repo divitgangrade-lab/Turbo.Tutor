@@ -39,6 +39,7 @@ await build({
     'legal-bg': 'src/legal-bg/entry.jsx',
     'shader-animation': 'src/shader-animation/entry.jsx',
     'hero-car': 'src/hero-3d/entry.js',
+    'animated-list': 'src/animated-list/entry.jsx',
     'click-spark': 'src/click-spark/entry.jsx'
   },
   bundle: true,

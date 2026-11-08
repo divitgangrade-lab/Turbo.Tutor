@@ -1,0 +1,149 @@
+.lap-pack {
+  display: grid;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+@media (min-width: 900px) {
+  .lap-pack {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    align-items: center;
+    gap: 36px;
+  }
+}
+
+.lap-pack-kicker {
+  margin: 0 0 10px;
+  color: var(--red);
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.lap-pack-copy h3 {
+  margin: 0 0 10px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.05;
+}
+
+.lap-pack-copy > p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+.lap-pack-status {
+  margin-top: 14px !important;
+  min-height: 2.6em;
+  color: var(--ink) !important;
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.lap-pack .animated-list {
+  --al-frame: #e9ece5 !important;
+  --al-frame-edge: var(--line) !important;
+  --al-frame-highlight: rgba(255, 255, 255, 0.7) !important;
+  --al-frame-shadow: 0 18px 40px -30px rgba(17, 23, 26, 0.5) !important;
+  --al-tile: #f7f8f4 !important;
+  --al-tile-edge: var(--line) !important;
+  --al-tile-highlight: rgba(255, 255, 255, 0.8) !important;
+  --al-tile-shadow: 0 3px 8px -6px rgba(17, 23, 26, 0.35) !important;
+  --al-well: color-mix(in srgb, var(--ink) 7%, transparent) !important;
+  --al-ink: var(--ink) !important;
+  --al-muted: var(--muted) !important;
+  --al-thumb: color-mix(in srgb, var(--ink) 24%, transparent) !important;
+  --al-ring: var(--red) !important;
+  --al-ring-fill: color-mix(in srgb, var(--red) 7%, transparent) !important;
+  --al-hover: brightness(0.985) !important;
+  --al-press: brightness(0.95) !important;
+  --al-active: none !important;
+  --al-accent: var(--red) !important;
+  width: 100%;
+  font-family: inherit;
+}
+
+[data-theme="dark"] .lap-pack .animated-list {
+  --al-frame: #10171b !important;
+  --al-frame-highlight: rgba(255, 255, 255, 0.05) !important;
+  --al-frame-shadow: 0 18px 40px -30px rgba(0, 0, 0, 0.9) !important;
+  --al-tile: #161e23 !important;
+  --al-tile-highlight: rgba(255, 255, 255, 0.06) !important;
+  --al-tile-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.8) !important;
+  --al-ring: var(--amber) !important;
+  --al-ring-fill: color-mix(in srgb, var(--amber) 8%, transparent) !important;
+  --al-hover: brightness(1.08) !important;
+  --al-press: brightness(0.9) !important;
+  --al-active: none !important;
+  --al-accent: var(--amber) !important;
+}
+
+.lap-pack .animated-list__title {
+  letter-spacing: 0.01em;
+}
+
+.lap-pack .animated-list__meta {
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lap-pack .animated-list__viewport:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+}
+
+.lap-pack-fallback {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #e9ece5;
+  list-style: none;
+}
+
+.lap-pack-fallback li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f7f8f4;
+}
+
+.lap-pack-fallback b {
+  flex: 1;
+  font-size: 14.5px;
+}
+
+.lap-pack-fallback span {
+  color: var(--muted);
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .lap-pack-fallback {
+  background: #10171b;
+}
+
+[data-theme="dark"] .lap-pack-fallback li {
+  background: #161e23;
+}
+
+#animated-list-root[data-mounted] .lap-pack-fallback {
+  display: none;
+}
+
+#animated-list-mount {
+  width: 100%;
+}
