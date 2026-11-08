@@ -1667,6 +1667,10 @@
         </div>
         <div class="lap-panel">
           <p class="lap-head"><span>Run sheet</span><span>45 minutes · one student · one tutor</span></p>
+          <div class="lap-scrub" id="wake-slider-root">
+            <p class="lap-scrub-label">Drag through the lap <span id="lap-scrub-readout">22 min · Guided practice</span></p>
+            <div id="lap-scrub-mount"></div>
+          </div>
           <ol class="lap-timeline">
             <li><span class="lap-time">00–05</span><div><h3>Warm-up</h3><p>Two quick questions from last week's work. This shows what stayed and what needs another look before anything new starts.</p></div><span class="lap-min">5 min</span></li>
             <li><span class="lap-time">05–20</span><div><h3>The concept</h3><p>One idea at a time, worked in front of the student, then repeated back in their own words. No worksheet dump.</p></div><span class="lap-min">15 min</span></li>
@@ -3886,6 +3890,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./pixel-card.js?v=20261108-1").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("wake-slider-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "wake-slider.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./wake-slider.js?v=20261108-1").catch(() => {});
         });
       };
       const near = () => {

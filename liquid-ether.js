@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-TICLYF2Q.js";import{g as De,i as Z,j as z,l as q,p as C}from"./island-chunks/chunk-AA5OBDBZ.js";import"./island-chunks/chunk-SSQABL5H.js";var Ye=24e5,He=14e4,Ke=32,Q=256,je=`#version 300 es
+import"./island-chunks/chunk-32GSOU5I.js";import{g as De,j as Z,k as z,m as q,r as C}from"./island-chunks/chunk-6DTBS2I7.js";import"./island-chunks/chunk-SSQABL5H.js";var Ye=24e5,He=14e4,Ke=32,Q=256,je=`#version 300 es
 const vec2 corners[3] = vec2[3](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
 out vec2 vUv;
 void main() {

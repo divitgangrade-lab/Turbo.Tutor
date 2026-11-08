@@ -50,6 +50,8 @@ await build({
     'pixel-card': 'src/pixel-card/entry.jsx'
 ,
     'visit-counter': 'src/visit-counter/entry.jsx'
+,
+    'wake-slider': 'src/wake-slider/entry.jsx'
   },
   bundle: true,
   minify: true,
