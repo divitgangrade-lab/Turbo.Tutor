@@ -52,7 +52,12 @@ await build({
   entryNames: '[name]',
   jsx: 'automatic',
   jsxImportSource: 'preact',
-  alias: { react: 'preact/compat' },
+  alias: {
+    react: 'preact/compat',
+    'react/jsx-runtime': 'preact/jsx-runtime',
+    'react-dom': 'preact/compat',
+    'react-dom/client': 'preact/compat'
+  },
   define: { 'process.env.NODE_ENV': '"production"' },
   sourcemap: false,
   legalComments: 'none',
