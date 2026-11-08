@@ -10,7 +10,7 @@
 
 /* ---------- hero backdrop + recede ---------- */
 .hero { position: relative; }
-.hero .contours { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .6; }
+.hero .contours { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .95; -webkit-mask-image: radial-gradient(120% 120% at 50% 45%, #000 48%, transparent 100%); mask-image: radial-gradient(120% 120% at 50% 45%, #000 48%, transparent 100%); }
 .hero-shade { position: absolute; inset: 0; z-index: 4; background: #06080a; opacity: 0; pointer-events: none; }
 .hero-grid { position: relative; z-index: 2; }
 .hero-visual { }
@@ -333,4 +333,60 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 .footer-ribbons .ribbons { position: absolute; inset: 0; height: 100%; }
 @media (max-width: 860px) {
   .footer-ribbons { display: none; }
+}
+
+/* ---------- shared sonar contours ---------- */
+#plans { position: relative; isolation: isolate; }
+#plans > .wrap { position: relative; z-index: 2; }
+#plans > .plans-ether { z-index: 1; }
+.plans-contours { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .82; }
+@media (prefers-reduced-motion: reduce) { .plans-contours { opacity: .62; } }
+
+/* ---------- blended section seams ---------- */
+.ticker, .loop-band, .lapcase, #policies, .warp-band { border-top: 0; border-bottom: 0; }
+.launch::before { display: none; }
+
+#plans {
+  background: linear-gradient(180deg, var(--carbon) 0, color-mix(in srgb, var(--carbon) 0%, transparent) 64px);
+}
+#specialty {
+  background:
+    linear-gradient(180deg, var(--surface) 0, color-mix(in srgb, var(--surface) 0%, transparent) 64px),
+    var(--surface-2);
+}
+#how {
+  background:
+    linear-gradient(180deg, var(--surface-2) 0, color-mix(in srgb, var(--surface-2) 0%, transparent) 72px),
+    radial-gradient(120% 120% at 78% 8%, #141b1f 0%, #0a0d10 46%, #06080a 100%);
+}
+.launch {
+  background:
+    linear-gradient(180deg, #0b0e11 0, color-mix(in srgb, #0b0e11 0%, transparent) 72px),
+    linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 58%, #efe9dc 100%);
+}
+.club {
+  background:
+    linear-gradient(180deg, #efe9dc 0, color-mix(in srgb, #efe9dc 0%, transparent) 72px),
+    linear-gradient(135deg, #0b0e11 0%, #141b21 48%, #241116 100%);
+}
+.lapcase {
+  background:
+    linear-gradient(180deg, #0b0e11 0, color-mix(in srgb, #0b0e11 0%, transparent) 72px),
+    var(--surface);
+}
+#policies::before {
+  background:
+    linear-gradient(180deg, var(--surface) 0, color-mix(in srgb, var(--surface) 0%, transparent) 72px),
+    linear-gradient(180deg, rgba(5, 9, 14, .62) 0%, rgba(5, 9, 14, .12) 45%, rgba(5, 9, 14, .74) 100%),
+    radial-gradient(72% 95% at 78% 0%, rgba(255, 212, 0, .08), transparent 64%);
+}
+.contact {
+  background:
+    linear-gradient(180deg, #0a0d10 0, color-mix(in srgb, #0a0d10 0%, transparent) 80px),
+    linear-gradient(128deg, var(--red-2) 0%, var(--red) 46%, #ff3a1f 100%);
+}
+#faq::before {
+  background:
+    linear-gradient(180deg, var(--red) 0, color-mix(in srgb, var(--red) 0%, transparent) 84px),
+    radial-gradient(75% 95% at 50% 45%, color-mix(in srgb, var(--surface) 92%, transparent) 0%, color-mix(in srgb, var(--surface) 86%, transparent) 62%, color-mix(in srgb, var(--surface) 80%, transparent) 100%);
 }

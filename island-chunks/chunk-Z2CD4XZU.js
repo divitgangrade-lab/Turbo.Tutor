@@ -1,4 +1,4 @@
-import{i as Et,j as je,l as ge,p as Ke}from"./chunk-CANNF34S.js";var Kt=.32,yt=9,le=.05,Be=160,Ee=1.7,ye=.45,Wt=2.8,Ie=4,wt=4,Fe=256,Ne=48,We=2e5,Yt=[-.81,.58,-.02],Ft={forward:[0,1],backward:[0,-1],left:[-1,0],right:[1,0]},Qt=["lift","trace","light"],Jt={plus:0,dots:1},eo=1.25,Oe=`
+import{g as Et,h as je,j as ge,n as Ke}from"./chunk-OS2XOP7G.js";var Kt=.32,yt=9,le=.05,Be=160,Ee=1.7,ye=.45,Wt=2.8,Ie=4,wt=4,Fe=256,Ne=48,We=2e5,Yt=[-.81,.58,-.02],Ft={forward:[0,1],backward:[0,-1],left:[-1,0],right:[1,0]},Qt=["lift","trace","light"],Jt={plus:0,dots:1},eo=1.25,Oe=`
 precision highp float;
 precision highp int;
 

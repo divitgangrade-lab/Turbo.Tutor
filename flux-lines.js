@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-XKFHMPKF.js";import{g as ae,j as N,l as L,p as F}from"./island-chunks/chunk-CANNF34S.js";var U=8,Fe=1.8,se={up:[0,1],down:[0,-1],left:[-1,0],right:[1,0]},Ce=`#version 300 es
+import"./island-chunks/chunk-F7TZUDVZ.js";import{e as ae,h as N,j as L,n as F}from"./island-chunks/chunk-OS2XOP7G.js";import"./island-chunks/chunk-SSQABL5H.js";var U=8,Fe=1.8,se={up:[0,1],down:[0,-1],left:[-1,0],right:[1,0]},Ce=`#version 300 es
 in vec2 aPosition;
 void main() {
   gl_Position = vec4(aPosition, 0.0, 1.0);

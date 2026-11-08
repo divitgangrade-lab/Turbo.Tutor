@@ -62,7 +62,7 @@ Out of scope: GitHub's own infrastructure, the visitor's browser, the tutor's em
 - **Prices and offers are computed in the browser.** A visitor can change them with developer tools. No payment is taken online, and the tutor confirms the final amount in writing before anything is charged, so this affects presentation, not billing.
 - **Email and SMS are not end-to-end secure.** Requests travel through the visitor's provider and the tutor's inbox. The site tells visitors not to send identity documents, card numbers or medical records.
 - **No WAF or bot protection.** GitHub Pages provides platform-level protection, but there is no custom firewall. Spam sent by email is handled by the mail provider's filters.
-- **Supply chain.** Four build-time dependencies are used. They are current and audit-clean, but future updates should be reviewed and the lockfile kept.
+- **Supply chain.** A small set of build-time dependencies is used. They are current and audit-clean, but future updates should be reviewed and the lockfile kept.
 - **Shared devices.** Theme and offer data in `localStorage` are readable by anyone using the same browser profile.
 - **No penetration test.** This was a code, configuration and history review, not an adversarial engagement.
 

@@ -4,7 +4,9 @@
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
     'copy controls'
-    'stage stage';
+    'form form'
+    'stage stage'
+    'log log';
   align-items: center;
   gap: 14px 30px;
   border-top: 1px solid #232b31;
@@ -41,6 +43,56 @@
   display: grid;
   justify-items: start;
   gap: 4px;
+}
+
+.peek-rating[data-dropping] {
+  pointer-events: none;
+}
+
+.pit-rating[data-state='ok'] .peek-rating__tip,
+.pit-rating[data-state='falling'] .peek-rating__tip,
+.pit-rating[data-state='leaving'] .peek-rating__tip,
+.peek-rating[data-dropping] .peek-rating__tip {
+  opacity: 0 !important;
+  transition: opacity 0.12s ease;
+}
+
+.pit-rating__gravity {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.pit-rating__gravity-burst {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pit-rating__gravity-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--amber, #ffd400);
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: crosshair;
+  will-change: transform;
+  filter: drop-shadow(0 0 7px rgba(255, 212, 0, 0.7));
+}
+
+.pit-rating__gravity-star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .pit-rating__status {
@@ -167,7 +219,9 @@
     grid-template-areas:
       'copy'
       'controls'
-      'stage';
+      'form'
+      'stage'
+      'log';
     gap: 12px;
   }
 
@@ -193,5 +247,212 @@
   .pit-rating__wheel,
   .pit-rating[data-state='leaving'] .pit-rating__road {
     animation: none;
+  }
+
+  .pit-rating__gravity {
+    display: none;
+  }
+}
+
+/* Review note, send button and pit-wall log. Button adapted from Uiverse.io by catraco. */
+.pit-rating__form {
+  grid-area: form;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.pit-rating__field {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pit-rating__field > span {
+  color: #8f9aa1;
+  font-family: var(--ui, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.pit-rating__field textarea {
+  width: 100%;
+  min-height: 58px;
+  max-height: 140px;
+  resize: vertical;
+  outline: none;
+  border: 1px solid #2c363d;
+  border-radius: 2px;
+  background: #0d1114;
+  padding: 10px 12px;
+  color: #e8eef1;
+  font-family: var(--body, sans-serif);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pit-rating__field textarea::placeholder {
+  color: #6f7b83;
+}
+
+.pit-rating__field textarea:focus-visible {
+  border-color: var(--amber, #ffd400);
+  outline: 2px solid rgba(255, 212, 0, 0.35);
+  outline-offset: 1px;
+}
+
+.pit-rating__send {
+  --primary: 255, 212, 0;
+  --secondary: 225, 6, 0;
+  position: relative;
+  flex: none;
+  width: 60px;
+  height: 50px;
+  margin: 0 0 1px;
+  padding: 0;
+  border: none;
+  border-radius: 100%;
+  outline: 10px solid rgb(var(--primary), 0.5);
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: 0.3s;
+}
+
+.pit-rating__send .back {
+  position: absolute;
+  inset: 0;
+  border-radius: 100%;
+  background: rgb(var(--secondary));
+}
+
+.pit-rating__send .front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(var(--secondary));
+  border-radius: 100%;
+  background: linear-gradient(0deg, rgba(var(--primary), 0.6) 20%, rgba(var(--primary)) 50%);
+  box-shadow: 0 0.5em 1em -0.2em rgba(var(--secondary), 0.5);
+  color: rgb(var(--secondary));
+  transform: translateY(-15%);
+  transition: 0.15s;
+}
+
+.pit-rating__send .front svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.pit-rating__send:hover .front {
+  transform: translateY(-20%);
+}
+
+.pit-rating__send:active .front {
+  transform: translateY(0%);
+  box-shadow: 0 0;
+}
+
+.pit-rating__send:focus-visible {
+  outline-color: #f7f5f0;
+}
+
+.pit-rating__send:disabled {
+  opacity: 0.45;
+  cursor: progress;
+}
+
+.pit-rating__log {
+  grid-area: log;
+  border-top: 1px solid #232b31;
+  padding-top: 16px;
+}
+
+.pit-rating__log-head {
+  margin: 0 0 10px;
+  color: #f7f5f0;
+  font-family: var(--display, sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.pit-rating__log-head span {
+  margin-left: 8px;
+  color: #7f8b93;
+  font-family: var(--ui, sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+}
+
+.pit-rating__log-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pit-rating__log-list li {
+  display: grid;
+  gap: 2px;
+  border-left: 2px solid rgba(255, 212, 0, 0.5);
+  background: #0d1114;
+  padding: 9px 12px;
+}
+
+.pit-rating__log-stars {
+  margin: 0;
+  color: #ffd400;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.pit-rating__log-stars span {
+  color: #3f4a51;
+}
+
+.pit-rating__log-text {
+  margin: 2px 0 0;
+  color: #dbe2e6;
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.pit-rating__log-meta {
+  color: #8f9aa1;
+  font-family: var(--ui, sans-serif);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.pit-rating__log-empty {
+  margin: 0;
+  color: #8f9aa1;
+  font-size: 12.5px;
+}
+
+@media (max-width: 760px) {
+  .pit-rating__form { gap: 10px; }
+  .pit-rating__send { width: 56px; height: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pit-rating__send,
+  .pit-rating__send .front {
+    transition: none;
   }
 }

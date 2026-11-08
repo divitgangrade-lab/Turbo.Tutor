@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-XKFHMPKF.js";import{g as At,j as it,l as q,p as z}from"./island-chunks/chunk-CANNF34S.js";var m=50,lt=4,I=(m-1)*lt+1,H=6,ct=1/120,Yt={lens:0,comet:1,even:2},yt=["#3847ff","#7c84ff","#c7cbff"],Bt=`#version 300 es
+import"./island-chunks/chunk-F7TZUDVZ.js";import{e as At,h as it,j as q,n as z}from"./island-chunks/chunk-OS2XOP7G.js";import"./island-chunks/chunk-SSQABL5H.js";var m=50,lt=4,I=(m-1)*lt+1,H=6,ct=1/120,Yt={lens:0,comet:1,even:2},yt=["#3847ff","#7c84ff","#c7cbff"],Bt=`#version 300 es
 in vec2 a_position;
 in vec4 a_shape;
 uniform vec2 u_resolution;

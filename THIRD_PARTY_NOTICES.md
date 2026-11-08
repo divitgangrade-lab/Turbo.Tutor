@@ -54,6 +54,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+## Uiverse cloud loader
+
+The loading overlay in `loader.css` and `loader.js` is adapted from the Cloud Loader by andrew-manzyk (https://uiverse.io/andrew-manzyk/smart-ladybug-8), published under the MIT licence. Copyright (c) 2026 Andrew Manzyk. The full-screen overlay and loading label were added for this site.
+
+## Uiverse send button
+
+The round review send button in `src/pit-rating/PitRating.css` is adapted from a Uiverse.io snippet by catraco (https://uiverse.io/catraco). The colours and the arrow glyph were changed for this site.
+
+## Lenis
+
+The SmoothScroll island bundles Lenis 1.3.27 (https://github.com/darkroomengineering/lenis) under the MIT licence. Copyright (c) 2024 darkroom.engineering. The licence permits use, modification and distribution with the copyright notice retained.
+
 ## GSAP
 
 The TextLoop, MaskedHeading and AnimatedContent islands bundle GSAP 3.15.1 (https://gsap.com) under the GSAP Standard "No Charge" License. The licence permits use in commercial projects but does not permit selling, sublicensing or redistributing GSAP itself. See https://gsap.com/standard-license/.

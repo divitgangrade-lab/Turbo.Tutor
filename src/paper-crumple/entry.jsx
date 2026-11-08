@@ -6,6 +6,7 @@ const host = document.getElementById('paper-crumple-mount');
 const compact = window.matchMedia('(max-width: 860px)').matches;
 
 if (host) {
+  host.replaceChildren();
   render(
     <PaperCrumple
       src="./f1-helmet.webp"
@@ -29,7 +30,8 @@ if (host) {
       shadowOpacity={0.16}
       rotation={-3}
       draggable
-      returnToOrigin
+      returnToOrigin={false}
+      dragRadius={900}
       detail={compact ? 48 : 64}
     />,
     host

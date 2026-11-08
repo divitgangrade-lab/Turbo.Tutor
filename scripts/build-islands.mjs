@@ -35,6 +35,7 @@ await build({
     'paper-crumple': 'src/paper-crumple/entry.jsx',
     'pit-rating': 'src/pit-rating/entry.jsx',
     'topography': 'src/topography/entry.jsx',
+    'smooth-scroll': 'src/smooth-scroll/entry.js',
     'legal-bg': 'src/legal-bg/entry.jsx'
   },
   bundle: true,

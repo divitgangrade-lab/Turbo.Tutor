@@ -202,3 +202,495 @@
 .flying-button[data-carry] .flying-button__cursor {
   display: block;
 }
+
+/* ---------- launch scene: floating F1 car, pit crew, chalkboard ---------- */
+
+.launch-car .flying-button__craft {
+  width: 274px;
+  height: 114px;
+  padding: 0;
+  border-radius: 18px;
+  background: #e10600;
+  z-index: 2;
+}
+
+.flying-button.launch-car .flying-button__face {
+  border-radius: inherit;
+  background: #e10600;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.34),
+    inset 0 0 0 3px rgba(18, 22, 26, 0.12),
+    0 16px 32px -16px rgba(18, 22, 26, 0.55),
+    0 0 34px -8px rgba(225, 6, 0, 0.34);
+}
+
+.launch-car .flying-button__face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.flying-button.launch-car .flying-button__face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 34%),
+    radial-gradient(120% 90% at 50% 122%, rgba(225, 6, 0, 0.5), transparent 62%);
+  pointer-events: none;
+}
+
+.launch-car .flying-button__label {
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  z-index: 2;
+  display: block;
+  transform: translateX(-50%);
+  padding: 5px 11px 4px;
+  border-radius: 3px;
+  background: #e10600;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  color: #fff;
+  font-family: var(--ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.launch-car .flying-button__craft[data-pressed] .flying-button__label {
+  transform: translateX(-50%) scale(0.96);
+}
+
+.launch-car .flying-button__pod {
+  top: calc(100% - 5px);
+  width: 32px;
+  height: 11px;
+  border-radius: 7px 7px 10px 10px;
+  background: linear-gradient(180deg, #26262b 0%, #43434b 52%, #101013 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.launch-car .flying-button__pod::after {
+  width: 21px;
+  height: 4px;
+  bottom: 1px;
+  border-radius: 999px;
+}
+
+.launch-car .flying-button__smoke {
+  z-index: 1;
+}
+
+.launch-car .flying-button__cursor {
+  z-index: 4;
+}
+
+.flying-button__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.1s;
+  pointer-events: none;
+}
+
+.launch-car[data-ready] .flying-button__scene {
+  opacity: 1;
+}
+
+.flying-button__chalkboard {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 1;
+  width: clamp(128px, 34%, 164px);
+  padding: 9px 11px 10px;
+  transform: rotate(-1.6deg);
+  border: 6px solid #b08a5a;
+  border-radius: 3px;
+  background:
+    radial-gradient(120% 90% at 18% 8%, rgba(255, 255, 255, 0.09), transparent 58%),
+    radial-gradient(90% 70% at 84% 96%, rgba(255, 255, 255, 0.05), transparent 60%),
+    #232c2b;
+  box-shadow:
+    0 12px 24px -14px rgba(18, 22, 26, 0.6),
+    inset 0 0 22px rgba(0, 0, 0, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  color: #e9e3d0;
+  font-family: "Bradley Hand", "Segoe Print", "Chalkboard SE", "Comic Sans MS", cursive;
+}
+
+.flying-button__chalkboard::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  left: -12px;
+  height: 6px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #c19a63, #8f6b3f);
+  box-shadow: 0 3px 6px -2px rgba(18, 22, 26, 0.4);
+}
+
+.flying-button__chalk-title {
+  display: block;
+  margin: 0 0 5px;
+  color: #ffd400;
+  font-family: var(--ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.flying-button__chalk-line {
+  display: block;
+  font-size: 11px;
+  line-height: 1.55;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.flying-button__chalk-line::before {
+  content: "\203A\00A0";
+  color: #8ec5ff;
+}
+
+.flying-button__chalk-note {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 1px 6px;
+  border: 1px dashed rgba(255, 212, 0, 0.5);
+  background: rgba(255, 212, 0, 0.14);
+  color: #ffd400;
+  font-family: var(--ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.flying-button__engineers {
+  position: absolute;
+  bottom: 22px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.flying-button__engineers::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: -2px;
+  left: -7px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(18, 22, 26, 0.14);
+  filter: blur(1px);
+}
+
+.flying-button__engineers--left {
+  left: 22px;
+}
+
+.flying-button__engineers--right {
+  right: 26px;
+}
+
+.flying-button__engineer {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 34px;
+  transform-origin: 50% 100%;
+  animation: fb-engineer-bob 2.6s ease-in-out infinite;
+}
+
+.flying-button__engineer:nth-child(2) {
+  animation-delay: -0.8s;
+}
+
+.flying-button__engineer:nth-child(3) {
+  animation-delay: -1.7s;
+}
+
+.flying-button__engineer-body {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 9px;
+  height: 18px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #fbf7ec 0 62%, #d3ccbd 100%);
+  clip-path: polygon(30% 0, 70% 0, 78% 44%, 74% 100%, 56% 100%, 50% 60%, 44% 100%, 26% 100%, 22% 44%);
+}
+
+.flying-button__engineer-body::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: #e10600;
+}
+
+.flying-button__engineer-head {
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #f0c39b;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  z-index: 1;
+}
+
+.flying-button__engineer-head::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -2px;
+  left: -2px;
+  height: 6px;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(180deg, #ffd400, #e2b400);
+}
+
+.flying-button__engineer-head::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: -3px;
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: #c79f00;
+}
+
+.flying-button__engineer-arm {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  z-index: 2;
+  width: 13px;
+  height: 2px;
+  border-radius: 2px;
+  background: #fbf7ec;
+  box-shadow: 0 1px 0 rgba(18, 22, 26, 0.12);
+  transform-origin: 0 50%;
+  animation: fb-engineer-point 2.6s ease-in-out infinite;
+}
+
+.flying-button__engineers--right .flying-button__engineer-arm {
+  right: auto;
+  left: 0;
+  transform-origin: 100% 50%;
+  animation-name: fb-engineer-point-alt;
+}
+
+.flying-button__engineer:nth-child(2) .flying-button__engineer-arm,
+.flying-button__engineer:nth-child(3) .flying-button__engineer-arm {
+  animation-delay: -1.1s;
+}
+
+@keyframes fb-engineer-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes fb-engineer-point {
+  0%,
+  100% {
+    transform: rotate(-54deg);
+  }
+  50% {
+    transform: rotate(-68deg);
+  }
+}
+
+@keyframes fb-engineer-point-alt {
+  0%,
+  100% {
+    transform: rotate(54deg);
+  }
+  50% {
+    transform: rotate(68deg);
+  }
+}
+
+.flying-button__quote {
+  position: absolute;
+  bottom: 72px;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: max-content;
+  max-width: min(300px, calc(100% - 32px));
+  padding: 8px 12px 9px;
+  border-left: 3px solid #e10600;
+  background: rgba(18, 22, 26, 0.93);
+  box-shadow: 0 16px 30px -18px rgba(0, 0, 0, 0.7);
+  color: #f4ead6;
+  font-family: var(--ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: none;
+}
+
+.flying-button__quote[data-show="true"] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.flying-button__quote-text {
+  display: block;
+}
+
+.flying-button__quote[data-show="true"] .flying-button__quote-text {
+  animation: fb-quote-in 0.34s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.flying-button__quote-label {
+  align-self: flex-start;
+  color: #ffd400;
+  font-family: var(--ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+@keyframes fb-quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .launch-car .flying-button__craft {
+    width: 236px;
+    height: 98px;
+    border-radius: 14px;
+  }
+
+  .launch-car .flying-button__label {
+    bottom: 6px;
+    padding: 4px 9px 3px;
+    font-size: 8px;
+    letter-spacing: 1.1px;
+  }
+
+  .flying-button__chalkboard {
+    top: 10px;
+    left: 10px;
+    width: 124px;
+    padding: 7px 9px 8px;
+    border-width: 4px;
+  }
+
+  .flying-button__chalk-title {
+    font-size: 7px;
+    letter-spacing: 0.9px;
+  }
+
+  .flying-button__chalk-line {
+    font-size: 9.5px;
+    line-height: 1.5;
+  }
+
+  .flying-button__chalk-note {
+    margin-top: 4px;
+    padding: 1px 4px;
+    font-size: 6.5px;
+  }
+
+  .flying-button__engineers {
+    bottom: 17px;
+    gap: 4px;
+  }
+
+  .flying-button__engineers--left {
+    left: 10px;
+  }
+
+  .flying-button__engineers--right {
+    right: 11px;
+  }
+
+  .flying-button__engineers--right .flying-button__engineer:nth-child(2) {
+    display: none;
+  }
+
+  .flying-button__engineer {
+    width: 18px;
+    height: 30px;
+  }
+
+  .flying-button__engineer-body {
+    width: 8px;
+    height: 16px;
+  }
+
+  .flying-button__engineer-arm {
+    width: 11px;
+  }
+
+  .flying-button__quote {
+    bottom: 58px;
+    padding: 7px 10px 8px;
+    font-size: 9.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flying-button__scene {
+    transition: none;
+  }
+
+  .flying-button__engineer,
+  .flying-button__engineer-arm,
+  .flying-button__quote,
+  .flying-button__quote-text,
+  .flying-button__quote[data-show="true"] .flying-button__quote-text {
+    animation: none;
+    transition: none;
+  }
+}

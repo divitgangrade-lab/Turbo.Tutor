@@ -431,16 +431,11 @@
 
   /* ---------- contour backdrop (marching squares) ---------- */
   (function contours() {
-    const canvas = $("#contours");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
-    let visible = true;
-    let time = 0;
-    let last = performance.now();
+    const canvases = $$(".contours, [data-sonar]");
+    if (!canvases.length) return;
+    const reduced = !showsMotion();
+    const setups = [];
+    const start = performance.now();
 
     const field = (x, y, t) =>
       (Math.sin(x * 0.0052 + t * 0.00021) * 0.5 +
@@ -450,20 +445,46 @@
         0.5 +
       0.5;
 
-    function resize() {
-      const rect = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      width = Math.max(1, rect.width);
-      height = Math.max(1, rect.height);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw();
+    const palette = (setup) => {
+      const dark = document.documentElement.dataset.theme === "dark";
+      if (setup.tone === "plans") {
+        if (dark) {
+          return [
+            { level: 0.3, color: "rgba(239, 244, 242, 0.11)", width: 1 },
+            { level: 0.5, color: "rgba(255, 212, 0, 0.14)", width: 1 },
+            { level: 0.7, color: "rgba(255, 255, 255, 0.1)", width: 1.1 }
+          ];
+        }
+        return [
+          { level: 0.3, color: "rgba(18, 26, 31, 0.1)", width: 1 },
+          { level: 0.5, color: "rgba(18, 26, 31, 0.16)", width: 1 },
+          { level: 0.7, color: "rgba(225, 6, 0, 0.12)", width: 1.1 }
+        ];
+      }
+      return [
+        { level: 0.28, color: "rgba(255, 241, 197, 0.13)", width: 1 },
+        { level: 0.42, color: "rgba(255, 255, 255, 0.18)", width: 1 },
+        { level: 0.56, color: "rgba(255, 212, 0, 0.22)", width: 1.1 },
+        { level: 0.7, color: "rgba(255, 255, 255, 0.15)", width: 1 },
+        { level: 0.84, color: "rgba(225, 6, 0, 0.17)", width: 1.2 }
+      ];
+    };
+
+    function resize(setup) {
+      const rect = setup.canvas.getBoundingClientRect();
+      setup.dpr = Math.min(window.devicePixelRatio || 1, setup.tone === "plans" ? 1 : 1.35);
+      setup.width = Math.max(1, rect.width);
+      setup.height = Math.max(1, rect.height);
+      setup.canvas.width = Math.round(setup.width * setup.dpr);
+      setup.canvas.height = Math.round(setup.height * setup.dpr);
+      setup.ctx.setTransform(setup.dpr, 0, 0, setup.dpr, 0, 0);
+      draw(setup, performance.now() - start);
     }
 
-    function draw() {
+    function draw(setup, time) {
+      const { ctx, width, height, step } = setup;
+      if (!width || !height) return;
       ctx.clearRect(0, 0, width, height);
-      const step = 38;
       const cols = Math.ceil(width / step);
       const rows = Math.ceil(height / step);
       const values = new Float32Array((cols + 1) * (rows + 1));
@@ -472,11 +493,12 @@
           values[j * (cols + 1) + i] = field(i * step, j * step, time);
         }
       }
-      const levels = [0.3, 0.5, 0.7];
       const at = (i, j) => values[j * (cols + 1) + i] || 0;
-      ctx.strokeStyle = "rgba(255,255,255,0.11)";
-      ctx.lineWidth = 1;
-      for (const level of levels) {
+      ctx.lineJoin = "round";
+      for (const tone of palette(setup)) {
+        const level = tone.level;
+        ctx.strokeStyle = tone.color;
+        ctx.lineWidth = tone.width;
         ctx.beginPath();
         for (let j = 0; j < rows; j++) {
           for (let i = 0; i < cols; i++) {
@@ -542,19 +564,41 @@
       }
     }
 
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver((entries) => {
-        visible = entries[0].isIntersecting;
-      }).observe(canvas);
+    for (const canvas of canvases) {
+      const ctx = canvas.getContext("2d");
+      if (!ctx) continue;
+      const setup = {
+        canvas,
+        ctx,
+        width: 0,
+        height: 0,
+        dpr: 1,
+        visible: true,
+        tone: canvas.dataset.sonar || "hero",
+        step: canvas.dataset.sonar === "plans" ? 52 : 34
+      };
+      setups.push(setup);
+      resize(setup);
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver((entries) => {
+          setup.visible = entries[0].isIntersecting;
+          if (setup.visible) draw(setup, performance.now() - start);
+        }).observe(canvas);
+      }
+      if ("ResizeObserver" in window) {
+        new ResizeObserver(() => resize(setup)).observe(canvas);
+      } else {
+        window.addEventListener("resize", () => resize(setup));
+      }
     }
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(resize).observe(canvas);
-    } else {
-      window.addEventListener("resize", resize);
-    }
-    resize();
 
-    draw();
+    if (!reduced) {
+      every((now) => {
+        for (const setup of setups) {
+          if (setup.visible) draw(setup, now - start);
+        }
+      }, 42);
+    }
   })();
 
   /* ---------- chequered seams ---------- */

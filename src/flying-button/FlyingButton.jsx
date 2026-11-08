@@ -6,7 +6,7 @@
  * Licensed under MIT + Commons Clause v1.0. See THIRD_PARTY_NOTICES.md.
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './FlyingButton.css';
 
 const G = 1100;
@@ -24,6 +24,19 @@ const SIZES = {
   large: { h: 52, px: 26, fs: 16, k: 1.18 },
   'extra-large': { h: 60, px: 30, fs: 18, k: 1.36 }
 };
+
+const LAUNCH_QUOTES = [
+  'Copy that. The lap plan is holding together.',
+  'More downforce. Less doubt.',
+  'Telemetry says the student is ready.',
+  'We have a green flag. Repeat, green flag.',
+  'All systems nominal. Bring the practice.',
+  'The fractions are stowed and secured.',
+  'Pit wall to tutor: the plan has cleared the tower.',
+  'No cold checkout detected. Keep climbing.',
+  'Engineers confirm the wing is for cornering.',
+  'That is a clean launch. Send the next lap.'
+];
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 const num = (v, d) => (Number.isFinite(Number(v)) && v !== null && v !== '' ? Number(v) : d);
@@ -1148,6 +1161,7 @@ function createEngine({ root, canvas, button, cursor, ramp, props }) {
     s.climbT = 1.15 + (s.alt - s.y) / 420;
     s.hold = Math.max(0, num(P.hoverTime, 2.4));
     s.xRef = s.x;
+    props.current.onLaunch?.();
     wake();
     return true;
   };
@@ -2031,7 +2045,25 @@ export default function FlyingButton({
   const rampRef = useRef(null);
   const engineRef = useRef(null);
   const propsRef = useRef({});
+  const quoteTimer = useRef(0);
+  const lastQuote = useRef('');
+  const [quote, setQuote] = useState({ text: '', id: 0 });
   const light = theme === 'light';
+
+  const showQuote = () => {
+    let next = LAUNCH_QUOTES[Math.floor(Math.random() * LAUNCH_QUOTES.length)];
+    for (let tries = 0; tries < 8 && next === lastQuote.current; tries += 1) {
+      next = LAUNCH_QUOTES[Math.floor(Math.random() * LAUNCH_QUOTES.length)];
+    }
+    lastQuote.current = next;
+    setQuote({ text: next, id: Date.now() });
+    clearTimeout(quoteTimer.current);
+    quoteTimer.current = window.setTimeout(() => {
+      setQuote(current => ({ ...current, text: '' }));
+    }, 5200);
+  };
+
+  useEffect(() => () => clearTimeout(quoteTimer.current), []);
   const dims = SIZES[size] || SIZES.medium;
   const thrust = thrustColor || (light ? '#4f8cff' : '#8ec5ff');
   const smokeTone = smokeColor || (light ? '#e9ebf0' : '#eef1f6');
@@ -2060,7 +2092,8 @@ export default function FlyingButton({
     thrustColor: thrust,
     smokeColor: smokeTone,
     theme,
-    onClick
+    onClick,
+    onLaunch: showQuote
   };
 
   useEffect(() => {
@@ -2116,18 +2149,51 @@ export default function FlyingButton({
         <path className="flying-button__ramp-edge" />
       </svg>
       <canvas ref={canvasRef} className="flying-button__smoke" aria-hidden="true" />
+      <div className="flying-button__scene" aria-hidden="true">
+        <div className="flying-button__chalkboard">
+          <span className="flying-button__chalk-title">Lap plan // TT-07</span>
+          <span className="flying-button__chalk-line">T-24 secure</span>
+          <span className="flying-button__chalk-line">Thrust 100%</span>
+          <span className="flying-button__chalk-line">Fractions stowed</span>
+          <span className="flying-button__chalk-note">Tutor ready</span>
+        </div>
+        <div className="flying-button__engineers flying-button__engineers--left">
+          <span className="flying-button__engineer">
+            <i className="flying-button__engineer-arm" />
+            <i className="flying-button__engineer-body" />
+            <i className="flying-button__engineer-head" />
+          </span>
+        </div>
+        <div className="flying-button__engineers flying-button__engineers--right">
+          {[0, 1, 2].map(index => (
+            <span key={index} className="flying-button__engineer">
+              <i className="flying-button__engineer-arm" />
+              <i className="flying-button__engineer-body" />
+              <i className="flying-button__engineer-head" />
+            </span>
+          ))}
+        </div>
+      </div>
       <button
         ref={buttonRef}
         type="button"
         className="flying-button__craft"
         onClick={e => propsRef.current.onClick && propsRef.current.onClick(e)}
       >
-        <span className="flying-button__face" aria-hidden="true" />
+        <span className="flying-button__face" aria-hidden="true">
+          <img src="f1-car.webp" alt="" width="1200" height="500" decoding="async" />
+        </span>
         <span className="flying-button__label">{children}</span>
         {pods.map(left => (
           <span key={left} className="flying-button__pod" style={{ left: `${left}%` }} aria-hidden="true" />
         ))}
       </button>
+      <div className="flying-button__quote" data-show={quote.text ? 'true' : 'false'} aria-live="polite">
+        <span className="flying-button__quote-label">Pit wall</span>
+        <span className="flying-button__quote-text" key={quote.id}>
+          {quote.text}
+        </span>
+      </div>
       <svg ref={cursorRef} className="flying-button__cursor" viewBox="0 0 24 34" aria-hidden="true">
         <path
           d="M2.2 2.1v24.6l6.1-5.9 4.1 9.6 4.4-1.9-4.1-9.4h8.6z"

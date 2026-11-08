@@ -50,8 +50,8 @@ if (pad) {
       theme="light"
       size="large"
       radius={18}
-      altitude={170}
-      hoverTime={2.4}
+      altitude={165}
+      hoverTime={3.4}
       jets={2}
       thrusters
       trigger="hover"
@@ -65,6 +65,8 @@ if (pad) {
       thrustColor="#ffd400"
       smokeColor="#f4ead6"
       onClick={flyToPlans}
+      className="launch-car"
+      style={{ '--fly-h': '114px', '--fly-px': '0px' }}
     >
       Build your lap plan
     </FlyingButton>,

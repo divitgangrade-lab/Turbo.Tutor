@@ -6,6 +6,7 @@ const host = document.getElementById('falling-text-mount');
 const compact = window.matchMedia('(max-width: 860px)').matches;
 
 if (host) {
+  host.replaceChildren();
   render(
     <FallingText
       text="Every lap is a lesson. Every lesson sticks."

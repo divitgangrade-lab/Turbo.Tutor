@@ -1,0 +1,5 @@
+/* Lenis takes over the wheel, so the native CSS glide would double up. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
