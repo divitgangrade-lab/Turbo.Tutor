@@ -56,7 +56,7 @@ const buildCar = () => {
   car.add(box(1.62, 0.34, 0.56, body, 0.52, 0.46, 0));
   car.add(box(1.0, 0.16, 0.5, trim, 1.18, 0.36, 0));
 
-  const nose = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.06, 1.55, 14), body);
+  const nose = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.19, 1.55, 14), body);
   nose.rotation.z = Math.PI / 2;
   nose.scale.z = 0.78;
   nose.position.set(2.02, 0.4, 0);
@@ -148,8 +148,8 @@ if (mount) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
-  camera.position.set(4.4, 2.0, 5.8);
-  camera.lookAt(0, 0.5, 0);
+  camera.position.set(1.8, 1.7, 4.8);
+  camera.lookAt(0, 0.48, 0);
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
   renderer.setClearColor(0x000000, 0);
@@ -158,7 +158,7 @@ if (mount) {
   renderer.toneMappingExposure = 1.1;
 
   const car = buildCar();
-  car.rotation.y = -0.9;
+  car.rotation.y = -0.4;
   scene.add(car);
 
   const floor = new THREE.Mesh(
