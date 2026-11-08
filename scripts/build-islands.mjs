@@ -38,6 +38,7 @@ await build({
     'smooth-scroll': 'src/smooth-scroll/entry.js',
     'legal-bg': 'src/legal-bg/entry.jsx',
     'shader-animation': 'src/shader-animation/entry.jsx',
+    'spline-hero': 'src/spline-hero/entry.js',
     'click-spark': 'src/click-spark/entry.jsx'
   },
   bundle: true,

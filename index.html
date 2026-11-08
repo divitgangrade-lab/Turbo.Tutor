@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page https://prod.spline.design https://apis.spline.design https://cdn.spline.design https://hooks.spline.design https://relayserver.spline.design; worker-src 'self' blob:; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0a0c0f">
   <title>TurboTutor | 1:1 Math, English &amp; Science Tutoring, Grades 1–8</title>
@@ -1072,9 +1072,11 @@
   <link rel="stylesheet" href="./loader.css?v=20261108-10">
   <link rel="stylesheet" href="./helmet-trash.css?v=20261108-2">
   <link rel="stylesheet" href="./shader-animation.css?v=20261108-1">
+  <link rel="stylesheet" href="./spline-hero.css?v=20261108-1">
   <link rel="stylesheet" href="./click-spark.css?v=20261108-1">
   <script src="./loader.js?v=20261108-9" defer></script>
   <script type="module" src="./shader-animation.js?v=20261108-1" defer></script>
+  <script type="module" src="./spline-hero.js?v=20261108-1" defer></script>
   <script type="module" src="./click-spark.js?v=20261108-1" defer></script>
 </head>
 <body>
@@ -1198,6 +1200,8 @@
           <div class="hero-swap" data-cursor-label="Swap">
             <img class="hero-swap-fallback" src="f1-car.webp" srcset="f1-car-640.webp 640w, f1-car-960.webp 960w, f1-car.webp 1200w" sizes="(max-width: 900px) 92vw, 760px" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
             <div class="hero-swap-mount" id="pixel-swap-mount"></div>
+            <div class="hero-3d" id="spline-hero-mount" data-scene="./hero-f1.splinecode"></div>
+            <button class="hero-3d-toggle" id="spline-hero-toggle" type="button" aria-pressed="false" aria-controls="spline-hero-mount" aria-label="Show the Formula 1 car as a 3D scene">3D view</button>
           </div>
           <div class="hero-plate" aria-hidden="true"><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
         </div>
