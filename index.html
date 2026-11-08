@@ -168,8 +168,11 @@
     .hero { position: relative; overflow: hidden; background: radial-gradient(120% 130% at 78% 18%, #2a3238 0, #12161a 46%, #080a0c 100%); color: #f7f5f0; isolation: isolate; }
     .hero-acid { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
     .hero-acid > div { position: absolute; inset: 0; }
+    .hero-laser { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .hero-laser > div { position: absolute; inset: 0; }
     .hero-acid .acid-squares-container { position: absolute; inset: 0; }
     @media (prefers-reduced-motion: reduce) { .hero-acid { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .hero-laser { display: none; } }
     .hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px); background-size: 84px 84px; content: ""; mask-image: radial-gradient(80% 80% at 50% 40%, #000 30%, transparent 100%); }
     .hero::after { position: absolute; right: -12%; bottom: -34%; width: 70%; height: 80%; background: radial-gradient(closest-side, rgba(225, 6, 0, .4), transparent); content: ""; pointer-events: none; }
     .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 30px; min-height: clamp(600px, 82vh, 800px); padding-block: clamp(52px, 7vw, 82px) clamp(58px, 7vw, 92px); }
@@ -1182,6 +1185,7 @@
         <div id="acid-squares-mount"></div>
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-laser" id="laser-flow-root" aria-hidden="true"><div id="laser-flow-mount"></div></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1 id="hero-title" aria-label="Learn at full throttle"><span class="line">Learn</span> <span class="line">at full</span> <span class="line outline">throttle</span></h1>
@@ -3935,6 +3939,34 @@
       window.addEventListener("scroll", near, { passive: true });
       window.addEventListener("resize", near, { passive: true });
       near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("laser-flow-root");
+      const surface = document.querySelector(".hero-swap");
+      if (!host || !surface) return;
+      if (!window.matchMedia("(min-width: 1024px)").matches) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "laser-flow.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./laser-flow.js?v=20261108-1").catch(() => {});
+        });
+      };
+      if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 2600 });
+      else window.setTimeout(load, 1200);
     })();
   </script>
 

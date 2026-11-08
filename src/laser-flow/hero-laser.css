@@ -1,0 +1,22 @@
+.hero-laser {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-laser > div {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-laser .laser-flow-container {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-laser {
+    display: none;
+  }
+}

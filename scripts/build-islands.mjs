@@ -52,6 +52,8 @@ await build({
     'visit-counter': 'src/visit-counter/entry.jsx'
 ,
     'wake-slider': 'src/wake-slider/entry.jsx'
+,
+    'laser-flow': 'src/laser-flow/entry.jsx'
   },
   bundle: true,
   minify: true,
