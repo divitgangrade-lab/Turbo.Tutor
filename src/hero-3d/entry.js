@@ -49,15 +49,17 @@ const buildCar = () => {
 
   for (const z of [-0.56, 0.56]) {
     car.add(box(1.9, 0.36, 0.46, body, -0.32, 0.44, z));
+    car.add(box(0.1, 0.26, 0.38, trim, 0.6, 0.44, z));
     car.add(box(0.58, 0.28, 0.4, carbon, -1.42, 0.42, z));
   }
 
   car.add(box(1.62, 0.34, 0.56, body, 0.52, 0.46, 0));
   car.add(box(1.0, 0.16, 0.5, trim, 1.18, 0.36, 0));
 
-  const nose = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.09, 1.5, 12), body);
+  const nose = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.06, 1.55, 14), body);
   nose.rotation.z = Math.PI / 2;
-  nose.position.set(2.05, 0.42, 0);
+  nose.scale.z = 0.78;
+  nose.position.set(2.02, 0.4, 0);
   car.add(nose);
 
   car.add(box(0.52, 0.05, 1.9, carbon, 2.94, 0.2, 0));
@@ -71,6 +73,7 @@ const buildCar = () => {
 
   car.add(box(1.5, 0.38, 0.42, body, -0.98, 0.6, 0));
   car.add(box(1.2, 0.02, 0.18, white, -0.92, 0.795, 0));
+  car.add(box(1.9, 0.015, 0.12, white, 0.5, 0.635, 0));
   car.add(box(0.36, 0.24, 0.3, body, -0.36, 0.82, 0));
   car.add(box(0.62, 0.08, 0.42, carbon, 0.72, 0.65, 0));
 
@@ -145,8 +148,8 @@ if (mount) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
-  camera.position.set(4.7, 1.75, 5.0);
-  camera.lookAt(0, 0.48, 0);
+  camera.position.set(4.4, 2.0, 5.8);
+  camera.lookAt(0, 0.5, 0);
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
   renderer.setClearColor(0x000000, 0);
@@ -155,7 +158,7 @@ if (mount) {
   renderer.toneMappingExposure = 1.1;
 
   const car = buildCar();
-  car.rotation.y = -0.55;
+  car.rotation.y = -0.9;
   scene.add(car);
 
   const floor = new THREE.Mesh(
@@ -211,7 +214,7 @@ if (mount) {
     tick.last = now;
     if (!reduce.matches) {
       idle += dt;
-      if (!dragging && idle > 1.6) car.rotation.y += dt * 0.22;
+      if (!dragging && idle > 1.6) car.rotation.y += dt * 0.18;
       car.position.y = Math.sin(now * 0.0012) * 0.012;
     }
     car.rotation.y += spin;
