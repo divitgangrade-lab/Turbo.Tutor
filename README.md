@@ -387,7 +387,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Removed the duplicate skip link from the home page so keyboard visitors get one clear target.
 - Added the React Bits **ClickSpark** tap layer: a short amber, red and bone spark burst on pointer and keyboard activation, drawn on viewport-clipped canvases that remove themselves when finished. The layer is inert to pointer events, hidden from assistive technology, capped at 16 concurrent bursts and disabled under `prefers-reduced-motion`.
 - Brightened the LiquidChrome first-load overlay and moved the pit-wall reviews onto the shared D1 API.
-- Calmed the LiquidChrome first-load overlay: slower folds, wider and softer creases, lower exposure, gentler pointer ripples and a lower render scale, so the loader drifts into view instead of strobing and flaring.
+- Calmed the LiquidChrome first-load overlay: slower folds, wider and softer creases, lower exposure, gentler pointer ripples and a lower render scale, so the loader drifts into view instead of strobing and flaring. The screen-space crease sample that drew fine corduroy ridges across the metal is gone as well.
 - Gave the kart panel `role="dialog"`, `aria-modal="true"` and `inert` while closed, added a Tab focus loop inside the open panel, fixed the close transition so the panel is visible immediately on open and still animates shut, and restored focus to the kart button when it closes.
 - Raised contrast on the walkthrough step numbers, the contact reply promise and the Twin Hickory directions link, and underlined the footer licence and photo-credit links so they no longer rely on colour alone.
 - Fixed an ARIA defect on the highlights ticker (`aria-label` on a plain `div`).

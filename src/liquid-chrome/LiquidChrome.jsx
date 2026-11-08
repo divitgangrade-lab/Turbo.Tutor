@@ -196,10 +196,6 @@ void main() {
   float weight = uDepth * uPresence * fade;
   vec2 slope = k * cs * bevel * weight * across + slopeAt(frag / uResolution) * uRipple;
   vec2 sweep = -k * bevel * (sn + 2.0 * k * cs * cs * th) * weight * density * 2.0 / uUnit * across;
-  vec2 stepX = dFdx(slope);
-  vec2 stepY = dFdy(slope);
-  vec2 crease = dot(stepX, stepX) > dot(stepY, stepY) ? stepX : stepY;
-  if (dot(crease, crease) > dot(sweep, sweep)) sweep = crease;
   float bend = length(sweep);
   float alpha = smoothstep(0.0, 0.1, length(slope));
   vec3 f0 = mix(vec3(1.0), uTint, smoothstep(0.05, 0.6, length(slope))) * 0.92;
