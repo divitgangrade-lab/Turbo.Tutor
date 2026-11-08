@@ -1725,7 +1725,7 @@
 
   <div class="scrim" id="scrim" aria-hidden="true"></div>
 
-  <aside class="kart-panel" id="kart-panel" role="dialog" aria-modal="true" aria-labelledby="kart-title" aria-hidden="true">
+  <aside class="kart-panel" id="kart-panel" role="dialog" aria-modal="true" aria-labelledby="kart-title" aria-hidden="true" inert>
     <div class="kart-strip" aria-hidden="true"></div>
     <div class="kart-head">
       <div>
@@ -2373,6 +2373,7 @@
 
       function openKart() {
         lastFocused = document.activeElement;
+        kartPanel.inert = false;
         kartPanel.classList.add("open");
         scrim.classList.add("open");
         kartPanel.setAttribute("aria-hidden", "false");
@@ -2381,6 +2382,7 @@
       }
 
       function closeKart() {
+        kartPanel.inert = true;
         kartPanel.classList.remove("open");
         scrim.classList.remove("open");
         kartPanel.setAttribute("aria-hidden", "true");
@@ -2456,6 +2458,19 @@
       });
       document.addEventListener("keydown", event => {
         if (event.key === "Escape" && !requestDialog.open && kartPanel.classList.contains("open")) closeKart();
+        if (event.key !== "Tab" || !kartPanel.classList.contains("open") || requestDialog.open) return;
+        const items = [...kartPanel.querySelectorAll("button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])")]
+          .filter(element => element.getClientRects().length > 0);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       });
 
       // ---- request form ----
