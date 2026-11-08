@@ -1419,6 +1419,56 @@
       </div>
     </section>
 
+    <section class="section term-stack" id="term" aria-labelledby="term-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">The long run</p>
+            <h2 class="h2" id="term-title">A term, <em>stacked</em></h2>
+          </div>
+          <p class="lead">Four checkpoints between the first lap and the last. Each one is confirmed with you before it starts, and the plan can change when the work does.</p>
+        </div>
+        <div class="term-stack-stage" id="scroll-stack-root">
+          <div class="term-stack-fallback">
+            <article>
+              <div class="term-card">
+                <div class="term-card-top"><span class="term-card-n" aria-hidden="true">01</span><span class="term-card-tag">Lap 1</span></div>
+                <h3>Diagnose</h3>
+                <p>A short check of last term’s work, in the student’s own handwriting. We find the one gap holding everything else back before adding anything new.</p>
+                <p class="term-card-meta">One 45-minute lap · written summary</p>
+              </div>
+            </article>
+            <article>
+              <div class="term-card">
+                <div class="term-card-top"><span class="term-card-n" aria-hidden="true">02</span><span class="term-card-tag">Laps 2–6</span></div>
+                <h3>Build</h3>
+                <p>One idea at a time, worked in front of the student and then repeated back. Practice stays short enough to finish, so the habit is accuracy rather than speed.</p>
+                <p class="term-card-meta">Weekly laps · notes after each</p>
+              </div>
+            </article>
+            <article>
+              <div class="term-card">
+                <div class="term-card-top"><span class="term-card-n" aria-hidden="true">03</span><span class="term-card-tag">Laps 7–10</span></div>
+                <h3>Apply</h3>
+                <p>The same ideas inside timed questions and real paper layouts. We rehearse the first thirty seconds of an exam question until the entry point is automatic.</p>
+                <p class="term-card-meta">Timed sets · marked together</p>
+              </div>
+            </article>
+            <article>
+              <div class="term-card">
+                <div class="term-card-top"><span class="term-card-n" aria-hidden="true">04</span><span class="term-card-tag">Every 4 laps</span></div>
+                <h3>Review</h3>
+                <p>We stop, look back at the work and reset the plan. Parents get a plain-language note on what moved, what did not, and what the next four laps should cover.</p>
+                <p class="term-card-meta">Progress note · next-lap plan</p>
+              </div>
+            </article>
+          </div>
+          <div id="scroll-stack-mount"></div>
+        </div>
+        <p class="term-stack-note">Prices stay as published and are confirmed by the tutor before anything starts. <a class="btn" href="#plans">Build a term plan <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
     <section class="section promise" aria-labelledby="promise-title">
       <div class="promise-flux" id="flux-lines-root" aria-hidden="true"></div>
       <div class="wrap promise-grid">
@@ -3573,6 +3623,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./animated-list.js?v=20261108-1").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("scroll-stack-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "scroll-stack.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./scroll-stack.js?v=20261108-1").catch(() => {});
         });
       };
       const near = () => {

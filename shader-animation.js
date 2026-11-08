@@ -1,4 +1,4 @@
-import{f as C,h as V,i as m,k as f,o as l}from"./island-chunks/chunk-XJDH345I.js";import"./island-chunks/chunk-SSQABL5H.js";var N=`#version 300 es
+import{g as C,i as V,j as m,l as f,p as l}from"./island-chunks/chunk-AA5OBDBZ.js";import"./island-chunks/chunk-SSQABL5H.js";var N=`#version 300 es
 void main() {
   vec2 corner = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
   gl_Position = vec4(corner * 2.0 - 1.0, 0.0, 1.0);
