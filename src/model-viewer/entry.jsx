@@ -37,15 +37,16 @@ const start = async () => {
       autoRotateDelay={2.5}
       startAngle={-35}
       tilt={12}
-      fit={0.86}
+      fit={2.2}
       float={0.25}
       shadow
       shadowOpacity={0.5}
       intro="rise"
+      onModelLoaded={() => {
+        root.dataset.mounted = 'true';
+      }}
     />
   );
-
-  root.dataset.mounted = 'true';
 };
 
 start();
