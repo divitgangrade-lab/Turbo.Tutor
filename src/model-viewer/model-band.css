@@ -1,0 +1,71 @@
+.model-band {
+  background: #07090b;
+  color: #f2f4ef;
+}
+
+.model-band .kicker {
+  color: #ffd400;
+}
+
+.model-band .h2,
+.model-band .h2 em {
+  color: #f2f4ef;
+}
+
+.model-band .h2 em {
+  color: #ffd400;
+}
+
+.model-band .lead {
+  color: #b9c2c6;
+}
+
+.model-stage {
+  position: relative;
+  min-height: clamp(380px, 46vw, 560px);
+  overflow: hidden;
+  border: 1px solid #2b363c;
+  border-radius: 20px;
+  background: radial-gradient(120% 120% at 50% 18%, #1a1f26, #0a0c0f 62%);
+}
+
+#model-viewer-mount {
+  position: absolute;
+  inset: 0;
+}
+
+#model-viewer-root[data-mounted] .model-fallback {
+  display: none;
+}
+
+.model-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.model-fallback img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.72;
+}
+
+.model-fallback p {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  left: 14px;
+  margin: 0;
+  border: 1px solid #2b363c;
+  background: rgba(7, 9, 11, 0.86);
+  padding: 10px 12px;
+  color: #c6cdd2;
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
