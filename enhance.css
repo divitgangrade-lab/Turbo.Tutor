@@ -423,7 +423,7 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
     #policies .policy-card::before, #policies .policy-card::after { display: none; }
     .warp-band { background: #0a0d10; }
     .warp-band::before { display: none; }
-    .contact { background: #0e1317; border-top: 5px solid var(--red); }
+    .contact { background: radial-gradient(120% 120% at 84% 8%, rgba(225, 6, 0, .18), transparent 56%), linear-gradient(180deg, #111a20 0%, #0a0f13 72%); border-top: 5px solid var(--red); }
     .contact::before, .contact::after { display: none; }
     .contact-card { background: rgba(255, 255, 255, .055); }
     .contact p.lede { color: #c7d0d4; }

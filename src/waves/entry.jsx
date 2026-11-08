@@ -18,14 +18,24 @@ const supportsWaves = () => {
 
 const compact = window.matchMedia('(max-width: 860px)').matches;
 
-if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && supportsWaves()) {
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// A busy page can refuse a new WebGL context for a moment while other islands
+// claim theirs, so try again instead of leaving the section flat.
+const mountWaves = (attempt = 0) => {
+  if (!host || reduced) return;
+  if (!supportsWaves()) {
+    if (attempt < 8) window.setTimeout(() => mountWaves(attempt + 1), 350);
+    return;
+  }
+
   render(
     <Waves
-      lineColor="#a8e6df"
-      accentColor="#e9fffb"
+      lineColor="#8ff3e6"
+      accentColor="#f2fffd"
       lineStyle="solid"
-      spacing={compact ? 24 : 30}
-      lineWidth={0.8}
+      spacing={compact ? 22 : 27}
+      lineWidth={1}
       rotation={0}
       amplitude={compact ? 12 : 18}
       scale={1.8}
@@ -39,12 +49,14 @@ if (host && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && su
       returnDuration={1.7}
       clickRipple
       intro
-      fade={0.32}
-      opacity={0.58}
+      fade={0.24}
+      opacity={0.78}
       lightMode={false}
       dpr={compact ? 1.35 : 1.75}
     />,
     host
   );
   host.dataset.mounted = 'true';
-}
+};
+
+mountWaves();
