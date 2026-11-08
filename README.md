@@ -4,7 +4,7 @@ The security model, audit results and residual risks are documented in `SECURITY
 
 **1:1 tutoring at full throttle.** A fast, F1-inspired marketing site for one-to-one Math, English and Science tutoring for Grades 1–8.
 
-The site is a set of static HTML pages with no backend of its own and no online payment. Thirty-three small Preact islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography, SmoothScroll and LiquidChrome, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap and AcidSquares backdrop load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the warp band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
+The site is a set of static HTML pages with no backend of its own and no online payment. Thirty-four small Preact islands, ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LegalBackground, Topography, SmoothScroll and LiquidChrome, are bundled locally with esbuild; most load near the viewport, while the hero PixelSwap, the AcidSquares backdrop and the ClickSpark tap layer load after first paint, LiquidEther loads as the plans section approaches, Silk loads as the special coaching section approaches, Lightfall loads as the steps section approaches, DecayCard loads as the promise section approaches, Plasma loads as the optional offer section approaches, GridScan loads as the pit-lane warm-up section approaches, DotField loads as the session walkthrough approaches, Iridescence loads as the attendance and support section approaches, Waves loads as the contact section approaches, GridMotion loads as the FAQ approaches, and FallingText, PaperCrumple and the PeekRating pit wall load as the footer approaches. The seven legal pages load their shared background island once the page is idle. The numbers rail, the warp band, the about page and the thanks page load a lighter Topography landscape as they approach. Their generated files are committed, so the rest of the site still runs without a build. Visitors configure a plan, add it to a **kart**, and send the request by email or text. The tutor confirms everything directly.
 
 - **Live site:** https://turbotutor.dpdns.org/
 - **License:** [MIT](LICENSE)
@@ -74,6 +74,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A GridMotion FAQ photo wall. A slow alternating wall of the local F1 car, helmet, kart race, Monaco circuit and pit garage images moves behind the Before the start section under a soft cream veil. The questions and search stay readable above it, and the wall is skipped for reduced-motion visitors.
 - An AnimatedContent policy grid. The three attendance cards enter in sequence when the section approaches the viewport, while the plain cards remain as the no-JS fallback.
 - A TargetCursor reticle. On fine-pointer devices it follows the pointer, locks onto links, buttons, fields and the hero swap, and shows short labels on key actions. It skips touch and reduced-motion visitors, and the native cursor stays when the island is unavailable.
+- A ClickSpark tap layer. A click or tap sends a short amber, red and bone spark burst across the pointer, and keyboard activation sparks from the focused control. Each burst is drawn on a viewport-clipped canvas that is removed when it finishes, the layer never intercepts pointer events, and reduced-motion visitors get no sparks at all.
 - A FallingText footer statement. The pit-wall line scatters into a small physics pile when tapped, pieces can be dragged and thrown, and it flies back into place a few seconds after the pointer leaves. It loads only near the footer and is skipped for reduced-motion visitors.
 - A PaperCrumple footer pit note. The helmet photograph crumples while held, can be dragged, and keeps soft creases after release, with the original photo kept as the no-JS and no-WebGL fallback. It loads only near the footer.
 - A PeekRating pit-wall rating. Five stars preview, lift and pop, and a short note with a round send button posts the lap: the stars break and drop into a small F1 car, the car leaves with a thank-you, and the saved note appears below. Reviews are stored in the shared pit-wall database and shown to every visitor; reduced-motion visitors get a plain confirmation instead of the animation.
@@ -226,6 +227,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── pit-rating.css          # Generated PeekRating and pit-wall styles
 ├── island-chunks/          # Shared GSAP and Preact code loaded once for all islands
 ├── target-cursor.css       # Generated TargetCursor styles
+├── click-spark.js          # Generated tap-spark island (Preact + ClickSpark)
+├── click-spark.css         # Generated ClickSpark styles
 ├── package.json            # Build script for the islands
 ├── package-lock.json       # Locked build tool versions
 ├── CNAME                   # GitHub Pages custom domain
@@ -240,7 +243,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── legal-bg.css            # Generated topography and falling text styles
 ├── fonts.css               # Self-hosted font faces
 ├── fonts/                  # Self-hosted WOFF2 files and OFL licences
-├── scripts/                # esbuild build script for all thirty-three islands
+├── scripts/                # esbuild build script for all thirty-four islands
 ├── src/flying-button/      # FlyingButton source and mount entry
 ├── src/flux-lines/         # FluxLines source and mount entry
 ├── src/pattern-waves/      # PatternWaves source and mount entry
@@ -254,6 +257,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── src/halftone-reveal/    # HalftoneReveal source and mount entry
 ├── src/animated-content/   # AnimatedContent source and mount entry
 ├── src/target-cursor/      # TargetCursor source and mount entry
+├── src/click-spark/        # ClickSpark source and mount entry
 ├── src/liquid-chrome/      # LiquidChrome source and loader entry
 ├── src/pixel-swap/         # PixelSwap source and mount entry
 ├── src/ribbons/            # Ribbons source and mount entry
@@ -288,7 +292,7 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 └── README.md
 ```
 
-No runtime dependencies for the static site. The separate review API is a small Worker with no third-party runtime dependencies. The thirty-three optional islands, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LiquidChrome, LegalBackground, Topography and SmoothScroll, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and Matter.js and three.js are bundled into the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the static pages make no third-party font or asset requests; the forms are contacted only when you submit, and the footer pit wall fetches its public review list when it approaches the viewport.
+No runtime dependencies for the static site. The separate review API is a small Worker with no third-party runtime dependencies. The thirty-four optional islands, ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple, PeekRating, LiquidChrome, LegalBackground, Topography and SmoothScroll, are built with esbuild and Preact, and their generated JS and CSS are committed. GSAP is bundled into the TextLoop, MaskedHeading and AnimatedContent islands, and Matter.js and three.js are bundled into the footer islands. Barlow Condensed, Chakra Petch and Titillium Web are self-hosted, so the static pages make no third-party font or asset requests; the forms are contacted only when you submit, and the footer pit wall fetches its public review list when it approaches the viewport.
 
 ### Photography credits
 
@@ -313,14 +317,14 @@ python3 -m http.server 3000
 # then open http://localhost:3000
 ```
 
-The generated islands are already committed, so serving the folder needs no build. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/ribbons/`, `src/acid-squares/`, `src/liquid-ether/`, or their props:
+The generated islands are already committed, so serving the folder needs no build. Only rebuild them after editing `src/flying-button/`, `src/flux-lines/`, `src/pattern-waves/`, `src/tech-text/`, `src/text-loop/`, `src/masked-heading/`, `src/particle-text/`, `src/split-flap-text/`, `src/warp-text/`, `src/elastic-mesh/`, `src/halftone-reveal/`, `src/animated-content/`, `src/pixel-swap/`, `src/target-cursor/`, `src/click-spark/`, `src/ribbons/`, `src/acid-squares/`, `src/liquid-ether/`, or their props:
 
 ```bash
 npm ci
 npm run build
 ```
 
-`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all thirty-three islands, and the local server command above checks that the folder serves.
+`npm ci` uses the committed lockfile; use `npm install` only when changing dependencies. `package.json` also records esbuild's postinstall in `allowScripts`, because npm blocks dependency install scripts by default and esbuild needs that step to install its platform binary. There is no separate linter or test suite. `npm run build` bundles all thirty-four islands, and the local server command above checks that the folder serves.
 
 ---
 
@@ -346,6 +350,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 - **PixelSwap island** - the hero photographs, pattern, pixel size, timing and accessible label live in `src/pixel-swap/entry.jsx`; run `npm run build` after changing them.
 - **AnimatedContent island** - the policy card copy mirrors the no-JS fallback in `index.html`; the stagger and entrance props live in `src/animated-content/entry.jsx`; run `npm run build` after changing them.
 - **TargetCursor island** - reticle size, colour, spin timing and target selector live in `src/target-cursor/entry.jsx`; action labels live on the target elements in `index.html`; run `npm run build` after changing them.
+- **ClickSpark island** - spark colours, size, radius, count, duration, easing, randomness and glow live in `src/click-spark/entry.jsx`; run `npm run build` after changing them.
 - **Ribbons island** - the footer trail colours, thickness, length, spread, spring, wave and opacity live in `src/ribbons/entry.jsx`; run `npm run build` after changing them.
 - **AcidSquares island** - the hero tile colours, lighting, motion, density and opacity live in `src/acid-squares/entry.jsx`; run `npm run build` after changing them.
 - **LiquidEther island** - the plan backdrop colours, flow, pointer force, persistence and resolution live in `src/liquid-ether/entry.jsx`; run `npm run build` after changing them.
@@ -372,7 +377,35 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Visible focus rings, skip link, semantic landmarks and labelled controls.
 - `aria-live` announcements for price changes, kart updates and toast messages.
 - All decorative SVG is hidden from assistive technology; illustrative images carry descriptive `alt` text.
-- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all thirty-three islands reduce or stop their continuous motion.
+- One skip link, WCAG AA contrast for text on flat surfaces, and underlined inline links in the footer so colour is never the only cue.
+- Continuous animation, reveals and counters respect `prefers-reduced-motion`; all thirty-four islands reduce or stop their continuous motion.
+
+## Changelog
+
+### November 2026 polish pass
+
+- Removed the duplicate skip link from the home page so keyboard visitors get one clear target.
+- Added the React Bits **ClickSpark** tap layer: a short amber, red and bone spark burst on pointer and keyboard activation, drawn on viewport-clipped canvases that remove themselves when finished. The layer is inert to pointer events, hidden from assistive technology, capped at 16 concurrent bursts and disabled under `prefers-reduced-motion`.
+- Brightened the LiquidChrome first-load overlay and moved the pit-wall reviews onto the shared D1 API.
+- Gave the kart panel `role="dialog"` and `aria-modal="true"`, fixed the close transition so the panel is visible immediately on open and still animates shut, and restored focus to the kart button when it closes.
+- Raised contrast on the walkthrough step numbers, the contact reply promise and the Twin Hickory directions link, and underlined the footer licence and photo-credit links so they no longer rely on colour alone.
+- Fixed an ARIA defect on the highlights ticker (`aria-label` on a plain `div`).
+- Verified with axe-core (WCAG 2.0/2.1 A and AA): zero violations on the home page and a representative legal page.
+- `npm audit` reports zero vulnerabilities; `npm run seo` and the page audit pass across all 11 pages.
+
+### Security review
+
+- No committed secrets, API keys or `.env` files were found. The newsletter posts to FormSubmit's public endpoint and the review API keeps no key in the repository.
+- No mixed content: every asset is same-origin HTTPS or an explicit HTTPS link. External `target="_blank"` links carry `rel="noopener"`.
+- User-controlled review text is rendered as text, never through `innerHTML`, and the Worker validates the rating, note length and JSON shape before writing to D1.
+- Residual risks recorded in `SECURITY.md`: GitHub Pages cannot send HSTS, `X-Frame-Options`, `X-Content-Type-Options` or Permissions-Policy headers and the CSP is meta-only; the public anonymous review endpoint relies on platform limits rather than an application rate limit.
+
+### Known issues and follow-ups
+
+- Automated cross-browser testing was not available in this environment (the Playwright Chromium download did not complete), so interaction checks were run in Chromium only. Re-run the interaction suite in Firefox and WebKit before a major release.
+- GitHub Pages cannot set response security headers. Moving to a host with header control, or proxying through Cloudflare, would close that gap.
+- The review endpoint is public and anonymous. Add a Worker-level rate limit or Turnstile if spam appears.
+- axe reports colour contrast on gradient and canvas-backed surfaces as "incomplete"; those text layers were checked by hand.
 
 ## A note on payment
 
@@ -384,11 +417,11 @@ This project intentionally does **not** integrate a payment provider. There are 
 
 MIT © 2026 Buttergod. See [LICENSE](LICENSE).
 
-The FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License, FallingText bundles Matter.js under the MIT licence, and PaperCrumple bundles three.js under the MIT licence. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are adapted from React Bits by David Haz under the MIT + Commons Clause licence. PatternWaves and WarpText also bundle `ogl` 1.0.11 under the Unlicense, and TextLoop, MaskedHeading and AnimatedContent bundle GSAP 3.15.1 under the GSAP Standard "No Charge" License, FallingText bundles Matter.js under the MIT licence, and PaperCrumple bundles three.js under the MIT licence. The full notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Motion layer and extra pages
 
-The pages are plain HTML, CSS and JavaScript. The optional FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
+The pages are plain HTML, CSS and JavaScript. The optional ClickSpark, FlyingButton, FluxLines, PatternWaves, TechText, TextLoop, MaskedHeading, ParticleText, SplitFlapText, WarpText, ElasticMesh, HalftoneReveal, AnimatedContent, PixelSwap, TargetCursor, Ribbons, AcidSquares, LiquidEther, Silk, Lightfall, DecayCard, Plasma, GridScan, DotField, Iridescence, Waves, GridMotion, FallingText, PaperCrumple and PeekRating islands are built from their folders under `src/` into the generated JS and CSS files committed at the root. The generated files are already present, so serving the site needs no build step; run `npm run build` only after changing an island. `enhance.css` and
 `enhance.js` sit on top of the inline styles and scripts in `index.html`:
 
 - A single reference-counted `requestAnimationFrame` ticker drives every canvas and reveal.
