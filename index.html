@@ -2051,6 +2051,7 @@
       let toastTimer;
       let lastFocused = null;
       let firstPlanRender = true;
+      let lastDraftMessage = "";
 
       function getWeeklyRate(grade, duration, subject = picker.subject, delivery = picker.delivery) {
         const base = (gradeBaseRates[grade] || 24) + (subjectPremiums[subject] || 0) + (deliveryPremiums[delivery] || 0);
@@ -2704,6 +2705,7 @@
         const subject = encodeURIComponent("TurboTutor kart request");
         const status = $("#draft-status");
         $("#request-message").value = message;
+        lastDraftMessage = message;
         $("#email-draft").href = `mailto:${tutorEmail}?subject=${subject}&body=${encodeURIComponent(message)}`;
         $("#sms-draft").href = `sms:${tutorPhone}?body=${encodeURIComponent(message)}`;
         const payload = Object.fromEntries(new FormData(requestForm).entries());
@@ -2724,15 +2726,35 @@
             requestSubmit.innerHTML = 'Send request <span class="arrow" aria-hidden="true">→</span>';
             showToast("Request sent. The tutor aims to reply within one business day.");
           }, 1100);
-        } catch {
+        } catch (error) {
           requestForm.dataset.sending = "false";
           requestSubmit.disabled = false;
           requestSubmit.innerHTML = 'Send request <span class="arrow" aria-hidden="true">→</span>';
-          status.textContent = "The request did not send. Try again or use the email or text fallback below.";
+          const needsActivation = /activat/i.test(String(error && error.message));
+          status.textContent = needsActivation
+            ? "The form service has not been activated yet, so nothing was sent. Use the email or text fallback below."
+            : "The request did not send. Try again or use the email or text fallback below.";
           status.classList.add("is-error");
           draftActions.classList.add("ready");
         }
       });
+
+      // mailto: and sms: links do nothing at all when the device has no mail app or SMS
+      // handler, so copying the draft guarantees the fallback always does something.
+      function wireDraftFallback(link, hint) {
+        if (!link) return;
+        link.addEventListener("click", async () => {
+          if (!lastDraftMessage) return;
+          try {
+            await navigator.clipboard.writeText(lastDraftMessage);
+            showToast(hint);
+          } catch {
+            showToast("Copy is unavailable here. Select the draft text and copy it manually.");
+          }
+        });
+      }
+      wireDraftFallback($("#email-draft"), `Draft copied. Paste it into an email to ${tutorEmail}.`);
+      wireDraftFallback($("#sms-draft"), "Draft copied. Paste it into a text to 804-847-3236.");
 
       contactEmailLink.addEventListener("click", event => {
         if (!emailDialog || !emailForm) return;
