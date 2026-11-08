@@ -20,7 +20,7 @@ Out of scope: GitHub's own infrastructure, the visitor's browser, the tutor's em
 - No accounts, sessions, cookies, admin panel or payment code. The review API is a public anonymous read/write endpoint for pit-wall notes; it stores no private user data.
 - Request details are assembled in the browser and posted to FormSubmit.co, which forwards them to the tutor's inbox. Nothing is posted to this origin.
 - Two `localStorage` keys hold a theme preference and a welcome-offer record. They stay in the visitor's browser.
-- No analytics, advertising pixels, third-party fonts, iframes or embeds. FormSubmit is contacted only when a visitor submits a form; the review API is contacted when the footer pit wall loads and when a note is posted.
+- No analytics, advertising pixels, third-party fonts, iframes or embeds. FormSubmit is contacted only when a visitor submits a form; the review API is contacted when the footer pit wall loads and when a note is posted. The Spline viewer and F1 scene are self-hosted under `vendor/spline/` and requested only when a visitor opens `f1.html`. That page allows `blob:` images and connections, blob workers and WebAssembly for the scene's own in-memory textures and its Draco decoder, while every other page keeps those allowances off. The viewer's CDN decoder, relay and telemetry endpoints are absent from both CSPs, so they cannot be contacted.
 
 ## Checks run
 

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page blob:; worker-src 'self' blob:; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
+<title>The F1 Scene | TurboTutor</title>
+<meta name="description" content="The TurboTutor Formula 1 scene, rendered live in the browser with a self-hosted Spline viewer. Open the full-screen F1 model and explore it.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Divit Gangrade">
+<link rel="canonical" href="https://turbotutor.dpdns.org/f1">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<meta property="og:site_name" content="TurboTutor">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://turbotutor.dpdns.org/f1">
+<meta property="og:title" content="The F1 Scene | TurboTutor">
+<meta property="og:description" content="Open the TurboTutor Formula 1 scene, rendered live in the browser with a self-hosted Spline viewer.">
+<meta property="og:image" content="https://turbotutor.dpdns.org/og-image.jpg?v=20261107">
+<meta property="og:image:secure_url" content="https://turbotutor.dpdns.org/og-image.jpg?v=20261107">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TurboTutor share card: learn at full throttle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The F1 Scene | TurboTutor">
+<meta name="twitter:description" content="Open the TurboTutor Formula 1 scene, rendered live in the browser.">
+<meta name="twitter:image" content="https://turbotutor.dpdns.org/og-image.jpg?v=20261107">
+<meta name="twitter:image:alt" content="TurboTutor share card: learn at full throttle">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: radial-gradient(120% 120% at 50% 20%, #1a1f26 0%, #0a0c0f 62%); color: #f7f5f0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .scene-shell { display: flex; flex-direction: column; height: 100%; }
+  .scene-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.14); }
+  .scene-bar a { color: #ffd400; text-decoration: none; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .scene-bar a:hover, .scene-bar a:focus-visible { text-decoration: underline; }
+  .scene-title { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #c9ccd0; }
+  .scene-stage { position: relative; flex: 1; min-height: 0; }
+  spline-viewer { display: block; width: 100%; height: 100%; }
+  .scene-note { position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; padding: 24px; text-align: center; color: #9aa3ad; font-size: 14px; }
+  .scene-note.is-hidden { display: none; }
+  .scene-note strong { color: #f7f5f0; font-weight: 600; }
+</style>
+<script type="module" src="vendor/spline/spline-viewer.js"></script>
+</head>
+<body>
+<div class="scene-shell">
+  <header class="scene-bar">
+    <a href="./">&larr; Back to TurboTutor</a>
+    <h1 class="scene-title">TT-01 F1 scene</h1>
+  </header>
+  <main class="scene-stage">
+    <spline-viewer id="f1-scene" url="vendor/spline/f1-scene.splinecode"></spline-viewer>
+    <p class="scene-note" id="scene-note"><strong>Loading the F1 scene</strong><span>The 4.6 MB scene is downloaded once, then cached.</span></p>
+  </main>
+</div>
+<script>
+  const viewer = document.getElementById('f1-scene');
+  const note = document.getElementById('scene-note');
+  const hide = () => note.classList.add('is-hidden');
+  viewer.addEventListener('load-complete', hide, { once: true });
+  viewer.addEventListener('error', () => {
+    note.innerHTML = '<strong>The scene could not start</strong><span>Your browser may not support WebGL. <a href="./">Back to the site</a>.</span>';
+  }, { once: true });
+  setTimeout(() => {
+    if (note.classList.contains('is-hidden')) return;
+    note.querySelector('span').textContent = 'Still working. On slower devices the scene can take a while to decode.';
+  }, 20000);
+</script>
+</body>
+</html>

@@ -61,7 +61,7 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - A scattered F1 card band on the 404 page. Five framed photos and illustrations sit below the 404 copy at slight angles, straightening on hover and dropping the smallest card on phones.
 - A HalftoneReveal kart print. The go-kart photo in the kart panel becomes an interactive halftone print, loads only when the kart is first opened, and keeps the original photo as its fallback.
 - A PixelSwap hero photograph. Hovering or focusing the Formula 1 hero swaps in the kart photo with a pixel wave, while the plain photograph remains as the LCP and no-JS fallback.
-- A Three.js hero car. The **3D view** button on the hero photograph opens a stylised low-poly Formula 1 car built from primitives, with drag-to-spin and a slow turntable. It renders only while open, pauses when offscreen or when the tab is hidden, and holds a single frame for reduced-motion visitors. The photograph stays as the LCP and no-JS fallback.
+- A Three.js hero car and a dedicated Spline F1 scene page. The **3D view** button on the hero photograph opens a stylised low-poly Formula 1 car built from primitives, with drag-to-spin and a slow turntable, which paints immediately and pauses when offscreen or when the tab is hidden. A **Full F1 scene** link beside it opens `f1.html`, which loads the self-hosted Spline viewer and the supplied Formula 1 scene on demand, shows a loading note while the scene decodes, and links back to the site. The photograph stays as the LCP and no-JS fallback.
 - An AcidSquares hero backdrop. A dark, red-lit WebGL surface of raised tiles moves slowly behind the hero copy and Formula 1 photograph. It loads after first paint, uses a lighter mesh on small screens, and is skipped entirely for reduced-motion visitors or browsers without WebGL2.
 - A LiquidEther course-garage backdrop. A slow red and amber ink flow drifts behind the plan builder, follows the pointer gently, and switches between soft ink on light and luminous flow on dark. It loads only near the plans section and is skipped for reduced-motion visitors or browsers without WebGL2 float targets.
 - A ShaderAnimation loading overlay. The supplied concentric-ring shader fills the first page load and same-site navigation with slow rings of red, green and blue, drawn at a capped pixel ratio so it stays light. It stays visible long enough to read the motion, then fades; reduced-motion visitors get a single still ring pattern.
@@ -199,6 +199,8 @@ Service terms: $15 missed session, $10 family-requested reschedule, and a 15% cr
 ├── pixel-swap.js           # Generated hero island (Preact + PixelSwap)
 ├── hero-car.js             # Generated hero 3D car island (Three.js)
 ├── hero-car.css            # Generated hero 3D car styles
+├── f1.html                 # Standalone Spline F1 scene page (noindex, viewer loaded on open)
+├── vendor/spline/          # Self-hosted Spline viewer build and F1 scene
 ├── animated-list.js        # Generated lap-pack list island (Preact + Hugeicons)
 ├── animated-list.css       # Generated AnimatedList and lap-pack styles
 ├── scroll-stack.js         # Generated term stack island (Preact + ScrollStack)
@@ -430,6 +432,8 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 ## Changelog
 
 ### November 2026 polish pass
+
+- Added the supplied **Spline F1 scene** on its own `f1.html` page, linked from a **Full F1 scene** chip beside the hero 3D view. The 2.5 MB self-hosted WebGL viewer and 4.6 MB scene are requested only when that page is opened, so the home page pays nothing for them; the page carries the same same-origin CSP plus the `blob:`, worker and WebAssembly allowances the viewer needs for its in-memory textures and Draco decoder, and keeps the viewer's "Built with Spline" badge. The hero itself keeps the instant low-poly car, which is what visitors see in the 3D view.
 
 - Fixed the hero **3D view** button: it sat underneath the TT-07 plate, so the click landed on the plate instead. It now sits at the bottom left, toggles the car model in and out, and its label and pressed state follow the view.
 - Added the React Bits **LaserFlow** to the hero: an amber beam drops onto the top edge of the car card, splashes along it and leaves smoke and dust drifting through the dark grid, following the cursor with a soft lens. It is skipped on narrow screens and for reduced motion, waits for idle time before loading its shader, and pauses whenever it scrolls out of view.

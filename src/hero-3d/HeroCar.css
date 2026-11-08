@@ -22,10 +22,44 @@
   height: 100%;
   touch-action: none;
   cursor: grab;
+  transition: opacity 0.5s ease;
 }
 
 .hero-3d__canvas:active {
   cursor: grabbing;
+}
+
+.hero-3d-scene {
+  position: absolute;
+  z-index: 4;
+  left: 10px;
+  bottom: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(8, 11, 14, 0.72);
+  padding: 6px 10px;
+  color: #f7f5f0;
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-3d-scene:hover,
+.hero-3d-scene:focus-visible {
+  border-color: var(--amber, #ffd400);
+  background: rgba(8, 11, 14, 0.9);
+}
+
+.hero-3d-scene:focus-visible {
+  outline: 2px solid var(--amber, #ffd400);
+  outline-offset: 2px;
 }
 
 .hero-3d-toggle {
@@ -73,7 +107,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-3d,
-  .hero-3d-toggle {
+  .hero-3d-toggle,
+  .hero-3d__canvas {
     transition: none;
   }
 }

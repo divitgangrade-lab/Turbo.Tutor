@@ -53,6 +53,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+## Spline viewer and F1 scene
+
+`f1.html` renders a Spline scene authored by the site owner in Spline (https://spline.design). `vendor/spline/spline-viewer.js` is the WebGL-only Spline Viewer build 2.0.151, self-hosted so the scene page keeps a same-origin CSP, and `vendor/spline/f1-scene.splinecode` is the owner's exported scene. The page fetches the viewer and scene only when a visitor opens it. The viewer keeps its "Made with Spline" credit badge. Spline and the Spline Viewer are copyright Spline, Inc. and are used under the Spline terms (https://spline.design/terms).
+
 ## Hugeicons
 
 The AnimatedList lap pack renders its row icons with `@hugeicons/react` 1.1.10 and `@hugeicons/core-free-icons` 4.4.0 (https://hugeicons.com), both under the MIT licence. The packages are bundled into `animated-list.js`, and only the five icons used by the lap pack are pulled into the bundle.
