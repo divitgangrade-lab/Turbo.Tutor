@@ -497,7 +497,7 @@
     .footer-col a { display: block; padding: 4px 0; color: #c6cdd2; font-size: 12.5px; transition: color .2s; }
     .footer-col a:hover { color: var(--amber); }
     .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #232b31; padding-block: 18px; color: #7f8a91; font-family: var(--ui); font-size: 9.5px; letter-spacing: .7px; text-transform: uppercase; }
-    .footer-bottom a { color: var(--amber); }
+    .footer-bottom a { color: var(--amber); text-decoration: underline; text-underline-offset: 3px; }
     .footer-bottom a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
     .footer-lab { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: center; gap: clamp(18px, 4vw, 46px); border-top: 1px solid #232b31; padding-block: 34px 18px; }
@@ -519,8 +519,8 @@
     /* ---------- kart panel ---------- */
     .scrim { position: fixed; z-index: 130; inset: 0; background: rgba(6, 8, 10, .6); opacity: 0; pointer-events: none; transition: opacity .25s; }
     .scrim.open { opacity: 1; pointer-events: auto; }
-    .kart-panel { position: fixed; z-index: 140; top: 0; right: 0; bottom: 0; display: flex; width: min(430px, 100%); flex-direction: column; background: var(--surface); box-shadow: -24px 0 60px rgba(0, 0, 0, .35); transform: translateX(102%); visibility: hidden; transition: transform .35s var(--ease), visibility .35s; }
-    .kart-panel.open { visibility: visible; transform: translateX(0); }
+    .kart-panel { position: fixed; z-index: 140; top: 0; right: 0; bottom: 0; display: flex; width: min(430px, 100%); flex-direction: column; background: var(--surface); box-shadow: -24px 0 60px rgba(0, 0, 0, .35); transform: translateX(102%); visibility: hidden; transition: transform .35s var(--ease), visibility 0s linear .35s; }
+    .kart-panel.open { visibility: visible; transition: transform .35s var(--ease); transform: translateX(0); }
     .kart-strip { height: 12px; flex: none; background: repeating-conic-gradient(#12161a 0 25%, #f7f5f0 0 50%) 0 0 / 16px 16px; }
     .kart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 20px 22px 14px; }
     .kart-head h2 { margin: 0; font-family: var(--display); font-size: 34px; font-weight: 900; letter-spacing: .4px; line-height: .95; text-transform: uppercase; }
@@ -1067,13 +1067,15 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="enhance.css?v=20261108-8">
+  <link rel="stylesheet" href="enhance.css?v=20261108-9">
   <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
   <link rel="stylesheet" href="./loader.css?v=20261108-9">
   <link rel="stylesheet" href="./helmet-trash.css?v=20261108-1">
   <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-2">
+  <link rel="stylesheet" href="./click-spark.css?v=20261108-1">
   <script src="./loader.js?v=20261108-9" defer></script>
   <script type="module" src="./liquid-chrome.js?v=20261108-2" defer></script>
+  <script type="module" src="./click-spark.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
@@ -1137,6 +1139,7 @@
   <noscript><style>.tt-loader{display:none}</style></noscript>
 
   <a class="skip-link" href="#main">Skip to content</a>
+  <div id="click-spark-root" aria-hidden="true"></div>
   <div class="page-wipe" id="page-wipe" aria-hidden="true"><i></i><i></i></div>
   <div class="progress" aria-hidden="true"><span id="scroll-bar"></span></div>
   <div class="topline" aria-hidden="true"></div>
@@ -1201,7 +1204,7 @@
       </div>
     </section>
 
-    <div class="ticker" aria-label="TurboTutor highlights">
+    <div class="ticker" role="group" aria-label="TurboTutor highlights">
       <div class="ticker-track" aria-hidden="true">
         <span>Now accepting new students</span><span>Grades 1–8</span><span>Math · English · Science</span><span>Weekly laps from $24</span><span>Zoom or public library</span><span>No card required</span>
         <span>Now accepting new students</span><span>Grades 1–8</span><span>Math · English · Science</span><span>Weekly laps from $24</span><span>Zoom or public library</span><span>No card required</span>
@@ -1722,7 +1725,7 @@
 
   <div class="scrim" id="scrim" aria-hidden="true"></div>
 
-  <aside class="kart-panel" id="kart-panel" aria-labelledby="kart-title" aria-hidden="true">
+  <aside class="kart-panel" id="kart-panel" role="dialog" aria-modal="true" aria-labelledby="kart-title" aria-hidden="true">
     <div class="kart-strip" aria-hidden="true"></div>
     <div class="kart-head">
       <div>
