@@ -5,7 +5,7 @@ import './model-band.css';
 
 const root = document.getElementById('model-viewer-root');
 const mount = document.getElementById('model-viewer-mount');
-const MODEL = 'f_1 (1).glb';
+const MODEL = 'f1-car.glb';
 
 const canRender = () => {
   if (!('WebGL2RenderingContext' in window)) return false;

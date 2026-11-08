@@ -22,6 +22,49 @@ const PITCH_LIMIT = (65 * Math.PI) / 180;
 
 const toRadians = degrees => (degrees * Math.PI) / 180;
 
+const PAINT = {
+  red: new THREE.MeshStandardMaterial({ color: 0xb00020, metalness: 0.35, roughness: 0.32 }),
+  carbon: new THREE.MeshStandardMaterial({ color: 0x151a1e, metalness: 0.3, roughness: 0.6 }),
+  tyre: new THREE.MeshStandardMaterial({ color: 0x0a0b0d, metalness: 0.05, roughness: 0.95 }),
+  rim: new THREE.MeshStandardMaterial({ color: 0xc9ccd0, metalness: 0.9, roughness: 0.28 }),
+  glass: new THREE.MeshStandardMaterial({ color: 0x0a0d12, metalness: 0.85, roughness: 0.12 }),
+  light: new THREE.MeshStandardMaterial({ color: 0xff2a1a, emissive: 0xff2a1a, emissiveIntensity: 1.6 })
+};
+
+const paintFor = name => {
+  const key = String(name || '').toLowerCase();
+  if (key.includes('grid') || key === 'plane') return null;
+  if (key.includes('tire') || key.includes('tyre')) return PAINT.tyre;
+  if (key.includes('rim') || key.includes('disk')) return PAINT.rim;
+  if (key.includes('mirror') || key.includes('glass')) return PAINT.glass;
+  if (key.includes('light')) return PAINT.light;
+  if (
+    key.includes('body') ||
+    key.includes('wing') ||
+    key.includes('spoiler') ||
+    key.includes('canard') ||
+    key.includes('chassis') ||
+    key.includes('cabin') ||
+    key.includes('fender') ||
+    key.includes('swan')
+  )
+    return PAINT.red;
+  return PAINT.carbon;
+};
+
+const paint = object => {
+  object.traverse(child => {
+    if (!child.isMesh) return;
+    const material = paintFor(child.name || child.parent?.name);
+    if (!material) {
+      child.visible = false;
+      return;
+    }
+    child.material = material;
+  });
+  return object;
+};
+
 const measured = new WeakMap();
 const announced = new WeakSet();
 
@@ -105,6 +148,7 @@ const Stage = ({ object, settingsRef, visibleRef, onReady }) => {
   const spinRef = useRef(null);
   const fitRef = useRef(null);
   const bounds = useMemo(() => measure(object), [object]);
+  useMemo(() => paint(object), [object]);
   const motionRef = useRef(null);
 
   if (!motionRef.current) {
@@ -341,6 +385,7 @@ const Stage = ({ object, settingsRef, visibleRef, onReady }) => {
             <group
               ref={fitRef}
               scale={bounds.scale}
+              rotation={[0, Math.PI / 2, 0]}
               position={[
                 -bounds.center.x * bounds.scale,
                 -bounds.center.y * bounds.scale,
