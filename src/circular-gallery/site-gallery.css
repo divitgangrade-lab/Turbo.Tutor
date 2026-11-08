@@ -1,0 +1,79 @@
+.site-gallery {
+  background: #0b1013;
+  color: #f2f4ef;
+}
+
+.site-gallery .kicker {
+  color: #ffd400;
+}
+
+.site-gallery .h2,
+.site-gallery .h2 em {
+  color: #f2f4ef;
+}
+
+.site-gallery .h2 em {
+  color: #ffd400;
+}
+
+.site-gallery .lead {
+  color: #b9c2c6;
+}
+
+.site-gallery-stage {
+  position: relative;
+  height: clamp(360px, 54vw, 560px);
+}
+
+#circular-gallery-mount {
+  position: absolute;
+  inset: 0;
+}
+
+#circular-gallery-root[data-mounted] .site-gallery-fallback {
+  display: none;
+}
+
+.site-gallery-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-content: center;
+  gap: 14px;
+  height: 100%;
+}
+
+.site-gallery-fallback figure {
+  margin: 0;
+}
+
+.site-gallery-fallback img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid #2b363c;
+  border-radius: 14px;
+}
+
+.site-gallery-fallback figcaption {
+  margin-top: 8px;
+  color: #a6b0b4;
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.site-gallery-note {
+  margin: 16px 0 0;
+  color: #8b969b;
+  font-size: 12.5px;
+}
+
+.site-gallery-note a {
+  color: #ffd400;
+}
+
+.circular-gallery-label {
+  letter-spacing: 0.02em;
+}

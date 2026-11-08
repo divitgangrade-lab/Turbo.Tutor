@@ -1513,6 +1513,27 @@
       </div>
     </section>
 
+    <section class="section site-gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">The real thing</p>
+            <h2 class="h2" id="gallery-title">Photographs, <em>up close</em></h2>
+          </div>
+          <p class="lead">Every picture here is a real photograph, not a stock stand-in. Drag the gallery, scroll through it, or open a frame.</p>
+        </div>
+        <div class="site-gallery-stage" id="circular-gallery-root">
+          <div class="site-gallery-fallback">
+            <figure><img src="f1-car.webp" alt="A red Ferrari Formula 1 car on track" loading="lazy" decoding="async" width="800" height="600"><figcaption>Carlos Sainz, 2023</figcaption></figure>
+            <figure><img src="f1-helmet.webp" alt="Oscar Piastri's papaya-coloured racing helmet" loading="lazy" decoding="async" width="800" height="600"><figcaption>Oscar Piastri's helmet</figcaption></figure>
+            <figure><img src="go-kart.webp" alt="A go-kart on a karting track" loading="lazy" decoding="async" width="800" height="600"><figcaption>Where it starts</figcaption></figure>
+          </div>
+          <div id="circular-gallery-mount"></div>
+        </div>
+        <p class="site-gallery-note">Photographs by Lukas Raich, Liauzh and Genevieve. Full licences are in the footer and on the <a href="credits.html">credits page</a>.</p>
+      </div>
+    </section>
+
     <section class="section offers" id="offers" aria-labelledby="offers-title">
       <div class="offers-plasma" id="plasma-root" aria-hidden="true">
         <div id="plasma-mount"></div>
@@ -3710,6 +3731,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./magic-bento.js?v=20261108-1").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("circular-gallery-root");
+      if (!host || !("WebGL2RenderingContext" in window)) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "circular-gallery.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./circular-gallery.js?v=20261108-1").catch(() => {});
         });
       };
       const near = () => {

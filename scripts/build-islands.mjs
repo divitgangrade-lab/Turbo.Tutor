@@ -42,6 +42,7 @@ await build({
     'animated-list': 'src/animated-list/entry.jsx',
     'scroll-stack': 'src/scroll-stack/entry.jsx',
     'magic-bento': 'src/magic-bento/entry.jsx',
+    'circular-gallery': 'src/circular-gallery/entry.jsx',
     'click-spark': 'src/click-spark/entry.jsx'
   },
   bundle: true,
