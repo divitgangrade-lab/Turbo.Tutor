@@ -37,7 +37,7 @@ await build({
     'topography': 'src/topography/entry.jsx',
     'smooth-scroll': 'src/smooth-scroll/entry.js',
     'legal-bg': 'src/legal-bg/entry.jsx',
-    'liquid-chrome': 'src/liquid-chrome/entry.jsx',
+    'shader-animation': 'src/shader-animation/entry.jsx',
     'click-spark': 'src/click-spark/entry.jsx'
   },
   bundle: true,

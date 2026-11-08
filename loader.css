@@ -41,7 +41,7 @@
   pointer-events: none;
 }
 
-.tt-loader__chrome .liquid-chrome {
+.tt-loader__chrome .shader-animation {
   position: absolute;
   inset: 0;
 }
