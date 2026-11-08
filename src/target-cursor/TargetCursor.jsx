@@ -25,6 +25,69 @@ const spring = (state, goal, stiffness, damping, dt) => {
 
 const resolveElement = value => (value && 'current' in value ? value.current : value) || null;
 
+const MAX_CURSOR_LABEL = 24;
+
+const cleanCursorLabel = value => {
+  let text = String(value || '')
+    .replace(/\s+/g, ' ')
+    .replace(/[→←↗↘◆•|]/g, ' ')
+    .replace(/^[\s+×✕]+|[\s+×✕]+$/g, '')
+    .trim();
+  if (!text) return '';
+  if (text.length > MAX_CURSOR_LABEL) text = `${text.slice(0, MAX_CURSOR_LABEL - 1).trimEnd()}…`;
+  return text;
+};
+
+const labelForTarget = target => {
+  if (!target) return '';
+
+  const explicit = target.getAttribute('data-cursor-label');
+  if (explicit) return cleanCursorLabel(explicit);
+
+  const tag = target.tagName;
+  if (tag === 'BUTTON') {
+    const primary = target.querySelector('b, strong');
+    if (primary) {
+      const small = target.querySelector('small');
+      const primaryText = cleanCursorLabel(`${primary.innerText || ''} ${small?.innerText || ''}`);
+      if (primaryText) return primaryText;
+    }
+  }
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+    const type = (target.getAttribute('type') || '').toLowerCase();
+    if (type === 'hidden') return '';
+    const labelText = cleanCursorLabel(target.labels?.[0]?.innerText || '');
+    if (type === 'checkbox' || type === 'radio') {
+      if (type === 'radio' && target.value) return cleanCursorLabel(target.value) || 'Choose';
+      if (/agree|consent|accept|read/i.test(labelText)) return 'Consent';
+      return labelText || (type === 'radio' ? 'Choose' : 'Select');
+    }
+    const placeholder = target.getAttribute('placeholder');
+    const placeholderText = placeholder && !/@|example\./i.test(placeholder) ? cleanCursorLabel(placeholder) : '';
+    if (labelText) return labelText;
+    if (placeholderText) return placeholderText;
+    const name = target.getAttribute('name') || target.id;
+    if (name) return cleanCursorLabel(name.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[-_]+/g, ' '));
+    return type === 'email' ? 'Email' : type === 'tel' ? 'Phone' : type === 'search' ? 'Search' : 'Type';
+  }
+
+  const aria = cleanCursorLabel(target.getAttribute('aria-label'));
+  if (aria) return aria;
+  const text = cleanCursorLabel(target.innerText || target.textContent);
+  if (text) return text;
+  const title = cleanCursorLabel(target.getAttribute('title'));
+  if (title) return title;
+  if (tag === 'A') {
+    const href = target.getAttribute('href') || '';
+    if (href.startsWith('#')) return cleanCursorLabel(href.slice(1).replace(/[-_]/g, ' ')) || 'Jump';
+    if (href.startsWith('mailto:')) return 'Email';
+    if (href.startsWith('tel:')) return 'Call';
+    if (href.startsWith('sms:')) return 'Text';
+    if (href.startsWith('http')) return 'Visit';
+  }
+  return 'Open';
+};
+
 const TargetCursor = ({
   targetSelector = '.cursor-target',
   cursorColor = '#ffffff',
@@ -104,6 +167,10 @@ const TargetCursor = ({
     let raf = 0;
     let last = 0;
     let lastLabel = '';
+    let lastLabelTarget = null;
+    let labelText = '';
+    let labelWidth = 0;
+    let labelHeight = 0;
     let lastColor = '';
     let lastScope = null;
 
@@ -245,11 +312,22 @@ const TargetCursor = ({
 
       const label = labelRef.current;
       if (label) {
-        const text = s.showLabel && target ? target.getAttribute('data-cursor-label') || '' : '';
-        if (text && text !== lastLabel) label.textContent = text;
-        if (text) lastLabel = text;
+        if (target !== lastLabelTarget) {
+          labelText = target ? labelForTarget(target) : '';
+          lastLabelTarget = target;
+        }
+        const text = s.showLabel ? labelText : '';
+        if (text && text !== lastLabel) {
+          label.textContent = text;
+          lastLabel = text;
+          labelWidth = label.offsetWidth;
+          labelHeight = label.offsetHeight;
+        }
         const shown = text ? Math.max(0, Math.min(1, lock.x)) : 0;
-        label.style.transform = `translate3d(${left.toFixed(2)}px, ${(top - 8).toFixed(2)}px, 0) translateY(-100%) translateY(${((1 - shown) * 4).toFixed(2)}px)`;
+        const margin = 8;
+        const x = Math.min(Math.max(left, margin), Math.max(margin, window.innerWidth - labelWidth - margin));
+        const y = Math.max(top - margin, labelHeight + margin);
+        label.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translateY(-100%) translateY(${((1 - shown) * 4).toFixed(2)}px)`;
         label.style.opacity = shown.toFixed(3);
       }
 
@@ -358,7 +436,8 @@ const TargetCursor = ({
   if (!host) return null;
 
   return createPortal(
-    <div ref={rootRef} className="target-cursor" style={{ mixBlendMode: blendMode, opacity: 0 }} aria-hidden="true">
+    <div ref={rootRef} className="target-cursor" style={{ opacity: 0 }} aria-hidden="true">
+      <div className="target-cursor__marks" style={{ mixBlendMode: blendMode }}>
       {CORNER_ANGLES.map((angle, i) => (
         <span
           key={angle}
@@ -368,7 +447,8 @@ const TargetCursor = ({
           className="target-cursor__corner"
         />
       ))}
-      <span ref={dotRef} className="target-cursor__dot" />
+        <span ref={dotRef} className="target-cursor__dot" />
+      </div>
       <span ref={labelRef} className="target-cursor__label" />
     </div>,
     host

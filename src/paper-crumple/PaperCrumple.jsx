@@ -6,7 +6,7 @@
  * Licensed under MIT + Commons Clause v1.0. See THIRD_PARTY_NOTICES.md.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { createPortal, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import './PaperCrumple.css';
 const spring = (value = 0) => ({ value, target: value, velocity: 0 });
@@ -269,6 +269,9 @@ const PaperCrumple = ({
   dragRotation = 10,
   dragRadius = 180,
   returnToOrigin = true,
+  freeRoam = false,
+  throwStrength = 0.9,
+  throwFriction = 1.8,
   rotation = 0,
   seed = 7,
   detail = 64,
@@ -283,6 +286,7 @@ const PaperCrumple = ({
   const rootRef = useRef(null);
   const canvasRef = useRef(null);
   const hitRef = useRef(null);
+  const focusRef = useRef(null);
   const resetRef = useRef(null);
   const cancelRef = useRef(null);
   const [status, setStatus] = useState('loading');
@@ -296,6 +300,9 @@ const PaperCrumple = ({
     dragRotation,
     dragRadius,
     returnToOrigin,
+    freeRoam,
+    throwStrength,
+    throwFriction,
     disabled,
     onStateChange,
     onError
@@ -310,6 +317,9 @@ const PaperCrumple = ({
     dragRotation,
     dragRadius,
     returnToOrigin,
+    freeRoam,
+    throwStrength,
+    throwFriction,
     disabled,
     onStateChange,
     onError
@@ -529,6 +539,12 @@ const PaperCrumple = ({
       lastMove = 0;
     let speedX = 0,
       speedY = 0;
+    let velocityX = 0,
+      velocityY = 0,
+      gliding = false;
+    let homeX = 0,
+      homeY = 0,
+      hasInteracted = false;
     let held = false,
       keyboard = false,
       pointerId = null;
@@ -638,6 +654,9 @@ const PaperCrumple = ({
       hit.style.transform = `translate3d(${minX}px, ${minY}px, 0)`;
       hit.style.width = `${Math.max(24, maxX - minX)}px`;
       hit.style.height = `${Math.max(24, maxY - minY)}px`;
+      if (freeRoam && focusRef.current) {
+        focusRef.current.style.transform = `translate3d(${(minX + maxX) / 2 - 2}px, ${maxY - 8}px, 0)`;
+      }
     }
     function setPointer(x, y) {
       pointer.set((x / viewportWidth) * 2 - 1, 1 - (y / viewportHeight) * 2);
@@ -652,7 +671,28 @@ const PaperCrumple = ({
       let moving = false;
       const duration = held ? finite(opts.crumpleDuration, 0.55) : finite(opts.releaseDuration, 0.4);
       for (const s of springs)
-        moving = advance(s, dt, s === amount || s === memory ? duration : 0.42, reduceMotion || keyboard) || moving;
+        moving =
+          advance(
+            s,
+            dt,
+            s === amount || s === memory ? duration : held && (s === posX || s === posY) ? 0.24 : 0.42,
+            reduceMotion || keyboard
+          ) || moving;
+      if (gliding && !held) {
+        const damping = Math.exp(-finite(options.current.throwFriction, 1.8) * dt);
+        velocityX *= damping;
+        velocityY *= damping;
+        posX.value += velocityX * dt;
+        posY.value += velocityY * dt;
+        posX.target = posX.value;
+        posY.target = posY.value;
+        posX.velocity = posY.velocity = 0;
+        if (Math.hypot(velocityX, velocityY) < 3) {
+          gliding = false;
+          velocityX = velocityY = 0;
+        }
+        moving = true;
+      }
       peak = Math.max(peak, amount.value);
       deform();
       sheet.rotation.set(tiltX.value, tiltY.value, baseRotation);
@@ -667,9 +707,8 @@ const PaperCrumple = ({
         plane.constant = -anchor.z;
         setPointer(pointerX, pointerY);
         if (raycaster.ray.intersectPlane(plane, world)) {
-          posX.value = posX.target = world.x - anchor.x;
-          posY.value = posY.target = world.y - anchor.y;
-          posX.velocity = posY.velocity = 0;
+          posX.target = world.x - anchor.x;
+          posY.target = world.y - anchor.y;
         }
       }
       sheet.position.set(posX.value, posY.value, 0);
@@ -698,11 +737,14 @@ const PaperCrumple = ({
     }
     function resize() {
       const rect = root.getBoundingClientRect();
-      viewportWidth = Math.max(1, rect.width);
-      viewportHeight = Math.max(1, rect.height);
+      const fitWidth = Math.max(1, rect.width);
+      const fitHeight = Math.max(1, rect.height);
+      const stageRect = freeRoam ? canvas.getBoundingClientRect() : { width: fitWidth, height: fitHeight };
+      viewportWidth = Math.max(1, stageRect.width);
+      viewportHeight = Math.max(1, stageRect.height);
       scale =
         paperWidth *
-        Math.min(1, Math.max(1, viewportWidth - 48) / paperWidth, Math.max(1, viewportHeight - 48) / paperHeight);
+        Math.min(1, Math.max(1, fitWidth - 48) / paperWidth, Math.max(1, fitHeight - 48) / paperHeight);
       sheet.scale.setScalar(scale);
       camera.aspect = viewportWidth / viewportHeight;
       camera.position.z = viewportHeight / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
@@ -722,11 +764,45 @@ const PaperCrumple = ({
       floor.scale.set(viewportWidth * 4, viewportHeight * 4, 1);
       root.style.setProperty('--pc-image-width', `${scale}px`);
       root.style.setProperty('--pc-image-height', `${scale * aspect}px`);
-      if (!held) {
+      if (freeRoam) {
+        const nextHomeX = rect.left + fitWidth / 2 - viewportWidth / 2;
+        const nextHomeY = -(rect.top + fitHeight / 2 - viewportHeight / 2);
+        if (!hasInteracted) {
+          homeX = nextHomeX;
+          homeY = nextHomeY;
+          posX.value = posX.target = homeX;
+          posY.value = posY.target = homeY;
+        } else {
+          const dx = nextHomeX - homeX;
+          const dy = nextHomeY - homeY;
+          posX.value += dx;
+          posX.target += dx;
+          posY.value += dy;
+          posY.target += dy;
+          homeX = nextHomeX;
+          homeY = nextHomeY;
+        }
+      } else if (!held) {
         const limitX = Math.max(0, (viewportWidth - scale) / 2 - 16);
         const limitY = Math.max(0, (viewportHeight - scale * aspect) / 2 - 16);
         posX.value = posX.target = clamp(posX.value, -limitX, limitX);
         posY.value = posY.target = clamp(posY.value, -limitY, limitY);
+      }
+      wake();
+    }
+    let lastScrollY = window.scrollY;
+    function scroll() {
+      if (!freeRoam) return;
+      const next = window.scrollY;
+      const delta = next - lastScrollY;
+      lastScrollY = next;
+      if (!delta) return;
+      homeY += delta;
+      if (!hasInteracted) {
+        posY.value = posY.target = homeY;
+      } else if (!held) {
+        posY.value += delta;
+        posY.target += delta;
       }
       wake();
     }
@@ -751,7 +827,21 @@ const PaperCrumple = ({
       }
       tiltX.target = tiltY.target = 0;
       if (opts.returnToOrigin && opts.releaseBehavior !== 'stay') {
-        posX.target = posY.target = 0;
+        posX.target = freeRoam ? homeX : 0;
+        posY.target = freeRoam ? homeY : 0;
+      } else if (freeRoam) {
+        const strength = Math.max(0, finite(opts.throwStrength, 0.9));
+        velocityX = clamp(speedX, -4000, 4000) * strength;
+        velocityY = -clamp(speedY, -4000, 4000) * strength;
+        const recent = performance.now() - lastMove < 90;
+        gliding = !instant && !reduceMotion && !keyboard && recent && Math.hypot(velocityX, velocityY) > 8;
+        if (!gliding) velocityX = velocityY = 0;
+        posX.target = posX.value;
+        posY.target = posY.value;
+        if (!instant && !reduceMotion && !keyboard) {
+          tiltX.velocity = clamp(speedY * 0.0012, -2.2, 2.2);
+          tiltY.velocity = clamp(speedX * 0.0012, -2.2, 2.2);
+        }
       } else {
         const bounds = geometry.boundingBox;
         const spanX = opts.releaseBehavior === 'stay' && bounds ? bounds.max.x - bounds.min.x : 1;
@@ -785,7 +875,14 @@ const PaperCrumple = ({
     }
     function reset() {
       finish(true);
+      gliding = false;
+      velocityX = velocityY = 0;
       for (const s of springs) s.target = s.value = s.velocity = 0;
+      if (freeRoam) {
+        posX.value = posX.target = homeX;
+        posY.value = posY.target = homeY;
+        hasInteracted = false;
+      }
       peak = 0;
       publish('flat');
       wake();
@@ -794,6 +891,9 @@ const PaperCrumple = ({
     cancelRef.current = () => finish(true);
     function start() {
       held = true;
+      hasInteracted = true;
+      gliding = false;
+      velocityX = velocityY = 0;
       peak = amount.value;
       amount.target = clamp(finite(options.current.crumpleAmount, 0.85), 0, 1);
       hit.setAttribute('aria-pressed', 'true');
@@ -803,7 +903,7 @@ const PaperCrumple = ({
     }
     function pointerDown(event) {
       if (!ready || options.current.disabled || held || event.button !== 0 || !event.isPrimary) return;
-      const rect = root.getBoundingClientRect();
+      const rect = freeRoam ? canvas.getBoundingClientRect() : root.getBoundingClientRect();
       pointerX = lastX = event.clientX - rect.left;
       pointerY = lastY = event.clientY - rect.top;
       setPointer(pointerX, pointerY);
@@ -829,7 +929,7 @@ const PaperCrumple = ({
     }
     function pointerMove(event) {
       if (!held || event.pointerId !== pointerId || !options.current.draggable) return;
-      const rect = root.getBoundingClientRect();
+      const rect = freeRoam ? canvas.getBoundingClientRect() : root.getBoundingClientRect();
       const now = performance.now();
       const x = event.clientX - rect.left,
         y = event.clientY - rect.top;
@@ -884,17 +984,24 @@ const PaperCrumple = ({
       ) {
         event.preventDefault();
         const step = event.shiftKey ? 30 : 12;
-        const limit = Math.max(0, finite(options.current.dragRadius, 180));
-        posX.target = clamp(
-          posX.target + (event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0),
-          -Math.min(limit, viewportWidth / 3),
-          Math.min(limit, viewportWidth / 3)
-        );
-        posY.target = clamp(
-          posY.target + (event.key === 'ArrowUp' ? step : event.key === 'ArrowDown' ? -step : 0),
-          -Math.min(limit, viewportHeight / 3),
-          Math.min(limit, viewportHeight / 3)
-        );
+        const dx = event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0;
+        const dy = event.key === 'ArrowUp' ? step : event.key === 'ArrowDown' ? -step : 0;
+        if (freeRoam) {
+          posX.target += dx;
+          posY.target += dy;
+        } else {
+          const limit = Math.max(0, finite(options.current.dragRadius, 180));
+          posX.target = clamp(
+            posX.target + dx,
+            -Math.min(limit, viewportWidth / 3),
+            Math.min(limit, viewportWidth / 3)
+          );
+          posY.target = clamp(
+            posY.target + dy,
+            -Math.min(limit, viewportHeight / 3),
+            Math.min(limit, viewportHeight / 3)
+          );
+        }
         wake();
       }
     }
@@ -911,7 +1018,11 @@ const PaperCrumple = ({
     }
     function motionChange() {
       reduceMotion = media.matches;
-      if (reduceMotion) tiltX.target = tiltY.target = 0;
+      if (reduceMotion) {
+        tiltX.target = tiltY.target = 0;
+        gliding = false;
+        velocityX = velocityY = 0;
+      }
       wake();
     }
     function loseContext(event) {
@@ -945,13 +1056,20 @@ const PaperCrumple = ({
     canvas.addEventListener('webglcontextrestored', restoreContext);
     const observer = new ResizeObserver(resize);
     observer.observe(root);
-    const intersectionObserver = new IntersectionObserver(entries => {
-      inView = entries[0].isIntersecting;
-      lastTime = 0;
-      if (!inView) cancel();
-      else wake();
-    });
-    intersectionObserver.observe(root);
+    if (freeRoam) {
+      window.addEventListener('resize', resize);
+      window.addEventListener('scroll', scroll, { passive: true });
+    }
+    let intersectionObserver = null;
+    if (!freeRoam) {
+      intersectionObserver = new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        lastTime = 0;
+        if (!inView) cancel();
+        else wake();
+      });
+      intersectionObserver.observe(root);
+    }
     deform();
     resize();
     const loader = new THREE.TextureLoader();
@@ -1022,7 +1140,7 @@ const PaperCrumple = ({
       if (pointerId !== null && hit.hasPointerCapture(pointerId)) hit.releasePointerCapture(pointerId);
       resetRef.current = cancelRef.current = null;
       observer.disconnect();
-      intersectionObserver.disconnect();
+      intersectionObserver?.disconnect();
       hit.removeEventListener('pointerdown', pointerDown);
       hit.removeEventListener('pointermove', pointerMove);
       hit.removeEventListener('pointerup', pointerUp);
@@ -1032,6 +1150,8 @@ const PaperCrumple = ({
       hit.removeEventListener('keyup', keyUp);
       hit.removeEventListener('blur', blur);
       window.removeEventListener('blur', cancel);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', scroll);
       document.removeEventListener('visibilitychange', visibility);
       media.removeEventListener('change', motionChange);
       canvas.removeEventListener('webglcontextlost', loseContext);
@@ -1065,7 +1185,10 @@ const PaperCrumple = ({
     shadowOpacity,
     rotation,
     seed,
-    detail
+    detail,
+    freeRoam,
+    throwStrength,
+    throwFriction
   ]);
   useEffect(() => {
     resetRef.current?.();
@@ -1076,6 +1199,53 @@ const PaperCrumple = ({
   const shadowFilter = shadow
     ? `drop-shadow(0 6px 10px rgb(0 0 0 / ${clamp(finite(shadowOpacity, 0.08), 0, 1)}))`
     : undefined;
+  const stage = (
+    <>
+      <canvas
+        ref={canvasRef}
+        className="paper-crumple-canvas"
+        aria-hidden="true"
+        style={
+          freeRoam
+            ? {
+                position: 'fixed',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 90,
+                visibility: status === 'ready' ? 'visible' : 'hidden',
+                filter: shadowFilter
+              }
+            : { visibility: status === 'ready' ? 'visible' : 'hidden', filter: shadowFilter }
+        }
+      />
+      <button
+        ref={hitRef}
+        type="button"
+        className="paper-crumple-hit"
+        disabled={disabled || status !== 'ready'}
+        aria-label={`${alt}. Hold to crumple and drag. Keyboard: hold Space or Enter, arrow keys to move, Escape to reset.`}
+        aria-pressed="false"
+        style={
+          freeRoam
+            ? {
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                zIndex: 91,
+                visibility: status === 'ready' ? 'visible' : 'hidden'
+              }
+            : { visibility: status === 'ready' ? 'visible' : 'hidden' }
+        }
+      />
+      <span
+        ref={focusRef}
+        className="paper-crumple-focus"
+        aria-hidden="true"
+        style={freeRoam ? { position: 'fixed', top: 0, left: 0, bottom: 'auto', zIndex: 92 } : undefined}
+      />
+    </>
+  );
   return (
     <div
       ref={rootRef}
@@ -1083,12 +1253,7 @@ const PaperCrumple = ({
       style={{ height: sceneHeight, ...style }}
       data-status={status}
     >
-      <canvas
-        ref={canvasRef}
-        className="paper-crumple-canvas"
-        aria-hidden="true"
-        style={{ visibility: status === 'ready' ? 'visible' : 'hidden', filter: shadowFilter }}
-      />
+      {freeRoam && typeof document !== 'undefined' ? createPortal(stage, document.body) : stage}
       {status !== 'ready' && (
         <img
           className="paper-crumple-fallback"
@@ -1102,16 +1267,6 @@ const PaperCrumple = ({
           }}
         />
       )}
-      <button
-        ref={hitRef}
-        type="button"
-        className="paper-crumple-hit"
-        disabled={disabled || status !== 'ready'}
-        aria-label={`${alt}. Hold to crumple and drag. Keyboard: hold Space or Enter, arrow keys to move, Escape to reset.`}
-        aria-pressed="false"
-        style={{ visibility: status === 'ready' ? 'visible' : 'hidden' }}
-      />
-      <span className="paper-crumple-focus" aria-hidden="true" />
       <span className="paper-crumple-sr" role="status">
         {status === 'loading'
           ? 'Loading interactive paper.'

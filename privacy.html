@@ -37,8 +37,8 @@
   <link rel="preload" href="fonts/chakra-petch-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css">
-  <link rel="stylesheet" href="legal.css">
-  <link rel="stylesheet" href="legal-bg.css?v=20261108-4">
+  <link rel="stylesheet" href="legal.css?v=20261108-7">
+  <link rel="stylesheet" href="legal-bg.css?v=20261108-7">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -65,13 +65,16 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="legal-scene.css?v=20261108-4">
-  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-3">
-  <link rel="stylesheet" href="./loader.css?v=20261108-3">
-  <script src="./loader.js?v=20261108-3" defer></script>
+  <link rel="stylesheet" href="legal-scene.css?v=20261108-7">
+  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
+  <link rel="stylesheet" href="./loader.css?v=20261108-8">
+  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-1">
+  <script src="./loader.js?v=20261108-8" defer></script>
+  <script type="module" src="./liquid-chrome.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
+    <div id="liquid-chrome-mount" class="tt-loader__chrome" aria-hidden="true"></div>
     <div class="loader" aria-hidden="true">
       <svg id="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <defs>
@@ -144,11 +147,10 @@
       <span aria-hidden="true">/</span>
       <span aria-current="page">Privacy policy</span>
     </nav>
-    <p class="kicker">Your data, in plain terms</p>
     <h1>Privacy<br>policy</h1>
     <div class="rule" aria-hidden="true"></div>
     <p class="lede">This page explains what happens to personal information when you use the TurboTutor website or contact the tutor. It is written to match what the site actually does, not what a template assumes.</p>
-    <p class="meta">Effective 7 November 2026</p>
+    <p class="meta">Effective 8 November 2026</p>
 
     <div class="legal-fall" data-legal-fall="YOUR DATA // YOUR RULES" aria-hidden="true"></div>
     <p class="legal-prompt"><span aria-hidden="true">//</span> Click the surface to shove the pit and send a pulse through the map.</p>
@@ -169,7 +171,7 @@
     <p>TurboTutor is a trading name used by Divit Gangrade for independent tutoring. This site does not publish a company registration number or a registered office. If a separate legal entity is used for a booking, the tutor will tell you in writing before you pay anything.</p>
 
     <div class="note">
-      <p><b>The short version.</b> This is a static website. It has no accounts, no analytics, no advertising, no cookies and no online payment. A request is built in your browser and sent from your own email or messaging app. The only personal information the tutor receives is what you choose to send.</p>
+      <p><b>The short version.</b> This is a static website. It has no accounts, no analytics, no advertising, no cookies and no online payment. A request, message or club signup is sent from this site through FormSubmit, a form-to-email processor, to the tutor's inbox. The only personal information the tutor receives is what you choose to submit.</p>
     </div>
 
     <h2>1. What this policy covers</h2>
@@ -181,7 +183,7 @@
     <p><b>Please do not send</b> Social Security numbers, government identification, payment card numbers, bank details, passwords, medical records or other sensitive information. None of it is needed to arrange tutoring, and email and text are not secure ways to send it.</p>
 
     <h2>3. How a request leaves your browser</h2>
-    <p>There is no TurboTutor server or database behind the request form. When you prepare a request, the site assembles the details in your browser and opens a draft in your own email or messaging app. Nothing is transmitted until you press send in that app. The website cannot read, store or forward the draft.</p>
+    <p>There is no TurboTutor server or database behind the forms. When you choose Send, the details go from your browser to FormSubmit, which forwards them to the tutor's email address. FormSubmit is a form-to-email processor; TurboTutor does not keep a copy on this website. The details are not stored in browser storage after you send them. FormSubmit says it keeps submissions for up to 30 days while delivering them.</p>
     <p>Once you send it, the message is delivered through your email provider or mobile carrier and arrives in the tutor's email inbox or phone. The tutor uses it to reply and to keep a record of what was agreed.</p>
 
     <h2>4. Children and students</h2>
@@ -192,12 +194,13 @@
     <p>This site does not set cookies. It stores two small preferences in your own browser so that features work as expected: your light or dark theme choice, and the record of a welcome-offer spin so the same offer is not revealed twice. The <a href="cookies.html">cookie policy</a> lists them, explains why they are functional rather than tracking, and shows how to clear them.</p>
 
     <h2>6. Analytics, advertising and embeds</h2>
-    <p>There are no analytics scripts, advertising pixels, heat maps, session recordings, social plugins or third-party iframes on this site. Fonts, images, styles and scripts are served from this domain, so loading a page does not send your IP address to a font network or an embed provider. Outbound links open another site only when you choose them.</p>
+    <p>There are no analytics scripts, advertising pixels, heat maps, session recordings, social plugins or third-party iframes on this site. Fonts, images, styles and scripts are served from this domain, so loading a page does not send your IP address to a font network or an embed provider. The only cross-origin request is made when you choose to send a form: it goes to FormSubmit.co so the message can reach the tutor's inbox. Outbound links open another site only when you choose them.</p>
     <p>The site does not track you across other websites, does not build a profile of you and does not make automated decisions about you. Because there is no tracking, a Do Not Track or Global Privacy Control signal has nothing to switch off here.</p>
 
     <h2>7. Hosting and service providers</h2>
     <p>The site is hosted by GitHub Pages, a service of GitHub, Inc. in the United States. Like any web host, GitHub processes technical request data such as your IP address, browser type and the time of your visit in order to deliver the site and protect it from abuse. GitHub handles that data under its own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">privacy statement</a>.</p>
     <p>The tutor also relies on an email provider, a mobile carrier, and Zoom for online sessions. Those providers process messages and meeting data under their own terms. Personal information is not sold, rented or shared for advertising. It is shared only with those providers as needed to run tutoring, or where the law requires it.</p>
+    <p>FormSubmit (formsubmit.co) is the form-to-email processor used by the request, contact and Paddock Club forms. It receives the name, email address, phone number, student details, message and any other information you enter, and forwards it to the tutor's email address. FormSubmit says it retains submissions for up to 30 days while delivering them and handles them under its <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">privacy policy</a>. Do not send identity documents, card numbers or medical records through these forms.</p>
 
     <h2>8. How long information is kept</h2>
     <ul>
@@ -259,13 +262,13 @@
       const load = () => {
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = './legal-bg.js?v=20261108-4';
+        script.src = './legal-bg.js?v=20261108-7';
         document.body.appendChild(script);
       };
       if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1600 });
       else window.setTimeout(load, 500);
     })();
   </script>
-  <script type="module" src="./smooth-scroll.js?v=20261108-3"></script>
+  <script type="module" src="./smooth-scroll.js?v=20261108-7"></script>
 </body>
 </html>

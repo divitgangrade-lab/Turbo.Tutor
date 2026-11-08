@@ -23,7 +23,7 @@ The site is a set of static HTML pages with no backend and no online payment. Th
 The kart is a go-kart. The slide-out panel is styled like a grid box with a little kart illustration, numbered entries and an estimated first payment. It:
 - adds and removes plans,
 - applies the best eligible seasonal or wheel discount (cash discounts never stack),
-- builds a complete email or SMS draft with every selection, the discount applied and the estimated total.
+- builds a complete request with every selection, the discount applied and the estimated total.
 
 No payment is collected anywhere on the site.
 
@@ -32,9 +32,9 @@ No payment is collected anywhere on the site.
 - Seasonal offers that rotate by date: Season Opener, Back-to-School Grand Prix, Diwali Night Race, Thanksgiving Sprint and Season Finale.
 
 ### Paddock Club newsletter
-A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one short email most Mondays about new session openings, study notes and occasional offers. The form is intentionally email-only: `enhance.js` checks the address and the privacy consent, then opens a pre-filled message to the tutor. No address is sent to this site or stored in the browser.
+A signup panel below the launch section offers **5% off the first month** (code `PADDOCK5`) and one short email most Mondays about new session openings, study notes and occasional offers. The form is intentionally email-only: `enhance.js` checks the address and the privacy consent, then sends the signup directly to the tutor's inbox through FormSubmit. The address is not stored in the browser.
 
-The code is shown after the draft opens. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. There is no newsletter provider or API key in the repository, and GitHub Pages could not keep one secret in client code.
+The code is shown after the signup sends. The tutor adds the address to the list and sends the welcome note; replying to any club email removes the subscriber. The form uses FormSubmit's public endpoint, so no newsletter API key is kept in the repository. FormSubmit requires one activation click from the tutor inbox before the first message can be delivered.
 
 ### Twin Hickory Library
 In-person laps meet at **Twin Hickory Library** in Henrico County. The plan section carries a large bordered card linking to the library's room-booking page (`https://henricolibrary-va.libcal.com/spaces?lid=6277`), and the FAQ and contact panel link there too.
@@ -104,7 +104,7 @@ To move to another domain:
 
 - The site has no backend, accounts, database or payment code, so there are no server sessions, passwords or API keys to protect here.
 - Every HTML page carries a meta Content Security Policy and a `strict-origin-when-cross-origin` referrer policy. GitHub Pages cannot send HSTS, `X-Frame-Options` or `X-Content-Type-Options` as response headers; `SECURITY.md` records that limit.
-- Forms validate locally and then open a pre-filled email or text. Nothing is posted to this origin.
+- Forms validate locally and then post to FormSubmit.co, which forwards them to the tutor's inbox. Nothing is posted to this origin, and the site stores no form data.
 - No analytics, advertising pixels, third-party embeds or cookies. Browser storage is limited to the theme choice and the saved offer.
 - `_config.yml` keeps source, build tooling and package files out of the published GitHub Pages site.
 
@@ -324,7 +324,7 @@ Almost everything lives in the `<script>` block at the bottom of `index.html`:
 
 - **Rates** - `gradeBaseRates`, `subjectPremiums`, `deliveryPremiums`, `durationMultipliers`, `termDetails`.
 - **Special programs** - the `data-base-price` attribute on each `[data-specialty]` card, plus the card copy in the Specialty section.
-- **Contact details** - `tutorEmail` and `tutorPhone`, and the matching `href`s in the contact section and form drafts.
+- **Contact details** - `tutorEmail`, `tutorPhone`, `formEndpoint`, and the matching fallback `href`s in the contact section and request form.
 - **Offers** - the `deals` array (labels and weights) next to `drawDealWheel()`, and `getSeasonSchedule()` for seasonal offers.
 - **FlyingButton island** - props and the label live in `src/flying-button/entry.jsx`; run `npm run build` after changing them.
 - **FluxLines island** - colours and visual props live in `src/flux-lines/entry.jsx`; run `npm run build` after changing them.

@@ -77,12 +77,15 @@
       .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
     .skip:focus { top: 12px; }
 </style>
-  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-3">
-  <link rel="stylesheet" href="./loader.css?v=20261108-3">
-  <script src="./loader.js?v=20261108-3" defer></script>
+  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
+  <link rel="stylesheet" href="./loader.css?v=20261108-8">
+  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-1">
+  <script src="./loader.js?v=20261108-8" defer></script>
+  <script type="module" src="./liquid-chrome.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
+    <div id="liquid-chrome-mount" class="tt-loader__chrome" aria-hidden="true"></div>
     <div class="loader" aria-hidden="true">
       <svg id="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <defs>
@@ -155,10 +158,9 @@
       <span aria-hidden="true">/</span>
       <span aria-current="page">Request sent</span>
     </nav>
-    <p class="kicker">Request on the grid</p>
     <h1>Thanks.<br> The pits have <em>your note.</em></h1>
     <div class="rule" aria-hidden="true"></div>
-    <p class="lede">If you pressed send in your email or messaging app, your request is with the tutor. Nothing has been charged and no session is booked yet. Here is the rest of the pit stop.</p>
+    <p class="lede">If you sent a request from the website, it has gone to the tutor's inbox through FormSubmit. Nothing has been charged and no session is booked yet. Here is the rest of the pit stop.</p>
 
     <h2>What happens next</h2>
     <ol>
@@ -167,7 +169,7 @@
       <li><b>Payment, direct</b> Cash or Zelle is arranged privately with the tutor after confirmation. This website never takes a card or an online payment.</li>
     </ol>
 
-    <p class="note">No reply after a business day? Check your sent folder first, then text <a href="sms:+18048473236">+1 804 847 3236</a> or email <a href="mailto:divit.gangrade@gmail.com">divit.gangrade@gmail.com</a> so the request can be found.</p>
+    <p class="note">No reply after a business day? Text <a href="sms:+18048473236">+1 804 847 3236</a> or email <a href="mailto:divit.gangrade@gmail.com">divit.gangrade@gmail.com</a> so the request can be found.</p>
 
     <h2>While you wait</h2>
     <p>Read the <a href="privacy.html">terms and privacy notes</a> so the attendance and reschedule rules are clear before the first lap, or look over the plans again if you want to change the lap length.</p>
@@ -189,14 +191,14 @@
       const load = () => {
         const css = document.createElement('link');
         css.rel = 'stylesheet';
-        css.href = 'topography.css?v=20261108-5';
-        css.addEventListener('load', () => { import('./topography.js?v=20261108-5').catch(() => {}); }, { once: true });
+        css.href = 'topography.css?v=20261108-7';
+        css.addEventListener('load', () => { import('./topography.js?v=20261108-7').catch(() => {}); }, { once: true });
         document.head.appendChild(css);
       };
       if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1800 });
       else window.setTimeout(load, 600);
     })();
   </script>
-  <script type="module" src="./smooth-scroll.js?v=20261108-3"></script>
+  <script type="module" src="./smooth-scroll.js?v=20261108-7"></script>
 </body>
 </html>

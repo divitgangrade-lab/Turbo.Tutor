@@ -30,8 +30,12 @@ if (host) {
       shadowOpacity={0.16}
       rotation={-3}
       draggable
+      freeRoam
       returnToOrigin={false}
       dragRadius={900}
+      dragRotation={16}
+      throwStrength={1.15}
+      throwFriction={1.7}
       detail={compact ? 48 : 64}
     />,
     host

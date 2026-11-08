@@ -1,7 +1,7 @@
 /* Cloud Loader adapted from Uiverse.io by andrew-manzyk (MIT). Recoloured for TurboTutor. */
 .tt-loader {
-  --cloud-color: #4387f4;
-  --arrows-color: #80b1ff;
+  --cloud-color: #eef2f5;
+  --arrows-color: #ffd400;
   --time-animation: 1s;
   position: fixed;
   inset: 0;
@@ -10,12 +10,22 @@
   place-items: center;
   align-content: center;
   gap: 14px;
-  background:
-    radial-gradient(60% 50% at 50% 42%, rgba(67, 135, 244, 0.18), transparent 70%),
-    #080b0e;
+  overflow: hidden;
+  background: #080b0e;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.tt-loader::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(52% 46% at 50% 42%, rgba(8, 11, 14, 0.04) 0%, rgba(8, 11, 14, 0.34) 68%, rgba(8, 11, 14, 0.82) 100%),
+    linear-gradient(180deg, rgba(8, 11, 14, 0.58) 0%, rgba(8, 11, 14, 0.06) 46%, rgba(8, 11, 14, 0.72) 100%);
+  content: "";
+  pointer-events: none;
 }
 
 .tt-loader.is-hidden {
@@ -24,7 +34,22 @@
   pointer-events: none;
 }
 
+.tt-loader__chrome {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tt-loader__chrome .liquid-chrome {
+  position: absolute;
+  inset: 0;
+}
+
 .tt-loader .loader {
+  position: relative;
+  z-index: 2;
   transform: scale(1);
 }
 
@@ -65,12 +90,15 @@
 }
 
 .tt-loader__label {
+  position: relative;
+  z-index: 2;
   margin: 0;
-  color: #8f9aa1;
+  color: #dce1e4;
   font-family: var(--ui, "Chakra Petch", monospace);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 2px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
   text-transform: uppercase;
 }
 

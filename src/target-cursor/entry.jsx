@@ -9,7 +9,7 @@ const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)').ma
 if (host && !reduced && finePointer) {
   render(
     <TargetCursor
-      targetSelector="a, button, summary, input, select, textarea, [data-cursor], .hero-swap"
+      targetSelector="a, button, summary, label, input, select, textarea, [data-cursor], [data-cursor-label], [role='button'], [role='tab'], [role='switch'], .hero-swap"
       cursorColor="#ffffff"
       cursorColorOnTarget="#ffd400"
       spinDuration={2.4}

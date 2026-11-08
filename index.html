@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' mailto: sms:; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0a0c0f">
   <title>TurboTutor | 1:1 Math, English &amp; Science Tutoring, Grades 1–8</title>
@@ -47,14 +47,14 @@
       --carbon-2: #11151a;
       --carbon-3: #171d23;
       --carbon-line: #2a3239;
-      --surface: #f5f3ee;
-      --surface-2: #eae7dd;
-      --card: #fffefb;
-      --ink: #12161a;
-      --muted: #5b646b;
-      --line: #d8d3c6;
-      --red: #e10600;
-      --red-2: #b00500;
+      --surface: #f1f3ee;
+      --surface-2: #e4e8e1;
+      --card: #fbfcf8;
+      --ink: #11171a;
+      --muted: #525d61;
+      --line: #cbd1c8;
+      --red: #b00020;
+      --red-2: #8a0018;
       --amber: #ffd400;
       --green: #0f8a5f;
       --display: "Barlow Condensed", Impact, sans-serif;
@@ -66,11 +66,11 @@
     [data-theme="dark"] {
       color-scheme: dark;
       --surface: #0e1216;
-      --surface-2: #131820;
-      --card: #171d23;
-      --ink: #f2efe7;
-      --muted: #a4aeb5;
-      --line: #2b333a;
+      --surface-2: #131a1e;
+      --card: #171f24;
+      --ink: #f2f4ef;
+      --muted: #a6b0b4;
+      --line: #2b363c;
       --shadow: 0 18px 40px rgba(0, 0, 0, .5);
     }
 
@@ -236,7 +236,7 @@
     .track-lightfall .lightfall-container { position: absolute; inset: 0; }
     @media (prefers-reduced-motion: reduce) { .track-lightfall { display: none; } }
     #plans { position: relative; isolation: isolate; --muted: #38372f; }
-    #plans > .wrap { text-shadow: 0 0 9px rgba(245, 243, 238, .8); }
+    #plans > .wrap { text-shadow: 0 0 9px rgba(241, 243, 238, .8); }
     #plans .tab[aria-selected="false"] { background: var(--surface); }
     #plans > .wrap { position: relative; z-index: 1; }
     .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .7; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); }
@@ -565,7 +565,9 @@
     .field { display: grid; gap: 6px; }
     .field.full { grid-column: 1 / -1; }
     .field label, .payment-title { font-family: var(--ui); font-size: 9.5px; font-weight: 600; letter-spacing: .9px; text-transform: uppercase; }
-    .field input { width: 100%; min-height: 44px; border: 1px solid var(--line); background: var(--card); padding: 9px 11px; color: var(--ink); font: inherit; font-size: 13px; }
+    .field input, .field textarea { width: 100%; border: 1px solid var(--line); background: var(--card); padding: 9px 11px; color: var(--ink); font: inherit; font-size: 13px; }
+    .field input { min-height: 44px; }
+    .field textarea { min-height: 118px; resize: vertical; line-height: 1.55; }
     .payment-opts { display: flex; flex-wrap: wrap; gap: 8px; }
     .pay-opt { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; border: 1px solid var(--line); padding: 0 12px; font-family: var(--ui); font-size: 11px; font-weight: 600; cursor: pointer; }
     .pay-opt:has(input:checked) { border-color: var(--ink); background: var(--surface-2); }
@@ -577,6 +579,8 @@
     .form-note { margin: 0; color: var(--muted); font-size: 10.5px; line-height: 1.65; }
     .form-note:empty { display: none; }
     .draft-status { min-height: 16px; margin: 0; color: var(--green); font-size: 10.5px; }
+    .draft-status.is-error { color: var(--red-2); }
+    .form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
     .draft-actions { display: none; gap: 9px; }
     .draft-actions.ready { display: grid; }
     .draft-actions .btn { width: 100%; }
@@ -843,6 +847,7 @@
       .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
     .skip:focus { top: 12px; }
     @media (max-width: 560px) { .kart-btn, .seg { min-height: 44px; } }
+
   </style>
   <script type="application/ld+json">
   {
@@ -1048,7 +1053,7 @@
       "name": "How do I request enrollment?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Add your plans to the kart, enter the parent or guardian and student details, choose cash or Zelle, then prepare the request. Your email or messaging app opens with everything filled in. Review it, press send, and the tutor replies to confirm."
+        "text": "Add your plans to the kart, enter the parent or guardian and student details, choose cash or Zelle, then send the request. The request goes straight to the tutor's inbox from this page, and the tutor replies to confirm."
       }
     },
     {
@@ -1062,13 +1067,16 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="enhance.css?v=20261108-5">
-  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-3">
-  <link rel="stylesheet" href="./loader.css?v=20261108-3">
-  <script src="./loader.js?v=20261108-3" defer></script>
+  <link rel="stylesheet" href="enhance.css?v=20261108-8">
+  <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
+  <link rel="stylesheet" href="./loader.css?v=20261108-8">
+  <link rel="stylesheet" href="./liquid-chrome.css?v=20261108-1">
+  <script src="./loader.js?v=20261108-8" defer></script>
+  <script type="module" src="./liquid-chrome.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
+    <div id="liquid-chrome-mount" class="tt-loader__chrome" aria-hidden="true"></div>
     <div class="loader" aria-hidden="true">
       <svg id="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <defs>
@@ -1169,7 +1177,6 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> 1:1 tutoring · Grades 1–8 · Richmond, VA</p>
           <h1 id="hero-title" aria-label="Learn at full throttle"><span class="line">Learn</span> <span class="line">at full</span> <span class="line outline">throttle</span></h1>
           <p class="hero-lede">One-to-one Math, English and Science coaching built around your student's own pace. Clear session lengths, honest prices, and a tutor who replies, with no cold checkout, ever.</p>
           <div class="hero-actions">
@@ -1177,6 +1184,7 @@
             <a class="btn ghost" data-cursor-label="Spin" href="#offers">Spin for an offer</a>
           </div>
           <ul class="hero-chips">
+            <li><b>1:1</b> Grades 1–8 · Richmond, VA</li>
             <li>No card needed</li>
             <li>From <b>$24</b> / week</li>
             <li>Zoom or public library</li>
@@ -1217,7 +1225,6 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="kicker">The course garage</p>
             <h2 class="h2" id="plans-title">Choose your setup</h2>
           </div>
           <p class="lead">Pick a grade, a subject and a lap length. Every price updates live: no surprise pit stops, no card, no checkout.</p>
@@ -1262,7 +1269,7 @@
 
         <div class="plan-grid" id="plan-cards" aria-live="polite">
           <article class="plan-card" data-plan="weekly">
-            <div class="plan-top"><div><p class="plan-kicker">Flexible pace</p><h3>Weekly</h3></div><span class="plan-badge">1 lap / week</span></div>
+            <div class="plan-top"><div><h3>Weekly</h3></div><span class="plan-badge">1 lap / week</span></div>
             <p class="plan-summary">A focused weekly session with zero long-term commitment.</p>
             <p class="field-label">Lap length</p>
             <div class="segmented" role="group" aria-label="Weekly class length">
@@ -1283,7 +1290,7 @@
           </article>
 
           <article class="plan-card featured" data-plan="monthly">
-            <div class="plan-top"><div><p class="plan-kicker">Steady routine</p><h3>Monthly</h3></div><span class="plan-badge hot">Most popular</span></div>
+            <div class="plan-top"><div><h3>Monthly</h3></div><span class="plan-badge hot">Most popular</span></div>
             <p class="plan-summary">Four weekly laps as one monthly block, 5% lower than paying week to week.</p>
             <p class="field-label">Lap length</p>
             <div class="segmented" role="group" aria-label="Monthly class length">
@@ -1304,7 +1311,7 @@
           </article>
 
           <article class="plan-card" data-plan="yearly">
-            <div class="plan-top"><div><p class="plan-kicker">Full season</p><h3>Yearly</h3></div><span class="plan-badge">Save 15%</span></div>
+            <div class="plan-top"><div><h3>Yearly</h3></div><span class="plan-badge">Save 15%</span></div>
             <p class="plan-summary">48 weekly laps across 12 months, paid once upfront.</p>
             <p class="field-label">Lap length</p>
             <div class="segmented" role="group" aria-label="Yearly class length">
@@ -1344,12 +1351,11 @@
       <div class="specialty-silk" id="silk-root" aria-hidden="true"><div id="silk-mount"></div></div>
       <div class="wrap">
         <div class="section-head">
-          <div><p class="kicker">Advanced programs</p><h2 class="h2" id="specialty-title">Special coaching</h2></div>
+          <div><h2 class="h2" id="specialty-title">Special coaching</h2></div>
           <p class="lead">Focused one-time sessions for advanced coursework and applications. Confirm the scope, materials and timing with the tutor before requesting.</p>
         </div>
         <div class="specialty-grid">
           <article class="specialty-card featured reveal" data-specialty="moody-ib" data-base-price="120" data-zoom-only="true" data-price-suffix="120-min Zoom session" data-kart-meta="120-minute Zoom session" data-minutes="120" data-period="session">
-            <p class="kicker">Advanced · by request</p>
             <h3>Moody IB Prep</h3>
             <p>A full two-hour Zoom deep dive for IB coursework. Bring the unit, the rubric and the questions you want to attack, and we build the plan around them.</p>
             <p class="specialty-price" data-specialty-price>$120 <small>/ 120-min Zoom session</small></p>
@@ -1357,7 +1363,6 @@
             <button class="btn" type="button" data-cursor-label="Request" data-add-specialty="moody-ib">Request IB prep <span class="arrow" aria-hidden="true">→</span></button>
           </article>
           <article class="specialty-card reveal" data-specialty="application-review" data-base-price="35" data-zoom-only="true" data-price-suffix="application" data-kart-meta="Application review · optional 90-min Zoom +$40" data-minutes="0" data-period="application">
-            <p class="kicker">Application support</p>
             <h3>High School Application Review</h3>
             <p>A full review of one application, with written notes on what to fix. Add a 90-minute Zoom meeting with the student and parent if you want to talk it through.</p>
             <p class="specialty-price" data-specialty-price>$35 <small>/ application</small></p>
@@ -1374,7 +1379,6 @@
       <div class="track-lightfall" id="lightfall-root" aria-hidden="true"><div id="lightfall-mount"></div></div>
       <div class="wrap track-grid">
         <div class="track-copy">
-          <p class="kicker">How tutoring begins</p>
           <h2 class="h2" id="steps-title">Three steps to the <em>green flag</em></h2>
           <p class="track-lede">Good tutoring starts with a good fit. Pick a setup, send the kart, and the first lap is a conversation with the tutor, never a checkout.</p>
           <ol class="track-steps">
@@ -1412,7 +1416,6 @@
       <div class="promise-flux" id="flux-lines-root" aria-hidden="true"></div>
       <div class="wrap promise-grid">
         <div>
-          <p class="kicker">The pit wall promise</p>
           <div class="promise-mask" id="masked-heading-root">
             <h2 id="promise-title">Every lap<br> <em>counts.</em></h2>
           </div>
@@ -1438,7 +1441,6 @@
       </div>
       <div class="wrap offers-grid">
         <div class="offer-copy-wrap">
-          <p class="kicker">Optional parent offer</p>
           <h2 id="offers-title">Take a<br> pit-stop spin</h2>
           <p class="offers-copy">One free spin can reveal a welcome offer for your first enrollment request. No purchase is needed, and every prize and its real odds are listed before you spin.</p>
           <div class="season" id="seasonal-banner" aria-live="polite">
@@ -1478,7 +1480,6 @@
       <div class="wrap launch-grid">
         <div>
           <div class="launch-board" id="split-flap-root">
-            <p class="kicker launch-board-fallback">Pit lane warm-up</p>
           </div>
           <h2 id="launch-title">Give it a<br><em>little throttle.</em></h2>
           <p class="launch-copy">Every plan starts with a conversation, not a checkout. Hover the car for a small pit-lane warm-up, then tap it to drift up to the plans at a calmer pace.</p>
@@ -1502,7 +1503,6 @@
       <div class="pattern-waves-host" id="pattern-waves-root" aria-hidden="true"></div>
       <div class="wrap club-grid">
         <div>
-          <p class="kicker">Paddock Club</p>
           <h2 id="club-title">5% off, and a<br> <em>Monday email.</em></h2>
           <p class="club-copy">Join the list once. Your first month costs 5% less, and most Mondays you get one short email about new session openings, study notes and the occasional offer.</p>
           <ul class="club-perks">
@@ -1514,10 +1514,16 @@
         <div class="club-panel">
           <h3>Get on the list</h3>
           <p>No card, no account. Just an email address.</p>
-          <form class="club-form" id="club-form" novalidate>
+          <form class="club-form" id="club-form" action="https://formsubmit.co/divit.gangrade@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Paddock Club signup: 5% off">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://turbotutor.dpdns.org/thanks.html">
+            <input type="hidden" name="form" value="Paddock Club signup">
+            <input class="form-hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="sr-only" for="club-email">Email address</label>
             <input id="club-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="120" required>
-            <label class="club-consent"><input type="checkbox" id="club-consent" name="privacyAccepted" value="Yes"><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.</span></label>
+            <label class="club-consent"><input type="checkbox" id="club-consent" name="privacyAccepted" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.</span></label>
             <button class="btn" type="submit" data-cursor-label="Join">Join the club</button>
           </form>
           <span class="club-code">PADDOCK5 · 5% OFF</span>
@@ -1534,7 +1540,6 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="kicker">Session walkthrough</p>
             <h2 class="h2" id="walkthrough-title">Inside one 45-minute lap</h2>
           </div>
           <p class="lead">A real lesson structure, not a testimonial. Student names and results are never published on this site.</p>
@@ -1561,7 +1566,7 @@
       </div>
       <div class="wrap">
         <div class="section-head">
-          <div><p class="kicker">Clear before the green flag</p><h2 class="h2" id="policies-title">Attendance &amp; support</h2></div>
+          <div><h2 class="h2" id="policies-title">Attendance &amp; support</h2></div>
           <p class="lead">These are the proposed service terms. Read them before requesting a session. This website never charges a fee or takes a payment.</p>
         </div>
         <div id="animated-content-root">
@@ -1590,7 +1595,6 @@
       </div>
       <div class="wrap contact-grid">
         <div>
-          <p class="kicker">Talk to the tutor</p>
           <h2 id="contact-title">Questions?<br> Open a channel.</h2>
           <p class="lede">Ask about subjects, schedules, pricing, or how cash and Zelle work. The tutor aims to reply within one business day.</p>
           <div class="contact-list">
@@ -1599,7 +1603,7 @@
               <button class="copy-btn" type="button" data-cursor-label="Copy" data-copy="804-847-3236">Copy number</button>
             </div>
             <div class="contact-card">
-              <a class="contact-link" data-cursor-label="Email" href="mailto:divit.gangrade@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.6 6.4 12 12.8l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> divit.gangrade@gmail.com</a>
+              <a class="contact-link" data-cursor-label="Email" id="contact-email-link" href="mailto:divit.gangrade@gmail.com" aria-haspopup="dialog"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.6 6.4 12 12.8l8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> divit.gangrade@gmail.com</a>
               <button class="copy-btn" type="button" data-cursor-label="Copy" data-copy="divit.gangrade@gmail.com">Copy email</button>
             </div>
             <div class="contact-card">
@@ -1623,7 +1627,7 @@
       </div>
       <div class="wrap">
         <div class="section-head">
-          <div><p class="kicker">Quick answers</p><h2 class="h2" id="faq-title">Before the start</h2></div>
+          <div><h2 class="h2" id="faq-title">Before the start</h2></div>
           <p class="lead">Search the grid. Everything about plans, payment, sessions and gear lives here.</p>
         </div>
         <div class="faq-tools">
@@ -1640,7 +1644,7 @@
           <details><summary>Does the kart take payment?</summary><p>No. The kart is just a build sheet: it collects the plans you want and turns them into a tidy email or text request. No card fields, no checkout, no online payment anywhere on this site.</p></details>
           <details><summary>How do the seasonal offers work?</summary><p>The page checks the calendar and rotates the offer for New Year, back-to-school, Diwali season (Oct 1–Nov 10), Thanksgiving week and Christmas. Only one cash discount applies per request: the best eligible seasonal or wheel discount wins.</p></details>
           <details><summary>What happens if we miss or move a class?</summary><p>A missed scheduled class carries a $15 fee. A family-requested reschedule carries a $10 fee. If the tutor needs to move a session, they confirm a 15% credit toward the next request. These terms are shown before enrollment and the website never charges them.</p></details>
-          <details><summary>How do I request enrollment?</summary><p>Add your plans to the kart, enter the parent/guardian and student details, choose cash or Zelle as the preferred method, then prepare the request. Your email or messaging app opens with everything filled in. Review it, press send, and the tutor replies to confirm.</p></details>
+          <details><summary>How do I request enrollment?</summary><p>Add your plans to the kart, enter the parent/guardian and student details, choose cash or Zelle as the preferred method, then send the request. It goes straight to the tutor's inbox from this page, and the tutor replies to confirm.</p></details>
           <details><summary>Can I pay by cash or Zelle?</summary><p>Yes. Pick cash or Zelle in the request form. The tutor confirms the amount, due date and Zelle details directly with you before any enrollment. This site never collects card numbers or online payments.</p></details>
         </div>
         <p class="faq-empty" id="faq-empty" hidden>No answers match that search. Try “price”, “kart”, “Zoom” or “library”.</p>
@@ -1654,7 +1658,6 @@
     <div class="wrap footer-wordmark" id="tech-text-root" aria-hidden="true"></div>
     <div class="wrap footer-lab">
       <div class="footer-lab-main">
-        <p class="kicker">Pit wall</p>
         <div class="footer-falling" id="falling-text-root">
           <div id="falling-text-mount">
             <p class="footer-falling-fallback">Every lap is a <em>lesson</em>. Every lesson <em>sticks</em>.</p>
@@ -1748,7 +1751,14 @@
   </aside>
 
   <dialog id="request-dialog" aria-labelledby="request-title">
-    <form class="request-form" id="request-form">
+    <form class="request-form" id="request-form" action="https://formsubmit.co/divit.gangrade@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="TurboTutor kart request">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://turbotutor.dpdns.org/thanks.html">
+      <input type="hidden" name="form" value="Kart request">
+      <input class="form-hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="message" id="request-message">
       <div class="form-head">
         <div>
           <h2 id="request-title">Request enrollment</h2>
@@ -1771,15 +1781,43 @@
         <label class="policy-ack"><input type="checkbox" name="policiesAccepted" value="Yes" required><span>I have read the <a href="#policies">attendance and rescheduling policies</a>.</span></label>
         <label class="policy-ack"><input type="checkbox" name="privacyAccepted" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>, and I am 18 or older.</span></label>
       </div>
-      <p class="form-note">No payment is collected here. Your request opens as a draft. Review it and press send in your email or messaging app.</p>
+      <p class="form-note">No payment is collected here. Your request is sent directly to the tutor's inbox, and the tutor aims to reply within one business day.</p>
       <p class="form-note" id="request-deal"></p>
-      <button class="btn" type="submit" data-cursor-label="Prepare">Prepare request <span class="arrow" aria-hidden="true">→</span></button>
+      <button class="btn" type="submit" data-cursor-label="Send">Send request <span class="arrow" aria-hidden="true">→</span></button>
       <p class="draft-status" id="draft-status" aria-live="polite"></p>
       <div class="draft-actions" id="draft-actions">
-        <a class="btn" id="email-draft" href="mailto:divit.gangrade@gmail.com">Open email draft</a>
-        <a class="btn light" id="sms-draft" href="sms:+18048473236">Open text draft</a>
+        <a class="btn light" id="email-draft" href="mailto:divit.gangrade@gmail.com">Use your email app instead</a>
+        <a class="btn light" id="sms-draft" href="sms:+18048473236">Text instead</a>
       </div>
       <p class="form-note"><a href="thanks.html">Already sent it? See what happens next</a></p>
+    </form>
+  </dialog>
+
+
+  <dialog id="email-dialog" aria-labelledby="email-dialog-title">
+    <form class="request-form" id="email-form" action="https://formsubmit.co/divit.gangrade@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="TurboTutor website message">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://turbotutor.dpdns.org/thanks.html">
+      <input type="hidden" name="form" value="Website message">
+      <input class="form-hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-head">
+        <div>
+          <h2 id="email-dialog-title">Email the tutor</h2>
+          <p>Ask about subjects, schedules or pricing. The tutor aims to reply within one business day.</p>
+        </div>
+        <button class="close-btn" type="button" id="close-email" aria-label="Close email form">×</button>
+      </div>
+      <div class="form-grid">
+        <div class="field"><label for="email-name">Your name</label><input id="email-name" name="name" autocomplete="name" maxlength="80" required></div>
+        <div class="field"><label for="email-address">Your email</label><input id="email-address" name="email" type="email" autocomplete="email" maxlength="120" required></div>
+        <div class="field full"><label for="email-message">Message</label><textarea id="email-message" name="message" maxlength="4000" required></textarea></div>
+      </div>
+      <label class="policy-ack"><input type="checkbox" name="privacyAccepted" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+      <p class="form-note">Your message is sent directly through FormSubmit. No payment is collected here.</p>
+      <button class="btn" type="submit" data-cursor-label="Send">Send email <span class="arrow" aria-hidden="true">→</span></button>
+      <p class="draft-status" id="email-status" aria-live="polite"></p>
     </form>
   </dialog>
 
@@ -1804,6 +1842,7 @@
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
       const tutorEmail = "divit.gangrade@gmail.com";
+      const formEndpoint = "https://formsubmit.co/ajax/divit.gangrade@gmail.com";
       const tutorPhone = "+18048473236";
       const gradeBaseRates = { 1: 24, 2: 26, 3: 28, 4: 30, 5: 33, 6: 36, 7: 39, 8: 42 };
       const subjectPremiums = { Science: 0, Math: 3, English: 5 };
@@ -1823,7 +1862,7 @@
       const dealStorageKey = "turbotutor-welcome-offer-v2";
       const dealValidityMs = 30 * 24 * 60 * 60 * 1000;
       const deals = [
-        { id: "five-percent", weight: 45, label: "5% off your first monthly payment", short: "5% OFF", accent: "#e10600" },
+        { id: "five-percent", weight: 45, label: "5% off your first monthly payment", short: "5% OFF", accent: "#b00020" },
         { id: "ten-dollars", weight: 25, label: "$10 off your first invoice", short: "$10 OFF", accent: "#ffd400" },
         { id: "five-dollars", weight: 20, label: "$5 off your first invoice", short: "$5 OFF", accent: "#f7f5f0" },
         { id: "priority-scheduling", weight: 8, label: "Priority scheduling request", short: "PRIORITY", accent: "#2e5b66" },
@@ -1835,7 +1874,11 @@
       const kartItems = $("#kart-items");
       const requestDialog = $("#request-dialog");
       const requestForm = $("#request-form");
+      const requestSubmit = requestForm.querySelector('button[type="submit"]');
       const draftActions = $("#draft-actions");
+      const contactEmailLink = $("#contact-email-link");
+      const emailDialog = $("#email-dialog");
+      const emailForm = $("#email-form");
       const toast = $("#toast");
       const dealCanvas = $("#deal-wheel");
       const openKartBtn = $("#open-kart");
@@ -1875,6 +1918,30 @@
         toast.classList.add("show");
         window.clearTimeout(toastTimer);
         toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2800);
+      }
+
+      async function postForm(payload) {
+        if (payload._honey) return { success: "true" };
+        const response = await fetch(formEndpoint, {
+          method: "POST",
+          credentials: "omit",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+        let data = null;
+        try {
+          data = await response.json();
+        } catch {
+          throw new Error("The form service returned an unreadable response.");
+        }
+        if (!response.ok) throw new Error(`The form service returned ${response.status}.`);
+        if (!data || data.success === false || data.success === "false") {
+          throw new Error(data?.message || "The form service refused the request.");
+        }
+        return data;
       }
 
       function setTabSelection(container, selector, selectedValue, dataKey) {
@@ -2137,7 +2204,7 @@
         if (!context) return;
         const center = dealCanvas.width / 2;
         const radius = center - 4;
-        const ringColors = ["#e10600", "#ffd400", "#f7f5f0", "#2e5b66", "#0f8a5f"];
+        const ringColors = ["#b00020", "#ffd400", "#f7f5f0", "#2e5b66", "#0f8a5f"];
         let angle = -Math.PI / 2;
         deals.forEach((deal, index) => {
           const endAngle = angle + Math.PI * 2 * deal.weight / 100;
@@ -2165,7 +2232,7 @@
         });
         context.beginPath();
         context.arc(center, center, radius - 4, 0, Math.PI * 2);
-        context.strokeStyle = "#f5f3ee";
+        context.strokeStyle = "#f1f3ee";
         context.lineWidth = 4;
         context.stroke();
       }
@@ -2333,6 +2400,12 @@
           return;
         }
         $("#request-course-summary").textContent = `${selectedCourses.length} plan${selectedCourses.length === 1 ? "" : "s"} · estimated first payment ${$("#kart-total").textContent}`;
+        requestForm.dataset.sending = "false";
+        requestSubmit.disabled = false;
+        requestSubmit.innerHTML = 'Send request <span class="arrow" aria-hidden="true">→</span>';
+        $("#draft-status").textContent = "";
+        $("#draft-status").classList.remove("is-error");
+        draftActions.classList.remove("ready");
         closeKart();
         requestDialog.showModal();
         $("#guardian-name").focus();
@@ -2347,8 +2420,9 @@
         draftActions.classList.remove("ready");
         $("#draft-status").textContent = "";
       });
-      requestForm.addEventListener("submit", event => {
+      requestForm.addEventListener("submit", async event => {
         event.preventDefault();
+        if (requestForm.dataset.sending === "true") return;
         const formData = new FormData(requestForm);
         const courses = selectedCourses.map(plan => {
           const detail = plan.term === "specialty"
@@ -2386,10 +2460,79 @@
           "Sent from the TurboTutor website. No payment was taken online."
         ].filter(Boolean).join("\n");
         const subject = encodeURIComponent("TurboTutor kart request");
+        const status = $("#draft-status");
+        $("#request-message").value = message;
         $("#email-draft").href = `mailto:${tutorEmail}?subject=${subject}&body=${encodeURIComponent(message)}`;
         $("#sms-draft").href = `sms:${tutorPhone}?body=${encodeURIComponent(message)}`;
-        draftActions.classList.add("ready");
-        $("#draft-status").textContent = "Review the request in your email or text app and press send. No payment is collected here.";
+        const payload = Object.fromEntries(new FormData(requestForm).entries());
+        requestForm.dataset.sending = "true";
+        requestSubmit.disabled = true;
+        requestSubmit.innerHTML = 'Sending <span class="arrow" aria-hidden="true">…</span>';
+        status.textContent = "Sending your request…";
+        status.classList.remove("is-error");
+        draftActions.classList.remove("ready");
+        try {
+          await postForm(payload);
+          requestForm.reset();
+          status.textContent = "Request sent. The tutor aims to reply within one business day.";
+          window.setTimeout(() => {
+            if (requestDialog.open) requestDialog.close();
+            requestForm.dataset.sending = "false";
+            requestSubmit.disabled = false;
+            requestSubmit.innerHTML = 'Send request <span class="arrow" aria-hidden="true">→</span>';
+            showToast("Request sent. The tutor aims to reply within one business day.");
+          }, 1100);
+        } catch {
+          requestForm.dataset.sending = "false";
+          requestSubmit.disabled = false;
+          requestSubmit.innerHTML = 'Send request <span class="arrow" aria-hidden="true">→</span>';
+          status.textContent = "The request did not send. Try again or use the email or text fallback below.";
+          status.classList.add("is-error");
+          draftActions.classList.add("ready");
+        }
+      });
+
+      contactEmailLink.addEventListener("click", event => {
+        if (!emailDialog || !emailForm) return;
+        event.preventDefault();
+        const status = $("#email-status");
+        if (status) {
+          status.textContent = "";
+          status.classList.remove("is-error");
+        }
+        emailDialog.showModal();
+        $("#email-name").focus();
+      });
+      $("#close-email").addEventListener("click", () => emailDialog.close());
+      emailForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (emailForm.dataset.sending === "true") return;
+        const emailSubmit = emailForm.querySelector('button[type="submit"]');
+        const status = $("#email-status");
+        const original = emailSubmit.innerHTML;
+        emailForm.dataset.sending = "true";
+        emailSubmit.disabled = true;
+        emailSubmit.innerHTML = 'Sending <span class="arrow" aria-hidden="true">…</span>';
+        status.textContent = "Sending your message…";
+        status.classList.remove("is-error");
+        try {
+          await postForm(Object.fromEntries(new FormData(emailForm).entries()));
+          emailForm.reset();
+          status.textContent = "Message sent. The tutor aims to reply within one business day.";
+          window.setTimeout(() => {
+            if (emailDialog.open) emailDialog.close();
+            emailForm.dataset.sending = "false";
+            emailSubmit.disabled = false;
+            emailSubmit.innerHTML = original;
+            showToast("Email sent. The tutor aims to reply within one business day.");
+          }, 1100);
+        } catch {
+          emailForm.dataset.sending = "false";
+          emailSubmit.disabled = false;
+          emailSubmit.innerHTML = original;
+          status.innerHTML = 'The message did not send. Try again, or <a href="mailto:divit.gangrade@gmail.com">use your email app</a>.';
+          status.classList.add("is-error");
+        }
       });
 
       // ---- offers ----
@@ -2583,14 +2726,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "flying-button.css?v=20261108-2";
+        css.href = "flying-button.css?v=20261108-7";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./flying-button.js?v=20261108-2").catch(() => {});
+          if (ok) import("./flying-button.js?v=20261108-7").catch(() => {});
         });
       };
       const near = () => {
@@ -3303,14 +3446,14 @@
       if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
       const css = document.createElement("link");
       css.rel = "stylesheet";
-      css.href = "target-cursor.css?v=20261107-18";
+      css.href = "target-cursor.css?v=20261108-1";
       const ready = new Promise(resolve => {
         css.addEventListener("load", () => resolve(true), { once: true });
         css.addEventListener("error", () => resolve(false), { once: true });
       });
       document.head.appendChild(css);
       ready.then(ok => {
-        if (ok) import("./target-cursor.js?v=20261107-18").catch(() => {});
+        if (ok) import("./target-cursor.js?v=20261108-1").catch(() => {});
       });
     })();
   </script>
@@ -3325,14 +3468,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "falling-text.css?v=20261108-1";
+        css.href = "falling-text.css?v=20261108-7";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./falling-text.js?v=20261108-1").catch(() => {});
+          if (ok) import("./falling-text.js?v=20261108-7").catch(() => {});
         });
       };
       const near = () => {
@@ -3363,14 +3506,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "paper-crumple.css?v=20261108-1";
+        css.href = "paper-crumple.css?v=20261108-7";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./paper-crumple.js?v=20261108-1").catch(() => {});
+          if (ok) import("./paper-crumple.js?v=20261108-7").catch(() => {});
         });
       };
       const near = () => {
@@ -3395,14 +3538,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "pit-rating.css?v=20261108-6";
+        css.href = "pit-rating.css?v=20261108-7";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./pit-rating.js?v=20261108-6").catch(() => {});
+          if (ok) import("./pit-rating.js?v=20261108-7").catch(() => {});
         });
       };
       const near = () => {
@@ -3452,7 +3595,7 @@
       near();
     })();
   </script>
-  <script src="enhance.js?v=20261108-3"></script>
+  <script src="enhance.js?v=20261108-8"></script>
   <script>
     (() => {
       const hosts = document.querySelectorAll("[data-topography]");
@@ -3464,14 +3607,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "topography.css?v=20261108-5";
+        css.href = "topography.css?v=20261108-7";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./topography.js?v=20261108-5").catch(() => {});
+          if (ok) import("./topography.js?v=20261108-7").catch(() => {});
         });
       };
       const near = () => {
@@ -3489,6 +3632,6 @@
       window.addEventListener("resize", near, { passive: true });
     })();
   </script>
-  <script type="module" src="./smooth-scroll.js?v=20261108-3"></script>
+  <script type="module" src="./smooth-scroll.js?v=20261108-7"></script>
 </body>
 </html>

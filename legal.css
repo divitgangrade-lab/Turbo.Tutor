@@ -2,12 +2,12 @@
 :root {
   --carbon: #0a0c0f;
   --amber: #ffd400;
-  --red: #e10600;
-  --red-text: #b00500;
-  --paper: #f5f3ee;
-  --ink: #12161a;
-  --muted: #58636a;
-  --line: #d8d4cb;
+  --red: #b00020;
+  --red-text: #8a0018;
+  --paper: #f1f3ee;
+  --ink: #11171a;
+  --muted: #525d61;
+  --line: #cbd1c8;
   --display: "Barlow Condensed", Impact, sans-serif;
   --ui: "Chakra Petch", monospace;
   --body: "Titillium Web", system-ui, sans-serif;

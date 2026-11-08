@@ -1,4 +1,4 @@
-import"./island-chunks/chunk-F7TZUDVZ.js";import{e as ve,h as $,j as _,n as U}from"./island-chunks/chunk-OS2XOP7G.js";import"./island-chunks/chunk-SSQABL5H.js";var We=`#version 300 es
+import"./island-chunks/chunk-SXAG5OYS.js";import{e as ve,h as $,j as _,n as U}from"./island-chunks/chunk-OS2XOP7G.js";import"./island-chunks/chunk-SSQABL5H.js";var We=`#version 300 es
 in vec2 aPosition;
 out vec2 vUv;
 void main() {

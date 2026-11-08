@@ -1081,10 +1081,13 @@
     const form = $("#club-form");
     if (!form) return;
     const status = $("#club-status");
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (form.dataset.sending === "true") return;
       const input = form.querySelector("input[type=email]");
       const consent = form.querySelector("input[name=privacyAccepted]");
+      const honey = form.querySelector('input[name="_honey"]');
+      const button = form.querySelector('button[type=submit]');
       const email = (input.value || "").trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
         status.hidden = false;
@@ -1098,11 +1101,58 @@
         consent.focus();
         return;
       }
-      const subject = encodeURIComponent("Paddock Club signup: 5% off");
-      const body = encodeURIComponent(`Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`);
-      window.location.href = `mailto:divit.gangrade@gmail.com?subject=${subject}&body=${body}`;
+      if (honey && honey.value) {
+        form.reset();
+        status.hidden = false;
+        status.innerHTML = "<b>You're in.</b> Your 5% code is <b>PADDOCK5</b>. Replying to any club email removes you from the list.";
+        return;
+      }
+      const original = button.textContent;
+      form.dataset.sending = "true";
+      button.disabled = true;
+      button.textContent = "Sending...";
       status.hidden = false;
-      status.innerHTML = "<b>Almost there.</b> Your email app should open with the signup ready to send. Your 5% code is <b>PADDOCK5</b>. Replying to any club email removes you from the list.";
+      status.textContent = "Adding you to the list...";
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/divit.gangrade@gmail.com", {
+          method: "POST",
+          credentials: "omit",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            privacyAccepted: "Yes",
+            form: "Paddock Club signup",
+            message: `Please add ${email} to the Paddock Club list for the 5% first-month discount and the Monday email.\n\nCode: PADDOCK5`,
+            _subject: "Paddock Club signup: 5% off",
+            _template: "table",
+            _captcha: "false"
+          })
+        });
+        let data = null;
+        try {
+          data = await response.json();
+        } catch {
+          throw new Error("The form service returned an unreadable response.");
+        }
+        if (!response.ok || !data || data.success === false || data.success === "false") {
+          throw new Error(data?.message || "The form service refused the signup.");
+        }
+        form.reset();
+        form.dataset.sending = "false";
+        button.disabled = false;
+        button.textContent = original;
+        status.hidden = false;
+        status.innerHTML = "<b>You're in.</b> Your 5% code is <b>PADDOCK5</b>. The tutor will send the welcome note; replying to any club email removes you from the list.";
+      } catch {
+        form.dataset.sending = "false";
+        button.disabled = false;
+        button.textContent = original;
+        status.hidden = false;
+        status.innerHTML = 'The signup did not send. Try again in a moment, or <a href="sms:+18048473236">text the tutor</a>.';
+      }
     });
   })();
 

@@ -8,14 +8,22 @@
   const started = performance.now();
   let finished = false;
 
+  const signal = state => {
+    window.dispatchEvent(new CustomEvent(`tt:loader-${state}`));
+  };
+
   const show = () => {
+    const wasHidden = loader.classList.contains('is-hidden');
     loader.classList.remove('is-hidden');
     loader.removeAttribute('aria-hidden');
+    if (wasHidden) signal('show');
   };
 
   const hide = () => {
+    if (loader.classList.contains('is-hidden')) return;
     loader.classList.add('is-hidden');
     loader.setAttribute('aria-hidden', 'true');
+    signal('hidden');
   };
 
   const finish = () => {

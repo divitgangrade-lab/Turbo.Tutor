@@ -37,7 +37,7 @@
   <link rel="preload" href="/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/fonts.css">
   <style>
-    :root { --carbon:#0a0c0f; --amber:#ffd400; --red:#e10600; --paper:#f5f3ee; --ink:#12161a; --muted:#58636a; --display:"Barlow Condensed",Impact,sans-serif; --ui:"Chakra Petch",monospace; --body:"Titillium Web",system-ui,sans-serif; }
+    :root { --carbon:#0a0c0f; --amber:#ffd400; --red:#b00020; --paper:#f5f3ee; --ink:#12161a; --muted:#58636a; --display:"Barlow Condensed",Impact,sans-serif; --ui:"Chakra Petch",monospace; --body:"Titillium Web",system-ui,sans-serif; }
     * { box-sizing:border-box; }
     body { margin:0; min-height:100vh; display:flex; flex-direction:column; background:var(--carbon); color:#f5f3ee; font-family:var(--body); line-height:1.7; }
     a { color:inherit; }
@@ -95,12 +95,15 @@
       .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
     .skip:focus { top: 12px; }
 </style>
-  <link rel="stylesheet" href="/smooth-scroll.css?v=20261108-3">
-  <link rel="stylesheet" href="/loader.css?v=20261108-3">
-  <script src="/loader.js?v=20261108-3" defer></script>
+  <link rel="stylesheet" href="/smooth-scroll.css?v=20261108-7">
+  <link rel="stylesheet" href="/loader.css?v=20261108-8">
+  <link rel="stylesheet" href="/liquid-chrome.css?v=20261108-1">
+  <script src="/loader.js?v=20261108-8" defer></script>
+  <script type="module" src="/liquid-chrome.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
+    <div id="liquid-chrome-mount" class="tt-loader__chrome" aria-hidden="true"></div>
     <div class="loader" aria-hidden="true">
       <svg id="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <defs>
@@ -175,7 +178,6 @@
           <span aria-hidden="true">/</span>
           <span aria-current="page">404</span>
         </nav>
-        <p class="kicker">Off the circuit</p>
         <h1>That page took<br> <span>the escape road.</span></h1>
         <p>There is nothing at this address. The useful pages are still on the grid, and the tutor is one message away.</p>
         <div class="actions">
@@ -243,6 +245,6 @@
       });
     })();
   </script>
-  <script type="module" src="/smooth-scroll.js?v=20261108-3"></script>
+  <script type="module" src="/smooth-scroll.js?v=20261108-7"></script>
 </body>
 </html>
