@@ -236,7 +236,7 @@
     .track-lightfall .lightfall-container { position: absolute; inset: 0; }
     @media (prefers-reduced-motion: reduce) { .track-lightfall { display: none; } }
     #plans { position: relative; isolation: isolate; --muted: #38372f; }
-    #plans > .wrap { text-shadow: 0 0 9px rgba(241, 243, 238, .8); }
+    [data-theme="dark"] #plans { --muted: #a6b0b4; }
     #plans .tab[aria-selected="false"] { background: var(--surface); }
     #plans > .wrap { position: relative; z-index: 1; }
     .plans-ether { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .7; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); mask-image: radial-gradient(135% 125% at 50% 55%, #000 58%, transparent 100%); }
@@ -1067,7 +1067,7 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="enhance.css?v=20261108-9">
+  <link rel="stylesheet" href="enhance.css?v=20261108-10">
   <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
   <link rel="stylesheet" href="./loader.css?v=20261108-9">
   <link rel="stylesheet" href="./helmet-trash.css?v=20261108-1">

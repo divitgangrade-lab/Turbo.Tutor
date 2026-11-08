@@ -390,6 +390,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 - Gave the kart panel `role="dialog"`, `aria-modal="true"` and `inert` while closed, added a Tab focus loop inside the open panel, fixed the close transition so the panel is visible immediately on open and still animates shut, and restored focus to the kart button when it closes.
 - Raised contrast on the walkthrough step numbers, the contact reply promise and the Twin Hickory directions link, and underlined the footer licence and photo-credit links so they no longer rely on colour alone.
 - Fixed an ARIA defect on the highlights ticker (`aria-label` on a plain `div`).
+- Restored the plans section to the light surface its ink and cards were designed for and removed the inherited 9px white text glow that made the setup picker, prices and plan copy look blurred. Dark mode now also resets the section's muted colour so its small labels stay legible.
 - Verified with axe-core (WCAG 2.0/2.1 A and AA): zero violations on the home page and a representative legal page.
 - `npm audit` reports zero vulnerabilities; `npm run seo` and the page audit pass across all 11 pages.
 

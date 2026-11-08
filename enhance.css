@@ -439,7 +439,7 @@ body.no-scroll .mobile-cta { transform: translateY(112%); }
 .track::before { display: none; }
 
 /* Flat section surfaces: no decorative section gradients. */
-#plans { background: var(--carbon); }
+#plans { background: var(--surface); }
 #specialty { background: var(--surface-2); }
 #how { background: #0b1014; }
 .loop-band { background: #0a0d10; }
