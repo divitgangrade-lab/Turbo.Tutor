@@ -624,15 +624,6 @@
     .hero-swap .pixel-swap { position: absolute; inset: 0; width: 100%; height: 100%; }
     .hero-swap .pixel-swap:focus-visible { outline-offset: -5px; }
     .hero-swap-image { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .hero-3d { position: absolute; z-index: 3; inset: 0; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s; }
-    .hero-swap.is-3d .hero-3d { opacity: 1; visibility: visible; }
-    .hero-swap-fallback, .hero-swap-mount { transition: opacity .3s ease; }
-    .hero-swap.is-3d .hero-swap-fallback, .hero-swap.is-3d .hero-swap-mount { opacity: 0; pointer-events: none; }
-    .hero-3d-toggle { position: absolute; z-index: 4; left: 10px; bottom: 10px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(7, 9, 11, .84); padding: 7px 11px; color: #f7f5f0; font-family: var(--ui); font-size: 9.5px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
-    .hero-3d-toggle:hover { border-color: var(--amber); color: var(--amber); }
-    .hero-3d-toggle[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); color: #12161a; }
-    .hero-3d-toggle[aria-busy="true"] { opacity: .55; cursor: progress; }
-    .hero-3d-toggle:disabled { opacity: .45; cursor: default; }
     .hero-visual::before { filter: none; }
     .promise-art .promise-photo { border: 0; box-shadow: none; }
     .promise-art:has(.promise-photo)::after { display: none; }
@@ -3829,14 +3820,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "model-viewer.css?v=20261108-5";
+        css.href = "model-viewer.css?v=20261108-6";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./model-viewer.js?v=20261108-5").then(m => m.mountBand()).catch(() => {});
+          if (ok) import("./model-viewer.js?v=20261108-6").catch(() => {});
         });
       };
       const near = () => {
@@ -3979,61 +3970,7 @@
     })();
   </script>
 
-  <script>
-    (() => {
-      const swap = document.querySelector(".hero-swap");
-      const button = document.getElementById("hero-3d-toggle");
-      if (!swap || !button) return;
-      let loading = null;
-      const setLabel = on => {
-        button.textContent = on ? "Photo view" : "3D view";
-        button.setAttribute("aria-pressed", String(on));
-      };
-      const load = () => {
-        if (loading) return loading;
-        button.setAttribute("aria-busy", "true");
-        const existing = document.querySelector('link[href^="model-viewer.css"]');
-        let cssReady;
-        if (existing) {
-          cssReady = Promise.resolve(true);
-        } else {
-          const css = document.createElement("link");
-          css.rel = "stylesheet";
-          css.href = "model-viewer.css?v=20261108-5";
-          cssReady = new Promise(resolve => {
-            css.addEventListener("load", () => resolve(true), { once: true });
-            css.addEventListener("error", () => resolve(false), { once: true });
-          });
-          document.head.appendChild(css);
-        }
-        loading = cssReady
-          .then(ok => (ok ? import("./model-viewer.js?v=20261108-5") : null))
-          .then(mod => (mod ? mod.mountHero() : false))
-          .catch(() => false);
-        return loading;
-      };
-      button.addEventListener("click", () => {
-        if (button.disabled) return;
-        if (swap.classList.contains("is-3d")) {
-          swap.classList.remove("is-3d");
-          setLabel(false);
-          return;
-        }
-        setLabel(false);
-        load().then(ok => {
-          button.removeAttribute("aria-busy");
-          if (!ok) {
-            button.disabled = true;
-            button.textContent = "3D unavailable";
-            return;
-          }
-          swap.classList.add("is-3d");
-          setLabel(true);
-        });
-      });
-    })();
-  </script>
-
+  <div id="target-cursor-root"></div>
   <div id="target-cursor-root"></div>
   <script type="module">
     (() => {

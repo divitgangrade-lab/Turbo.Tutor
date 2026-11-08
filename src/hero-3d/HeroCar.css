@@ -31,7 +31,7 @@
 .hero-3d-toggle {
   position: absolute;
   z-index: 4;
-  right: 10px;
+  left: 10px;
   bottom: 10px;
   display: inline-flex;
   align-items: center;

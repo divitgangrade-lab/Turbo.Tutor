@@ -227,6 +227,10 @@ if (mount) {
     active = on;
     mount.classList.toggle('is-on', on);
     toggle?.setAttribute('aria-pressed', String(on));
+    if (toggle) {
+      toggle.textContent = on ? 'Photo view' : '3D view';
+      toggle.setAttribute('aria-label', on ? 'Show the photo instead of the 3D model' : 'Show the Formula 1 car as a 3D model');
+    }
     if (on) {
       resize();
       tick.last = 0;

@@ -431,7 +431,7 @@ Design tokens (colour, type, spacing) are CSS custom properties at the top of th
 
 ### November 2026 polish pass
 
-- Fixed the hero **3D view** button: it now loads the car model the first time it is pressed, swaps the photo for the interactive model and back again, and reuses the same bundle as the garage section instead of shipping a second copy of three.js.
+- Fixed the hero **3D view** button: it sat underneath the TT-07 plate, so the click landed on the plate instead. It now sits at the bottom left, toggles the car model in and out, and its label and pressed state follow the view.
 - Added the React Bits **LaserFlow** to the hero: an amber beam drops onto the top edge of the car card, splashes along it and leaves smoke and dust drifting through the dark grid, following the cursor with a soft lens. It is skipped on narrow screens and for reduced motion, waits for idle time before loading its shader, and pauses whenever it scrolls out of view.
 - Added the React Bits **WakeSlider** to the 45-minute run sheet: drag the bars through the lap and the wake lifts behind your finger while the matching phase card highlights, with a live minute readout and arrow-key control. It is mounted in its own island, uses the amber and red palette, respects reduced motion and lazy-loads as the walkthrough approaches.
 - Added the React Bits **Counter** to the numbers rail as a live **Total page views** figure: every load asks the pit-wall Worker to add one to a D1 counter and returns the running total, so repeat visits count too. The digits roll into place when the rail scrolls into view, the accessible value stays plain text for screen readers, and the figure shows a dash until the API answers.
