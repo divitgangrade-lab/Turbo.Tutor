@@ -14,12 +14,12 @@ if (host && surface) {
       beamPosition={0.62}
       color="#ffd75e"
       intensity={2.0}
-      beamWidth={1.7}
-      flare={1.5}
-      spread={1.45}
+      beamWidth={1.6}
+      flare={1.4}
+      spread={1.2}
       spill={1.2}
-      fog={0.45}
-      dust={1.6}
+      fog={0.3}
+      dust={1.3}
       streaks={1.5}
       dots={1}
       pulse={1.5}
