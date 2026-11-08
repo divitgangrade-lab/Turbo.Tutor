@@ -48,6 +48,8 @@ await build({
     'dock': 'src/dock/entry.jsx'
 ,
     'pixel-card': 'src/pixel-card/entry.jsx'
+,
+    'visit-counter': 'src/visit-counter/entry.jsx'
   },
   bundle: true,
   minify: true,

@@ -1,0 +1,17 @@
+#visit-counter-root {
+  display: block;
+}
+
+#visit-counter-root .counter {
+  display: inline-flex;
+  vertical-align: baseline;
+}
+
+.visit-counter-fallback {
+  color: inherit;
+  opacity: 0.5;
+}
+
+#visit-counter-root[data-failed] .visit-counter-fallback {
+  opacity: 0.35;
+}

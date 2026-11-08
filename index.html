@@ -212,7 +212,7 @@
     .rail > .wrap { position: relative; z-index: 1; }
     .rail-topo { position: absolute; inset: 0; z-index: 0; opacity: .6; pointer-events: none; }
     .warp-topo { position: absolute; inset: 0; z-index: 0; opacity: .5; pointer-events: none; }
-    .rail-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .rail-grid { display: grid; grid-template-columns: repeat(5, 1fr); }
     .rail-item { padding: 26px 20px; border-left: 1px solid rgba(255, 255, 255, .1); }
     .rail-item:first-child { border-left: 0; padding-left: 0; }
     .rail-item strong { display: block; color: var(--amber); font-family: var(--display); font-size: 42px; font-weight: 900; letter-spacing: -.5px; line-height: 1; }
@@ -1074,10 +1074,12 @@
   <link rel="stylesheet" href="./shader-animation.css?v=20261108-1">
   <link rel="stylesheet" href="./hero-car.css?v=20261108-1">
   <link rel="stylesheet" href="./click-spark.css?v=20261108-1">
+  <link rel="stylesheet" href="./visit-counter.css?v=20261108-1">
   <script src="./loader.js?v=20261108-9" defer></script>
   <script type="module" src="./shader-animation.js?v=20261108-1" defer></script>
   <script type="module" src="./hero-car.js?v=20261108-1" defer></script>
   <script type="module" src="./click-spark.js?v=20261108-1" defer></script>
+  <script type="module" src="./visit-counter.js?v=20261108-1" defer></script>
 </head>
 <body>
   <div class="tt-loader" role="status" aria-live="polite">
@@ -1222,6 +1224,7 @@
         <div class="rail-item reveal"><strong><span data-counter data-target="3">3</span></strong><span>Core subjects</span></div>
         <div class="rail-item reveal"><strong><span data-counter data-target="100" data-suffix="%">100%</span></strong><span>One-to-one sessions</span></div>
         <div class="rail-item reveal"><strong>$<span data-counter data-target="24">24</span><small>/ week</small></strong><span>Starting rate</span></div>
+        <div class="rail-item reveal"><strong id="visit-counter-root"><span class="visit-counter-fallback">—</span></strong><span>Total page views</span></div>
       </div>
     </section>
     <section class="section" id="plans" aria-labelledby="plans-title">

@@ -29,6 +29,13 @@ async function ensureSchema(env) {
         )
       `),
       env.DB.prepare('CREATE INDEX IF NOT EXISTS reviews_created_at ON reviews (created_at DESC)')
+      ,
+      env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS counters (
+          name TEXT PRIMARY KEY,
+          value INTEGER NOT NULL DEFAULT 0
+        )
+      `)
     ])
       .then(() => true)
       .catch(error => {
@@ -70,6 +77,29 @@ function parseBody(body) {
   return { stars, note };
 }
 
+async function handleVisits(request, env) {
+  if (request.method === 'GET') {
+    const row = await env.DB.prepare("SELECT value FROM counters WHERE name = 'pageviews'").first();
+    return json({ visits: Number(row?.value) || 0 });
+  }
+
+  if (request.method === 'POST') {
+    const row = await env.DB.prepare(`
+      INSERT INTO counters (name, value) VALUES ('pageviews', 1)
+      ON CONFLICT(name) DO UPDATE SET value = value + 1
+      RETURNING value
+    `).first();
+
+    if (!row) {
+      return json({ error: 'The view counter could not record that visit.' }, 500);
+    }
+
+    return json({ visits: Number(row.value) || 0 });
+  }
+
+  return json({ error: 'Method not allowed.' }, 405, { Allow: 'GET, POST, OPTIONS' });
+}
+
 async function handleRequest(request, env) {
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
@@ -82,6 +112,10 @@ async function handleRequest(request, env) {
 
   if (path === '/' || path === '/api/health') {
     return json({ ok: true, service: 'turbotutor-reviews' });
+  }
+
+  if (path === '/api/visits') {
+    return handleVisits(request, env);
   }
 
   if (path !== '/api/reviews') {

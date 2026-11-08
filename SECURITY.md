@@ -16,7 +16,7 @@ Out of scope: GitHub's own infrastructure, the visitor's browser, the tutor's em
 ## Architecture and data flow
 
 - Static HTML, CSS, images and ES modules. Hosted by GitHub Pages.
-- A separate Cloudflare Worker at `reviews-api/` serves the public pit wall: `GET /api/reviews` returns the latest five, and `POST /api/reviews` validates a 1-5 rating and a 1-240 character note before inserting into D1. It is anonymous, public and CORS-enabled by design.
+- A separate Cloudflare Worker at `reviews-api/` serves the public pit wall: `GET /api/reviews` returns the latest five, and `POST /api/reviews` validates a 1-5 rating and a 1-240 character note before inserting into D1. It is anonymous, public and CORS-enabled by design. The same Worker exposes `GET` and `POST /api/visits`, which store a single D1 counter and return the running total page views; posting is open by design so every visitor's load can be counted.
 - No accounts, sessions, cookies, admin panel or payment code. The review API is a public anonymous read/write endpoint for pit-wall notes; it stores no private user data.
 - Request details are assembled in the browser and posted to FormSubmit.co, which forwards them to the tutor's inbox. Nothing is posted to this origin.
 - Two `localStorage` keys hold a theme preference and a welcome-offer record. They stay in the visitor's browser.
