@@ -940,6 +940,7 @@ const PaperCrumple = ({
             ? 'creased'
             : 'flat'
       );
+      window.dispatchEvent(new CustomEvent('turbotutor:helmet-released'));
       wake();
     }
     function reset() {
@@ -1010,6 +1011,7 @@ const PaperCrumple = ({
       hit.setAttribute('aria-pressed', 'true');
       hit.dataset.held = 'true';
       publish('holding');
+      window.dispatchEvent(new CustomEvent('turbotutor:helmet-held'));
       wake();
     }
     function pointerDown(event) {
@@ -1059,8 +1061,25 @@ const PaperCrumple = ({
       tiltY.target = clamp(speedX / 1800, -1, 1) * maxTilt;
       wake();
     }
+    function overTrash(event) {
+      const trash = document.querySelector(options.current.discardSelector);
+      const rect = trash?.getBoundingClientRect();
+      if (!rect || rect.width < 2 || rect.height < 2) return false;
+      const pad = 10;
+      return (
+        event.clientX >= rect.left - pad &&
+        event.clientX <= rect.right + pad &&
+        event.clientY >= rect.top - pad &&
+        event.clientY <= rect.bottom + pad
+      );
+    }
     function pointerUp(event) {
-      if (event.pointerId === pointerId) finish();
+      if (event.pointerId !== pointerId) return;
+      if (freeRoam && held && overTrash(event)) {
+        discard();
+        return;
+      }
+      finish();
     }
     function pointerCancel(event) {
       if (event.pointerId === pointerId) finish(true);

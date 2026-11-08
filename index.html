@@ -1070,7 +1070,7 @@
   <link rel="stylesheet" href="enhance.css?v=20261108-10">
   <link rel="stylesheet" href="./smooth-scroll.css?v=20261108-7">
   <link rel="stylesheet" href="./loader.css?v=20261108-10">
-  <link rel="stylesheet" href="./helmet-trash.css?v=20261108-1">
+  <link rel="stylesheet" href="./helmet-trash.css?v=20261108-2">
   <link rel="stylesheet" href="./shader-animation.css?v=20261108-1">
   <link rel="stylesheet" href="./click-spark.css?v=20261108-1">
   <script src="./loader.js?v=20261108-9" defer></script>
@@ -1938,11 +1938,47 @@
         toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2800);
       }
 
-      function discardHelmetForEnrollment() {
+      function showHelmetTrash() {
         if (!helmetTrash) return;
         window.clearTimeout(helmetTrashTimer);
         helmetTrash.classList.remove("is-full");
+        helmetTrash.classList.add("is-visible");
+      }
+
+      function hideHelmetTrash(delay = 0) {
+        if (!helmetTrash) return;
+        window.clearTimeout(helmetTrashTimer);
+        helmetTrashTimer = window.setTimeout(() => {
+          helmetTrash.classList.remove("is-visible", "is-full", "is-armed");
+        }, delay);
+      }
+
+      window.addEventListener("turbotutor:helmet-held", () => {
+        showHelmetTrash();
+        helmetTrash?.classList.add("is-armed");
+      });
+      window.addEventListener("turbotutor:helmet-released", () => {
+        if (!helmetTrash || helmetTrash.classList.contains("is-full")) return;
+        helmetTrash.classList.remove("is-armed");
+        hideHelmetTrash(520);
+      });
+      window.addEventListener("turbotutor:helmet-discarded", () => {
+        if (!helmetTrash) return;
+        window.clearTimeout(helmetTrashTimer);
+        helmetTrash.classList.remove("is-armed");
         helmetTrash.classList.add("is-visible", "is-receiving");
+        window.setTimeout(() => {
+          helmetTrash.classList.remove("is-receiving");
+          helmetTrash.classList.add("is-full");
+        }, 900);
+        helmetTrashTimer = window.setTimeout(() => {
+          helmetTrash.classList.remove("is-visible", "is-full");
+        }, 3600);
+      });
+
+      function discardHelmetForEnrollment() {
+        if (!helmetTrash) return;
+        showHelmetTrash();
         let fired = false;
         const fire = () => {
           if (fired) return;
@@ -1955,13 +1991,7 @@
           window.dispatchEvent(new Event("turbotutor:prepare-helmet"));
           window.setTimeout(fire, 3000);
         }
-        window.setTimeout(() => {
-          helmetTrash.classList.remove("is-receiving");
-          helmetTrash.classList.add("is-full");
-        }, 1400);
-        helmetTrashTimer = window.setTimeout(() => {
-          helmetTrash.classList.remove("is-visible", "is-full");
-        }, 6500);
+        hideHelmetTrash(6500);
       }
 
       async function postForm(payload) {
@@ -3578,7 +3608,7 @@
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./paper-crumple.js?v=20261108-9").catch(() => {});
+          if (ok) import("./paper-crumple.js?v=20261108-10").catch(() => {});
         });
       };
       window.addEventListener("turbotutor:prepare-helmet", load);

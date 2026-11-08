@@ -59,8 +59,12 @@
   letter-spacing: .8px;
   text-transform: uppercase;
 }
+.helmet-trash.is-armed .helmet-trash__lid,
 .helmet-trash.is-receiving .helmet-trash__lid {
   transform: translate(-2px, -7px) rotate(-28deg);
+}
+.helmet-trash.is-armed {
+  filter: drop-shadow(0 0 16px rgba(255, 212, 0, .32)) drop-shadow(0 12px 18px rgba(0, 0, 0, .38));
 }
 .helmet-trash.is-full .helmet-trash__body {
   animation: helmet-trash-gulp .34s cubic-bezier(.2, .8, .2, 1);
