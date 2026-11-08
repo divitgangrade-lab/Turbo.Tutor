@@ -1702,7 +1702,7 @@
     <section class="warp-band" aria-labelledby="warp-title">
       <div class="warp-topo" data-topography="band" aria-hidden="true"></div>
       <h2 class="sr-only" id="warp-title">Learning in the fast lane</h2>
-      <div class="wrap warp-band-stage" id="warp-text-root" aria-hidden="true">
+      <div class="wrap warp-band-stage" id="fluid-glass-root" aria-hidden="true">
         <span class="warp-band-fallback">LEARNING IN<br>THE FAST LANE</span>
       </div>
     </section>
@@ -3184,7 +3184,7 @@
   </script>
   <script type="module">
     (() => {
-      const host = document.getElementById("warp-text-root");
+      const host = document.getElementById("fluid-glass-root");
       if (!host) return;
       let started = false;
       const load = () => {
@@ -3192,14 +3192,14 @@
         started = true;
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = "warp-text.css?v=20261107-13";
+        css.href = "fluid-glass.css?v=20261108-2";
         const ready = new Promise(resolve => {
           css.addEventListener("load", () => resolve(true), { once: true });
           css.addEventListener("error", () => resolve(false), { once: true });
         });
         document.head.appendChild(css);
         ready.then(ok => {
-          if (ok) import("./warp-text.js?v=20261107-13").catch(() => {});
+          if (ok) import("./fluid-glass.js?v=20261108-2").catch(() => {});
         });
       };
       const near = () => {

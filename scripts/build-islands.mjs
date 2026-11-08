@@ -13,7 +13,7 @@ await build({
     'masked-heading': 'src/masked-heading/entry.jsx',
     'particle-text': 'src/particle-text/entry.jsx',
     'split-flap-text': 'src/split-flap-text/entry.jsx',
-    'warp-text': 'src/warp-text/entry.jsx',
+    'fluid-glass': 'src/fluid-glass/entry.jsx',
     'elastic-mesh': 'src/elastic-mesh/entry.jsx',
     'halftone-reveal': 'src/halftone-reveal/entry.jsx',
     'animated-content': 'src/animated-content/entry.jsx',

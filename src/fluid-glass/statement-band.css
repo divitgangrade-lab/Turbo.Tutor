@@ -1,0 +1,15 @@
+#fluid-glass-root {
+  height: 100%;
+}
+
+#fluid-glass-root .fluid-glass {
+  height: 100%;
+}
+
+#fluid-glass-root .fluid-glass__handle {
+  display: none;
+}
+
+#fluid-glass-root .fluid-glass__label {
+  white-space: pre-line;
+}
