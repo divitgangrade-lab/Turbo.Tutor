@@ -1354,6 +1354,27 @@
       <div class="loop-band-host" id="text-loop-root"></div>
     </div>
 
+    <section class="section included-bento" id="included" aria-labelledby="included-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">The standard kit</p>
+            <h2 class="h2" id="included-title">Every lap <em>includes</em></h2>
+          </div>
+          <p class="lead">The format does not change with the grade or the subject. Four things come with every plan, whether the lap happens on Zoom or at the library.</p>
+        </div>
+        <div id="magic-bento-root">
+          <div class="kit-fallback">
+            <article class="kit-card"><span>Format</span><h3>One student, one tutor</h3><p>Every lap is one-to-one. No shared screens and no rotating groups.</p></article>
+            <article class="kit-card"><span>Coverage</span><h3>Grades 1–8</h3><p>Math, English and Science from first grade through eighth.</p></article>
+            <article class="kit-card"><span>Where</span><h3>Zoom or the library</h3><p>Join from home, or meet at Twin Hickory Library in Henrico.</p></article>
+            <article class="kit-card"><span>After</span><h3>A written recap</h3><p>Three wins, one focus and the next-lap plan after every session.</p></article>
+          </div>
+          <div id="magic-bento-mount"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section alt" id="specialty" aria-labelledby="specialty-title">
       <div class="specialty-silk" id="silk-root" aria-hidden="true"><div id="silk-mount"></div></div>
       <div class="wrap">
@@ -3656,6 +3677,39 @@
         document.head.appendChild(css);
         ready.then(ok => {
           if (ok) import("./scroll-stack.js?v=20261108-1").catch(() => {});
+        });
+      };
+      const near = () => {
+        const rect = host.getBoundingClientRect();
+        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
+        window.removeEventListener("scroll", near);
+        window.removeEventListener("resize", near);
+        load();
+      };
+      window.addEventListener("scroll", near, { passive: true });
+      window.addEventListener("resize", near, { passive: true });
+      near();
+    })();
+  </script>
+
+  <script type="module">
+    (() => {
+      const host = document.getElementById("magic-bento-root");
+      if (!host) return;
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "magic-bento.css?v=20261108-1";
+        const ready = new Promise(resolve => {
+          css.addEventListener("load", () => resolve(true), { once: true });
+          css.addEventListener("error", () => resolve(false), { once: true });
+        });
+        document.head.appendChild(css);
+        ready.then(ok => {
+          if (ok) import("./magic-bento.js?v=20261108-1").catch(() => {});
         });
       };
       const near = () => {

@@ -41,6 +41,7 @@ await build({
     'hero-car': 'src/hero-3d/entry.js',
     'animated-list': 'src/animated-list/entry.jsx',
     'scroll-stack': 'src/scroll-stack/entry.jsx',
+    'magic-bento': 'src/magic-bento/entry.jsx',
     'click-spark': 'src/click-spark/entry.jsx'
   },
   bundle: true,

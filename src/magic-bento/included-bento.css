@@ -1,0 +1,93 @@
+.included-bento .magic-bento {
+  --mb-surface: linear-gradient(180deg, #fbfbf7 0%, #f1f3ee 100%) !important;
+  --mb-edge: var(--line) !important;
+  --mb-highlight: rgba(255, 255, 255, 0.9) !important;
+  --mb-shadow: 0 22px 44px -34px rgba(17, 23, 26, 0.45) !important;
+  --mb-ink: var(--ink) !important;
+  --mb-muted: var(--muted) !important;
+  --mb-line: var(--line) !important;
+  --mb-well: rgba(17, 23, 26, 0.04) !important;
+  --mb-well-edge: rgba(17, 23, 26, 0.08) !important;
+  --mb-glow-alpha: 0.7 !important;
+  --mb-spot-alpha: 0.09 !important;
+}
+
+[data-theme="dark"] .included-bento .magic-bento {
+  --mb-surface: linear-gradient(180deg, #161e23 0%, #0e1417 100%) !important;
+  --mb-edge: #2b363c !important;
+  --mb-highlight: rgba(255, 255, 255, 0.05) !important;
+  --mb-shadow: 0 24px 48px -34px rgba(0, 0, 0, 0.9) !important;
+  --mb-ink: #f2f4ef !important;
+  --mb-muted: #a6b0b4 !important;
+  --mb-line: #2b363c !important;
+  --mb-well: rgba(255, 255, 255, 0.03) !important;
+  --mb-well-edge: rgba(255, 255, 255, 0.07) !important;
+  --mb-glow-alpha: 0.9 !important;
+  --mb-spot-alpha: 0.1 !important;
+}
+
+.included-bento .magic-bento__title {
+  font-family: var(--display, "Barlow Condensed", sans-serif);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.included-bento .magic-bento__label {
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.kit-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.kit-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fbfbf7 0%, #f1f3ee 100%);
+}
+
+[data-theme="dark"] .kit-card {
+  border-color: #2b363c;
+  background: linear-gradient(180deg, #161e23 0%, #0e1417 100%);
+}
+
+.kit-card > span {
+  color: var(--red);
+  font-family: var(--ui, "Chakra Petch", monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .kit-card > span {
+  color: var(--amber);
+}
+
+.kit-card h3 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.kit-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#magic-bento-root[data-mounted] .kit-fallback {
+  display: none;
+}
