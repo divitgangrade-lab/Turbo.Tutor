@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client';
 import ModelViewer from './ModelViewer.jsx';
 import './model-band.css';
 
-const root = document.getElementById('model-viewer-root');
-const mount = document.getElementById('model-viewer-mount');
 const MODEL = 'f1-car.glb';
 
 const canRender = () => {
@@ -15,23 +13,36 @@ const canRender = () => {
   return Boolean(gl);
 };
 
-const start = async () => {
-  if (!root || !mount || !canRender()) return;
+const ready = async () => {
+  if (!canRender()) return false;
   try {
     const response = await fetch(MODEL, { method: 'HEAD' });
-    if (!response.ok) return;
+    return response.ok;
   } catch {
-    return;
+    return false;
   }
+};
+
+const viewerProps = {
+  url: MODEL,
+  width: '100%',
+  height: '100%',
+  style: { position: 'absolute', inset: 0 },
+  environment: 'none',
+  exposure: 1.05,
+  shadow: true,
+  intro: 'rise'
+};
+
+export const mountBand = async () => {
+  const root = document.getElementById('model-viewer-root');
+  const mount = document.getElementById('model-viewer-mount');
+  if (!root || !mount || root.dataset.mounted === 'true') return Boolean(root && mount);
+  if (!(await ready())) return false;
 
   createRoot(mount).render(
     <ModelViewer
-      url={MODEL}
-      width="100%"
-      height="100%"
-      style={{ position: 'absolute', inset: 0 }}
-      environment="none"
-      exposure={1.05}
+      {...viewerProps}
       autoRotate
       autoRotateSpeed={0.35}
       autoRotateDelay={2.5}
@@ -39,13 +50,34 @@ const start = async () => {
       tilt={12}
       fit={0.86}
       float={0.25}
-      shadow
       shadowOpacity={0.5}
-      intro="rise"
     />
   );
 
   root.dataset.mounted = 'true';
+  return true;
 };
 
-start();
+export const mountHero = async () => {
+  const mount = document.getElementById('hero-3d-mount');
+  if (!mount) return false;
+  if (mount.dataset.mounted === 'true') return true;
+  if (!(await ready())) return false;
+
+  createRoot(mount).render(
+    <ModelViewer
+      {...viewerProps}
+      autoRotate
+      autoRotateSpeed={0.5}
+      autoRotateDelay={1.2}
+      startAngle={-28}
+      tilt={10}
+      fit={0.92}
+      float={0.18}
+      shadowOpacity={0.42}
+    />
+  );
+
+  mount.dataset.mounted = 'true';
+  return true;
+};
