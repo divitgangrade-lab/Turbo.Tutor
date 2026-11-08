@@ -82,8 +82,11 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 - Every page has one `h1`, a unique title and description, a self-referencing canonical URL where it is indexable, and a complete Open Graph and Twitter card.
 - Three 1200x630 JPEG share cards cover the home page, terms and photo credits.
 - JSON-LD covers the tutoring business and its offer catalogue, the website, each indexable page, the FAQ and breadcrumbs on the subpages.
+- Canonical URLs and the sitemap use extensionless paths such as `/about`, not `/about.html`. Internal navigation keeps the `.html` form so the local preview server resolves it; GitHub Pages serves both and the canonical consolidates the duplicate.
 - `sitemap.xml`, `robots.txt` and `llms.txt` describe the public pages. `site.webmanifest` and the PNG/ICO icons cover browser tabs, home screens and installable web apps.
 - `thanks.html` and `404.html` are marked `noindex,follow` and are deliberately excluded from the sitemap.
+- `npm run seo` validates titles, descriptions, heading order, canonicals, sitemap coverage, image alt attributes, JSON-LD, internal links and anchors.
+- `seo/search-console.md` lists the verification, sitemap and HTTPS steps; `seo/backlink-strategy.md` holds the local citation and outreach plan. The `seo/` folder is excluded from the published site.
 
 ## Custom domain
 

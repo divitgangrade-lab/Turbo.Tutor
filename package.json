@@ -4,7 +4,8 @@
   "private": true,
   "description": "Static TurboTutor site with lazy-loaded Preact islands.",
   "scripts": {
-    "build": "node scripts/build-islands.mjs"
+    "build": "node scripts/build-islands.mjs",
+    "seo": "node scripts/seo-check.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

@@ -11,6 +11,7 @@
   <meta name="author" content="Divit Gangrade">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://turbotutor.dpdns.org/">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <meta property="og:site_name" content="TurboTutor">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
@@ -18,6 +19,7 @@
   <meta property="og:title" content="TurboTutor | 1:1 Math, English &amp; Science Tutoring">
   <meta property="og:description" content="One-to-one tutoring for Grades 1–8. Weekly sessions from $24 on Zoom or at Twin Hickory Library. No online payment.">
   <meta property="og:image" content="https://turbotutor.dpdns.org/og-image.jpg?v=20261107">
+  <meta property="og:image:secure_url" content="https://turbotutor.dpdns.org/og-image.jpg?v=20261107">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -32,7 +34,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="preload" as="image" href="f1-car.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="f1-car.webp" imagesrcset="f1-car-640.webp 640w, f1-car-960.webp 960w, f1-car.webp 1200w" imagesizes="(max-width: 900px) 92vw, 760px" fetchpriority="high">
   <link rel="preload" href="fonts/barlow-condensed-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/chakra-petch-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -840,7 +842,8 @@
     }
       .skip { position: absolute; top: -60px; left: 16px; z-index: 200; background: #ffd400; padding: 10px 14px; color: #0a0c0f; font-family: "Chakra Petch", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
     .skip:focus { top: 12px; }
-</style>
+    @media (max-width: 560px) { .kart-btn, .seg { min-height: 44px; } }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -851,7 +854,7 @@
         "name": "TurboTutor",
         "alternateName": "Turbo Tutor",
         "description": "One-to-one Math, English and Science tutoring for Grades 1–8, online via Zoom or in person at Twin Hickory Library in Henrico County, Virginia.",
-        "founder": { "@type": "Person", "name": "Divit Gangrade", "url": "https://turbotutor.dpdns.org/about.html" },
+        "founder": { "@type": "Person", "name": "Divit Gangrade", "url": "https://turbotutor.dpdns.org/about" },
         "url": "https://turbotutor.dpdns.org/",
         "logo": {
           "@type": "ImageObject",
@@ -979,9 +982,9 @@
         "description": "One-to-one Math, English and Science tutoring for Grades 1–8 in Richmond, VA. Weekly sessions from $24 on Zoom or at Twin Hickory Library.",
         "isPartOf": { "@id": "https://turbotutor.dpdns.org/#website" },
         "about": { "@id": "https://turbotutor.dpdns.org/#organization" },
-        "author": { "@type": "Person", "name": "Divit Gangrade", "url": "https://turbotutor.dpdns.org/about.html" },
+        "author": { "@type": "Person", "name": "Divit Gangrade", "url": "https://turbotutor.dpdns.org/about" },
         "primaryImageOfPage": { "@type": "ImageObject", "url": "https://turbotutor.dpdns.org/og-image.jpg" },
-        "dateModified": "2026-11-07",
+        "dateModified": "2026-11-08",
         "inLanguage": "en-US"
       }
     ]
@@ -1182,7 +1185,7 @@
         <div class="hero-visual">
           <div class="hero-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <div class="hero-swap" data-cursor-label="Swap">
-            <img class="hero-swap-fallback" src="f1-car.webp" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
+            <img class="hero-swap-fallback" src="f1-car.webp" srcset="f1-car-640.webp 640w, f1-car-960.webp 960w, f1-car.webp 1200w" sizes="(max-width: 900px) 92vw, 760px" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" width="1200" height="500" fetchpriority="high" decoding="async">
             <div class="hero-swap-mount" id="pixel-swap-mount"></div>
           </div>
           <div class="hero-plate" aria-hidden="true"><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><i class="bracket"></i><span><b>TT-07</b> RACE PACE TUTORING</span><span>GRID 01</span></div>
@@ -1606,7 +1609,7 @@
           </div>
         </div>
         <div class="contact-aside">
-          <img class="contact-art" src="pit-garage.svg" alt="A pit garage with an open door, tyre stacks and a toolbox" loading="lazy" width="340" height="260">
+          <img class="contact-art" src="pit-garage.svg" alt="A pit garage with an open door, tyre stacks and a toolbox" loading="lazy" decoding="async" width="340" height="260">
           <p class="contact-note">Richmond, VA · Mon–Sat · 4–8pm</p>
           <p class="reply-promise"><span aria-hidden="true"></span> Aims to reply within one business day</p>
           <a class="directions-link" href="https://henricolibrary-va.libcal.com/spaces?lid=6277" target="_blank" rel="noopener">Twin Hickory Library rooms <span aria-hidden="true">↗</span></a>
@@ -1728,7 +1731,7 @@
     <div class="kart-art" aria-hidden="true">
       <span>Grid box · TT-07</span>
       <div class="kart-mesh" id="halftone-root">
-        <img class="kart-photo kart-mesh-fallback" src="go-kart.webp" alt="A go-kart racing on a track, shown in the kart request panel" width="960" height="620" loading="lazy" decoding="async">
+        <img class="kart-photo kart-mesh-fallback" src="go-kart.webp" srcset="go-kart-480.webp 480w, go-kart.webp 960w" sizes="(max-width: 430px) 100vw, 430px" alt="A go-kart racing on a track, shown in the kart request panel" width="960" height="620" loading="lazy" decoding="async">
         <div class="kart-mesh-mount" id="halftone-mount"></div>
       </div>
     </div>
