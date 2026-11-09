@@ -1114,7 +1114,7 @@
       status.hidden = false;
       status.textContent = "Adding you to the list...";
       try {
-        const response = await fetch("https://formsubmit.co/ajax/divit.gangrade@gmail.com", {
+        const response = await fetch("https://formsubmit.co/ajax/9fb3f65146a600790d7010d2c522571e", {
           method: "POST",
           credentials: "omit",
           headers: {
