@@ -1,3 +1,7 @@
+# WIP Please stay tuned for more bug fixing and more features
+
+Originally designed as a template for AI
+
 # TurboTutor
 
 The security model, audit results and residual risks are documented in `SECURITY.md`.
