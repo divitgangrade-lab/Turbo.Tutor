@@ -49,8 +49,11 @@ const paintFor = name => {
     key.includes('swan')
   )
     return PAINT.red;
-  return PAINT.carbon;
+  // A merged single-mesh export has no part names to key off, so it gets the
+  // body colour; carbon here would read as a black blob on the dark stage.
+  return PAINT.red;
 };
+
 
 const paint = object => {
   object.traverse(child => {
@@ -65,6 +68,41 @@ const paint = object => {
   return object;
 };
 
+/*
+ * f1-car.glb ships a dense display plate fused into the same mesh as the car,
+ * and it is many times the car's size. Left in, the camera has to frame the
+ * plate, so the car renders as a speck on a slab. Drop the triangles that sit
+ * entirely in the bottom slab of the bounding box. Bails out when the result
+ * is implausible rather than risk deleting the car.
+ */
+const trimBase = object => {
+  object.traverse(child => {
+    if (!child.isMesh || !child.geometry) return;
+    const geometry = child.geometry;
+    const position = geometry.getAttribute('position');
+    const index = geometry.getIndex();
+    if (!position || !index) return;
+    if (!geometry.boundingBox) geometry.computeBoundingBox();
+    const box = geometry.boundingBox;
+    const cut = box.min.y + (box.max.y - box.min.y) * 0.12;
+    const keep = [];
+    for (let i = 0; i < index.count; i += 3) {
+      const a = index.getX(i);
+      const b = index.getX(i + 1);
+      const c = index.getX(i + 2);
+      if (position.getY(a) <= cut && position.getY(b) <= cut && position.getY(c) <= cut) continue;
+      keep.push(a, b, c);
+    }
+    const ratio = keep.length / index.count;
+    if (ratio < 0.3 || ratio > 0.97) return;
+    const IndexArray = index.array.constructor;
+    geometry.setIndex(new THREE.BufferAttribute(new IndexArray(keep), 1));
+    geometry.computeBoundingBox();
+    geometry.computeBoundingSphere();
+  });
+  return object;
+};
+
 const measured = new WeakMap();
 const announced = new WeakSet();
 
@@ -74,7 +112,13 @@ const measure = object => {
   const extent = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const scale = 2 / Math.max(extent.x, extent.y, extent.z, 0.0001);
-  const bounds = { scale, center, radius: (extent.length() / 2) * scale, floor: (extent.y / 2) * scale };
+  const bounds = {
+    scale,
+    center,
+    radius: (extent.length() / 2) * scale,
+    floor: (extent.y / 2) * scale,
+    footprint: Math.max(extent.x, extent.z) * scale
+  };
   measured.set(object, bounds);
   return bounds;
 };
@@ -147,8 +191,8 @@ const Stage = ({ object, settingsRef, visibleRef, onReady }) => {
   const tiltRef = useRef(null);
   const spinRef = useRef(null);
   const fitRef = useRef(null);
+  useMemo(() => paint(trimBase(object)), [object]);
   const bounds = useMemo(() => measure(object), [object]);
-  useMemo(() => paint(object), [object]);
   const motionRef = useRef(null);
 
   if (!motionRef.current) {
@@ -399,11 +443,11 @@ const Stage = ({ object, settingsRef, visibleRef, onReady }) => {
       </group>
       {settingsRef.current.shadow && (
         <ContactShadows
-          position={[0, -bounds.floor - 0.08, 0]}
+          position={[0, -bounds.floor - 0.02, 0]}
           opacity={settingsRef.current.shadowOpacity}
-          scale={bounds.radius * 4}
-          blur={2.6}
-          far={bounds.floor * 2 + 0.5}
+          scale={bounds.footprint * 1.1}
+          blur={2.2}
+          far={Math.max(bounds.floor * 1.2, 0.4)}
           resolution={512}
           color="#000000"
         />
