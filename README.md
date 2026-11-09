@@ -100,11 +100,19 @@ In-person laps meet at **Twin Hickory Library** in Henrico County. The plan sect
 
 The site is served at `https://turbotutor.dpdns.org/`, and the repository's `CNAME` file contains that exact host. GitHub Pages reads it on every deploy. The shared pit wall is a separate deployment at `https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page`; it is not the site's custom domain.
 
+Verified on 9 November 2026:
+
+- The certificate is issued by Let's Encrypt for `CN=turbotutor.dpdns.org` and runs to 5 February 2027, so HTTPS itself is healthy.
+- Every canonical, `og:url`, `sitemap.xml` entry, `robots.txt` line and `llms.txt` link uses the apex host, and no page still points at a `github.io` address.
+- DNS publishes only one of GitHub's four A records, `185.199.108.153`. The other three and all four AAAA records are missing, so the site has no IPv6 and no failover if that single address is unreachable.
+- `www.turbotutor.dpdns.org` has no DNS record at all, so it does not resolve.
+- `http://turbotutor.dpdns.org/` answers 200 instead of redirecting to HTTPS, which means the Pages setting for enforcing HTTPS is off even though the certificate is ready.
+
 To move to another domain:
 
 1. Replace the contents of `CNAME` with the new host, such as `www.example.com`.
-2. Point the domain at GitHub Pages using GitHub's published A and AAAA records for an apex domain, or a CNAME to `divitgangrade-lab.github.io` for `www`.
-3. Set the same custom domain in the repository's Pages settings and enable HTTPS.
+2. Point the domain at GitHub Pages. For an apex domain add all four A records, `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`, and all four AAAA records, `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153` and `2606:50c0:8003::153`. Add a `www` CNAME pointing at `divitgangrade-lab.github.io` if the `www` host should resolve; GitHub redirects it to the apex once the custom domain is set.
+3. Set the same custom domain in the repository's Pages settings and tick Enforce HTTPS once the certificate has been issued.
 4. Update every absolute URL in `index.html`, `privacy.html`, `terms.html`, `cookies.html`, `refunds.html`, `eula.html`, `dmca.html`, `credits.html`, `404.html`, `thanks.html`, `sitemap.xml`, `robots.txt` and `llms.txt`.
 5. Keep `CNAME` in the repository; removing it drops the custom domain.
 
