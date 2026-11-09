@@ -13,6 +13,7 @@ import { Suspense, useCallback, useEffect, useImperativeHandle, useMemo, useRef,
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { ContactShadows, Environment, useFBX, useGLTF } from '@react-three/drei';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import * as THREE from 'three';
 
 const FOV = 30;
@@ -23,7 +24,7 @@ const PITCH_LIMIT = (65 * Math.PI) / 180;
 const toRadians = degrees => (degrees * Math.PI) / 180;
 
 const PAINT = {
-  red: new THREE.MeshStandardMaterial({ color: 0xb00020, metalness: 0.35, roughness: 0.32 }),
+  red: new THREE.MeshStandardMaterial({ color: 0xbf1226, metalness: 0.18, roughness: 0.46 }),
   carbon: new THREE.MeshStandardMaterial({ color: 0x151a1e, metalness: 0.3, roughness: 0.6 }),
   tyre: new THREE.MeshStandardMaterial({ color: 0x0a0b0d, metalness: 0.05, roughness: 0.95 }),
   rim: new THREE.MeshStandardMaterial({ color: 0xc9ccd0, metalness: 0.9, roughness: 0.28 }),
@@ -79,9 +80,11 @@ const trimBase = object => {
   object.traverse(child => {
     if (!child.isMesh || !child.geometry) return;
     const geometry = child.geometry;
+    if (geometry.userData.baseTrimmed) return;
     const position = geometry.getAttribute('position');
     const index = geometry.getIndex();
     if (!position || !index) return;
+    geometry.userData.baseTrimmed = true;
     if (!geometry.boundingBox) geometry.computeBoundingBox();
     const box = geometry.boundingBox;
     const cut = box.min.y + (box.max.y - box.min.y) * 0.12;
@@ -156,6 +159,32 @@ const Exposure = ({ value }) => {
     gl.toneMappingExposure = value;
     invalidate();
   }, [gl, value, invalidate]);
+  return null;
+};
+
+/*
+ * Metallic paint needs something to reflect. drei's Environment presets fetch
+ * remote HDRIs, which the CSP blocks, so build a studio environment on the GPU
+ * from three's RoomEnvironment instead. No network, no extra asset.
+ */
+const StudioEnvironment = ({ intensity }) => {
+  const gl = useThree(state => state.gl);
+  const scene = useThree(state => state.scene);
+  const invalidate = useThree(state => state.invalidate);
+  useEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const room = new RoomEnvironment();
+    const target = pmrem.fromScene(room, 0.04);
+    scene.environment = target.texture;
+    scene.environmentIntensity = intensity;
+    pmrem.dispose();
+    room.dispose?.();
+    invalidate();
+    return () => {
+      scene.environment = null;
+      target.dispose();
+    };
+  }, [gl, scene, intensity, invalidate]);
   return null;
 };
 
@@ -564,9 +593,12 @@ const ModelViewer = ({
         }}
       >
         <Exposure value={exposure} />
-        <hemisphereLight args={['#fff6ea', '#1b2026', 1.1]} />
-        <directionalLight position={[3, 5, 4]} intensity={1.6} color="#fff4e6" />
-        <directionalLight position={[-6, 2.4, -4]} intensity={1.4} color="#ff3b1f" />
+        <hemisphereLight args={['#fff6ea', '#1f242a', 0.85]} />
+        <ambientLight intensity={0.2} color="#ffe9d6" />
+        <directionalLight position={[3, 5, 4]} intensity={1.9} color="#fff4e6" />
+        <directionalLight position={[-6, 2.4, -4]} intensity={1.1} color="#ff3b1f" />
+        <directionalLight position={[0, 6, -5]} intensity={0.55} color="#ffd9bd" />
+        {environment === 'none' && <StudioEnvironment intensity={0.35} />}
         <Lighting environment={environment} intensity={environmentIntensity} />
         <Suspense fallback={null}>
           {url && (

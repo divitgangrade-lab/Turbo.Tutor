@@ -37,7 +37,7 @@ const start = async () => {
       autoRotateDelay={2.5}
       startAngle={-35}
       tilt={12}
-      fit={2.2}
+      fit={1.15}
       float={0.25}
       shadow
       shadowOpacity={0.5}
