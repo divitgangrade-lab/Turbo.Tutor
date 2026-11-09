@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co https://site-bc52dc6774bc4028a0be827c85de9df2.freebuff.page; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co mailto: sms:; upgrade-insecure-requests">
   <script src="https-upgrade.js?v=20261109-1"></script>
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0a0c0f">
@@ -1549,24 +1549,6 @@
       </div>
     </section>
 
-    <section class="section model-band" id="model" aria-labelledby="model-title">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="kicker">Open the garage</p>
-            <h2 class="h2" id="model-title">The car, <em>in the round</em></h2>
-          </div>
-          <p class="lead">Drag to turn it, pinch or Ctrl-scroll to zoom, double-click to reset. It is the same Ferrari as the hero shot, set up as a model you can walk around.</p>
-        </div>
-        <div class="model-stage" id="model-viewer-root">
-          <div class="model-fallback">
-            <img src="f1-car.webp" alt="Carlos Sainz driving a red Ferrari Formula 1 car at the 2023 Austrian Grand Prix" loading="lazy" decoding="async" width="1200" height="500">
-            <p>The 3D viewer needs WebGL2. This is the same car in the meantime.</p>
-          </div>
-          <div id="model-viewer-mount"></div>
-        </div>
-      </div>
-    </section>
 
     <section class="section offers" id="offers" aria-labelledby="offers-title">
       <div class="offers-plasma" id="plasma-root" aria-hidden="true">
@@ -3840,38 +3822,6 @@
     })();
   </script>
 
-  <script type="module">
-    (() => {
-      const host = document.getElementById("model-viewer-root");
-      if (!host) return;
-      let started = false;
-      const load = () => {
-        if (started) return;
-        started = true;
-        const css = document.createElement("link");
-        css.rel = "stylesheet";
-        css.href = "model-viewer.css?v=20261108-6";
-        const ready = new Promise(resolve => {
-          css.addEventListener("load", () => resolve(true), { once: true });
-          css.addEventListener("error", () => resolve(false), { once: true });
-        });
-        document.head.appendChild(css);
-        ready.then(ok => {
-          if (ok) import("./model-viewer.js?v=20261108-6").catch(() => {});
-        });
-      };
-      const near = () => {
-        const rect = host.getBoundingClientRect();
-        if (rect.bottom < -320 || rect.top > window.innerHeight + 320) return;
-        window.removeEventListener("scroll", near);
-        window.removeEventListener("resize", near);
-        load();
-      };
-      window.addEventListener("scroll", near, { passive: true });
-      window.addEventListener("resize", near, { passive: true });
-      near();
-    })();
-  </script>
 
   <script type="module">
     (() => {

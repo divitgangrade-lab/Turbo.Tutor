@@ -78,20 +78,3 @@ await build({
   charset: 'utf8',
   logLevel: 'info'
 });
-
-await build({
-  entryPoints: ['src/model-viewer/entry.jsx'],
-  bundle: true,
-  minify: true,
-  format: 'esm',
-  splitting: false,
-  outfile: 'model-viewer.js',
-  target: ['es2020'],
-  jsx: 'automatic',
-  jsxImportSource: 'react',
-  define: { 'process.env.NODE_ENV': '"production"' },
-  sourcemap: false,
-  legalComments: 'none',
-  charset: 'utf8',
-  logLevel: 'info'
-});
